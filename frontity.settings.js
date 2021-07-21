@@ -2,50 +2,28 @@ const settings = {
   "name": "brutal-front",
   "state": {
     "frontity": {
-      "url": "https://test.frontity.org",
-      "title": "Test Frontity Blog",
+      "url": "http://test.frontity.org/",
+      "title": "Brutal",
       "description": "WordPress installation for Frontity development"
     }
   },
   "packages": [
     {
-      "name": "@frontity/mars-theme",
-      "state": {
-        "theme": {
-          "menu": [
-            [
-              "Home",
-              "/"
-            ],
-            [
-              "Nature",
-              "/category/nature/"
-            ],
-            [
-              "Travel",
-              "/category/travel/"
-            ],
-            [
-              "Japan",
-              "/tag/japan/"
-            ],
-            [
-              "About Us",
-              "/about-us/"
-            ]
-          ],
-          "featured": {
-            "showOnList": false,
-            "showOnPost": false
-          }
-        }
-      }
+      "name": "brutal-theme"
     },
     {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://test.frontity.org"
+          "url": "http://15.237.115.140",
+          "postTypes": [
+            {
+              type: "proyectos",
+              endpoint: "proyectos",
+              archive: "/proyectos"
+            },
+          ],
+          "homepage": "home",
         }
       }
     },
