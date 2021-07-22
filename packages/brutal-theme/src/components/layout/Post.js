@@ -1,5 +1,5 @@
 import { connect } from 'frontity';
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Post = ( { state, actions, libraries } ) =>
 {
@@ -15,7 +15,13 @@ const Post = ( { state, actions, libraries } ) =>
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
 
+  console.log( data )
   console.log( post )
+
+  useEffect( () =>
+  {
+    console.log( 'isFetching: ', data.isFetching )
+  }, [ data.isFetching ] )
 
   return data.isReady ? (
     <>
