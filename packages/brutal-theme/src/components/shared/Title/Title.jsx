@@ -24,7 +24,7 @@ const headerFontSizes = ( level, mq ) =>
 }
 
 const Heading = styled.div`
-    font-size: ${ ( { level } ) => headerFontSizes( level ) }em;
+    font-size: ${ ( { level } ) => headerFontSizes( level ) }rem;
     font-weight: 300;
     margin: 0;
 `
