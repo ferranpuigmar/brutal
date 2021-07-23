@@ -66,6 +66,21 @@ const globalStyles = css`
   }
 `;
 
+
+// const globalStyles = css`
+//   body {
+//     margin: 0;
+//     color: pink;
+//     font-family: Arial;
+//     font-size: 20px;
+//   }
+//   a,
+//   a:visited {
+//     color: inherit;
+//     text-decoration: none;
+//   }
+// `;
+
 const HeadContainer = styled.div`
   display: flex;
   align-items: center;
