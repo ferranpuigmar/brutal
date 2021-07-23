@@ -54,7 +54,7 @@ body {
   font-weight: 700;
   display: inline-block; //so it doesn take the whole line
   background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
-  -webkit-background-clip: text; //this cuts the gradient to the letter shape
+  // -webkit-background-clip: text; //this cuts the gradient to the letter shape
   color: transparent;
   letter-spacing: .2rem;
   transition: all .2;
