@@ -20,9 +20,7 @@ const Root = ( { state } ) =>
       <Global styles={ css( styleCSS ) } />
       <Header />
       <main>
-        <Container>
-          <Title level={ 2 }>Hola</Title>
-        </Container>
+        <Title level={ 2 }>Hola</Title>
         <Switch>
           <Home when={ data.isHome } />
           <Post when={ !data.isPage && data.isPostType } />
