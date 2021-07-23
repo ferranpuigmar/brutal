@@ -5,23 +5,21 @@
   padding: 0;
   box-sizing: inherit; /*better practice like this and the real in the body*/
 }
-// html {
-//   //defines what 1rem is
-//   font-size: 62.5%;/*this is the % of the browser size"16px" to the "10px" mesure that we want as default*/
+html {
+  font-size: 62.5%;
 
-//   @include respond(big-desktop) {
-//     font-size: 75%;
-//   }
+  //   @include respond(big-desktop) {
+  //     font-size: 75%;
+  //   }
 
-//   @include respond(tab-lan) {
-//     font-size: 56.25%;  //1rem= 9px, 9/16
-//   }
+  //   @include respond(tab-lan) {
+  //     font-size: 56.25%;  //1rem= 9px, 9/16
+  //   }
 
-//   @include respond(tab-port) {
-//     font-size: 50%;  //1rem= 8px, 8/16 =50%
-//   }
-
-// }
+  //   @include respond(tab-port) {
+  //     font-size: 50%;  //1rem= 8px, 8/16 =50%
+  //   }
+}
 
 body {
   box-sizing: border-box;

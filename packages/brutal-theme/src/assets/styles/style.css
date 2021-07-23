@@ -23,6 +23,10 @@
   /*better practice like this and the real in the body*/
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   box-sizing: border-box;
 }
@@ -33,7 +37,7 @@ body {
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "DMSans-Regular", sans-serif;
   /*every thing related to font, always on de body selector for the reset*/
   font-weight: 400;
   /* font-size: 1.6rem; */
@@ -76,8 +80,8 @@ body {
   display: inline-block;
   background-image: linear-gradient(to right, #7ed56f, #28b485);
   color: transparent;
-  letter-spacing: .2rem;
-  transition: all .2;
+  letter-spacing: 0.2rem;
+  transition: all 0.2;
 }
 
 .heading-secondary:hover {
