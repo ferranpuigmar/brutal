@@ -6,6 +6,7 @@ import Page from './layout/Page';
 import Header from './layout/Header';
 import Home from './layout/Home';
 import Footer from './layout/Footer';
+import Title from './shared/Title/Title';
 
 const Root = ( { state } ) =>
 {
@@ -14,6 +15,7 @@ const Root = ( { state } ) =>
     <div className="page">
       <Header />
       <main>
+        <Title level={ 2 }>Hola</Title>
         <Switch>
           <Home when={ data.isHome } />
           <Post when={ !data.isPage && data.isPostType } />
