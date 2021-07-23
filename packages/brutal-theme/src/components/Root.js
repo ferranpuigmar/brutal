@@ -1,7 +1,7 @@
 import React from 'react';
 // import { connect } from 'frontity';
-import { Global, css, connect} from "frontity";
-import styleCSS from '../../assests/styles/style.css'
+import { Global, css, connect } from "frontity";
+import styleCSS from '../assets/styles/style.css'
 
 import Switch from "@frontity/components/switch";
 import Post from './layout/Post';
@@ -16,11 +16,13 @@ const Root = ( { state } ) =>
   const data = state.source.get( state.router.link );
   return (
     <div className="page">
-    {/* <Global styles={globalStyles} /> */}
-    <Global styles={css(styleCSS)} />
+      {/* <Global styles={globalStyles} /> */ }
+      <Global styles={ css( styleCSS ) } />
       <Header />
       <main>
-        <Title level={ 2 }>Hola</Title>
+        <Container>
+          <Title level={ 2 }>Hola</Title>
+        </Container>
         <Switch>
           <Home when={ data.isHome } />
           <Post when={ !data.isPage && data.isPostType } />
@@ -41,7 +43,7 @@ const globalStyles = css`
     font-family: Arial;
     font-size: 20px;
   }
-  ${'' /* a,
+  ${ '' /* a,
   a:visited {
     color: inherit;
     text-decoration: none;
