@@ -2,7 +2,6 @@ import Root from "./components/Root";
 import image from "@frontity/html2react/processors/image";
 import link from "@frontity/html2react/processors/link";
 import menuHandler from "./components/handlers/menu-handler";
-import categoryPostHandler from "./components/handlers/category-post-handler";
 
 export default {
   name: "brutal-theme",
