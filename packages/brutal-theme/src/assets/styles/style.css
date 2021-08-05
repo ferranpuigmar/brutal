@@ -1,6 +1,8 @@
 @font-face {
   font-family: "DMSans-Bold";
-  src: url("../../fonts/DMSans-Bold.woff2") format("woff2"), url("../../fonts/DMSans-Bold.woff") format("woff"), url("../../fonts/DMSans-Bold.svg#DMSans-Bold") format("svg");
+  src: url("../../fonts/DMSans-Bold.woff2") format("woff2"),
+    url("../fonts/DMSans-Bold.woff") format("woff"),
+    url("../fonts/DMSans-Bold.svg#DMSans-Bold") format("svg");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -8,7 +10,9 @@
 
 @font-face {
   font-family: "DMSans-Regular";
-  src: url("../../fonts/DMSans-Regular.woff2") format("woff2"), url("../../fonts/DMSans-Regular.woff") format("woff"), url("../../fonts/DMSans-Regular.svg#DMSans-Regular") format("svg");
+  src: url("../fonts/DMSans-Regular.woff2") format("woff2"),
+    url("../fonts/DMSans-Regular.woff") format("woff"),
+    url("../fonts/DMSans-Regular.svg#DMSans-Regular") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -29,6 +33,7 @@ html {
 
 body {
   box-sizing: border-box;
+  background-color: #000000;
 }
 
 ::selection {
@@ -37,7 +42,7 @@ body {
 }
 
 body {
-  font-family: "DMSans-Regular", sans-serif;
+  font-family: "DMSansRegular", sans-serif;
   /*every thing related to font, always on de body selector for the reset*/
   font-weight: 400;
   /* font-size: 1.6rem; */

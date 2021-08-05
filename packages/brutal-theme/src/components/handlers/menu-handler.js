@@ -16,7 +16,6 @@ const menuHandler = {
 
     // Add the menu items to source.data
     const menu = state.source.data[ link ];
-      console.log("----------------------",link)
     Object.assign( menu, {
       items: menuData.items,
       isMenu: true,
