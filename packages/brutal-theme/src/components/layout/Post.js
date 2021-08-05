@@ -54,15 +54,15 @@ const Post = ( { state, actions, libraries, params } ) =>
               { !data.isPage && ( <Html2React html={ post.content.rendered } /> ) }
             </Paragraph>
           </Col>
-          <Col md={ 7 }>
+          <Col md={ 8 }>
             <Row>
-              { cliente && <Col md={ 3 }>
+              <Col xs={ 12 } md={ 3 } mdOffset={ 1 }>
                 <ProjectTags tagLabel="Cliente" tagValue={ cliente } />
-              </Col> }
-              <Col md={ 4 }>
+              </Col>
+              <Col xs={ 12 } md={ 3 }>
                 <ProjectTags tagLabel="Industria" tagValue={ industria } />
               </Col>
-              <Col md={ 5 }>
+              <Col xs={ 12 } md={ 4 }>
                 <ProjectTags tagLabel="Servicios" tagValue={ services } />
               </Col>
             </Row>

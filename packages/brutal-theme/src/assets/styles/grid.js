@@ -7,6 +7,7 @@ export const gridTheme = {
     lg: breakpoints.lg,
     md: breakpoints.md,
     sm: breakpoints.sm,
+    xs: breakpoints.xs,
     // or you can use aliases
     // veryGiant: 1440,
     // giant: 1200,
