@@ -25,6 +25,7 @@ const renderFontFamily = ( weight ) =>
 const Span = styled.span`
   font-family: ${ props => renderFontFamily( props.weight ) };
   font-size: 2rem;
+  line-height: normal;
   letter-spacing: 0.5px;
   color: ${ props => props.color || theme_colors.white };
   ${ mq[ "sm" ] } {

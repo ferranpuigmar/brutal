@@ -17,7 +17,7 @@ export const gridTheme = {
     // smaller: 575,
   },
   row: {
-    padding: 15, // default 15
+    padding: 20, // default 15
   },
   col: {
     padding: 20, // default 15

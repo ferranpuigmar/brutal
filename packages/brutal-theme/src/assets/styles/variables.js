@@ -1,3 +1,5 @@
+import { spacing } from './spacing'
+
 export const breakpoints = {
   xs: 320,
   sm: 500,
@@ -8,7 +10,7 @@ export const breakpoints = {
 }
 
 export const maxWidths = {
-  sm: breakpoints.sm + 40,
+  sm: breakpoints.sm - 40,
   md: breakpoints.md,
   lg: breakpoints.lg,
   xl: breakpoints.xl,

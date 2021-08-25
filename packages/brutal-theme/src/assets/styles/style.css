@@ -23,7 +23,7 @@
 *::before {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  box-sizing: border-box;
   /*better practice like this and the real in the body*/
 }
 
@@ -31,8 +31,11 @@ html {
   font-size: 62.5%;
 }
 
-body {
+* {
   box-sizing: border-box;
+}
+
+body {
   background-color: #000000;
 }
 

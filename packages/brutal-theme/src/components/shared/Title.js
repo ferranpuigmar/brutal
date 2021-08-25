@@ -62,6 +62,7 @@ const generateHeaderProps = ( level, mq ) =>
 const Heading = styled.div`
     font-family: ${ fontFamily.bold }, sans-serif;
     color: ${ theme_colors.white };
+    line-height: normal;
     ${ ( { level } ) => generateHeaderProps( level, mq ) };
     font-weight: 300;
     margin: 0;

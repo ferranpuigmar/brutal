@@ -5,6 +5,65 @@ import { Row, Col } from 'styled-bootstrap-grid';
 import Text from '../shared/Text';
 import Title from '../shared/Title';
 import Paragraph from '../shared/Paragraph';
+import { styled } from 'frontity';
+import { mq } from '../../assets/styles/mediaqueries';
+import { spacing } from '../../assets/styles/spacing';
+import { css, cx } from '@emotion/css'
+import OtherProyects from '../proyect/OtherProyects';
+
+
+// STYLES
+
+const PortFolioImageWrapper = styled.div`
+  margin-top: ${ spacing[ 'mt-10' ] };
+  ${ mq[ "sm" ] } {
+    margin-top: ${ spacing[ 'mt-8' ] };
+  }
+  img{
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+`
+
+const descriptionCol = css`
+  order: 1;
+  ${ mq[ "sm" ] } {
+    order: 0;
+  }
+`
+
+const infoCol = css`
+  order: 0;
+  ${ mq[ "sm" ] } {
+    order: 1;
+  }
+`
+
+const projectTitle = css`
+  margin-bottom: ${ spacing[ 'm-6' ] };
+`;
+
+const descriptionStyles = css`
+  &:last-child{
+    margin-bottom: 20px;
+  }
+  ${ mq[ "md" ] } {
+    margin-bottom: 0;
+  }
+`;
+
+const Wrapper = styled.div`
+  margin-bottom: ${ spacing[ 'm-5' ] };
+  > h4 {
+    line-height: 1;
+    margin-bottom: ${ spacing[ 'm-2' ] };
+  }
+  ${ mq[ "sm" ] } {
+    margin: 0;
+  }
+`
+
 
 const Post = ( { state, actions, libraries, params } ) =>
 {
@@ -47,14 +106,14 @@ const Post = ( { state, actions, libraries, params } ) =>
   return data.isReady ? (
     <>
       <Container className="projectpage">
-        <Title level={ 1 }>{ post.title.rendered }</Title>
+        <Title className={ cx( projectTitle ) } level={ 1 }>{ post.title.rendered }</Title>
         <Row>
-          <Col md={ 4 } >
-            <Paragraph>
+          <Col md={ 4 } className={ cx( descriptionCol ) }>
+            <Paragraph className={ descriptionStyles }>
               { !data.isPage && ( <Html2React html={ post.content.rendered } /> ) }
             </Paragraph>
           </Col>
-          <Col md={ 8 }>
+          <Col md={ 8 } className={ cx( infoCol ) }>
             <Row>
               <Col xs={ 12 } md={ 3 } mdOffset={ 1 }>
                 <ProjectTags tagLabel="Cliente" tagValue={ cliente } />
@@ -69,19 +128,31 @@ const Post = ( { state, actions, libraries, params } ) =>
           </Col>
         </Row>
       </Container>
+      { portfolio && <PortfolioList projectName={ post.title.rendered } portfolio={ portfolio } /> }
+      <OtherProyects currentProyect={ data.id } />
+
     </>
     // Esto sería un loading en vez de null
   ) : null;
 }
 
+// SMALL COMPONENTS
+
 const ProjectTags = ( { tagLabel, tagValue } ) =>
 {
   return (
-    <>
+    <Wrapper>
       <Title level={ 4 }>{ tagLabel }</Title>
       <Text text={ tagValue } />
-    </>
+    </Wrapper>
   )
+}
+
+const PortfolioList = ( { portfolio, projectName } ) =>
+{
+  return <div>
+    { portfolio.map( ( portfolioImage, index ) => <PortFolioImageWrapper key={ `portfolioImage_${ index }` }><img src={ portfolioImage.imagen } alt={ `${ projectName } portfolio` } /></PortFolioImageWrapper> ) }
+  </div>
 }
 
 export default connect( Post );

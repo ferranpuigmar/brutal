@@ -5,10 +5,10 @@ import { breakpoints } from '../../assets/styles/variables';
 
 
 
-const Container = ( { children, align = 'flex-start', bgColor = 'transparent' } ) =>
+const Container = ( { children, align = 'flex-start', bgColor = 'transparent', className } ) =>
 {
   return (
-    <ContainerDiv bgColor={ bgColor } align={ align }>
+    <ContainerDiv className={ className } bgColor={ bgColor } align={ align }>
       { children }
     </ContainerDiv>
   )
@@ -21,7 +21,9 @@ const ContainerDiv = styled.div`
     flex-direction: column;
     justify-content: ${ props => props.align };
     background: ${ props => props.bgColor };
+    padding: 0 20px;
     ${ mq[ "sm" ] } {
+      padding: 0;
       max-width: ${ breakpoints.sm }px;
     }
     ${ mq[ "md" ] } {
