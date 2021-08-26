@@ -20,7 +20,7 @@ const Theme = ({ state }) => {
   const data = state.source.get(state.router.link);
 
   return (
-    <>
+   <> 
       {/* Add some metatags to the <head> of the HTML. */}
       <Title />
       <Head>
