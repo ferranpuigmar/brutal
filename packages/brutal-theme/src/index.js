@@ -2,6 +2,7 @@ import Root from "./components/Root";
 import image from "@frontity/html2react/processors/image";
 import link from "@frontity/html2react/processors/link";
 import menuHandler from "./components/handlers/menu-handler";
+import globalOptionsHandler from "./components/handlers/global-options-handler";
 
 export default {
   name: "brutal-theme",
@@ -11,7 +12,8 @@ export default {
   state: {
     theme: {
       menuUrl: "all_pages",
-      postType: 'servicios'
+      postType: 'servicios',
+      globalOptions: 'acf-brutal-settings'
     }
   },
   actions: {
@@ -19,6 +21,7 @@ export default {
       beforeSSR: async ( { state, actions } ) =>
       {
         await actions.source.fetch( `/menu/${ state.theme.menuUrl }/` )
+        await actions.source.fetch( `/globalOptions/${ state.theme.globalOptions }/` )
       }
     }
   },
@@ -27,7 +30,7 @@ export default {
       processors: [ image, link ]
     },
     source: {
-      handlers: [ menuHandler ]
+      handlers: [ menuHandler, globalOptionsHandler ]
     }
   }
 };
