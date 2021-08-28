@@ -24,7 +24,7 @@ const OtherProyects = ( { state, actions, currentProyect } ) =>
       <>
         <Container>
           <Title className={ cx( section ) } level={ 4 }>Otros Proyectos</Title>
-        </Container >
+        </Container>
         <Wrapper otherProyectsNumber={ proyects.length }>
 
           { proyects.map( project =>

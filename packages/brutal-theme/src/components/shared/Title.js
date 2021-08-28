@@ -3,8 +3,10 @@ import React from 'react'
 import { mq } from '../../assets/styles/mediaqueries';
 import { fontFamily, theme_colors } from '../../assets/styles/variables';
 
+
 const Title = ( { level, className, children } ) =>
 {
+  console.log(`level, className, children`, level, className, children)
   return (
     <Heading className={ className } level={ level } as={ `h${ level }` }>
       { children }
@@ -43,8 +45,17 @@ const renderH4Props = ( mq ) =>
   },
 } )
 
+const renderH5Props = ( mq ) =>
+( {
+  fontSize: '1.2rem',
+  [ mq[ 'sm' ] ]: {
+    fontSize: '1.2rem',
+  },
+} )
+
 const generateHeaderProps = ( level, mq ) =>
 {
+  console.log("mq",mq, "level",level)
   switch ( level ) {
     case 1:
       return { ...renderH1Props( mq ) };
@@ -54,6 +65,8 @@ const generateHeaderProps = ( level, mq ) =>
       return { ...renderH3Props( mq ) };
     case 4:
       return { ...renderH4Props( mq ) };
+    case 5:
+      return { ...renderH5Props( mq ) };
     default:
       return { ...h1 };
   }

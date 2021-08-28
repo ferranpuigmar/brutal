@@ -15,3 +15,6 @@ Update user with ID 4? Send a PUT request to
 
 Get all posts with the search term “awesome”? 
 GET /wp-json/wp/v2/posts?filter[s]=awesome
+
+
+chequear react-animejs para anmacion de burguer

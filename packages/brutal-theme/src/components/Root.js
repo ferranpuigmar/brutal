@@ -10,9 +10,11 @@ import FontFace from './shared/FontFace';
 import { GridThemeProvider } from 'styled-bootstrap-grid';
 import { gridTheme } from '../assets/styles/grid';
 import styleCSS from '../assets/styles/style.css'
+import Navbar from './header/Navbar';
 
 const Root = ( { state } ) =>
 {
+  // console.log(`state2222`, state)
   const data = state.source.get( state.router.link );
   return (
     <>
@@ -21,7 +23,8 @@ const Root = ( { state } ) =>
       <GridThemeProvider
         gridTheme={ gridTheme }
       >
-        <Header />
+        {/* <Header /> */}
+        <Navbar />
         <main>
           <Switch>
             <Home when={ data.isHome } />
