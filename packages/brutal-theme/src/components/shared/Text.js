@@ -29,7 +29,7 @@ const Span = styled.span`
   letter-spacing: 0.5px;
   color: ${ props => props.color || theme_colors.white };
   ${ mq[ "sm" ] } {
-    font-size: 2rem;
+    font-size: ${ props => props.size || "2rem" };
   }
 `
 

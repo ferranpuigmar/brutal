@@ -57,16 +57,16 @@ const NavFooter = styled.div`
 `;
 
 const NavMenu = ({ state, open, close }) => {
-  console.log(`statessssss`, state)
+  console.log(`state clau`, state)
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
   return (
     <Ul open={open}>
       { items.map( item => {
         return (
-          <li className="navigation__item">
+          <li className="navigation__item" key={item.ID}>
             <div onClick={close}>
               <Link className="navigation__link" nonekey={item.ID} link={`/${item.slug}`}>
-                  <Title level={5} className="navigation__titles">{ item.title }</Title> 
+                  <Title level={6} className="navigation__titles">{ item.title }</Title> 
               </Link> 
             </div>
           </li>
@@ -80,7 +80,9 @@ const NavMenu = ({ state, open, close }) => {
         </div>
         <div>
           <Title level={5} className="navigation__footer-title">SIGUENOS</Title>
-          <Text text={"@esmuybrutal"} size={"1.2rem"} className="navigation__footer-text"/>
+          <Link link="https://www.instagram.com/esmuybrutal/">
+            <Text text={"@esmuybrutal"} size={"1.2rem"} className="navigation__footer-text"/>
+          </Link>
         </div>
       </NavFooter>
     </Ul>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect, styled } from 'frontity'
 
 import Container from './../layout/Container';
@@ -21,7 +21,7 @@ const Nav = styled.nav`
   justify-content: space-between;
   .logo {
     height: 100%;
-    padding:.5vh;
+    padding:.5vh .1vw;
   }
 
   @media (max-width: ${breakpoints["md"]}px) {

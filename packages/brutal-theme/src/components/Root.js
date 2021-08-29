@@ -3,7 +3,6 @@ import { Global, css, connect } from "frontity";
 import Switch from "@frontity/components/switch";
 import Post from './layout/Post';
 import Page from './layout/Page';
-import Header from './layout/Header';
 import Home from './layout/Home';
 import Footer from './layout/Footer';
 import FontFace from './shared/FontFace';
@@ -14,16 +13,12 @@ import Navbar from './header/Navbar';
 
 const Root = ( { state } ) =>
 {
-  // console.log(`state2222`, state)
   const data = state.source.get( state.router.link );
   return (
     <>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
-      <GridThemeProvider
-        gridTheme={ gridTheme }
-      >
-        {/* <Header /> */}
+      <GridThemeProvider gridTheme={ gridTheme }>
         <Navbar />
         <main>
           <Switch>
