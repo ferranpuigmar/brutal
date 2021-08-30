@@ -29,5 +29,3 @@ export const spacing = spacingLabels
   {
     return { ...acc, ...type };
   }, {} );
-
-console.log( spacing )

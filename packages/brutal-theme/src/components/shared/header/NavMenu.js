@@ -2,9 +2,9 @@ import React from 'react';
 import { connect, styled } from 'frontity';
 
 import Link from "@frontity/components/link";
-import Title from '../shared/Title';
-import Text from '../shared/Text';
-import {theme_colors, breakpoints} from '../../assets/styles/variables'
+import Title from '../Title';
+import Text from '../Text';
+import {theme_colors, breakpoints} from '../../../assets/styles/variables'
 // import { spacing } from '../../assets/styles/spacing'; 
 
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect, styled } from 'frontity'
 import NavMenu from './NavMenu';
 
-import {theme_colors, breakpoints} from '../../assets/styles/variables'
+import {theme_colors, breakpoints} from '../../../assets/styles/variables'
 
 const BurgerIcon = styled.div`
   width: 3rem;

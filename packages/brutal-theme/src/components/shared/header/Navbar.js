@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { connect, styled } from 'frontity'
 
-import Container from './../layout/Container';
+import Container from '../../layout/Container';
 import NavBurger from './NavBurger';
 import NavLogo from './NavLogo';
 
-import {theme_colors, breakpoints} from '../../assets/styles/variables'
+import {theme_colors, breakpoints} from '../../../assets/styles/variables'
 
 
 const Nav = styled.nav`

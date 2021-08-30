@@ -4,12 +4,12 @@ import Switch from "@frontity/components/switch";
 import Post from './layout/Post';
 import Page from './layout/Page';
 import Home from './layout/Home';
-import Footer from './layout/Footer';
+import Footer from './shared/Footer';
 import FontFace from './shared/FontFace';
 import { GridThemeProvider } from 'styled-bootstrap-grid';
 import { gridTheme } from '../assets/styles/grid';
 import styleCSS from '../assets/styles/style.css'
-import Navbar from './header/Navbar';
+import Navbar from './shared/header/Navbar';
 
 const Root = ( { state } ) =>
 {

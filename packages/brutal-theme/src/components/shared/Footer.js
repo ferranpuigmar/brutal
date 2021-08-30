@@ -2,9 +2,9 @@ import { styled, connect } from 'frontity'
 import React, { useState } from 'react';
 import logoBlackSVG from '../../assets/images/logo-blackletter.svg';
 import logoWhiteSVG from '../../assets/images/logo-whiteletter.svg';
-import Text from '../shared/Text';
-import Title from '../shared/Title';
-import Container from './Container';
+import Text from './Text';
+import Title from './Title';
+import Container from '../layout/Container';
 import Link from "@frontity/components/link";
 import {theme_colors, breakpoints} from '../../assets/styles/variables'
 
@@ -60,6 +60,8 @@ const FooterText = styled.div`
 
   const Footer = ( { state } ) => {
     // state.source.
+    const settings = state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf;
+console.log(`settings`, settings)
   let blackback = false
   if (state.router.link === "/") blackback= true;
 

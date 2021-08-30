@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect, styled } from 'frontity';
 import Link from "@frontity/components/link";
-import logoSVG from '../../assets/images/logo-whiteletter.svg';
+import logoSVG from '../../../assets/images/logo-whiteletter.svg';
 
 const Logo = styled.div`
   height: 100%;
