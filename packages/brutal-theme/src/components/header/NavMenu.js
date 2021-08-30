@@ -57,6 +57,8 @@ const NavFooter = styled.div`
 `;
 
 const NavMenu = ({ state, open, close }) => {
+
+  
   console.log(`state clau`, state)
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
   return (

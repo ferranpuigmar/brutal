@@ -59,9 +59,13 @@ const FooterText = styled.div`
   // }
 
   const Footer = ( { state } ) => {
+    // state.source.
   let blackback = false
   if (state.router.link === "/") blackback= true;
 
+  // const data = state.source.get( state.router.link );
+//acf
+  // const post = state.source[ data.type ][ data.id ];
   // const [blackback, setBlackBack] = useState(true);
   // // const linkx = state.router.link;
   return (
