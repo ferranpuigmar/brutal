@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect, styled } from 'frontity'
-
 import Container from '../../layout/Container';
 import NavBurger from './NavBurger';
 import NavLogo from './NavLogo';
-
 import {theme_colors, breakpoints} from '../../../assets/styles/variables'
 
 
@@ -14,9 +12,6 @@ const Nav = styled.nav`
   height: 8vh;
   min-height: 40px;
   max-height: 60px;
-  //position: fixed;
-  //top: 0;
-  //left: 0;
   display: flex;
   justify-content: space-between;
   .logo {
@@ -27,7 +22,6 @@ const Nav = styled.nav`
   @media (max-width: ${breakpoints["md"]}px) {
     height: 15vh;
     max-height: none;
-
     .logo {
       height: 100%;
       padding: 2vh 0;
@@ -48,7 +42,6 @@ const NavBreak = styled.hr`
 `;
 
 const Navbar = () => {
-  // const [navLine, setNavLine] = useState(false)
   return (
     
       <Container>

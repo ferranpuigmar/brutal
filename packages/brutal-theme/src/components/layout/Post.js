@@ -74,8 +74,6 @@ const Post = ( { state, actions, libraries, params } ) =>
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
   const { cliente, industria, portfolio } = post.acf;
-  console.log( 'data: ', data )
-  console.log( 'post:', post )
 
   const getIdServiceTaxonomies = async ( post ) =>
   {

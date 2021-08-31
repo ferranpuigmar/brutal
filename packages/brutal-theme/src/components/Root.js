@@ -14,6 +14,14 @@ import Navbar from './shared/header/Navbar';
 const Root = ( { state } ) =>
 {
   const data = state.source.get( state.router.link );
+
+  // Background footer logic
+  const objPageIDs = state.source.page;
+  let blackBackground 
+  for (const ID in objPageIDs) if (objPageIDs[ID].link === data.link) {
+    blackBackground = Boolean(objPageIDs[ID].acf.footer_default_black)
+  } 
+  
   return (
     <>
       <FontFace />
@@ -27,7 +35,7 @@ const Root = ( { state } ) =>
             <Page when={ data.isPage && data.isPostType } />
           </Switch>
         </main>
-        <Footer />
+        <Footer blackBackground={blackBackground}/>
       </GridThemeProvider>
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect, styled } from 'frontity'
+import { connect, styled } from 'frontity';
 import NavMenu from './NavMenu';
 
 import {theme_colors, breakpoints} from '../../../assets/styles/variables'
@@ -10,9 +10,9 @@ const BurgerIcon = styled.div`
   position: relative;
   top: 5vh;
   right: 3vh;
-
   z-index: 20;
   display: none;
+
   @media (max-width: ${breakpoints["md"]}px) {
     display: flex;
     justify-content: space-around;

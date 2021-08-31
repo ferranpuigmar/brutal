@@ -8,7 +8,7 @@ const Page = ( { state, actions, libraries } ) =>
 
   // Get the data of the post.
   const post = state.source[ data.type ][ data.id ];
-  console.log( 'post: ', post )
+  // console.log(`posthome`, post)
   // Get a human readable date.
   const date = new Date( post.date );
 

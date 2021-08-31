@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect, styled } from 'frontity';
-
 import Link from "@frontity/components/link";
 import Title from '../Title';
-import Text from '../Text';
 import {theme_colors, breakpoints} from '../../../assets/styles/variables'
-// import { spacing } from '../../assets/styles/spacing'; 
+import FooterText from '../FooterText';
 
 
 const Ul = styled.ul`
@@ -17,7 +15,8 @@ const Ul = styled.ul`
   li { margin: auto 2vw }
   a { text-decoration: none }
   .navigation__titles:hover { color: ${theme_colors.grey_dark} }
-  .navigation__footer { display: none }
+  .navigation__footer { display: none; }
+  .t1 { display: none; }
   
 
   //////////////////////////////mobile-phone-styles-menus
@@ -33,15 +32,11 @@ const Ul = styled.ul`
     padding-top: 12vh;
     transition: transform 0.3s ease-in-out;
     text-align: center;
-
     li {
-      color: ${theme_colors["white"]};
-      margin: 4.5vh auto;
+      color: c;
+      margin: 4vh auto;
     }
-    .navigation__titles { 
-      font-size: 24px 
-    }
-    
+    .navigation__titles { font-size: 24px }    
     .navigation__footer { display: flex }
   }
 `;
@@ -52,15 +47,12 @@ const NavFooter = styled.div`
   text-transform: none;
   display: flex;
   justify-content: space-around;
-
-  .navigation__footer-title { font-size: 15px }
 `;
 
 const NavMenu = ({ state, open, close }) => {
-
   
-  console.log(`state clau`, state)
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
+
   return (
     <Ul open={open}>
       { items.map( item => {
@@ -76,17 +68,9 @@ const NavMenu = ({ state, open, close }) => {
       })}
 
       <NavFooter className="navigation__footer">
-        <div>
-          <Title level={5} className="navigation__footer-title">ENCUÉNTRANOS</Title>
-          <Text text={"hola@esmuybrutal.com"} size={"1.2rem"} className="navigation__footer-text"/>
-        </div>
-        <div>
-          <Title level={5} className="navigation__footer-title">SIGUENOS</Title>
-          <Link link="https://www.instagram.com/esmuybrutal/">
-            <Text text={"@esmuybrutal"} size={"1.2rem"} className="navigation__footer-text"/>
-          </Link>
-        </div>
+        <FooterText blackback textsize={"1.4rem"} titlelevel={5}/>
       </NavFooter>
+
     </Ul>
   )
 }
