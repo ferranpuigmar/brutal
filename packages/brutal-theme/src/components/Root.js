@@ -1,5 +1,5 @@
 import React from 'react';
-import { Global, css, connect } from "frontity";
+import { Global, css, connect, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Post from './layout/Post';
 import Page from './layout/Page';
@@ -16,6 +16,11 @@ const Root = ( { state } ) =>
   const data = state.source.get( state.router.link );
   return (
     <>
+      <Head>
+        <title>{ state.frontity.title }</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <html lang="en" />
+      </Head>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
