@@ -21,7 +21,7 @@ const ContainerDiv = styled.div`
     flex-direction: column;
     justify-content: ${ props => props.align };
     background: ${ props => props.bgColor };
-    padding: 0 20px;
+    padding: 0 40px;
     ${ mq[ "sm" ] } {
       padding: 0;
       max-width: ${ breakpoints.sm }px;
