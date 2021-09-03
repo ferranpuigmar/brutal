@@ -4,7 +4,6 @@ import Container from './Container';
 import { Row, Col } from 'styled-bootstrap-grid';
 import Text from '../shared/Text';
 import Title from '../shared/Title';
-import Paragraph from '../shared/Paragraph';
 import { styled } from 'frontity';
 import { mq } from '../../assets/styles/mediaqueries';
 import { spacing } from '../../assets/styles/spacing';
@@ -109,9 +108,7 @@ const Post = ( { state, actions, libraries, params } ) =>
         <Title className={ cx( projectTitle ) } level={ 1 }>{ post.title.rendered }</Title>
         <Row>
           <Col md={ 4 } className={ cx( descriptionCol ) }>
-            <Paragraph className={ descriptionStyles }>
-              { !data.isPage && ( <Html2React html={ post.content.rendered } /> ) }
-            </Paragraph>
+            { !data.isPage && ( <Html2React className={ descriptionStyles } html={ post.content.rendered } /> ) }
           </Col>
           <Col md={ 8 } className={ cx( infoCol ) }>
             <Row>

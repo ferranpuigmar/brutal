@@ -1,6 +1,5 @@
 import connect from '@frontity/connect'
 import React from 'react'
-import Paragraph from '../../shared/Paragraph'
 import Title from '../../shared/Title'
 import { styled } from 'frontity';
 import { css, cx } from '@emotion/css'
@@ -50,7 +49,7 @@ const StrenghItem = ( {
     <Item>
       <img src={ image } />
       <Title className={ cx( itemTitle ) } level={ 3 } >{ title }</Title>
-      <Paragraph><Html2React html={ description } /></Paragraph>
+      <Html2React html={ description } />
     </Item>
   )
 }

@@ -5,9 +5,9 @@ import { css, cx } from '@emotion/css'
 import { theme } from '../../../assets/styles/theme';
 import { spacing } from '../../../assets/styles/spacing';
 import Title from '../../shared/Title';
-import Paragraph from '../../shared/Paragraph';
 import { getImageUrlSize } from '../../utils/images';
 import { mq } from '../../../assets/styles/mediaqueries';
+import { uuid } from 'uuidv4';
 
 // Styles
 const block = css`
@@ -85,11 +85,9 @@ const ImageTextModule = ( {
     {
       switch ( key ) {
         case 'title':
-          return <Title className={ cx( moduleTitle ) } level={ 2 }><Html2React html={ title } /></Title>
+          return <Title key={ uuid() } className={ cx( moduleTitle ) } level={ 2 }><Html2React html={ title } /></Title>
         case 'description':
-          return <Paragraph className={ cx( moduleDescription ) }>
-            <Html2React html={ description } />
-          </Paragraph>
+          return <Html2React className={ cx( moduleDescription ) } html={ description } />
         default:
           return null
       }
