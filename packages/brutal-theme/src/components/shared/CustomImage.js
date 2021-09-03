@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from "@frontity/components/image";
-import { calculateSrcSet } from '../../utils/images';
+import { calculateSrcSet } from '../utils/images';
 const CustomImage = ( { srcSet, className, ...rest } ) =>
 {
   const srcSetSizes = calculateSrcSet( srcSet );

@@ -1,17 +1,25 @@
 import { orderByBreakpoint } from "./order"
 
-export const calculateSrcSet = ( srcSet ) =>
+export const calculateSrcSet = ( sizes ) =>
 {
-  return Object.keys( srcSet )
-    .filter( size => typeof ( srcSet[ size ] ) === 'string' )
+  if ( !sizes ) return;
+  return Object.keys( sizes )
+    .filter( size => typeof ( sizes[ size ] ) === 'string' )
     .reduce( ( acc, size ) =>
     {
-      const srcSetOption = {
+      const sizesOption = {
         brakpoint: size,
-        url: srcSet[ size ],
-        width: srcSet[ `${ size }-width` ]
+        url: sizes[ size ],
+        width: sizes[ `${ size }-width` ]
       }
-      return [ ...acc, { ...srcSetOption } ]
+      return [ ...acc, { ...sizesOption } ]
     }, [] )
     .sort( orderByBreakpoint )
+}
+
+export const getImageUrlSize = ( sizes, maxSize ) =>
+{
+  if ( !sizes ) return '';
+  const sizeFormats = calculateSrcSet( sizes ).sort( orderByBreakpoint( 'desc' ) );
+  return sizeFormats.find( size => size.width < maxSize );
 }

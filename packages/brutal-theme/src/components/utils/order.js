@@ -6,10 +6,13 @@ export const orderByModulePosition = ( ( a, b ) =>
 }
 );
 
-export const orderByBreakpoint = ( ( a, b ) =>
+export const orderByBreakpoint = ( order = 'asc' ) =>
 {
-  const moduleA = a.width
-  const moduleB = b.width
-  return moduleA > moduleB ? 1 : -1
-}
-);
+  return ( ( a, b ) =>
+  {
+    const moduleA = a.width
+    const moduleB = b.width
+    return order === 'asc' ? moduleA > moduleB ? 1 : -1 : moduleA < moduleB ? 1 : -1
+  }
+  )
+};

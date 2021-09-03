@@ -8,7 +8,7 @@ const Paragraph = ( { children, className } ) =>
 {
 
 
-  const Wrapper = styled.div`
+  const Wrapper = styled.p`
     font-family: ${ fontFamily.regular }, sans-serif;
     margin-bottom: 20px;
     font-size: 2rem;
@@ -18,8 +18,10 @@ const Paragraph = ( { children, className } ) =>
     &:last-child{
       margin-bottom: 0;
     }
+
     ${ mq[ "sm" ] } {
-      max-width: ${ breakpoints.sm }px;
+      font-size: 1.8rem;
+      line-height: 1.6;
     }
   `
 
