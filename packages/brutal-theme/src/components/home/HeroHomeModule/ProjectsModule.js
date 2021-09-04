@@ -1,11 +1,13 @@
-import { connect } from 'frontity'
-import React, { useEffect } from 'react'
+import { connect, styled } from 'frontity'
+import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'styled-bootstrap-grid';
 import { css, cx } from '@emotion/css'
 import { theme } from '../../../assets/styles/theme';
 import { spacing } from '../../../assets/styles/spacing';
 import Title from '../../shared/Title';
 import { mq } from '../../../assets/styles/mediaqueries';
+import ArrowLink from '../../shared/ArrowLink';
+import { getImageUrlSize } from '../../utils/images';
 
 // Styles
 const block = css`
@@ -27,8 +29,38 @@ const block = css`
   }
 `;
 
+const titleColor = css`
+  color: ${ theme.colors.black };
+  text-align: left;
+  width: 100%;
+  margin-bottom: ${ spacing[ 'mb-3' ] };
+`
+
+const DescriptionWrapper = styled.div`
+  width: 100%;
+  p { color: ${ theme.colors.black };}
+`
+
 const fullRow = css`
   margin: 0!important;
+  background: ${ theme.colors.white };
+  position: relative;
+  height: 329px;
+
+  > div:first-child{
+    order: 0
+  }
+  > div:first-child{
+    order: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    justify-content: flex-start;
+  }
 `
 
 // Component
@@ -37,36 +69,50 @@ const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
 {
 
   const { link_text, projects } = rest;
+  const [ dataProjects, setDataProjects ] = useState( [] );
 
-  useEffect( () =>
+  const getMedia = ( project ) =>
   {
-    actions.source.fetch( "/proyectos" );
+    const media = state.source.attachment[ project.featured_media ];
+    console.log( media )
+    return getImageUrlSize( media.sizes, 1600 ).url
+  }
+
+  const loadProjects = async () =>
+  {
+    await actions.source.fetch( "/proyectos" );
+    const availableProjects = Object.values( state?.source?.proyectos ).filter( project => projects.includes( project.id ) )
+    const newProjects = availableProjects.map( project => ( { ...project, media: getMedia( project ) } ) )
+    console.log( 'new projects: ', newProjects )
+    setDataProjects( availableProjects )
+  }
+
+  useEffect( async () =>
+  {
+    loadProjects()
   }, [] );
 
   const Html2React = libraries.html2react.Component;
-  // return projects.filter( project => projectsDataKeys.includes( project ) ).map( project => 
-  // {
-  //   // const bg = project
-  //   return <Row className={ cx( fullRow ) }>
-  //     <Col md={ 6 } className={ cx( block ) }>
 
-  //     </Col>
-  //     <Col md={ 6 } className={ cx( block ) } style={ {
-  //       backgroundImage: ''
-  //     } }>
-
-  //     </Col>
-  //   </Row >
-  // }
-
-  // )
-
-  return projects.map( project =>
+  return dataProjects.map( project =>
   {
-    const dataProject = state.source.proyectos[ project ];
-    const title = dataProject.title.rendered;
-    const description = dataProject.excerpt.rendered;
-    return <p><Html2React html={ dataProject.title.rendered } /></p>
+    const title = project?.title.rendered;
+    const description = project?.excerpt.rendered;
+    const link = project?.link;
+
+    return <Row className={ cx( fullRow ) }>
+      <Col md={ 6 } className={ cx( block ) }>
+        <Title className={ titleColor } level={ 3 } >{ title }</Title>
+        <DescriptionWrapper>
+          <Html2React html={ description } />
+        </DescriptionWrapper>
+        <ArrowLink link={ link }>{ link_text }</ArrowLink>
+      </Col>
+      <Col md={ 6 } className={ cx( block ) } style={ {
+        backgroundImage: ''
+      } }></Col>
+    </Row >
+    return <p>hola...</p>
   } )
 }
 

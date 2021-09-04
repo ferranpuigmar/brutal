@@ -32,6 +32,7 @@ const renderH2Props = ( mq ) =>
 
 const renderH3Props = ( mq ) =>
 ( {
+  fontSize: '2.6rem',
   [ mq[ 'sm' ] ]: {
     fontSize: '5rem',
   },
