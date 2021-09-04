@@ -35,7 +35,7 @@ const moduleTitle = css`
 `;
 
 const moduleDescription = css`
-  color: ${ theme.colors.black }
+  p { color: ${ theme.colors.black } }
 `;
 
 const fullRow = css`
@@ -49,7 +49,7 @@ const transformDataToObject = ( data ) =>
   const requiredKeys = [ 'col_left', 'col_right' ];
   const requiredProps = [ 'title', 'description', 'image' ];
 
-  const dataObject = { };
+  const dataObject = {};
 
   for ( let colKey in data ) {
     if ( requiredKeys.includes( colKey ) ) {
@@ -87,7 +87,7 @@ const ImageTextModule = ( {
         case 'title':
           return <Title key={ uuid() } className={ cx( moduleTitle ) } level={ 2 }><Html2React html={ title } /></Title>
         case 'description':
-          return <Html2React className={ cx( moduleDescription ) } html={ description } />
+          return <div className={ cx( moduleDescription ) }><Html2React html={ description } /></div>
         default:
           return null
       }

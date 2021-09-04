@@ -14,6 +14,7 @@ const Page = ( { state, actions, libraries } ) =>
       { renderModule( 'hero_home_module', post?.acf ) }
       { renderModule( 'text_image_module', post?.acf ) }
       { renderModule( 'strenghts_module', post?.acf ) }
+      { renderModule( 'projects_module', post?.acf ) }
     </>
   ) : null;
 }

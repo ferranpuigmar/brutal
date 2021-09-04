@@ -1,5 +1,6 @@
 import HeroHomeModule from "../home/HeroHomeModule/HeroHomeModule";
 import ImageTextModule from "../home/HeroHomeModule/ImageTextModule";
+import ProjectsModule from "../home/HeroHomeModule/ProjectsModule";
 import StrenghtModule from "../home/HeroHomeModule/StrenghtModule";
 
 export const renderModule = ( moduleName, postData ) =>
@@ -15,5 +16,7 @@ export const renderModule = ( moduleName, postData ) =>
       return <ImageTextModule mode="light" { ...acfModule } />
     case 'strenghts_module':
       return <StrenghtModule { ...acfModule } />
+    case 'projects_module':
+      return <ProjectsModule mode="light" { ...acfModule } />
   }
 }

@@ -35,12 +35,13 @@ const paragraph = {
   priority: 20,
   test: ( { component } ) =>
     component === "p",
-  processor: ( { node } ) =>
+  processor: ( { node, className } ) =>
   {
     const text = node.children[ 0 ].content;
+    console.log( 'node: ', node )
     return {
       component: Paragraph,
-      props: { text },
+      props: { text, className },
     };
   },
 };
