@@ -60,19 +60,20 @@ const HeroHomeModule = ( {
   const Html2React = libraries.html2react.Component;
 
   return (
-
-    <Block className={ heroWrapper }>
-      <Container>
-        <Row>
-          <Col md={ 7 } lg={ 7 } className={ cx( colHero ) }>
-            <Title level={ 1 } className={ cx( heroTitle ) }><Html2React html={ text } /></Title>
-          </Col>
-          <Col md={ 5 } className={ cx( colHero, colImage ) }>
-            <CustomImage className={ cx( imageStyles ) } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
-          </Col>
-        </Row>
-      </Container>
-    </Block>
+    <section id="hero">
+      <Block className={ heroWrapper }>
+        <Container>
+          <Row>
+            <Col md={ 7 } lg={ 7 } className={ cx( colHero ) }>
+              <Title level={ 1 } className={ cx( heroTitle ) }><Html2React html={ text } /></Title>
+            </Col>
+            <Col md={ 5 } className={ cx( colHero, colImage ) }>
+              <CustomImage className={ cx( imageStyles ) } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
+            </Col>
+          </Row>
+        </Container>
+      </Block>
+    </section>
   )
 }
 

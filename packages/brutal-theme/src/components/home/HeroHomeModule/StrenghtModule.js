@@ -6,7 +6,7 @@ import { theme } from '../../../assets/styles/theme';
 import Title from '../../shared/Title';
 import connect from '@frontity/connect';
 import Container from '../../layout/Container';
-import { uuid } from 'uuidv4';
+import { v4 as uuid_v4 } from "uuid";
 import StrenghItem from './StrenghItem';
 import { mq } from '../../../assets/styles/mediaqueries';
 import { styled } from 'frontity';
@@ -63,7 +63,7 @@ const StrenghtModule = ( {
           <Title level={ 2 } className={ cx( heroTitle ) }><Html2React html={ section_title } /></Title>
           <ItemsList>
             {
-              strenght.map( module => <StrenghItem key={ uuid() } { ...module } /> )
+              strenght.map( module => <StrenghItem key={ uuid_v4() } { ...module } /> )
             }
           </ItemsList>
         </Container>

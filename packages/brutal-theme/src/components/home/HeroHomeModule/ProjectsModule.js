@@ -7,6 +7,7 @@ import { mq } from '../../../assets/styles/mediaqueries';
 import { orderByBreakpoint } from '../../utils/order';
 import { hexToRgb } from '../../utils/colors';
 import ProjectItem from './ProjectItem';
+import { v4 as uuid_v4 } from "uuid";
 
 // Styles
 const fullRow = css`
@@ -85,7 +86,7 @@ const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
     loadProjects()
   }, [] );
 
-  return dataProjects.map( ( project, index ) => <Row className={ cx( fullRow ) }>
+  return dataProjects.map( ( project, index ) => <Row key={ uuid_v4() } className={ cx( fullRow ) }>
     <ProjectItem project={ project } index={ index } link_text={ link_text } />
   </Row >
   )

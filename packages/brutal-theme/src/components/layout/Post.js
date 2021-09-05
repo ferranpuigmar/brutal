@@ -9,6 +9,7 @@ import { mq } from '../../assets/styles/mediaqueries';
 import { spacing } from '../../assets/styles/spacing';
 import { css, cx } from '@emotion/css'
 import OtherProyects from '../proyect/OtherProyects';
+import { v4 as uuid_v4 } from "uuid";
 
 
 // STYLES
@@ -148,7 +149,7 @@ const ProjectTags = ( { tagLabel, tagValue } ) =>
 const PortfolioList = ( { portfolio, projectName } ) =>
 {
   return <div>
-    { portfolio.map( ( portfolioImage, index ) => <PortFolioImageWrapper key={ `portfolioImage_${ index }` }><img src={ portfolioImage.imagen } alt={ `${ projectName } portfolio` } /></PortFolioImageWrapper> ) }
+    { portfolio.map( ( portfolioImage, index ) => <PortFolioImageWrapper key={ uuid_v4() }><img src={ portfolioImage.imagen } alt={ `${ projectName } portfolio` } /></PortFolioImageWrapper> ) }
   </div>
 }
 

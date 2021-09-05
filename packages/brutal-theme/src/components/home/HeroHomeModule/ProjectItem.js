@@ -7,6 +7,7 @@ import Title from '../../shared/Title';
 import { css, cx } from '@emotion/css'
 import { spacing } from '../../../assets/styles/spacing';
 import { mq } from '../../../assets/styles/mediaqueries';
+import { v4 as uuid_v4 } from "uuid";
 
 // Styles
 const DescriptionWrapper = styled.div`
@@ -53,7 +54,7 @@ const ProjectItem = ( {
   const link = project?.link;
   const bg_url = project?.project_media_url;
 
-  const colContent = <Col md={ 6 } className={ cx( block ) }>
+  const colContent = <Col key={ uuid_v4() } md={ 6 } className={ cx( block ) }>
     <Title className={ titleColor } level={ 3 } >{ title }</Title>
     <DescriptionWrapper>
       <Html2React html={ description } />
@@ -61,7 +62,7 @@ const ProjectItem = ( {
     <ArrowLink link={ link }>{ link_text }</ArrowLink>
   </Col>
 
-  const colBg = <Col md={ 6 } className={ cx( block ) } style={ {
+  const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( block ) } style={ {
     backgroundImage: `url(${ bg_url })`
   } }></Col>
 

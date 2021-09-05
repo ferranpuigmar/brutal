@@ -12,9 +12,16 @@ const Page = ( { state, actions, libraries } ) =>
   return data.isReady ? (
     <>
       { renderModule( 'hero_home_module', post?.acf ) }
-      { renderModule( 'text_image_module', post?.acf ) }
-      { renderModule( 'strenghts_module', post?.acf ) }
-      { renderModule( 'projects_module', post?.acf ) }
+      <section id="buildingBrands">
+        { renderModule( 'text_image_module', post?.acf ) }
+      </section>
+      <section id="strengths">
+        { renderModule( 'strenghts_module', post?.acf ) }
+      </section>
+      <section id="projects">
+        { renderModule( 'projects_module', post?.acf ) }
+      </section>
+      { renderModule( 'contact_module', post?.acf ) }
     </>
   ) : null;
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import { styled } from 'frontity';
 import { theme } from '../../assets/styles/theme';
+import { cx } from '@emotion/css'
+import { mq } from '../../assets/styles/mediaqueries';
 
 // Styles
 
@@ -14,6 +16,7 @@ const ArrowLinkWrapper = styled.a`
   text-decoration: none;
   color: ${ theme.colors.black }!important;
   font-size: 1.2rem;
+  font-family: ${ props => props.variant === 'bold' ? theme.fontFamily.bold : theme.fontFamily.regular };
 
   span{
     display: inline-block;
@@ -21,15 +24,23 @@ const ArrowLinkWrapper = styled.a`
 
   &:hover{
     span:last-child{
-      width: 70px;
+      width: 58px;
+    }
+  }
+
+  ${ mq[ "sm" ] } {
+    &:hover{
+      span:last-child{
+        width: 71px;
+      }
     }
   }
 
 `
 const Arrow = styled.span`
-  width: 61px;
+  width: 48px;
   display: inline-block;
-  height: 1px;
+  height: ${ props => props.variant === 'bold' ? '2px' : '1px' };
   background-color: black;
   position: relative;
   overflow: visible;
@@ -40,7 +51,7 @@ const Arrow = styled.span`
   &:after{
     content: "";
     width: 12px;
-    height: 1px;
+    height: ${ props => props.variant === 'bold' ? '2px' : '1px' };
     position: absolute;
     top: 0;
     right: 0;
@@ -49,22 +60,26 @@ const Arrow = styled.span`
 
   &:before{
     transform-origin: right 0;
-    transform: rotate(14deg);
+    transform: ${ props => props.variant === 'bold' ? 'rotate( 18deg )' : 'rotate( 14deg )' };
   }
 
   &:after {
     transform-origin: right 0;
-    transform: rotate(-14deg);
+    transform: ${ props => props.variant === 'bold' ? 'rotate( -18deg )' : 'rotate( -14deg )' };
+  }
+
+  ${ mq[ "sm" ] } {
+    width: 61px;
   }
 
 `
 
-const ArrowLink = ( { link, children } ) =>
+const ArrowLink = ( { link, children, className, variant } ) =>
 {
   return (
-    <ArrowLinkWrapper href={ link }>
+    <ArrowLinkWrapper variant={ variant } href={ link } className={ cx( className ) }>
       <span>{ children }</span>
-      <Arrow></Arrow>
+      <Arrow variant={ variant }></Arrow>
     </ArrowLinkWrapper>
   )
 }

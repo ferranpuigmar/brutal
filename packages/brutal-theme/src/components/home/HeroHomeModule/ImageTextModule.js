@@ -7,7 +7,7 @@ import { spacing } from '../../../assets/styles/spacing';
 import Title from '../../shared/Title';
 import { getImageUrlSize } from '../../utils/images';
 import { mq } from '../../../assets/styles/mediaqueries';
-import { uuid } from 'uuidv4';
+import { v4 as uuid_v4 } from "uuid";
 
 // Styles
 const block = css`
@@ -85,9 +85,9 @@ const ImageTextModule = ( {
     {
       switch ( key ) {
         case 'title':
-          return <Title key={ uuid() } className={ cx( moduleTitle ) } level={ 2 }><Html2React html={ title } /></Title>
+          return <Title key={ uuid_v4() } className={ cx( moduleTitle ) } level={ 2 }><Html2React html={ title } /></Title>
         case 'description':
-          return <div className={ cx( moduleDescription ) }><Html2React html={ description } /></div>
+          return <div key={ uuid_v4() } className={ cx( moduleDescription ) }><Html2React html={ description } /></div>
         default:
           return null
       }
