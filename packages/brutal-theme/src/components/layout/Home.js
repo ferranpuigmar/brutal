@@ -22,6 +22,9 @@ const Page = ( { state, actions, libraries } ) =>
         { renderModule( 'projects_module', post?.acf ) }
       </section>
       { renderModule( 'contact_module', post?.acf ) }
+      <section id="services">
+        { renderModule( 'services_module', post?.acf ) }
+      </section>
     </>
   ) : null;
 }

@@ -2,12 +2,12 @@ import { connect } from 'frontity'
 import React, { useEffect, useState } from 'react'
 import { Row } from 'styled-bootstrap-grid';
 import { css, cx } from '@emotion/css'
-import { theme } from '../../../assets/styles/theme';
-import { mq } from '../../../assets/styles/mediaqueries';
-import { orderByBreakpoint } from '../../utils/order';
-import { hexToRgb } from '../../utils/colors';
+import { theme } from '../../assets/styles/theme';
+import { mq } from '../../assets/styles/mediaqueries';
+import { hexToRgb } from '../utils/colors';
 import ProjectItem from './ProjectItem';
 import { v4 as uuid_v4 } from "uuid";
+import { orderByBreakpoint } from '../utils/order';
 
 // Styles
 const fullRow = css`

@@ -1,14 +1,14 @@
 import connect from '@frontity/connect'
 import React from 'react'
 import { Col, Row } from 'styled-bootstrap-grid'
-import CustomImage from '../../shared/CustomImage';
+import CustomImage from '../shared/CustomImage';
 import { css, cx } from '@emotion/css'
-import Container from '../../layout/Container';
-import Title from '../../shared/Title';
-import { spacing } from '../../../assets/styles/spacing';
-import Block from '../../shared/Block';
-import { theme } from '../../../assets/styles/theme';
-import { mq } from '../../../assets/styles/mediaqueries';
+import Container from '../layout/Container';
+import Title from '../shared/Title';
+import { spacing } from '../../assets/styles/spacing';
+import Block from '../shared/Block';
+import { theme } from '../../assets/styles/theme';
+import { mq } from '../../assets/styles/mediaqueries';
 
 // Styles
 const heroWrapper = css`
