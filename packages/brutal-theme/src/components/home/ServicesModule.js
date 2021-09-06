@@ -35,7 +35,7 @@ const colTitle = css`
 const colServices = css`
   ${ mq[ "sm" ] } {
     order: 2;
-    margin-top: ${ spacing[ 'mt-6' ] };
+    margin-top: ${ spacing[ 'mt-12' ] };
   }
 `
 const colButton = css`

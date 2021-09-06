@@ -5,17 +5,6 @@ import { cx } from '@emotion/css'
 import { mq } from '../../assets/styles/mediaqueries';
 import { spacing } from '../../assets/styles/spacing';
 
-const primarySolid = {
-  backgroundColor: theme.colors.primaryColor,
-  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`
-}
-
-const outline = {
-  backgroundColor: 'transparent',
-  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
-  border: `2px solid ${ theme.colors.black }`
-}
-
 const handleBtnStyle = ( type ) =>
 {
   switch ( type ) {
@@ -31,6 +20,25 @@ const handleBtnStyle = ( type ) =>
 }
 
 // Styles
+const buttonGenerics = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'space-between'
+}
+
+const primarySolid = {
+  backgroundColor: theme.colors.primaryColor,
+  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
+  ...buttonGenerics
+}
+
+const outline = {
+  backgroundColor: 'transparent',
+  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
+  border: `2px solid ${ theme.colors.black }`,
+  ...buttonGenerics
+}
+
 const ArrowLinkWrapper = styled.a`
   display: inline-block;
   display: flex;
@@ -50,16 +58,12 @@ const ArrowLinkWrapper = styled.a`
 
   &:hover{
     span:last-child{
-      width: 58px;
+      transform: translateX(5px);
     }
   }
 
   ${ mq[ "sm" ] } {
-    &:hover{
-      span:last-child{
-        width: 71px;
-      }
-    }
+    font-size: 1.8rem;
   }
 
 `
