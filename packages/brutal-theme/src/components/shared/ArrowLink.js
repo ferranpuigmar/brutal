@@ -3,9 +3,34 @@ import { styled } from 'frontity';
 import { theme } from '../../assets/styles/theme';
 import { cx } from '@emotion/css'
 import { mq } from '../../assets/styles/mediaqueries';
+import { spacing } from '../../assets/styles/spacing';
+
+const primarySolid = {
+  backgroundColor: theme.colors.primaryColor,
+  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`
+}
+
+const outline = {
+  backgroundColor: 'transparent',
+  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
+  border: `2px solid ${ theme.colors.black }`
+}
+
+const handleBtnStyle = ( type ) =>
+{
+  switch ( type ) {
+    case 'primary-solid':
+      return primarySolid;
+    case 'outline':
+      return outline
+    default: {
+      false
+    }
+  }
+
+}
 
 // Styles
-
 const ArrowLinkWrapper = styled.a`
   display: inline-block;
   display: flex;
@@ -17,6 +42,7 @@ const ArrowLinkWrapper = styled.a`
   color: ${ theme.colors.black }!important;
   font-size: 1.2rem;
   font-family: ${ props => props.variant === 'bold' ? theme.fontFamily.bold : theme.fontFamily.regular };
+  ${ props => handleBtnStyle( props.type ) };
 
   span{
     display: inline-block;
@@ -74,12 +100,12 @@ const Arrow = styled.span`
 
 `
 
-const ArrowLink = ( { link, children, className, variant } ) =>
+const ArrowLink = ( { link, children, className, variant, type } ) =>
 {
   return (
-    <ArrowLinkWrapper variant={ variant } href={ link } className={ cx( className ) }>
+    <ArrowLinkWrapper type={ type } variant={ variant } href={ link } className={ cx( className ) }>
       <span>{ children }</span>
-      <Arrow variant={ variant }></Arrow>
+      <Arrow type={ type } variant={ variant }></Arrow>
     </ArrowLinkWrapper>
   )
 }

@@ -5,41 +5,53 @@ import { theme } from '../../assets/styles/theme'
 import { spacing } from '../../assets/styles/spacing'
 import Title from '../shared/Title'
 import { v4 as uuid_v4 } from "uuid";
+import { mq } from '../../assets/styles/mediaqueries'
 
 // Styles
 const AccordionWrapper = styled.div`
-  border-top: 2px solid ${ theme.colors.black };
+  ${ mq[ "sm" ] } {
+    border-top: 2px solid ${ theme.colors.black };
+  }
 `
 const accordionTitle = css`
   color: ${ theme.colors.black };
   font-family: ${ theme.fontFamily.regular };
 `
 const AccordionHeader = styled.div`
-  padding-top: ${ spacing[ 'pt-6' ] };
-  padding-bottom: ${ spacing[ 'pt-6' ] };
+  padding-bottom: ${ spacing[ 'pt-2' ] };
   position: relative;
+
+  ${ mq[ "sm" ] } {
+    padding-top: ${ spacing[ 'pt-6' ] };
+    padding-bottom: ${ spacing[ 'pt-6' ] };
+  }
 `
 const AccordionCloseBtn = styled.button`
-  width: 47px;
-  height: 47px;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transition: all 0.3s ease-in-out;
-  transform: ${ props => props.expand ? 'translateY(-50%) rotate(135deg)' : 'translateY(-50%) rotate(0deg)' };
-  background: transparent;
-  border: 0;
+  display: none;
 
-  &:before,
-  &:after{
-  content: "";
-  position: absolute;
-  width: 100%;
-  left: 0;
-  height: 2px;
-  background-color: ${ theme.colors.black };
-  transform-origin: center;
-  top:50%;
+  ${ mq[ "sm" ] } {
+    width: 47px;
+    height: 47px;
+    position: absolute;
+    display: block;
+    top: 50%;
+    right: 0;
+    transition: all 0.3s ease-in-out;
+    transform: ${ props => props.expand ? 'translateY(-50%) rotate(135deg)' : 'translateY(-50%) rotate(0deg)' };
+    background: transparent;
+    border: 0;
+
+    &:before,
+    &:after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 2px;
+    background-color: ${ theme.colors.black };
+    transform-origin: center;
+    top:50%;
+  }
 }
 
   &:before{

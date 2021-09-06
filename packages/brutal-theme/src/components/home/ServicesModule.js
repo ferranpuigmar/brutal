@@ -9,6 +9,7 @@ import { mq } from '../../assets/styles/mediaqueries';
 import { theme } from '../../assets/styles/theme';
 import { Row, Col } from 'styled-bootstrap-grid';
 import Accordion from './Accordion';
+import ArrowLink from '../shared/ArrowLink';
 
 // Styles
 const sectionTitle = css`
@@ -34,16 +35,19 @@ const colTitle = css`
 const colServices = css`
   ${ mq[ "sm" ] } {
     order: 2;
-    margin-top: ${ spacing[ 'mt-6' ] }
+    margin-top: ${ spacing[ 'mt-6' ] };
   }
 `
 const colButton = css`
+  margin-top: ${ spacing[ 'mt-6' ] };
+
   ${ mq[ "sm" ] } {
     align-items: center;
     order: 1;
     flex-basis: 30%;
     display: flex;
     justify-content: flex-end;
+    margin-top: 0;
   }
 `
 
@@ -51,7 +55,7 @@ const colButton = css`
 const ServicesModule = ( { state, libraries, actions, ...rest } ) =>
 {
 
-  const { title, text, services } = rest;
+  const { title, text_link, services } = rest;
   const [ dataServices, setDataServices ] = useState( [] );
   const Html2React = libraries.html2react.Component;
 
@@ -84,7 +88,7 @@ const ServicesModule = ( { state, libraries, actions, ...rest } ) =>
           ) }
         </Col>
         <Col className={ cx( colButton ) }>
-          Botón
+          <ArrowLink variant="bold" type="outline" link='/servicios'>{ text_link }</ArrowLink>
         </Col>
       </Row>
 
