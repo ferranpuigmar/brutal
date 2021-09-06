@@ -15,9 +15,11 @@ const Page = ( { state, actions, libraries } ) =>
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
 
+console.log(`data.link`, data.link)
   return data.isReady ? (
     <div>
-      <div><Html2React html={ post.content.rendered } /></div>
+      {/* {data.link === "/proyecto/" && <Projects/>} */}
+ 
     </div>
   ) : null;
 }

@@ -1,5 +1,6 @@
 import { connect } from 'frontity';
 import React from 'react'
+import { Projects } from './Projects';
 
 const Page = ( { state, actions, libraries } ) =>
 {
@@ -18,7 +19,6 @@ const Page = ( { state, actions, libraries } ) =>
   return data.isReady ? (
     <div>
       <div><Html2React html={ post.content.rendered } /></div>
-      <br/>
       <br/>
       <br/>
       <br/>

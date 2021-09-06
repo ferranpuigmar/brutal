@@ -17,6 +17,8 @@ const OtherProyects = ( { state, actions, currentProyect } ) =>
     actions.source.fetch( "/proyectos" );
   }, [] );
 
+  console.log(object)
+
   const proyects = Object.values( state.source.proyectos ).filter( project => project.id !== currentProyect ).slice( 0, 4 );
 
   return (

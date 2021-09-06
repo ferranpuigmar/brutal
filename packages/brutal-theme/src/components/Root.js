@@ -10,18 +10,19 @@ import { GridThemeProvider } from 'styled-bootstrap-grid';
 import { gridTheme } from '../assets/styles/grid';
 import styleCSS from '../assets/styles/style.css'
 import Navbar from './shared/header/Navbar';
+import Projects from './layout/Projects';
 
 const Root = ( { state } ) =>
 {
   const data = state.source.get( state.router.link );
-
-  // Background footer logic
-  const objPageIDs = state.source.page;
-  let blackBackground 
-  for (const ID in objPageIDs) if (objPageIDs[ID].link === data.link) {
-    blackBackground = Boolean(objPageIDs[ID].acf.footer_default_black)
-  } 
   
+  // console.log(`data`, data)
+  // Background footer logic
+  const objPageIDs = Object.values(state.source.page).find(page=>page.link=== data.link)
+  const blackBackground = objPageIDs?.acf.footer_default_black
+  
+  // console.log(`data Root`, data)
+  // console.log(`state Root`, state)
   return (
     <>
       <FontFace />
@@ -32,7 +33,9 @@ const Root = ( { state } ) =>
           <Switch>
             <Home when={ data.isHome } />
             <Post when={ !data.isPage && data.isPostType } />
-            <Page when={ data.isPage && data.isPostType } />
+            {/* <Page when={ data.isPage && data.isPostType } /> */}
+            <Projects when={ data.isPostType && data.link==="/listado-proyectos/"}/>
+            
           </Switch>
         </main>
         <Footer blackBackground={blackBackground}/>

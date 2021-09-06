@@ -68,7 +68,7 @@ const NavMenu = ({ state, open, close }) => {
       })}
 
       <NavFooter className="navigation__footer">
-        <FooterText blackback textsize={"1.4rem"} titlelevel={5}/>
+        <FooterText blackBackground textsize={"1.4rem"} titlelevel={5}/>
       </NavFooter>
 
     </Ul>
