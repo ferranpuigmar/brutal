@@ -9,7 +9,7 @@ import { cx, css } from '@emotion/css';
 
 
 
-const OtherProyects = ( { state, actions, currentProyect } ) =>
+const OtherProjects = ( { state, actions, currentProyect } ) =>
 {
 
   useEffect( () =>
@@ -17,19 +17,19 @@ const OtherProyects = ( { state, actions, currentProyect } ) =>
     actions.source.fetch( "/proyectos" );
   }, [] );
 
-  console.log(object)
+  const projects = Object.values( state.source.proyectos ).filter( project => project.id !== currentProyect ).slice( 0, 4 );
 
-  const proyects = Object.values( state.source.proyectos ).filter( project => project.id !== currentProyect ).slice( 0, 4 );
+  console.log( 'projects: ', projects )
 
   return (
-    proyects ?
+    projects ?
       <>
         <Container>
           <Title className={ cx( section ) } level={ 4 }>Otros Proyectos</Title>
-        </Container>
-        <Wrapper otherProyectsNumber={ proyects.length }>
+        </Container >
+        <Wrapper otherProjectsNumber={ projects.length }>
 
-          { proyects.map( project =>
+          { projects.map( project =>
           {
             const media = state.source.attachment[ project.featured_media ];
             return <WrapperLink key={ project.id } href={ project.link }><OtherProject background={ media.media_details.sizes } ></OtherProject></WrapperLink>
@@ -52,7 +52,7 @@ const Wrapper = styled.div`
   }
   display: flex;
   align-items: middle;
-  justify-content: ${ props => props.otherProyectsNumber < 4 ? 'flex-start' : 'space-around' };
+  justify-content: ${ props => props.otherProjectsNumber < 4 ? 'flex-start' : 'space-around' };
 `
 
 const WrapperLink = styled.a`
@@ -68,13 +68,11 @@ const OtherProject = styled.div`
   display: flex;
   align-items: middle;
   justify-content: space-around;
-  ${ mq[ "sm" ] } {
-    background-image: ${ props => `url("${ props.background[ 'medium_large' ]?.source_url || props.background[ 'medium' ]?.source_url }")` };
-  }
+  background-image: ${ props => `url("${ props.background[ 'medium_large' ]?.source_url || props.background[ 'medium' ]?.source_url }")` };
   width: 100%;
   height: 100%;
   background-size: cover;
 
 `
 
-export default connect( OtherProyects );
+export default connect( OtherProjects );

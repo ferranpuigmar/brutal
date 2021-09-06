@@ -20,11 +20,11 @@ const Ul = styled.ul`
   
 
   //////////////////////////////mobile-phone-styles-menus
-  @media (max-width: ${breakpoints["md"]}px) {
+  @media (max-width: ${ breakpoints[ "md" ] }px) {
     flex-flow: column nowrap;
-    background-color: ${theme_colors["black"]};
+    background-color: ${ theme_colors[ "black" ] };
     position: fixed;
-    transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
+    transform: ${ ( { open } ) => open ? 'translateX(0)' : 'translateX(100%)' };
     top: 0;
     right: 0;
     height: 100vh;
@@ -54,18 +54,19 @@ const NavMenu = ({ state, open, close }) => {
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
 
   return (
-    <Ul open={open}>
-      { items.map( item => {
+    <Ul open={ open }>
+      { items.map( item =>
+      {
         return (
-          <li className="navigation__item" key={item.ID}>
-            <div onClick={close}>
-              <Link className="navigation__link" nonekey={item.ID} link={`/${item.slug}`}>
-                  <Title level={6} className="navigation__titles">{ item.title }</Title> 
-              </Link> 
+          <li className="navigation__item" key={ item.ID }>
+            <div onClick={ close }>
+              <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
+                <Title level={ 6 } className="navigation__titles">{ item.title }</Title>
+              </Link>
             </div>
           </li>
         )
-      })}
+      } ) }
 
       <NavFooter className="navigation__footer">
         <FooterText blackBackground textsize={"1.4rem"} titlelevel={5}/>
@@ -75,4 +76,4 @@ const NavMenu = ({ state, open, close }) => {
   )
 }
 
-export default connect ( NavMenu )
+export default connect( NavMenu )

@@ -4,12 +4,12 @@ import Container from './Container';
 import { Row, Col } from 'styled-bootstrap-grid';
 import Text from '../shared/Text';
 import Title from '../shared/Title';
-import Paragraph from '../shared/Paragraph';
 import { styled } from 'frontity';
 import { mq } from '../../assets/styles/mediaqueries';
 import { spacing } from '../../assets/styles/spacing';
 import { css, cx } from '@emotion/css'
 import OtherProyects from '../proyect/OtherProyects';
+import { v4 as uuid_v4 } from "uuid";
 
 
 // STYLES
@@ -107,9 +107,7 @@ const Post = ( { state, actions, libraries, params } ) =>
         <Title className={ cx( projectTitle ) } level={ 1 }>{ post.title.rendered }</Title>
         <Row>
           <Col md={ 4 } className={ cx( descriptionCol ) }>
-            <Paragraph className={ descriptionStyles }>
-              { !data.isPage && ( <Html2React html={ post.content.rendered } /> ) }
-            </Paragraph>
+            { !data.isPage && ( <Html2React className={ descriptionStyles } html={ post.content.rendered } /> ) }
           </Col>
           <Col md={ 8 } className={ cx( infoCol ) }>
             <Row>
@@ -149,7 +147,7 @@ const ProjectTags = ( { tagLabel, tagValue } ) =>
 const PortfolioList = ( { portfolio, projectName } ) =>
 {
   return <div>
-    { portfolio.map( ( portfolioImage, index ) => <PortFolioImageWrapper key={ `portfolioImage_${ index }` }><img src={ portfolioImage.imagen } alt={ `${ projectName } portfolio` } /></PortFolioImageWrapper> ) }
+    { portfolio.map( ( portfolioImage, index ) => <PortFolioImageWrapper key={ uuid_v4() }><img src={ portfolioImage.imagen } alt={ `${ projectName } portfolio` } /></PortFolioImageWrapper> ) }
   </div>
 }
 

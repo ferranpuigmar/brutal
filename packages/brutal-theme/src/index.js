@@ -3,6 +3,7 @@ import image from "@frontity/html2react/processors/image";
 import link from "@frontity/html2react/processors/link";
 import menuHandler from "./components/handlers/menu-handler";
 import globalOptionsHandler from "./components/handlers/global-options-handler";
+import paragraph from "./processors/paragraph";
 
 export default {
   name: "brutal-theme",
@@ -27,7 +28,7 @@ export default {
   },
   libraries: {
     html2react: {
-      processors: [ image, link ]
+      processors: [ image, link, paragraph ]
     },
     source: {
       handlers: [ menuHandler, globalOptionsHandler ]
