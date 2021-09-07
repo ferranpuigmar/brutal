@@ -16,6 +16,10 @@ const Item = styled.div`
 
 const serviceTitle = css`
   margin-bottom: ${ spacing[ 'mb-4' ] };
+
+  ${ mq[ "sm" ] } {
+    font-size: 2.5rem;
+  }
 `
 
 const Description = styled.div`
@@ -37,6 +41,10 @@ const Icon = styled.div`
   img{
     max-width: 100%;
     width: 100%;
+  }
+
+  ${ mq[ "sm" ] } {
+    max-width: 240px;
   }
 `
 

@@ -41,6 +41,7 @@ const GridServicesWrapper = styled.div`
   ${ mq[ "sm" ] } {
     flex-direction: row;
     margin: 0 -4rem;
+    flex-wrap: wrap;
     > div{
       width: 33.33%;
       padding: 4rem;
