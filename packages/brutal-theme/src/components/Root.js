@@ -1,7 +1,7 @@
 import React from 'react';
 import { Global, css, connect, Head } from "frontity";
 import Switch from "@frontity/components/switch";
-import Post from './layout/Post';
+import Project from './layout/Project';
 import Page from './layout/Page';
 import Home from './layout/Home';
 import Footer from './shared/Footer';
@@ -10,10 +10,12 @@ import { GridThemeProvider } from 'styled-bootstrap-grid';
 import { gridTheme } from '../assets/styles/grid';
 import styleCSS from '../assets/styles/style.css'
 import Navbar from './shared/header/Navbar';
+import Services from './layout/Services';
 
 const Root = ( { state } ) =>
 {
   const data = state.source.get( state.router.link );
+  console.log( 'data: ', data )
   return (
     <>
       <Head>
@@ -28,8 +30,8 @@ const Root = ( { state } ) =>
         <main>
           <Switch>
             <Home when={ data.isHome } />
-            <Post when={ !data.isPage && data.isPostType } />
-            <Page when={ data.isPage && data.isPostType } />
+            <Project when={ !data.isPage && data.isPostType } />
+            <Services when={ data.isPage && data.link === '/servicios/' } />
           </Switch>
         </main>
         <Footer />

@@ -1,25 +1,27 @@
-const globalOptionsHandler = {
-  name: "globalOptions",
+const servicesHandler = {
+  name: "services",
   priority: 10,
-  pattern: "/globalOptions/:slug",
+  pattern: "/service_taxonomy/:slug",
   func: async ( { link, params, state, libraries } ) =>
   {
     const { slug } = params;
 
     // Fetch the menu data from the endpoint
     const response = await libraries.source.api.get( {
-      endpoint: `/acf/v3/options/${ slug }`,
+      endpoint: `/taxonomies//${ slug }`,
     } );
 
+    console.log( 'SERVICIOS: ', response )
+
     // Parse the JSON to get the object
-    const globalSettingsData = await response.json();
+    const servicesData = await response.json();
 
     // Add the menu items to source.data
     const settings = state.source.data[ link ];
     Object.assign( settings, {
-      acf: globalSettingsData.acf
+      items: servicesData
     } );
   },
 };
 
-export default globalOptionsHandler;
+export default servicesHandler;

@@ -14,7 +14,8 @@ export default {
     theme: {
       menuUrl: "all_pages",
       postType: 'servicios',
-      globalOptions: 'acf-brutal-settings'
+      globalOptions: 'acf-brutal-settings',
+      services: 'servicios'
     }
   },
   actions: {

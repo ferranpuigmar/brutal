@@ -65,7 +65,7 @@ const Wrapper = styled.div`
 `
 
 
-const Post = ( { state, actions, libraries, params } ) =>
+const Project = ( { state, actions, libraries, params } ) =>
 {
 
   const [ services, setServices ] = useState();
@@ -153,4 +153,4 @@ const PortfolioList = ( { portfolio, projectName } ) =>
   </div>
 }
 
-export default connect( Post );
+export default connect( Project );
