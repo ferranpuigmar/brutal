@@ -9,6 +9,7 @@ import { mq } from '../../assets/styles/mediaqueries';
 import { theme } from '../../assets/styles/theme';
 import Block from '../shared/Block';
 import ServiceItem from '../services/ServiceItem';
+import { renderModule } from '../utils/renderModule';
 
 // Styles
 const pageTitle = css`
@@ -123,8 +124,8 @@ const Services = ( { state, actions, libraries } ) =>
             </GridServicesWrapper>
           </Container>
         </BlockServices>
-
       </SectionServices>
+      { renderModule( 'contact_module', post?.acf ) }
     </>
   ) : null;
 }
