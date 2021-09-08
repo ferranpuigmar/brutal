@@ -10,6 +10,7 @@ import { spacing } from '../../assets/styles/spacing';
 import { css, cx } from '@emotion/css'
 import OtherProyects from '../proyect/OtherProyects';
 import { v4 as uuid_v4 } from "uuid";
+import PageWrapper from '../shared/PageWrapper';
 
 
 // STYLES
@@ -104,7 +105,7 @@ const Project = ( { state, actions, libraries, params } ) =>
   }, [] )
 
   return data.isReady ? (
-    <>
+    <PageWrapper>
       <Container className="projectpage">
         <Title className={ cx( projectTitle ) } level={ 1 }>{ post.title.rendered }</Title>
         <Row>
@@ -129,7 +130,7 @@ const Project = ( { state, actions, libraries, params } ) =>
       { portfolio && <PortfolioList projectName={ post.title.rendered } portfolio={ portfolio } /> }
       <OtherProyects currentProyect={ data.id } />
 
-    </>
+    </PageWrapper>
     // Esto sería un loading en vez de null
   ) : null;
 }

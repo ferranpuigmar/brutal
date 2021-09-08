@@ -1,8 +1,9 @@
 import { connect } from 'frontity';
 import React, { useEffect } from 'react'
+import PageWrapper from '../shared/PageWrapper';
 import { renderModule } from '../utils/renderModule';
 
-const Page = ( { state, actions, libraries } ) =>
+const Home = ( { state, actions, libraries } ) =>
 {
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
@@ -10,7 +11,7 @@ const Page = ( { state, actions, libraries } ) =>
   console.log( 'post: ', post )
 
   return data.isReady ? (
-    <>
+    <PageWrapper>
       { renderModule( 'hero_home_module', post?.acf ) }
       <section id="buildingBrands">
         { renderModule( 'text_image_module', post?.acf ) }
@@ -25,8 +26,8 @@ const Page = ( { state, actions, libraries } ) =>
       <section id="services">
         { renderModule( 'services_module', post?.acf ) }
       </section>
-    </>
+    </PageWrapper>
   ) : null;
 }
 
-export default connect( Page );
+export default connect( Home );

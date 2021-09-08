@@ -10,11 +10,16 @@ import { theme } from '../../assets/styles/theme';
 import Block from '../shared/Block';
 import ServiceItem from '../services/ServiceItem';
 import { renderModule } from '../utils/renderModule';
+import PageWrapper from '../shared/PageWrapper';
 
 // Styles
 const pageTitle = css`
   margin-bottom: ${ spacing[ 'm-6' ] };
 `;
+
+const pageWrapper = css`
+  padding-bottom: 0;
+`
 
 const ServicesTitleWrapper = styled.div`
   background-color: ${ theme.colors.primaryColor };
@@ -100,7 +105,7 @@ const Services = ( { state, actions, libraries } ) =>
   }, [] );
 
   return data.isReady ? (
-    <>
+    <PageWrapper className={ cx( pageWrapper ) }>
       <Container>
         <Title className={ cx( pageTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
         <Row>
@@ -127,7 +132,7 @@ const Services = ( { state, actions, libraries } ) =>
         </BlockServices>
       </SectionServices>
       { renderModule( 'contact_module', post?.acf ) }
-    </>
+    </PageWrapper>
   ) : null;
 }
 
