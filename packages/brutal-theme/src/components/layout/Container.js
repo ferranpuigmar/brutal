@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from 'frontity';
 import { mq } from '../../assets/styles/mediaqueries';
-import { breakpoints } from '../../assets/styles/variables';
+import { breakpoints, maxWidths } from '../../assets/styles/variables';
 
 
 
@@ -24,19 +24,19 @@ const ContainerDiv = styled.div`
     padding: 0 20px;
     ${ mq[ "sm" ] } {
       padding: 0;
-      max-width: ${ breakpoints.sm }px;
+      max-width: ${ maxWidths.sm }px;
     }
     ${ mq[ "md" ] } {
-      max-width: ${ breakpoints.md }px;
+      max-width: ${ maxWidths.md }px;
     }
     ${ mq[ "lg" ] } {
-      max-width: ${ breakpoints.lg }px;
+      max-width: ${ maxWidths.lg }px;
     }
     ${ mq[ "xl" ] } {
-      max-width: ${ breakpoints.xl }px;
+      max-width: ${ maxWidths.xl }px;
     }
     ${ mq[ "xxl" ] } {
-      max-width: ${ breakpoints.xxl }px;
+      max-width: ${ maxWidths.xxl }px;
     }
 `
 

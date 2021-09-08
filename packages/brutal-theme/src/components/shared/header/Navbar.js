@@ -3,11 +3,11 @@ import { connect, styled } from 'frontity'
 import Container from '../../layout/Container';
 import NavBurger from './NavBurger';
 import NavLogo from './NavLogo';
-import {theme_colors, breakpoints} from '../../../assets/styles/variables'
+import { theme_colors, breakpoints } from '../../../assets/styles/variables'
+import { mq } from '../../../assets/styles/mediaqueries';
 
 
 const Nav = styled.nav`
-  background: ${theme_colors["black"]};
   width: calc(100%);
   height: 8vh;
   min-height: 40px;
@@ -19,7 +19,7 @@ const Nav = styled.nav`
     padding:.5vh .1vw;
   }
 
-  @media (max-width: ${breakpoints["md"]}px) {
+  @media (max-width: ${ breakpoints[ "md" ] }px) {
     height: 15vh;
     max-height: none;
     .logo {
@@ -28,34 +28,30 @@ const Nav = styled.nav`
     }
   }
 `
-const NavBreak = styled.hr`
-  border: .5px solid white;
-  border-top: 0px;
-  margin: 0 -10vw;
-  @media (max-width: ${breakpoints["md"]}px) {
-    border-top: 0px;
+const Header = styled.header`
+  ${ mq[ 'md' ] }{
     border: .5px solid white;
-    margin: 0 -20vw;
-    display: none;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0px;
   }
-
 `;
 
-const Navbar = () => {
+const Navbar = () =>
+{
   return (
-    
+    <Header>
       <Container>
         <Nav>
-          <NavLogo/>
-          <NavBurger/>
+          <NavLogo />
+          <NavBurger />
         </Nav>
-        <NavBreak />
-        
-      {/* { onScroll={() => setNavLine(!navLine)} navLine && <NavBreak />} */}
+
+        {/* { onScroll={() => setNavLine(!navLine)} navLine && <NavBreak />} */ }
       </Container>
-      
-    
+    </Header>
+
   )
 }
 
-export default connect ( Navbar )
+export default connect( Navbar )
