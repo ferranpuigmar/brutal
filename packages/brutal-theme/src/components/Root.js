@@ -13,6 +13,7 @@ import Services from './layout/Services';
 import Contact from './layout/Contact';
 import { styled } from 'frontity';
 import { spacing } from '../assets/styles/spacing';
+import About from './layout/About';
 
 const Main = styled.main`
   padding: ${ spacing[ 'py-10' ] };
@@ -40,6 +41,7 @@ const Root = ( { state } ) =>
             <Project when={ !data.isPage && data.isPostType } />
             <Services when={ data.isPage && data.link === '/servicios/' } />
             <Contact when={ data.isPage && data.link === '/contactar/' } />
+            <About when={ data.isPage && data.link === '/sobre-nosotros/' } />
           </Switch>
         </main>
         <Footer />

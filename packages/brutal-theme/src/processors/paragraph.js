@@ -19,8 +19,9 @@ const Paragraph = ( { text, className } ) =>
     }
 
     ${ mq[ "sm" ] } {
-      font-size: 1.8rem;
-      line-height: 1.6;
+      font-size: 2rem;
+      line-height: 1.3;
+      margin-bottom: ${ spacing[ 'mb-6' ] };
     }
   `
 

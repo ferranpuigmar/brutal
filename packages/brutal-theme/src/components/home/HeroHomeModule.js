@@ -61,7 +61,7 @@ const HeroHomeModule = ( {
 
   return (
     <section id="hero">
-      <Block className={ heroWrapper }>
+      <Block className={ heroWrapper } widthPadding={ true }>
         <Container>
           <Row>
             <Col md={ 7 } lg={ 7 } className={ cx( colHero ) }>

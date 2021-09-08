@@ -8,11 +8,18 @@ import { spacing } from '../../assets/styles/spacing';
 import PageWrapper from '../shared/PageWrapper';
 import selectArrow from '../../assets/images/select_arrow.svg'
 import { mq } from '../../assets/styles/mediaqueries';
+import { theme } from '../../assets/styles/theme';
 
 
 // STYLES
 const sectionTitle = css`
   margin-bottom: ${ spacing[ 'pb-6' ] };
+`
+
+const descriptionWrapper = css`
+  ${ mq[ "sm" ] } {
+    padding-right: 80px;
+  }
 `
 
 const colForm = css`
@@ -49,6 +56,7 @@ const colForm = css`
           font-size: 1.6rem;
           padding: 15px;
           border: 0;
+          background-color: ${ theme.colors.white };
         }
 
         &.select > span{
@@ -140,7 +148,7 @@ const Contact = ( { state, libraries } ) =>
       <Container>
         <Title className={ cx( sectionTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
         <Row>
-          <Col md={ 6 }><Html2React html={ description } /></Col>
+          <Col md={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
           <Col md={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
         </Row>
       </Container>

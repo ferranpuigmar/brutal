@@ -10,6 +10,8 @@ const handleBtnStyle = ( type ) =>
   switch ( type ) {
     case 'primary-solid':
       return primarySolid;
+    case 'white-solid':
+      return whiteSolid;
     case 'outline':
       return outline
     default: {
@@ -28,6 +30,12 @@ const buttonGenerics = {
 
 const primarySolid = {
   backgroundColor: theme.colors.primaryColor,
+  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
+  ...buttonGenerics
+}
+
+const whiteSolid = {
+  backgroundColor: theme.colors.white,
   padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
   ...buttonGenerics
 }
