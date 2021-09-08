@@ -19,6 +19,7 @@ const Menu = styled.div`
   transform: ${ props => props.open ? 'translateX( 0 )' : 'translateX( 100%)' };
   transition: transform 0.3s ease-in-out;
   background-color: ${ theme.colors.black };
+  z-index: 10;
 
   ${ mq[ 'lg' ] }{
     position: static;

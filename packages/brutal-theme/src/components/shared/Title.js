@@ -7,7 +7,7 @@ import { fontFamily, theme_colors } from '../../assets/styles/variables';
 const Title = ( { level, className, children, color } ) =>
 {
   return (
-    <Heading className={ className } level={ level } color={ color }as={ `h${ level }` }>
+    <Heading className={ className } level={ level } color={ color } as={ `h${ level }` }>
       { children }
     </Heading>
   )
@@ -15,7 +15,7 @@ const Title = ( { level, className, children, color } ) =>
 
 const renderH1Props = ( mq ) =>
 ( {
-  fontSize: '5rem',
+  fontSize: '3.5rem',
   [ mq[ 'sm' ] ]: {
     fontSize: '4.9rem',
   }
@@ -23,7 +23,8 @@ const renderH1Props = ( mq ) =>
 
 const renderH2Props = ( mq ) =>
 ( {
-  fontSize: '4rem',
+  lineHeight: '1.1',
+  fontSize: '3rem',
   [ mq[ 'sm' ] ]: {
     fontSize: '3.5rem',
   },
@@ -31,8 +32,9 @@ const renderH2Props = ( mq ) =>
 
 const renderH3Props = ( mq ) =>
 ( {
+  fontSize: '2.6rem',
   [ mq[ 'sm' ] ]: {
-    fontSize: '5rem',
+    fontSize: '3rem',
   },
 } )
 
