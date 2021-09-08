@@ -16,6 +16,7 @@ import { spacing } from '../assets/styles/spacing';
 
 const Main = styled.main`
   padding: ${ spacing[ 'py-10' ] };
+  padding-bottom: ${ props => props.bottom === false ? '0px' : 'inherit' }
 `
 
 const Root = ( { state } ) =>
@@ -33,14 +34,14 @@ const Root = ( { state } ) =>
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
         <Navbar />
-        <Main>
+        <main>
           <Switch>
             <Home when={ data.isHome } />
             <Project when={ !data.isPage && data.isPostType } />
             <Services when={ data.isPage && data.link === '/servicios/' } />
             <Contact when={ data.isPage && data.link === '/contactar/' } />
           </Switch>
-        </Main>
+        </main>
         <Footer />
       </GridThemeProvider>
     </>
