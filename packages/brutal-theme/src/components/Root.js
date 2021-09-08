@@ -2,7 +2,6 @@ import React from 'react';
 import { Global, css, connect, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Project from './layout/Project';
-import Page from './layout/Page';
 import Home from './layout/Home';
 import Footer from './shared/Footer';
 import FontFace from './shared/FontFace';
@@ -11,6 +10,13 @@ import { gridTheme } from '../assets/styles/grid';
 import styleCSS from '../assets/styles/style.css'
 import Navbar from './shared/header/Navbar';
 import Services from './layout/Services';
+import Contact from './layout/Contact';
+import { styled } from 'frontity';
+import { spacing } from '../assets/styles/spacing';
+
+const Main = styled.main`
+  padding: ${ spacing[ 'py-10' ] };
+`
 
 const Root = ( { state } ) =>
 {
@@ -27,13 +33,14 @@ const Root = ( { state } ) =>
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
         <Navbar />
-        <main>
+        <Main>
           <Switch>
             <Home when={ data.isHome } />
             <Project when={ !data.isPage && data.isPostType } />
             <Services when={ data.isPage && data.link === '/servicios/' } />
+            <Contact when={ data.isPage && data.link === '/contactar/' } />
           </Switch>
-        </main>
+        </Main>
         <Footer />
       </GridThemeProvider>
     </>
