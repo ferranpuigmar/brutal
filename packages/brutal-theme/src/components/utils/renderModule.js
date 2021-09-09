@@ -1,8 +1,10 @@
-import HeroHomeModule from "../home/HeroHomeModule/HeroHomeModule";
-import ImageTextModule from "../home/HeroHomeModule/ImageTextModule";
-import ProjectsModule from "../home/HeroHomeModule/ProjectsModule";
-import StrenghtModule from "../home/HeroHomeModule/StrenghtModule";
+
+import HeroHomeModule from "../home/HeroHomeModule";
+import ImageTextModule from "../home/ImageTextModule";
+import StrenghtModule from "../home/StrenghtModule";
+import ProjectsModule from '../home/ProjectsModule'
 import ContactModule from "../shared/ContactModule";
+import ServicesModule from '../home/ServicesModule'
 
 export const renderModule = ( moduleName, postData ) =>
 {
@@ -21,5 +23,9 @@ export const renderModule = ( moduleName, postData ) =>
       return <ProjectsModule mode="light" { ...acfModule } />
     case 'contact_module':
       return <ContactModule { ...acfModule } />
+    case 'services_module':
+      return <ServicesModule { ...acfModule } />
+    default:
+      return <></>
   }
 }

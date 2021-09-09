@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { styled, connect } from 'frontity';
 import Container from '../layout/Container';
-import {theme_colors, breakpoints} from '../../assets/styles/variables';
+import { theme_colors, breakpoints } from '../../assets/styles/variables';
 import GridRow from './GridRow';
 import { getMediaUrl } from '../utils/images';
 
@@ -10,53 +10,46 @@ const Grid = styled.div`
 margin-top: 5vh;
 `;
 
-const Projects = ({state, actions }) => {
-  
-  
+const Projects = ( { state, actions } ) =>
+{
+
   const [ dataProjects, setDataProjects ] = useState();
 
   const data = state.source.get( state.router.link );
-  const post = state.source[ data.type ][ data.id ].acf.grid_block["0"].grid_row;
-  // const acf = state.source[ data.type ][ data.id ].acf ;
+  // const post = state.source[ data.type ][ data.id ].acf.grid_block.grid_row;
+  const post = state.source[ data.type ][ data.id ].acf.grid_row;
+  console.log( 'post.acf: ', post );
+  const rows = Object.values( post )
+  const rowFetch = async () =>
+  {
 
-  // const projectsObj = Object.values(state.source[ data.type ][ data.id ].acf.projects_module.projects);
-
-
-  const rows = Object.values(post)
-  console.log(`rows!!`, rows)
-  
-  
-  const rowFetch = async () => {
-  console.log(`rows!!`, rows)
-
-  await actions.source.fetch( "/proyectos" )
+    await actions.source.fetch( "/proyectos" )
 
     const projectsBag = state.source.proyectos
-    for (const project in projectsBag) {
-      const projectURLimg=getMediaUrl(state, projectsBag[project], 1000)
-      projectsBag[project].cover_img= projectURLimg
+    for ( const project in projectsBag ) {
+      const projectURLimg = getMediaUrl( state, projectsBag[ project ], 1000 )
+      projectsBag[ project ].cover_img = projectURLimg
     }
-    setDataProjects(projectsBag)
-    
-
+    setDataProjects( projectsBag )
   }
 
-  useEffect( async () => rowFetch(), []  );
+  useEffect( async () => rowFetch(), [] );
 
   return (
     <div>
       <Container>
         <Grid>
-          {dataProjects && rows.map(row=> { 
+          { dataProjects && rows.map( row =>
+          {
             return (
-                <GridRow 
-                  bigRight={row.acf_fc_layout === "big_right" ? true: false} 
-                  big={dataProjects[row.id_big]} 
-                  bottom={dataProjects[row.id_bottom]} 
-                  top={dataProjects[row.id_top]} 
-                />
+              <GridRow
+                bigRight={ row.acf_fc_layout === "big_right" ? true : false }
+                big={ dataProjects[ row.id_big ] }
+                bottom={ dataProjects[ row.id_bottom ] }
+                top={ dataProjects[ row.id_top ] }
+              />
             )
-          })}
+          } ) }
         </Grid>
       </Container>
     </div>
@@ -64,7 +57,7 @@ const Projects = ({state, actions }) => {
 }
 
 
-export default connect(Projects)
+export default connect( Projects )
 
 
 
@@ -74,7 +67,7 @@ export default connect(Projects)
 //   console.log(`post`, post)
 
 
-  
+
 //   // console.log(`data`, data)
 //   // Background footer logic
 //   const rows = Object.values(post)

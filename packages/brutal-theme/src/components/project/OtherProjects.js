@@ -8,39 +8,7 @@ import Title from '../shared/Title';
 import { cx, css } from '@emotion/css';
 
 
-
-const OtherProyects = ( { state, actions, currentProject } ) =>
-{
-
-  useEffect( () =>
-  {
-    actions.source.fetch( "/proyectos" );
-  }, [] );
-
-  console.log(object)
-
-  const proyects = Object.values( state.source.proyectos ).filter( project => project.id !== currentProject ).slice( 0, 4 );
-
-  return (
-    proyects ?
-      <>
-        <Container>
-          <Title className={ cx( section ) } level={ 4 }>Otros Proyectos</Title>
-        </Container>
-        <Wrapper otherProyectsNumber={ proyects.length }>
-
-          { proyects.map( project =>
-          {
-            const media = state.source.attachment[ project.featured_media ];
-            return <WrapperLink key={ project.id } href={ project.link }><OtherProject background={ media.media_details.sizes } ></OtherProject></WrapperLink>
-          } ) }
-
-        </Wrapper>
-      </>
-      : null
-  )
-}
-
+// Styles 
 const section = css`
   margin-bottom: ${ spacing[ 'mb-2' ] };
   margin-top: ${ spacing[ 'mt-20' ] };
@@ -76,5 +44,34 @@ const OtherProject = styled.div`
   background-size: cover;
 
 `
+
+// Component 
+const OtherProyects = ( { state, actions, currentProject } ) =>
+{
+
+  useEffect( () =>
+  {
+    actions.source.fetch( "/proyectos" );
+  }, [] );
+
+  const proyects = Object.values( state.source.proyectos ).filter( project => project.id !== currentProject ).slice( 0, 4 );
+
+  return (
+    proyects ?
+      <>
+        <Container>
+          <Title className={ cx( section ) } level={ 4 }>Otros Proyectos</Title>
+        </Container>
+        <Wrapper otherProyectsNumber={ proyects.length }>
+          { proyects.map( project =>
+          {
+            const media = state.source.attachment[ project.featured_media ];
+            return <WrapperLink key={ project.id } href={ project.link }><OtherProject background={ media.media_details.sizes } ></OtherProject></WrapperLink>
+          } ) }
+        </Wrapper>
+      </>
+      : null
+  )
+}
 
 export default connect( OtherProyects );

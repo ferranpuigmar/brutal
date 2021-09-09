@@ -1,8 +1,7 @@
 import React from 'react';
 import { Global, css, connect, Head } from "frontity";
 import Switch from "@frontity/components/switch";
-import Post from './layout/Post';
-import Page from './layout/Page';
+import Project from './layout/Project';
 import Home from './layout/Home';
 import Footer from './shared/Footer';
 import FontFace from './shared/FontFace';
@@ -10,19 +9,24 @@ import { GridThemeProvider } from 'styled-bootstrap-grid';
 import { gridTheme } from '../assets/styles/grid';
 import styleCSS from '../assets/styles/style.css'
 import Navbar from './shared/header/Navbar';
+import Services from './layout/Services';
+import Contact from './layout/Contact';
+import { styled } from 'frontity';
+import { spacing } from '../assets/styles/spacing';
+import About from './layout/About';
 import Projects from './layout/Projects';
+
+const Main = styled.main`
+  padding: ${ spacing[ 'py-10' ] };
+  padding-bottom: ${ props => props.bottom === false ? '0px' : 'inherit' }
+`
 
 const Root = ( { state } ) =>
 {
   const data = state.source.get( state.router.link );
-  
-  // console.log(`data`, data)
-  // Background footer logic
-  const objPageIDs = Object.values(state.source.page).find(page=>page.link=== data.link)
+  const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
   const blackBackground = objPageIDs?.acf.footer_default_black
-  
-  // console.log(`data Root`, data)
-  // console.log(`state Root`, state)
+
   return (
     <>
       <Head>
@@ -33,17 +37,18 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
-        <Navbar /> 
+        <Navbar />
         <main>
           <Switch>
             <Home when={ data.isHome } />
-            <Post when={ !data.isPage && data.isPostType } />
-            {/* <Page when={ data.isPage && data.isPostType } /> */}
-            <Projects when={ data.isPostType && data.link==="/listado-proyectos/"}/>
-            
+            <Project when={ !data.isPage && data.isPostType } />
+            <Services when={ data.isPage && data.link === '/servicios/' } />
+            <Contact when={ data.isPage && data.link === '/contactar/' } />
+            <About when={ data.isPage && data.link === '/sobre-nosotros/' } />
+            <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } />
           </Switch>
         </main>
-        <Footer blackBackground={blackBackground}/>
+        <Footer blackBackground={ blackBackground } />
       </GridThemeProvider>
     </>
   );

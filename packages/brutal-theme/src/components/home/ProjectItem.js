@@ -1,12 +1,12 @@
 import { connect, styled } from 'frontity'
 import React from 'react'
 import { Col } from 'styled-bootstrap-grid';
-import { theme } from '../../../assets/styles/theme';
-import ArrowLink from '../../shared/ArrowLink';
-import Title from '../../shared/Title';
+import { theme } from '../../assets/styles/theme';
+import ArrowLink from '../shared/ArrowLink';
+import Title from '../shared/Title';
 import { css, cx } from '@emotion/css'
-import { spacing } from '../../../assets/styles/spacing';
-import { mq } from '../../../assets/styles/mediaqueries';
+import { spacing } from '../../assets/styles/spacing';
+import { mq } from '../../assets/styles/mediaqueries';
 import { v4 as uuid_v4 } from "uuid";
 
 // Styles

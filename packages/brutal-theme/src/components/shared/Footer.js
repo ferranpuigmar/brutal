@@ -1,16 +1,16 @@
 import { styled, connect } from 'frontity'
 import React from 'react';
 import Container from '../layout/Container';
-import {theme_colors, breakpoints} from '../../assets/styles/variables'
+import { theme_colors, breakpoints } from '../../assets/styles/variables'
 import FooterText from './FooterText';
 
 const FooterColor = styled.div`
   .black-back {
-    background-color: ${theme_colors["black"]};
+    background-color: ${ theme_colors[ "black" ] };
     padding: 5vh 0;
   }
   .white-back {
-    background-color: ${theme_colors["white"]};
+    background-color: ${ theme_colors[ "white" ] };
     padding: 5vh 0;
   }
 `;
@@ -30,31 +30,32 @@ const FooterTextStyle = styled.div`
     a { text-decoration: none }
   }
   
-  @media (max-width: ${breakpoints["md"]}px) {
+  @media (max-width: ${ breakpoints[ "md" ] }px) {
     flex-direction: column; 
   }
 `;
 
-  const Footer = ( { state, blackBackground } ) => {
-    const logo = state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf;
+const Footer = ( { state, blackBackground } ) =>
+{
+  const logo = state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf;
 
   return (
     <FooterColor >
-    <div className={ blackBackground?  "black-back" : "white-back" }>
+      <div className={ blackBackground ? "black-back" : "white-back" }>
 
-      <Container>
+        <Container>
 
-        <FooterLogo>
-          <img src={ blackBackground ? logo.logo_white : logo.logo_black} className="logo" />
-        </FooterLogo>
+          <FooterLogo>
+            <img src={ blackBackground ? logo.logo_white : logo.logo_black } className="logo" />
+          </FooterLogo>
 
-        <FooterTextStyle className="footer__text">
-          <FooterText blackBackground={blackBackground} textsize={"1.6rem"} titlelevel={5}/>
-        </FooterTextStyle>
+          <FooterTextStyle className="footer__text">
+            <FooterText blackBackground={ blackBackground } textsize={ "1.6rem" } titlelevel={ 5 } />
+          </FooterTextStyle>
 
-      </Container>
+        </Container>
 
-    </div>
+      </div>
     </FooterColor>
   )
 }

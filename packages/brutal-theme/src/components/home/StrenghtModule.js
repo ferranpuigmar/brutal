@@ -1,14 +1,14 @@
 import React from 'react'
-import Block from '../../shared/Block';
+import Block from '../shared/Block';
 import { css, cx } from '@emotion/css'
-import { spacing } from '../../../assets/styles/spacing';
-import { theme } from '../../../assets/styles/theme';
-import Title from '../../shared/Title';
+import { spacing } from '../../assets/styles/spacing';
+import { theme } from '../../assets/styles/theme';
+import Title from '../shared/Title';
 import connect from '@frontity/connect';
-import Container from '../../layout/Container';
+import Container from '../layout/Container';
 import { v4 as uuid_v4 } from "uuid";
 import StrenghItem from './StrenghItem';
-import { mq } from '../../../assets/styles/mediaqueries';
+import { mq } from '../../assets/styles/mediaqueries';
 import { styled } from 'frontity';
 
 // styles

@@ -10,6 +10,7 @@ import { spacing } from '../../assets/styles/spacing';
 import { css, cx } from '@emotion/css'
 import OtherProjects from '../project/OtherProjects';
 import { v4 as uuid_v4 } from "uuid";
+import PageWrapper from '../shared/PageWrapper';
 
 
 // STYLES
@@ -65,7 +66,7 @@ const Wrapper = styled.div`
 `
 
 
-const Post = ( { state, actions, libraries, params } ) =>
+const Project = ( { state, actions, libraries, params } ) =>
 {
 
   const [ services, setServices ] = useState();
@@ -74,6 +75,8 @@ const Post = ( { state, actions, libraries, params } ) =>
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
   const { cliente, industria, portfolio } = post.acf;
+  console.log( 'post: ', post.acf )
+  console.log( 'data: ', data )
 
   const getIdServiceTaxonomies = async ( post ) =>
   {
@@ -98,11 +101,11 @@ const Post = ( { state, actions, libraries, params } ) =>
 
   useEffect( () =>
   {
-    renderServices( post )
+    // renderServices( post )
   }, [] )
 
   return data.isReady ? (
-    <>
+    <PageWrapper>
       <Container className="projectpage">
         <Title className={ cx( projectTitle ) } level={ 1 }>{ post.title.rendered }</Title>
         <Row>
@@ -127,7 +130,7 @@ const Post = ( { state, actions, libraries, params } ) =>
       { portfolio && <PortfolioList projectName={ post.title.rendered } portfolio={ portfolio } /> }
       <OtherProjects currentProject={ data.id } />
 
-    </>
+    </PageWrapper>
     // Esto sería un loading en vez de null
   ) : null;
 }
@@ -151,4 +154,4 @@ const PortfolioList = ( { portfolio, projectName } ) =>
   </div>
 }
 
-export default connect( Post );
+export default connect( Project );

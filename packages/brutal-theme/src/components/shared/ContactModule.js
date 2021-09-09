@@ -74,8 +74,8 @@ const ContactModule = ( {
 
   return (
     <Section id="contact">
-      <Container>
-        <Block className={ cx( blockColor ) }>
+      <Block widthPadding={ true } className={ cx( blockColor ) }>
+        <Container>
           <Row>
             <Col md={ 7 } className={ cx( colLeft ) }>
               <Title level={ 2 }><Html2React html={ title } /></Title>
@@ -85,8 +85,8 @@ const ContactModule = ( {
               <ArrowLink variant="bold" className={ cx( projectLink ) } link={ '/contactar' }>{ link }</ArrowLink>
             </Col>
           </Row>
-        </Block>
-      </Container>
+        </Container>
+      </Block>
     </Section>
   )
 }

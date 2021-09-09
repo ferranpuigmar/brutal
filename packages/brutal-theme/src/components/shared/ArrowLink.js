@@ -3,8 +3,49 @@ import { styled } from 'frontity';
 import { theme } from '../../assets/styles/theme';
 import { cx } from '@emotion/css'
 import { mq } from '../../assets/styles/mediaqueries';
+import { spacing } from '../../assets/styles/spacing';
+
+const handleBtnStyle = ( type ) =>
+{
+  switch ( type ) {
+    case 'primary-solid':
+      return primarySolid;
+    case 'white-solid':
+      return whiteSolid;
+    case 'outline':
+      return outline
+    default: {
+      false
+    }
+  }
+
+}
 
 // Styles
+const buttonGenerics = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'space-between'
+}
+
+const primarySolid = {
+  backgroundColor: theme.colors.primaryColor,
+  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
+  ...buttonGenerics
+}
+
+const whiteSolid = {
+  backgroundColor: theme.colors.white,
+  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
+  ...buttonGenerics
+}
+
+const outline = {
+  backgroundColor: 'transparent',
+  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
+  border: `2px solid ${ theme.colors.black }`,
+  ...buttonGenerics
+}
 
 const ArrowLinkWrapper = styled.a`
   display: inline-block;
@@ -17,6 +58,7 @@ const ArrowLinkWrapper = styled.a`
   color: ${ theme.colors.black }!important;
   font-size: 1.2rem;
   font-family: ${ props => props.variant === 'bold' ? theme.fontFamily.bold : theme.fontFamily.regular };
+  ${ props => handleBtnStyle( props.type ) };
 
   span{
     display: inline-block;
@@ -24,16 +66,12 @@ const ArrowLinkWrapper = styled.a`
 
   &:hover{
     span:last-child{
-      width: 58px;
+      transform: translateX(5px);
     }
   }
 
   ${ mq[ "sm" ] } {
-    &:hover{
-      span:last-child{
-        width: 71px;
-      }
-    }
+    font-size: 1.8rem;
   }
 
 `
@@ -74,12 +112,12 @@ const Arrow = styled.span`
 
 `
 
-const ArrowLink = ( { link, children, className, variant } ) =>
+const ArrowLink = ( { link, children, className, variant, type } ) =>
 {
   return (
-    <ArrowLinkWrapper variant={ variant } href={ link } className={ cx( className ) }>
+    <ArrowLinkWrapper type={ type } variant={ variant } href={ link } className={ cx( className ) }>
       <span>{ children }</span>
-      <Arrow variant={ variant }></Arrow>
+      <Arrow type={ type } variant={ variant }></Arrow>
     </ArrowLinkWrapper>
   )
 }

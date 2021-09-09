@@ -2,11 +2,11 @@ import connect from '@frontity/connect'
 import React from 'react'
 import { Col, Row } from 'styled-bootstrap-grid'
 import { css, cx } from '@emotion/css'
-import { theme } from '../../../assets/styles/theme';
-import { spacing } from '../../../assets/styles/spacing';
-import Title from '../../shared/Title';
-import { getImageUrlSize } from '../../utils/images';
-import { mq } from '../../../assets/styles/mediaqueries';
+import { theme } from '../../assets/styles/theme';
+import { spacing } from '../../assets/styles/spacing';
+import Title from '../shared/Title';
+import { getImageUrlSize } from '../utils/images';
+import { mq } from '../../assets/styles/mediaqueries';
 import { v4 as uuid_v4 } from "uuid";
 
 // Styles
