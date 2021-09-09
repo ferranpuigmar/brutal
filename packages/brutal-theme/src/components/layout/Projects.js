@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled, connect } from 'frontity';
 import Container from '../layout/Container';
 import {theme_colors, breakpoints} from '../../assets/styles/variables';
-import Row3 from './Row3';
+import GridRow from './GridRow';
+import { getMediaUrl } from '../utils/images';
 
 // const StyleRow = styled.div`
 const Grid = styled.div`
@@ -10,33 +11,49 @@ margin-top: 5vh;
 `;
 
 const Projects = ({state, actions }) => {
+  
+  
+  const [ dataProjects, setDataProjects ] = useState();
 
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ].acf.grid_block["0"].grid_row;
-  const acf = state.source[ data.type ][ data.id ].acf ;
-  const projectsObj = state.source[ data.type ][ data.id ].acf.projects_module.projects;
-  console.log(`acf!!`, acf)
-  console.log(`projectsObj!!`, projectsObj)
+  // const acf = state.source[ data.type ][ data.id ].acf ;
+
+  // const projectsObj = Object.values(state.source[ data.type ][ data.id ].acf.projects_module.projects);
+
 
   const rows = Object.values(post)
-  console.log(`rows!!`, rows[0].acf_fc_layout)
+  console.log(`rows!!`, rows)
+  
+  
+  const rowFetch = async () => {
+  console.log(`rows!!`, rows)
+
+  await actions.source.fetch( "/proyectos" )
+
+    const projectsBag = state.source.proyectos
+    for (const project in projectsBag) {
+      const projectURLimg=getMediaUrl(state, projectsBag[project], 1000)
+      projectsBag[project].cover_img= projectURLimg
+    }
+    setDataProjects(projectsBag)
+    
+
+  }
+
+  useEffect( async () => rowFetch(), []  );
 
   return (
     <div>
       <Container>
         <Grid>
-          {rows.map(row=> { 
+          {dataProjects && rows.map(row=> { 
             return (
-                <Row3 
-                  bigRight={row.acf_fc_layout === "grande_der" ? true: false} 
-                  rowObj={row}
-                  big={"https://1.bp.blogspot.com/-QQsSl1p555c/Xwg48x5xyQI/AAAAAAAAMxI/JwBJHUzc2_4DjshP7097XxzjJENi62L7QCLcBGAsYHQ/s1600/congost-mont-rebei.jpg"} 
-                  top={"https://elgiroscopo.es/wp-content/uploads/2016/08/pasarela_congost_mont_rebei.jpg"}
-                  // top={"https://meraviglia.es/wp-content/uploads/2020/09/Ruta-Pasarelas-Montfalco-Congost-Mont-Rebei-scaled.jpg"}
-                  bottom={"https://etheriamagazine.com/wp-content/uploads/2020/05/mont-rebei-gr1.jpg"}
-                  bigLink={"/"} 
-                  topLink={"/"}  
-                  bottomLink={"/"} 
+                <GridRow 
+                  bigRight={row.acf_fc_layout === "big_right" ? true: false} 
+                  big={dataProjects[row.id_big]} 
+                  bottom={dataProjects[row.id_bottom]} 
+                  top={dataProjects[row.id_top]} 
                 />
             )
           })}

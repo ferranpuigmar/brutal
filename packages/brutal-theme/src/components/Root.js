@@ -33,7 +33,7 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
-        {/* <Navbar /> */ }
+        <Navbar /> 
         <main>
           <Switch>
             <Home when={ data.isHome } />

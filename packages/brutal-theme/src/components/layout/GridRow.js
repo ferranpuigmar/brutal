@@ -93,29 +93,33 @@ const ImgBigSet = styled.div`
   }
 `;
 
-const Row3 = ({bigRight, big, top, bottom, bigLink, topLink, bottomLink }) => {
+const GridRow = ({bigRight, big, top, bottom, projectsBag }) => {
   // const Row3 = ({bigRight, rowObj}) => {
   // const {big, top, bottom, bigLink, topLink, bottomLink} = rowObj
+// console.log('big', big, `projectsBagRooooooow`, projectsBag)
+// console.log('big cover img', big["cover_img"]
+
+// console.log(`projectsBag*****`, projectsBag)
+
+console.log(`big`, big)
 
   return (
     <Big>
         <Row className={ bigRight && "bigright" } >
           <SideBig className="big">
-              <Link link={bigLink}>
-                <ImgBigSet><img alt="" src={big}/></ImgBigSet>
+              <Link link={big.link}>
+                <ImgBigSet><img  src={big.cover_img}/></ImgBigSet>
               </Link> 
           </SideBig>
           <SideSmall>
             <BiVertical>
-              <Link link={topLink}>
-                <ImgSmallSet><img alt="" src={top}/></ImgSmallSet>
-                {/* <ImgSmallSet><img alt="" src={infoRow.top}/></ImgSmallSet> */}
+              <Link link={top.link}>
+                <ImgSmallSet><img   src={top.cover_img}/></ImgSmallSet>
               </Link> 
             </BiVertical>
             <BiVertical>
-              <Link link={bottomLink}>
-                <ImgSmallSet><img alt="" src={bottom}/></ImgSmallSet>
-                {/* <ImgSmallSet><img alt="" src={infoRow.bottom}/></ImgSmallSet> */}
+              <Link link={bottom.link}>
+                <ImgSmallSet><img   src={bottom.cover_img}/></ImgSmallSet>
               </Link> 
             </BiVertical>
           </SideSmall>
@@ -125,7 +129,7 @@ const Row3 = ({bigRight, big, top, bottom, bigLink, topLink, bottomLink }) => {
 }
 
 
-export default connect(Row3)
+export default connect( GridRow )
 
 
 

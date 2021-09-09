@@ -9,7 +9,7 @@ import { cx, css } from '@emotion/css';
 
 
 
-const OtherProjects = ( { state, actions, currentProyect } ) =>
+const OtherProyects = ( { state, actions, currentProject } ) =>
 {
 
   useEffect( () =>
@@ -17,19 +17,19 @@ const OtherProjects = ( { state, actions, currentProyect } ) =>
     actions.source.fetch( "/proyectos" );
   }, [] );
 
-  const projects = Object.values( state.source.proyectos ).filter( project => project.id !== currentProyect ).slice( 0, 4 );
+  console.log(object)
 
-  console.log( 'projects: ', projects )
+  const proyects = Object.values( state.source.proyectos ).filter( project => project.id !== currentProject ).slice( 0, 4 );
 
   return (
-    projects ?
+    proyects ?
       <>
         <Container>
           <Title className={ cx( section ) } level={ 4 }>Otros Proyectos</Title>
-        </Container >
-        <Wrapper otherProjectsNumber={ projects.length }>
+        </Container>
+        <Wrapper otherProyectsNumber={ proyects.length }>
 
-          { projects.map( project =>
+          { proyects.map( project =>
           {
             const media = state.source.attachment[ project.featured_media ];
             return <WrapperLink key={ project.id } href={ project.link }><OtherProject background={ media.media_details.sizes } ></OtherProject></WrapperLink>
@@ -52,7 +52,7 @@ const Wrapper = styled.div`
   }
   display: flex;
   align-items: middle;
-  justify-content: ${ props => props.otherProjectsNumber < 4 ? 'flex-start' : 'space-around' };
+  justify-content: ${ props => props.otherProyectsNumber < 4 ? 'flex-start' : 'space-around' };
 `
 
 const WrapperLink = styled.a`
@@ -68,11 +68,13 @@ const OtherProject = styled.div`
   display: flex;
   align-items: middle;
   justify-content: space-around;
-  background-image: ${ props => `url("${ props.background[ 'medium_large' ]?.source_url || props.background[ 'medium' ]?.source_url }")` };
+  ${ mq[ "sm" ] } {
+    background-image: ${ props => `url("${ props.background[ 'medium_large' ]?.source_url || props.background[ 'medium' ]?.source_url }")` };
+  }
   width: 100%;
   height: 100%;
   background-size: cover;
 
 `
 
-export default connect( OtherProjects );
+export default connect( OtherProyects );

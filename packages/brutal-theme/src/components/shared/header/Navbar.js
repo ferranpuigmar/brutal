@@ -51,7 +51,7 @@ const Navbar = () => {
         </Nav>
         {/* { onScroll={() => setNavLine(!navLine)} navLine && <NavBreak />} */ }
       </Container>
-      <NavBreak />
+      {/* <NavBreak /> */}
     </>
 
   )

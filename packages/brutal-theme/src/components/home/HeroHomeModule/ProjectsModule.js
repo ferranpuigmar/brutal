@@ -8,6 +8,7 @@ import { orderByBreakpoint } from '../../utils/order';
 import { hexToRgb } from '../../utils/colors';
 import ProjectItem from './ProjectItem';
 import { v4 as uuid_v4 } from "uuid";
+import { getMediaUrl } from '../../utils/images';
 
 // Styles
 const fullRow = css`
@@ -61,13 +62,7 @@ const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
   const { link_text, projects } = rest;
   const [ dataProjects, setDataProjects ] = useState( [] );
 
-  const getMediaUrl = ( project, maxSize ) =>
-  {
-    const media = state.source.attachment[ project.featured_media ];
-    const urlList = Object.values( media.media_details.sizes ).sort( orderByBreakpoint( 'desc' ) )
-    const url = urlList.find( urlListItem => urlListItem.width < maxSize ).source_url
-    return url;
-  }
+
 
   const loadProjects = async () =>
   {
@@ -88,7 +83,7 @@ const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
 
   return dataProjects.map( ( project, index ) => <Row key={ uuid_v4() } className={ cx( fullRow ) }>
     <ProjectItem project={ project } index={ index } link_text={ link_text } />
-  </Row >
+  </Row>
   )
 }
 

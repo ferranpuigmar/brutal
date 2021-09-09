@@ -18,3 +18,8 @@ GET /wp-json/wp/v2/posts?filter[s]=awesome
 
 
 chequear react-animejs para anmacion de burguer
+
+
+Claaaaaaaaaaaaaaaaaaaaaaaaaaaaaaudia
+
+recuerda poner el "?" antes del punto en los objetos cuando son undefined

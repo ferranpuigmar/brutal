@@ -8,7 +8,7 @@ import { styled } from 'frontity';
 import { mq } from '../../assets/styles/mediaqueries';
 import { spacing } from '../../assets/styles/spacing';
 import { css, cx } from '@emotion/css'
-import OtherProyects from '../proyect/OtherProyects';
+import OtherProjects from '../project/OtherProjects';
 import { v4 as uuid_v4 } from "uuid";
 
 
@@ -125,7 +125,7 @@ const Post = ( { state, actions, libraries, params } ) =>
         </Row>
       </Container>
       { portfolio && <PortfolioList projectName={ post.title.rendered } portfolio={ portfolio } /> }
-      <OtherProyects currentProyect={ data.id } />
+      <OtherProjects currentProject={ data.id } />
 
     </>
     // Esto sería un loading en vez de null
