@@ -17,20 +17,19 @@ const Section = styled.section`
 
   h2{
     color: ${ theme.colors.black };
-    font-size: 3.5rem;
     margin-bottom: ${ spacing[ 'mb-6' ] };
 
     ${ mq[ "sm" ] } {
-      font-size: 4.9rem;
       margin-bottom: 0;
     }
+
+    ${ theme.fontSize.h1 }
   }
 `
 
 const Subtitle = styled.div`
   color: ${ theme.colors.black };
-  line-height: 1.1;
-  font-size: 3rem;
+  ${ theme.fontSize.h2 }
 `
 
 const projectLink = css`

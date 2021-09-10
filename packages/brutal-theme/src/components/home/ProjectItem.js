@@ -13,6 +13,7 @@ import { v4 as uuid_v4 } from "uuid";
 const DescriptionWrapper = styled.div`
   width: 100%;
   p { color: ${ theme.colors.black };}
+  margin-bottom: ${ spacing[ 'mb-6' ] };
 `
 
 const block = css`
@@ -39,6 +40,8 @@ const titleColor = css`
   text-align: left;
   width: 100%;
   margin-bottom: ${ spacing[ 'mb-3' ] };
+  ${ theme.fontSize.h2 }
+
 `
 
 const blockColImg = css`
@@ -75,7 +78,7 @@ const ProjectItem = ( {
     <DescriptionWrapper>
       <Html2React html={ description } />
     </DescriptionWrapper>
-    <ArrowLink link={ link }>{ link_text }</ArrowLink>
+    <ArrowLink variant="bold" link={ link }>{ link_text }</ArrowLink>
   </Col>
 
   const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }><img src={ bg_url } alt={ title } /></Col>

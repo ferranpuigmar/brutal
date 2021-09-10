@@ -13,14 +13,12 @@ import ArrowLink from '../shared/ArrowLink';
 
 // Styles
 const sectionTitle = css`
-    font-size: 3.5rem;
     margin-bottom: ${ spacing[ 'mb-6' ] };
     color: ${ theme.colors.black };
-
     ${ mq[ "sm" ] } {
-      font-size: 4.9rem;
       margin-bottom: 0;
     }
+    ${ theme.fontSize.h1 }
 `
 
 const colTitle = css`

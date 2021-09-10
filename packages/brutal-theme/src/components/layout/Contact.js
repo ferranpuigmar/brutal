@@ -14,11 +14,20 @@ import { theme } from '../../assets/styles/theme';
 // STYLES
 const sectionTitle = css`
   margin-bottom: ${ spacing[ 'pb-6' ] };
+
+  ${ mq[ "md" ] } {
+    padding-bottom: ${ spacing[ 'pb-7' ] };
+  }
 `
 
 const descriptionWrapper = css`
-  ${ mq[ "sm" ] } {
-    padding-right: 80px;
+  ${ mq[ "md" ] } {
+    padding-bottom: ${ spacing[ 'pb-12' ] };
+  }
+
+  ${ mq[ "lg" ] } {
+    padding-right: ${ spacing[ 'pr-12' ] };
+    padding-bottom: 0;
   }
 `
 
@@ -148,8 +157,8 @@ const Contact = ( { state, libraries } ) =>
       <Container>
         <Title className={ cx( sectionTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
         <Row>
-          <Col md={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
-          <Col md={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
+          <Col lg={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
+          <Col lg={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
         </Row>
       </Container>
     </PageWrapper>

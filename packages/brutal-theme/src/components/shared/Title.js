@@ -1,6 +1,7 @@
 import { styled } from 'frontity';
 import React from 'react'
 import { mq } from '../../assets/styles/mediaqueries';
+import { theme } from '../../assets/styles/theme';
 import { fontFamily, theme_colors } from '../../assets/styles/variables';
 
 
@@ -13,70 +14,51 @@ const Title = ( { level, className, children, color } ) =>
   )
 }
 
-const renderH1Props = ( mq ) =>
+const renderH1Props = () =>
 ( {
-  fontSize: '3.5rem',
-  [ mq[ 'sm' ] ]: {
-    fontSize: '4.9rem',
-  }
+  ...theme.fontSize.h1
 } )
 
-const renderH2Props = ( mq ) =>
+const renderH2Props = () =>
 ( {
-  lineHeight: '1.1',
-  fontSize: '3rem',
-  [ mq[ 'sm' ] ]: {
-    fontSize: '3.5rem',
-  },
+  ...theme.fontSize.h2
 } )
 
-const renderH3Props = ( mq ) =>
+const renderH3Props = () =>
 ( {
-  fontSize: '2.6rem',
-  [ mq[ 'sm' ] ]: {
-    fontSize: '3rem',
-  },
+  ...theme.fontSize.h3
 } )
 
-const renderH4Props = ( mq ) =>
+const renderH4Props = () =>
 ( {
-  fontSize: '2rem',
-  [ mq[ 'sm' ] ]: {
-    fontSize: '2rem',
-  },
+  ...theme.fontSize.h4
 } )
 
-const renderH5Props = ( mq ) =>
+const renderH5Props = () =>
 ( {
-  fontSize: '1.6rem',
-  [ mq[ 'sm' ] ]: {
-    fontSize: '1.6rem',
-  },
+  ...theme.fontSize.h5
 } )
 
-const renderH6Props = ( mq ) =>
+const renderH6Props = () =>
 ( {
-  fontSize: '1.2rem',
-  [ mq[ 'sm' ] ]: {
-    fontSize: '1.2rem',
-  },
+  ...theme.fontSize.h6
 } )
 
-const generateHeaderProps = ( level, mq ) =>
+const generateHeaderProps = ( level ) =>
 {
   switch ( level ) {
     case 1:
-      return { ...renderH1Props( mq ) };
+      return { ...renderH1Props() };
     case 2:
-      return { ...renderH2Props( mq ) };
+      return { ...renderH2Props() };
     case 3:
-      return { ...renderH3Props( mq ) };
+      return { ...renderH3Props() };
     case 4:
-      return { ...renderH4Props( mq ) };
+      return { ...renderH4Props() };
     case 5:
-      return { ...renderH5Props( mq ) };
+      return { ...renderH5Props() };
     case 6:
-      return { ...renderH6Props( mq ) };
+      return { ...renderH6Props() };
     default:
       return { ...h1 };
   }
@@ -86,7 +68,7 @@ const Heading = styled.div`
     font-family: ${ fontFamily.bold }, sans-serif;
     color: ${ props => props.color || theme_colors.white };
     line-height: normal;
-    ${ ( { level } ) => generateHeaderProps( level, mq ) };
+    ${ ( { level } ) => generateHeaderProps( level ) };
     font-weight: 300;
     margin: 0;
 `

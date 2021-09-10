@@ -6,7 +6,8 @@ import { styled } from 'frontity';
 import { spacing } from '../../assets/styles/spacing';
 import Title from '../shared/Title';
 import { cx, css } from '@emotion/css';
-import { getImageUrlSize } from '../utils/images';
+import { getImageUrlSize, getMediaUrl } from '../utils/images';
+import { theme } from '../../assets/styles/theme';
 
 
 // Styles 
@@ -31,23 +32,34 @@ const WrapperLink = styled.a`
   max-width: 308px;
   margin-left: ${ spacing[ 'm-4' ] };
   margin-right: ${ spacing[ 'm-4' ] };
+  position: relative;
+
+  &:hover{
+    > div{
+      opacity: 1;
+    }
+  }
 `
 
-const OtherProject = styled.div`
-  display: flex;
-  align-items: middle;
-  justify-content: space-around;
-  ${ mq[ "sm" ] } {
-    background-image: ${ props => `url("${ props.background[ 'medium_large' ]?.source_url || props.background[ 'medium' ]?.source_url }")` };
-  }
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-`
 const OtherProjectImg = styled.img`
   object-fit: cover;
   width: 100%;
   height: 100%;
+`
+
+const WrapperInfo = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: ${ theme.colors.primaryColor };
+  padding: ${ spacing[ 'p-6' ] };
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+
+  h2{
+    color: ${ theme.colors.black }
+  } 
 `
 
 // Component 
@@ -69,8 +81,14 @@ const OtherProjects = ( { state, actions, currentProject } ) =>
         <Wrapper otherProjectsNumber={ projects.length }>
           { projects.map( project =>
           {
-            const media = state.source.attachment[ project.featured_media ];
-            return <WrapperLink key={ project.id } href={ project.link }><OtherProject></OtherProject></WrapperLink>
+            return (
+              <WrapperLink key={ project.id } href={ project.link }>
+                <WrapperInfo>
+                  <Title level={ 2 }>{ project.title.rendered }</Title>
+                </WrapperInfo>
+                <OtherProjectImg src={ getMediaUrl( state, project, 1600 ) } alt={ project.title.rendered }></OtherProjectImg>
+              </WrapperLink>
+            )
           } ) }
         </Wrapper>
       </>
@@ -78,6 +96,6 @@ const OtherProjects = ( { state, actions, currentProject } ) =>
   )
 }
 
-{/* <OtherProjectImg src={ media.media_details.sizes } ></OtherProjectImg> */ }
+
 
 export default connect( OtherProjects );

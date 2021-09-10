@@ -18,25 +18,32 @@ const sectionTitle = css`
     font-style: normal;
   }
 
-  ${ mq[ "sm" ] } {
+  ${ mq[ "md" ] } {
     width: 100%;
-    max-width: 65%;
+    max-width: 90%;
     margin-bottom: ${ spacing[ 'pb-13' ] };
+  }
+
+  ${ mq[ "lg" ] } {
+    max-width: 65%;
   }
 `
 
 const DescriptionWrapper = styled.div`
   margin-bottom: ${ spacing[ 'pb-6' ] };
-  ${ mq[ "sm" ] } {
-    padding-right: 80px;
+  ${ mq[ "md" ] } {
     width: 100%;
+    max-width: 85%;
+    margin-bottom: ${ spacing[ 'pb-12' ] };
+  }
+
+  ${ mq[ "lg" ] } {
+    padding-right: 80px;
     max-width: 55%;
-    margin-bottom: ${ spacing[ 'pb-8' ] };
   }
 `
 
 const ButtonDiv = styled.div`
-  
   ${ mq[ "sm" ] } {
     width: 100%;
     max-width: 349px;

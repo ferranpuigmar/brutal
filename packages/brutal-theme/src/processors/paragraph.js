@@ -10,20 +10,19 @@ const Paragraph = ( { text, className } ) =>
   const Wrapper = styled.p`
     font-family: ${ fontFamily.regular }, sans-serif;
     margin-bottom: ${ spacing[ 'mb-3' ] };
-    font-size: 2rem;
     letter-spacing: 0.5px;
     color: ${ theme.colors.white };
-    line-height: normal;
-    
+
     &:last-child{
       margin-bottom: 0;
     }
 
     ${ mq[ "sm" ] } {
-      font-size: 2rem;
-      line-height: 1.3;
       margin-bottom: ${ spacing[ 'mb-6' ] };
     }
+
+    ${ theme.fontSize.p }
+
   `
 
   return (

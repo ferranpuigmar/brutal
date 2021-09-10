@@ -1,4 +1,4 @@
-import { fontFamily } from './variables'
+import { fontFamily, fontSize } from './variables'
 
 export const theme = {
   colors: {
@@ -8,5 +8,8 @@ export const theme = {
   },
   fontFamily: {
     ...fontFamily
+  },
+  fontSize: {
+    ...fontSize
   }
 }

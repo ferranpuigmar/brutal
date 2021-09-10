@@ -5,6 +5,7 @@ import { styled } from 'frontity';
 import { css, cx } from '@emotion/css'
 import { spacing } from '../../assets/styles/spacing';
 import { mq } from '../../assets/styles/mediaqueries';
+import { theme } from '../../assets/styles/theme';
 
 
 // Styles
@@ -23,14 +24,14 @@ const Item = styled.div`
 `
 
 const itemTitle = css`
-  line-height: 1.1;
-  font-size: 3rem;
   margin-bottom: ${ spacing[ 'mb-4' ] };
 
   ${ mq[ "sm" ] } {
     min-height: 66px;
     margin-bottom: ${ spacing[ 'mb-8' ] };
   }
+
+  ${ theme.fontSize.h2 }
 `
 
 // Component

@@ -15,16 +15,13 @@ import { styled } from 'frontity';
 
 const heroTitle = css`
   margin-bottom: ${ spacing[ 'mb-10' ] };
-  font-size: 3.5rem;
-  line-height: normal;
+
   em {
     color: ${ theme.colors.primaryColor };
     font-style: normal;
   }
-
-  ${ mq[ "sm" ] } {
-    font-size: 4.9rem;
-  }
+  
+  ${ theme.fontSize.h1 }
 `;
 
 const ItemsList = styled.div`
