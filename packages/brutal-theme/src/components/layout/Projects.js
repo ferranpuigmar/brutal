@@ -18,7 +18,6 @@ const Projects = ( { state, actions } ) =>
   const data = state.source.get( state.router.link );
   // const post = state.source[ data.type ][ data.id ].acf.grid_block.grid_row;
   const post = state.source[ data.type ][ data.id ].acf.grid_row;
-  console.log( 'post.acf: ', post );
   const rows = Object.values( post )
   const rowFetch = async () =>
   {
@@ -55,41 +54,4 @@ const Projects = ( { state, actions } ) =>
     </div>
   )
 }
-
-
 export default connect( Projects )
-
-
-
-
-//  const data = state.source.get( state.router.link );
-//   const post = state.source[ data.type ][ data.id ].acf.grid_block["0"].grid_row;
-//   console.log(`post`, post)
-
-
-
-//   // console.log(`data`, data)
-//   // Background footer logic
-//   const rows = Object.values(post)
-//   console.log(`rows`, rows[0])
-
-
-//   // const rows = Object.values(post).find(row=>row.link=== data.link)
-//   // const blackBackground = objPageIDs?.acf.footer_default_black
-//   //buscar or ID
-
-//   // useEffect( () =>
-//   // {
-//   //   actions.source.fetch( "/proyecto" );
-//   // }, [] );
-
-//   // const proyects = Object.values( state.source.proyecto );
-//   // proyects.forEach( project =>
-//   // {
-//   //   const media = state.source.attachment[ project.featured_media ].media_details.sizes.full.source_url;
-//   // console.log(`proyects`, project)
-//   // srcset
-//     // console.log(`media`, media)
-//   // } ) 
-//   //title: {rendered/ link:
-//   // console.log("state.sourcede Projects", state.source)

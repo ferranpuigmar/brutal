@@ -41,6 +41,22 @@ const titleColor = css`
   margin-bottom: ${ spacing[ 'mb-3' ] };
 `
 
+const blockColImg = css`
+  ${ block };
+  display: flex;
+  padding: 0!important;
+
+  ${ mq[ "sm" ] } {
+    padding: 0!important;
+  }
+
+  img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+`
+
 //Component 
 const ProjectItem = ( {
   project, index, link_text, libraries
@@ -62,9 +78,7 @@ const ProjectItem = ( {
     <ArrowLink link={ link }>{ link_text }</ArrowLink>
   </Col>
 
-  const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( block ) } style={ {
-    backgroundImage: `url(${ bg_url })`
-  } }></Col>
+  const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }><img src={ bg_url } alt={ title } /></Col>
 
   return evenRow ? [ colContent, colBg ] : [ colContent, colBg ]
 }

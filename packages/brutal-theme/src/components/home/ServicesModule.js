@@ -71,11 +71,6 @@ const ServicesModule = ( { state, libraries, actions, ...rest } ) =>
     loadServices()
   }, [] );
 
-  useEffect( async () =>
-  {
-    console.log( 'dataServices: ', dataServices )
-  }, [ dataServices ] );
-
   return <Block mode="light">
     <Container>
       <Row>
@@ -84,7 +79,7 @@ const ServicesModule = ( { state, libraries, actions, ...rest } ) =>
         </Col>
         <Col className={ cx( colServices ) }>
           { dataServices.map( ( service, index ) =>
-            <Accordion data={ service } />
+            <Accordion key={ service.id } data={ service } />
           ) }
         </Col>
         <Col className={ cx( colButton ) }>

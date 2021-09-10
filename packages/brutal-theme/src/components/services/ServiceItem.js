@@ -53,7 +53,6 @@ const ServiceItem = ( { title, data, libraries } ) =>
 
   const Html2React = libraries.html2react.Component;
   const { description, icon_service } = data;
-  console.log( 'data: ', data );
 
   return (
     <Item>

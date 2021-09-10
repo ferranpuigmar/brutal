@@ -29,6 +29,23 @@ const block = css`
   }
 `;
 
+
+const blockColImg = css`
+  ${ block };
+  display: flex;
+  padding: 0!important;
+
+  ${ mq[ "sm" ] } {
+    padding: 0!important;
+  }
+
+  img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+`
+
 const moduleTitle = css`
   color: ${ theme.colors.black };
   margin-bottom: ${ spacing[ 'mb-4' ] }
@@ -88,6 +105,8 @@ const ImageTextModule = ( {
           return <Title key={ uuid_v4() } className={ cx( moduleTitle ) } level={ 2 }><Html2React html={ title } /></Title>
         case 'description':
           return <div key={ uuid_v4() } className={ cx( moduleDescription ) }><Html2React html={ description } /></div>
+        case 'image':
+          return <img key={ uuid_v4() } src={ getImageUrlSize( image.sizes, 1600 ).url } alt={ title } />
         default:
           return null
       }
@@ -98,19 +117,12 @@ const ImageTextModule = ( {
     </>
   }
 
-  const bgColLeft = data.col_left?.image?.sizes ? `url('${ getImageUrlSize( data.col_left.image.sizes, 1600 ).url }')` : '';
-  const bgColRight = data.col_right?.image?.sizes ? `url('${ getImageUrlSize( data.col_right.image.sizes, 1600 ).url }')` : '';
-
   return (
     <Row className={ cx( fullRow ) }>
-      <Col md={ 6 } className={ cx( block ) } style={ {
-        backgroundImage: bgColLeft
-      } }>
+      <Col md={ 6 } className={ cx( data.col_left.image ? blockColImg : block ) }>
         { renderCol( data.col_left ) }
       </Col>
-      <Col md={ 6 } className={ cx( block ) } style={ {
-        backgroundImage: bgColRight
-      } }>
+      <Col md={ 6 } className={ cx( data.col_right.image ? blockColImg : block ) }>
         { renderCol( data.col_right ) }
       </Col>
     </Row >

@@ -36,7 +36,8 @@ const settings = {
     "@frontity/tiny-router",
     "@frontity/html2react",
     "@frontity/head-tags",
-    "@aamodtgroup/frontity-contact-form-7"
+    "@aamodtgroup/frontity-contact-form-7",
+    "@frontity/yoast"
   ]
 };
 

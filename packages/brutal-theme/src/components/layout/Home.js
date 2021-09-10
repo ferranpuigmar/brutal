@@ -8,7 +8,7 @@ const Home = ( { state, actions, libraries } ) =>
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
   const Html2React = libraries.html2react.Component;
-
+  console.log( 'post: ', post )
   return data.isReady ? (
     <PageWrapper>
       { renderModule( 'hero_home_module', post?.acf ) }

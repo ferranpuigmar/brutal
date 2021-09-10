@@ -76,7 +76,6 @@ const Services = ( { state, actions, libraries } ) =>
 {
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
-  console.log( 'post: ', post )
   const {
     col_left_text,
     col_right_text,
@@ -95,7 +94,6 @@ const Services = ( { state, actions, libraries } ) =>
       endpoint: `/wp/v2/servicios`
     } );
     const response = await serviceTaxonomyRequest.json();
-    console.log( 'services: ', response )
     setServices( response )
   }
 

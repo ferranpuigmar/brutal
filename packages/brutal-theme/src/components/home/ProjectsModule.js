@@ -7,6 +7,7 @@ import { mq } from '../../assets/styles/mediaqueries';
 import { hexToRgb } from '../utils/colors';
 import ProjectItem from './ProjectItem';
 import { v4 as uuid_v4 } from "uuid";
+import { getMediaUrl } from '../utils/images';
 
 // Styles
 const fullRow = css`
@@ -36,12 +37,12 @@ const fullRow = css`
     flex-direction: row;
 
     > div:first-child,
-    &:nth-child(odd) > div:last-child{
+    &:nth-of-type(odd) > div:last-child{
       order: 0;
       position: relative;
     }
     > div:last-child,
-    &:nth-child(odd) > div:first-child{
+    &:nth-of-type(odd) > div:first-child{
       order: 1;
       position: relative;
     }
@@ -68,7 +69,7 @@ const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
     const availableProjects = Object.values( state?.source?.proyectos ).filter( project => projects.includes( project.id ) )
     const availableListProjects = availableProjects.map( ( project ) =>
     {
-      const url = getMediaUrl( project, 1600 );
+      const url = getMediaUrl( state, project, 1600 );
       return ( { ...project, project_media_url: url } )
     } )
     setDataProjects( availableListProjects )
