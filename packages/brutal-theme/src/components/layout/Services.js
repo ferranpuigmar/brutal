@@ -17,10 +17,6 @@ const pageTitle = css`
   margin-bottom: ${ spacing[ 'm-6' ] };
 `;
 
-const pageWrapper = css`
-  padding-bottom: 0;
-`
-
 const ServicesTitleWrapper = styled.div`
   background-color: ${ theme.colors.primaryColor };
   display: flex;
@@ -43,13 +39,20 @@ const GridServicesWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  ${ mq[ "sm" ] } {
+  ${ mq[ "md" ] } {
+    margin: 0 -4rem -4rem;
     flex-direction: row;
-    margin: 0 -4rem;
     flex-wrap: wrap;
+
+    > div{
+      width: 50%;
+      padding: 0 4rem 4rem;
+    }
+  }
+
+  ${ mq[ "lg" ] } {
     > div{
       width: 33.33%;
-      padding: 4rem;
     }
   }
 `
@@ -63,12 +66,16 @@ const servicesh2 = css`
     }
 `;
 
-const SectionServices = styled.section`
-  margin-top: ${ spacing[ 'mt-5' ] }
-`
+const colBlock = css`
+    margin-bottom: 4rem;
 
-const BlockServices = styled.div`
-  padding: ${ spacing[ 'py-6' ] }
+    &:last-child{
+      margin-bottom: 0;
+    }
+
+    ${ mq[ 'sm' ] }{
+      margin-bottom: 0;
+    }
 `
 
 
@@ -103,34 +110,36 @@ const Services = ( { state, actions, libraries } ) =>
   }, [] );
 
   return data.isReady ? (
-    <PageWrapper className={ cx( pageWrapper ) }>
-      <Container>
-        <Title className={ cx( pageTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
-        <Row>
-          <Col md={ 6 }>
-            <Html2React html={ col_left_text } />
-          </Col>
-          <Col md={ 6 }>
-            <Html2React html={ col_right_text } />
-          </Col>
-        </Row>
-      </Container>
-      <SectionServices id="services">
+    <>
+      <Block>
+        <Container>
+          <Title className={ cx( pageTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
+          <Row>
+            <Col md={ 6 } className={ cx( colBlock ) }>
+              <Html2React html={ col_left_text } />
+            </Col>
+            <Col md={ 6 } className={ cx( colBlock ) }>
+              <Html2React html={ col_right_text } />
+            </Col>
+          </Row>
+        </Container>
+      </Block>
+      <div id="services">
         <ServicesTitleWrapper>
           <Container>
             <Title level={ 2 } className={ cx( servicesh2 ) }>{ solutions_section_title }</Title>
           </Container>
         </ServicesTitleWrapper>
-        <BlockServices>
+        <Block>
           <Container>
             <GridServicesWrapper>
               { services.map( service => <ServiceItem title={ service.name } data={ service.acf } /> ) }
             </GridServicesWrapper>
           </Container>
-        </BlockServices>
-      </SectionServices>
+        </Block>
+      </div>
       { renderModule( 'contact_module', post?.acf ) }
-    </PageWrapper>
+    </>
   ) : null;
 }
 
