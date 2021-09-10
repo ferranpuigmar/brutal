@@ -15,6 +15,10 @@ import PageWrapper from '../shared/PageWrapper';
 
 // STYLES
 
+const pageWrapperStyle = css`
+  padding-bottom: 0;
+`
+
 const PortFolioImageWrapper = styled.div`
   margin-top: ${ spacing[ 'mt-10' ] };
   ${ mq[ "sm" ] } {
@@ -99,11 +103,11 @@ const Project = ( { state, actions, libraries, params } ) =>
 
   useEffect( () =>
   {
-    // renderServices( post )
+    renderServices( post )
   }, [] )
 
   return data.isReady ? (
-    <PageWrapper>
+    <PageWrapper className={ cx( pageWrapperStyle ) }>
       <Container className="projectpage">
         <Title className={ cx( projectTitle ) } level={ 1 }>{ post.title.rendered }</Title>
         <Row>

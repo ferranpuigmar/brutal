@@ -18,7 +18,11 @@ const BlockWrapper = styled.div`
   }
 
   ${ mq[ "sm" ] } {
-    padding: ${ props => props.widthPadding ? 0 : `${ spacing[ 'p-16' ] }` };
+    padding: ${ props => props.widthPadding ? 0 : `${ spacing[ 'p-12' ] }` };
+  }
+
+  ${ mq[ "lg" ] } {
+    padding: ${ props => props.widthPadding ? 0 : `${ spacing[ 'p-16¡¡' ] }` };
   }
 `
 
