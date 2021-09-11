@@ -8,30 +8,43 @@ import { css, cx } from '@emotion/css'
 import { spacing } from '../../assets/styles/spacing';
 import { mq } from '../../assets/styles/mediaqueries';
 import { v4 as uuid_v4 } from "uuid";
+import { hexToRgb } from '../utils/colors';
+import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
 
 // Styles
 const DescriptionWrapper = styled.div`
   width: 100%;
   p { color: ${ theme.colors.black };}
   margin-bottom: ${ spacing[ 'mb-6' ] };
+  display: none;
+
+  ${ mq[ 'md' ] }{
+    display: block;
+  }
 `
 
 const block = css`
-  padding: ${ spacing[ 'p-10' ] }!important;
+  padding: ${ mobilePaddingBlock }!important;
   position: relative;
   background-size: cover!important;
   background-position: center;
   background-repeat: no-repeat;
-  background: ${ theme.colors.white };
+  background: rgba( ${ hexToRgb( theme.colors.primaryColor ) }, 0.5);
   min-height: 329px!important;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
 
-  ${ mq[ "sm" ] } {
+  ${ mq[ "md" ] } {
+    background: ${ theme.colors.white };
+    padding: ${ tabletPaddingBlock }!important;
+  }
+
+  ${ mq[ "lg" ] } {
     min-height: 550px!important;
-    padding: ${ spacing[ 'p-20' ] }!important;
+    padding: ${ desktopPaddingBlock }!important;
   }
 `;
 
@@ -78,12 +91,12 @@ const ProjectItem = ( {
     <DescriptionWrapper>
       <Html2React html={ description } />
     </DescriptionWrapper>
-    <ArrowLink variant="bold" link={ link }>{ link_text }</ArrowLink>
+    <ArrowLink isAnchor={ false } variant="bold">{ link_text }</ArrowLink>
   </Col>
 
   const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }><img src={ bg_url } alt={ title } /></Col>
 
-  return evenRow ? [ colContent, colBg ] : [ colContent, colBg ]
+  return [ colBg, colContent ]
 }
 
 export default connect( ProjectItem )

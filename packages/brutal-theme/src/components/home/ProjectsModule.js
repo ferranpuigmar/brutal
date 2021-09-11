@@ -4,51 +4,64 @@ import { Row } from 'styled-bootstrap-grid';
 import { css, cx } from '@emotion/css'
 import { theme } from '../../assets/styles/theme';
 import { mq } from '../../assets/styles/mediaqueries';
-import { hexToRgb } from '../utils/colors';
 import ProjectItem from './ProjectItem';
 import { v4 as uuid_v4 } from "uuid";
 import { getMediaUrl } from '../utils/images';
+import Link from "@frontity/components/link"
+import { spacing } from '../../assets/styles/spacing';
 
 // Styles
-const fullRow = css`
-  margin: 0!important;
-  background: ${ theme.colors.white };
-  position: relative;
-  height: 329px;
+const projectLink = css`
+  text-decoration: none;
+  display: block;
+  margin-bottom: ${ spacing[ 'mb-6' ] };
+  background-color: ${ theme.colors.white };
 
-  > div:first-child{
-    background-color: rgba(${ hexToRgb( theme.colors.white ) }, 0.8) !important;
-    order: 0
-  }
-  > div:first-child{
-    order: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    justify-content: flex-start;
+  > div{
+    margin: 0;
+    position: relative;
   }
 
-  ${ mq[ "sm" ] } {
-    height: 516px;
-    width: 100%;
-    flex-direction: row;
-
-    > div:first-child,
-    &:nth-of-type(odd) > div:last-child{
-      order: 0;
-      position: relative;
+  > div > div{
+    &:last-child{
+      position: absolute;
     }
-    > div:last-child,
-    &:nth-of-type(odd) > div:first-child{
-      order: 1;
-      position: relative;
+  }
+
+  ${ mq[ 'md' ] }{
+    margin-bottom: 0;
+
+    > div > div{
+      &:first-child,
+      &:last-child{
+        position: relative;
+      }
     }
 
-    > div {
-      min-height: auto!important;
+    &:nth-of-type(even) > div > div {
+      &:first-child{
+        order: 1
+      }
+
+      &:last-child{
+        order: 0;
+        position: relative;
+      }
+    }
+  }
+
+  img {
+    transform-origin: center;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:hover {
+    img{
+      transform: scale(1.05);
+    }
+
+     .arrow-icon{
+      transform: translateX(5px);
     }
   }
 `
@@ -80,9 +93,12 @@ const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
     loadProjects()
   }, [] );
 
-  return dataProjects.map( ( project, index ) => <Row key={ uuid_v4() } className={ cx( fullRow ) }>
-    <ProjectItem project={ project } index={ index } link_text={ link_text } />
-  </Row>
+  return dataProjects.map( ( project, index ) =>
+    <Link key={ uuid_v4() } className={ cx( projectLink ) } link={ project.link }>
+      <Row>
+        <ProjectItem project={ project } index={ index } link_text={ link_text } />
+      </Row>
+    </Link>
   )
 }
 

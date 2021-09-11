@@ -5,11 +5,12 @@ import { theme } from '../../assets/styles/theme';
 import { minPadding } from '../layout/Container';
 import { mq } from '../../assets/styles/mediaqueries';
 import { spacing } from '../../assets/styles/spacing';
+import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
 
 // Styles
 const BlockWrapper = styled.div`
   width: 100%;
-  padding: ${ props => props.widthPadding ? 0 : `${ minPadding }` };
+  padding: ${ props => props.widthPadding ? 0 : `${ mobilePaddingBlock }` };
   background-color: ${ props => props.mode === 'dark' ? theme.colors.black : theme.colors.white };
 
   > [class*="ContainerDiv"] {
@@ -17,12 +18,12 @@ const BlockWrapper = styled.div`
     padding-right: 0;
   }
 
-  ${ mq[ "sm" ] } {
-    padding: ${ props => props.widthPadding ? 0 : `${ spacing[ 'p-12' ] }` };
+  ${ mq[ "md" ] } {
+    padding: ${ props => props.widthPadding ? 0 : `${ tabletPaddingBlock }` };
   }
 
   ${ mq[ "lg" ] } {
-    padding: ${ props => props.widthPadding ? 0 : `${ spacing[ 'p-16¡¡' ] }` };
+    padding: ${ props => props.widthPadding ? 0 : `${ desktopPaddingBlock }` };
   }
 `
 

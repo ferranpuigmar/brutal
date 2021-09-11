@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { styled, connect } from 'frontity';
 import Container from '../layout/Container';
-import { theme_colors, breakpoints } from '../../assets/styles/variables';
 import GridRow from './GridRow';
 import { getMediaUrl } from '../utils/images';
+import { v4 as uuid_v4 } from "uuid";
 
-// const StyleRow = styled.div`
 const Grid = styled.div`
-margin-top: 5vh;
+  margin-top: 5vh;
 `;
 
 const Projects = ( { state, actions } ) =>
 {
-
   const [ dataProjects, setDataProjects ] = useState();
 
   const data = state.source.get( state.router.link );
-  // const post = state.source[ data.type ][ data.id ].acf.grid_block.grid_row;
   const post = state.source[ data.type ][ data.id ].acf.grid_row;
   const rows = Object.values( post )
+
   const rowFetch = async () =>
   {
 
@@ -42,6 +40,7 @@ const Projects = ( { state, actions } ) =>
           {
             return (
               <GridRow
+                key={ uuid_v4() }
                 bigRight={ row.acf_fc_layout === "big_right" ? true : false }
                 big={ dataProjects[ row.id_big ] }
                 bottom={ dataProjects[ row.id_bottom ] }

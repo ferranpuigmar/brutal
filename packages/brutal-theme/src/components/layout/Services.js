@@ -10,7 +10,7 @@ import { theme } from '../../assets/styles/theme';
 import Block from '../shared/Block';
 import ServiceItem from '../services/ServiceItem';
 import { renderModule } from '../utils/renderModule';
-import PageWrapper from '../shared/PageWrapper';
+import { v4 as uuid_v4 } from "uuid";
 
 // Styles
 const pageTitle = css`
@@ -133,7 +133,7 @@ const Services = ( { state, actions, libraries } ) =>
         <Block>
           <Container>
             <GridServicesWrapper>
-              { services.map( service => <ServiceItem title={ service.name } data={ service.acf } /> ) }
+              { services.map( service => <ServiceItem key={ uuid_v4() } title={ service.name } data={ service.acf } /> ) }
             </GridServicesWrapper>
           </Container>
         </Block>

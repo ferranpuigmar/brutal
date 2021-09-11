@@ -16,6 +16,10 @@ const Item = styled.div`
   align-items: flex-start;
   margin-bottom: ${ spacing[ 'mb-15' ] };
 
+  &:last-child{
+    margin-bottom: 0;
+  }
+
   img{
     width: 100%;
     max-width: 180px;

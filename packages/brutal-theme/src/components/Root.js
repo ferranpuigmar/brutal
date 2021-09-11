@@ -41,7 +41,7 @@ const Root = ( { state } ) =>
         <main>
           <Switch>
             <Home when={ data.isHome } />
-            <Project when={ !data.isPage && data.isPostType } />
+            <Project when={ !data.isPage && data.isPostType && data.type === "proyectos" } />
             <Services when={ data.isPage && data.link === '/servicios/' } />
             <Contact when={ data.isPage && data.link === '/contactar/' } />
             <About when={ data.isPage && data.link === '/sobre-nosotros/' } />

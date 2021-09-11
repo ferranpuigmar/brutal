@@ -44,7 +44,7 @@ const colForm = css`
         display: flex;
         flex-direction: column;
         width: 100%;
-        margin-bottom: 30px; 
+        margin-bottom: 30px;
 
         label{
           font-size: 1.8rem;

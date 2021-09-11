@@ -8,14 +8,12 @@ import Title from '../shared/Title';
 import { getImageUrlSize } from '../utils/images';
 import { mq } from '../../assets/styles/mediaqueries';
 import { v4 as uuid_v4 } from "uuid";
+import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
 
 // Styles
 const block = css`
-  padding: ${ spacing[ 'p-10' ] }!important;
+  padding: ${ mobilePaddingBlock }!important;
   position: relative;
-  background-size: cover!important;
-  background-position: center;
-  background-repeat: no-repeat;
   background: ${ theme.colors.white };
   min-height: 329px!important;
   display: flex;
@@ -23,9 +21,13 @@ const block = css`
   justify-content: center;
   align-items: center;
 
-  ${ mq[ "sm" ] } {
+  ${ mq[ "md" ] } {
     min-height: 550px!important;
-    padding: ${ spacing[ 'p-20' ] }!important;
+    padding: ${ tabletPaddingBlock }!important;
+  }
+
+  ${ mq[ "lg" ] } {
+    padding: ${ desktopPaddingBlock }!important;
   }
 `;
 
@@ -48,7 +50,8 @@ const blockColImg = css`
 
 const moduleTitle = css`
   color: ${ theme.colors.black };
-  margin-bottom: ${ spacing[ 'mb-4' ] }
+  margin-bottom: ${ spacing[ 'mb-4' ] };
+  width: 100%;
 `;
 
 const moduleDescription = css`

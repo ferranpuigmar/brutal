@@ -103,7 +103,7 @@ const Project = ( { state, actions, libraries, params } ) =>
 
   useEffect( () =>
   {
-    renderServices( post )
+    post && renderServices( post )
   }, [] )
 
   return data.isReady ? (

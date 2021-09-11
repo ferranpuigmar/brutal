@@ -36,7 +36,14 @@ const colHero = css`
 `
 
 const colImage = css`
-  ${ mq[ "sm" ] } {
+  ${ mq[ "md" ] } {
+    img{
+      margin: 0 auto;
+      max-width: 100%;
+    }
+  }
+
+  ${ mq[ "lg" ] } {
     img{
       margin: 0 auto;
       height: 100%;

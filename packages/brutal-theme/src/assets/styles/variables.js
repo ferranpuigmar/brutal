@@ -84,3 +84,7 @@ export const fontSize = {
     }
   }
 }
+
+export const mobilePaddingBlock = '28px'
+export const tabletPaddingBlock = '50px'
+export const desktopPaddingBlock = '60px'

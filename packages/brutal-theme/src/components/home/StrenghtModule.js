@@ -28,16 +28,29 @@ const ItemsList = styled.div`
   display: flex;
   flex-direction: column;
 
-  ${ mq[ "sm" ] } {
+  ${ mq[ "md" ] } {
     flex-direction: row;
+    flex-wrap: wrap;
+  }
 
+  ${ mq[ "md" ] } {
+    margin: 0 -${ spacing[ 'p-8' ] };
     > div{
-      width: 33,33%;
-      margin-right: 95px;
+      width: 50%;
+      padding: 0 ${ spacing[ 'p-8' ] };
 
       &:last-child{
         margin-right: 0;
       }
+    }
+  }
+
+  ${ mq[ "lg" ] } {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    > div{
+      width: 33.33%;
     }
   }
 `
