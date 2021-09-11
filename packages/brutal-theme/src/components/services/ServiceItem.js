@@ -25,9 +25,6 @@ const serviceTitle = css`
 const Description = styled.div`
   margin-bottom: ${ spacing[ 'mb-4' ] };
   text-align: center;
-  p {
-    font-size: 1.6rem;
-  }
 
   ${ mq[ "sm" ] } {
     max-width: 90%;
@@ -53,7 +50,6 @@ const ServiceItem = ( { title, data, libraries } ) =>
 
   const Html2React = libraries.html2react.Component;
   const { description, icon_service } = data;
-  console.log( 'data: ', data );
 
   return (
     <Item>

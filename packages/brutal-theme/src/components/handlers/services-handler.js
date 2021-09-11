@@ -11,8 +11,6 @@ const servicesHandler = {
       endpoint: `/taxonomies//${ slug }`,
     } );
 
-    console.log( 'SERVICIOS: ', response )
-
     // Parse the JSON to get the object
     const servicesData = await response.json();
 

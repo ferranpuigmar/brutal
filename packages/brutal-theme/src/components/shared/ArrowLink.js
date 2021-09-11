@@ -47,16 +47,23 @@ const outline = {
   ...buttonGenerics
 }
 
-const ArrowLinkWrapper = styled.a`
+const ArrowAnchorWrapper = styled.a`
+  text-decoration: none;
+  ${ props => handleBtnStyle( props.type ) };
+  color: ${ theme.colors.black }!important;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`
+
+const ArrowWrapper = styled.div`
   display: inline-block;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  text-transform: uppercase;
-  text-decoration: none;
   color: ${ theme.colors.black }!important;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-family: ${ props => props.variant === 'bold' ? theme.fontFamily.bold : theme.fontFamily.regular };
   ${ props => handleBtnStyle( props.type ) };
 
@@ -112,13 +119,21 @@ const Arrow = styled.span`
 
 `
 
-const ArrowLink = ( { link, children, className, variant, type } ) =>
+const ArrowLinkContent = ( { type, variant, link, children } ) => <>
+  <span>{ children }</span>
+  <Arrow type={ type } variant={ variant } link={ link } className="arrow-icon"></Arrow>
+</>
+
+const ArrowLink = ( { link, children, className, variant, type, isAnchor = true } ) =>
 {
   return (
-    <ArrowLinkWrapper type={ type } variant={ variant } href={ link } className={ cx( className ) }>
-      <span>{ children }</span>
-      <Arrow type={ type } variant={ variant }></Arrow>
-    </ArrowLinkWrapper>
+    <ArrowWrapper className={ cx( className ) } variant={ variant }>
+      {
+        isAnchor
+          ? <ArrowAnchorWrapper type={ type } href={ link } ><ArrowLinkContent variant={ variant } children={ children } /></ArrowAnchorWrapper>
+          : <><ArrowLinkContent variant={ variant } children={ children } /></>
+      }
+    </ArrowWrapper>
   )
 }
 

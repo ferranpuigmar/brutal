@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from 'frontity';
 import { mq } from '../../assets/styles/mediaqueries';
-import { maxWidths } from '../../assets/styles/variables';
+import { maxWidths, mobilePaddingBlock } from '../../assets/styles/variables';
 import { spacing } from '../../assets/styles/spacing';
 
 export const minPadding = spacing[ 'p-7' ];
@@ -22,7 +22,7 @@ const ContainerDiv = styled.div`
     flex-direction: column;
     justify-content: ${ props => props.align };
     background: ${ props => props.bgColor };
-    padding: 0 ${ minPadding };
+    padding: 0 ${ mobilePaddingBlock };
 
     ${ mq[ "sm" ] } {
       padding: 0;

@@ -1,52 +1,71 @@
 import React, { useEffect } from 'react'
 import { connect } from 'frontity';
 import Container from '../layout/Container';
-import { mq } from '../../assets/styles/mediaqueries';
 import { styled } from 'frontity';
 import { spacing } from '../../assets/styles/spacing';
 import Title from '../shared/Title';
+import { getMediaUrl } from '../utils/images';
+import { theme } from '../../assets/styles/theme';
+import Block from '../shared/Block';
 import { cx, css } from '@emotion/css';
+import { mq } from '../../assets/styles/variables';
+
 
 
 // Styles 
-const section = css`
-  margin-bottom: ${ spacing[ 'mb-2' ] };
-  margin-top: ${ spacing[ 'mt-20' ] };
-`;
-
+const title = css`
+  margin-bottom: ${ spacing[ 'mb-6' ] };
+`
 const Wrapper = styled.div`
-  ${ mq[ "sm" ] } {
-    padding: ${ spacing[ 'py-4' ] };
-  }
   display: flex;
   align-items: middle;
-  justify-content: ${ props => props.otherProyectsNumber < 4 ? 'flex-start' : 'space-around' };
+  justify-content: ${ props => props.otherProjectsNumber < 4 ? 'flex-start' : 'space-around' };
+  margin: 0 -${ spacing[ 'm-4' ] };
 `
 
 const WrapperLink = styled.a`
   display: block;
-  height: 308px;
+  height: 250px;
   width: 100%;
   max-width: 308px;
   margin-left: ${ spacing[ 'm-4' ] };
   margin-right: ${ spacing[ 'm-4' ] };
+  position: relative;
+
+  ${ mq[ 'sm' ] }{
+    height: 308px;
+  }
+
+  &:hover{
+    > div{
+      opacity: 1;
+    }
+  }
 `
 
-const OtherProject = styled.div`
-  display: flex;
-  align-items: middle;
-  justify-content: space-around;
-  ${ mq[ "sm" ] } {
-    background-image: ${ props => `url("${ props.background[ 'medium_large' ]?.source_url || props.background[ 'medium' ]?.source_url }")` };
-  }
+const OtherProjectImg = styled.img`
+  object-fit: cover;
   width: 100%;
   height: 100%;
-  background-size: cover;
+`
 
+const WrapperInfo = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: ${ theme.colors.primaryColor };
+  padding: ${ spacing[ 'p-6' ] };
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+
+  h2{
+    color: ${ theme.colors.black }
+  } 
 `
 
 // Component 
-const OtherProyects = ( { state, actions, currentProject } ) =>
+const OtherProjects = ( { state, actions, currentProject } ) =>
 {
 
   useEffect( () =>
@@ -54,24 +73,32 @@ const OtherProyects = ( { state, actions, currentProject } ) =>
     actions.source.fetch( "/proyectos" );
   }, [] );
 
-  const proyects = Object.values( state.source.proyectos ).filter( project => project.id !== currentProject ).slice( 0, 4 );
+  const projects = Object.values( state.source.proyectos ).filter( project => project.id !== currentProject ).slice( 0, 4 );
 
   return (
-    proyects ?
+    projects ?
       <>
-        <Container>
-          <Title className={ cx( section ) } level={ 4 }>Otros Proyectos</Title>
-        </Container>
-        <Wrapper otherProyectsNumber={ proyects.length }>
-          { proyects.map( project =>
-          {
-            const media = state.source.attachment[ project.featured_media ];
-            return <WrapperLink key={ project.id } href={ project.link }><OtherProject background={ media.media_details.sizes } ></OtherProject></WrapperLink>
-          } ) }
-        </Wrapper>
+        <Block>
+          <Container>
+            <Title level={ 3 } className={ cx( title ) }>Otros Proyectos</Title>
+            <Wrapper otherProjectsNumber={ projects.length }>
+              { projects.map( project =>
+              {
+                return (
+                  <WrapperLink key={ project.id } href={ project.link }>
+                    <WrapperInfo>
+                      <Title level={ 2 }>{ project.title.rendered }</Title>
+                    </WrapperInfo>
+                    <OtherProjectImg src={ getMediaUrl( state, project, 1600 ) } alt={ project.title.rendered }></OtherProjectImg>
+                  </WrapperLink>
+                )
+              } ) }
+            </Wrapper>
+          </Container>
+        </Block>
       </>
       : null
   )
 }
 
-export default connect( OtherProyects );
+export default connect( OtherProjects );

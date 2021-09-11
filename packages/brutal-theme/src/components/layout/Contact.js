@@ -14,11 +14,20 @@ import { theme } from '../../assets/styles/theme';
 // STYLES
 const sectionTitle = css`
   margin-bottom: ${ spacing[ 'pb-6' ] };
+
+  ${ mq[ "md" ] } {
+    padding-bottom: ${ spacing[ 'pb-7' ] };
+  }
 `
 
 const descriptionWrapper = css`
-  ${ mq[ "sm" ] } {
-    padding-right: 80px;
+  ${ mq[ "md" ] } {
+    padding-bottom: ${ spacing[ 'pb-12' ] };
+  }
+
+  ${ mq[ "lg" ] } {
+    padding-right: ${ spacing[ 'pr-12' ] };
+    padding-bottom: 0;
   }
 `
 
@@ -35,7 +44,7 @@ const colForm = css`
         display: flex;
         flex-direction: column;
         width: 100%;
-        margin-bottom: 30px; 
+        margin-bottom: 30px;
 
         label{
           font-size: 1.8rem;
@@ -57,6 +66,11 @@ const colForm = css`
           padding: 15px;
           border: 0;
           background-color: ${ theme.colors.white };
+
+          + span{
+            margin-top: 1rem;
+            font-size: 1.4rem;
+          }
         }
 
         &.select > span{
@@ -98,6 +112,16 @@ const colForm = css`
         }
       }
     }
+  }
+
+  .error-message {
+    bottom: 40px;
+    right: 40px;
+    padding: 18px;
+    font-size: 14px;
+    color: white;
+    text-align: left;
+    margin-top: 30px;
   }
 
   ${ mq[ "sm" ] } {
@@ -148,8 +172,8 @@ const Contact = ( { state, libraries } ) =>
       <Container>
         <Title className={ cx( sectionTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
         <Row>
-          <Col md={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
-          <Col md={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
+          <Col lg={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
+          <Col lg={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
         </Row>
       </Container>
     </PageWrapper>

@@ -80,20 +80,31 @@ const AccordionUl = styled.ul`
   padding-top: ${ spacing[ 'mt-3' ] };
   padding-bottom: ${ spacing[ 'mb-5' ] };
   transition: all 0.6s ease-in-out;
-  opacity: ${ props => props.opacity ? 1 : 0 };
+  opacity: ${ props => props.opacityValue ? 1 : 0 };
 `
 
 const AccordionLi = styled.li`
   padding-left: 3rem;
   padding-right: 5rem;
-  width: 33.33%;
   font-size: 2.4rem;
   margin-bottom: 2rem;
   line-height: 1.4;
   position: relative;
   color: ${ theme.colors.black };
 
-  &:nth-child(3n){
+  ${ mq[ 'sm' ] }{
+    width: 100%;
+  }
+
+  ${ mq[ 'lg' ] }{
+    width: 50%;
+  }
+
+  ${ mq[ 'xl' ] }{
+    width: 33.33%;
+  }
+
+  &:nth-of-type(3n){
     padding-right: 0;
   }
 
@@ -132,7 +143,7 @@ const Accordion = ( {
       <AccordionCloseBtn onClick={ () => handleExpand() } expand={ expand } />
     </AccordionHeader>
     <AccordionContentWrapper expandHeight={ expandHeight } ref={ contentWrapper }>
-      <AccordionUl ref={ contentUlWrapper } opacity={ expand }>
+      <AccordionUl ref={ contentUlWrapper } opacityValue={ expand }>
         { acf.areas.map( service => <AccordionLi key={ uuid_v4() }>{ service.area }</AccordionLi> ) }
       </AccordionUl>
     </AccordionContentWrapper>
