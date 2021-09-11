@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect, styled } from 'frontity';
 import Link from "@frontity/components/link";
 import Title from '../Title';
 import Text from '../Text';
+import { css, cx } from '@emotion/css'
 import { theme_colors, breakpoints } from '../../../assets/styles/variables'
+import ArrowLink from '../ArrowLink';
+import { theme } from '../../../assets/styles/theme';
+import ScreenSizeDetector from 'screen-size-detector'
 
-
+const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
+console.log("pantallaaa width ......", screen)
+// console.log("pantallaaaaaaaaaaso", screen)
 
 const Ul = styled.ul`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
   text-transform: uppercase;
+  z-index: 10;
   li { margin: auto 2vw }
   a { text-decoration: none }
   .navigation__titles:hover { color: ${ theme_colors.grey_dark } }
@@ -51,27 +58,66 @@ const NavFooter = styled.div`
   .navigation__footer-title { font-size: 15px }
 `;
 
-const NavMenu = ( { state, open, close } ) =>
-{
+const whiteLink = css`
+  color: #fff!important;
+  ${theme.fontSize.h6};
+  .arrow-icon, 
+  .arrow-icon:after,
+  .arrow-icon:before {
+    background-color: #fff!important;
+  }
+`;
+const Cooo = styled.div`
+  .centermenu{
+    display: flex;
+    align-content: center;
+  }
+`;
+const NavMenu = ( { state, open, close } ) => {
 
-
-  console.log( `state clau`, state )
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
+  const [ isMobileWidth, setIsMobileWidth ] = useState(true )
+  // const refMenu = useRef()
+
+  console.log(`isMobileWidth1`, isMobileWidth)
+  useEffect (()=>{
+    const mobileWidth = screen.width < 768 ? true: false;
+    setIsMobileWidth(mobileWidth)
+    console.log(`isMobileWidth2 `, isMobileWidth )
+  }, [] )
+
+    // if (screen.width){
+    //   const mobileWidthx = refMenu.current.getBoundingClientRect().width > 992? true: false
+    //   const scrolly = refMenu.current.getBoundingClientRect()
+    // }
+    // console.log(`scrolly`, scrolly)
+  // }, [refMenu] )
+  
   return (
+    
     <Ul open={ open }>
-      { items.map( item =>
-      {
+    {/* <div ref={refMenu}>
+    </div> */}
+    { items.map( (item,index) => {
         return (
           <li className="navigation__item" key={ item.ID }>
+            {/* <div onClick={ isMobileWidth ? close : null}> */}
             <div onClick={ close }>
-              <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
-                <Title level={ 6 } className="navigation__titles">{ item.title }</Title>
-              </Link>
-            </div>
+              {(items.length-1) === index && !open ?  
+                <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
+                  <ArrowLink className={cx(whiteLink)} isAnchor={false}>{ item.title }</ArrowLink>
+                </Link>
+                :
+                <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
+                  <Title level={ 6 } className="navigation__titles">{ item.title }</Title>
+                </Link>                
+              }
+            </div>       
           </li>
         )
-      } ) }
-
+      })
+    }
+          
       <NavFooter className="navigation__footer">
         <div>
           <Title level={ 5 } className="navigation__footer-title">ENCUÉNTRANOS</Title>
