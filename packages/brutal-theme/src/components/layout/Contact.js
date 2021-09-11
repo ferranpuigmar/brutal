@@ -66,6 +66,11 @@ const colForm = css`
           padding: 15px;
           border: 0;
           background-color: ${ theme.colors.white };
+
+          + span{
+            margin-top: 1rem;
+            font-size: 1.4rem;
+          }
         }
 
         &.select > span{
@@ -107,6 +112,16 @@ const colForm = css`
         }
       }
     }
+  }
+
+  .error-message {
+    bottom: 40px;
+    right: 40px;
+    padding: 18px;
+    font-size: 14px;
+    color: white;
+    text-align: left;
+    margin-top: 30px;
   }
 
   ${ mq[ "sm" ] } {

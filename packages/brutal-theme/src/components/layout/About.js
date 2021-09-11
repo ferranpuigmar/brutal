@@ -8,6 +8,7 @@ import PageWrapper from '../shared/PageWrapper';
 import { mq } from '../../assets/styles/mediaqueries';
 import ArrowLink from '../shared/ArrowLink';
 import { theme } from '../../assets/styles/theme';
+import { Col, Row } from 'styled-bootstrap-grid';
 
 
 // STYLES
@@ -20,12 +21,12 @@ const sectionTitle = css`
 
   ${ mq[ "md" ] } {
     width: 100%;
-    max-width: 90%;
+    max-width: 80%;
     margin-bottom: ${ spacing[ 'pb-13' ] };
   }
 
-  ${ mq[ "lg" ] } {
-    max-width: 65%;
+  ${ mq[ "xl" ] } {
+    max-width: 100%;
   }
 `
 
@@ -37,16 +38,43 @@ const DescriptionWrapper = styled.div`
     margin-bottom: ${ spacing[ 'pb-12' ] };
   }
 
-  ${ mq[ "lg" ] } {
-    padding-right: 80px;
-    max-width: 55%;
+  ${ mq[ "xl" ] } {
+    max-width: 100%;
   }
 `
 
 const ButtonDiv = styled.div`
+
+> div{
+    justify-content: flex-end;
+    width: 100%;
+
+    a{
+      max-width: 100%;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
   ${ mq[ "sm" ] } {
     width: 100%;
     max-width: 349px;
+  }
+
+  ${ mq[ "xl" ] } {
+    margin-left: auto;
+    width: 100%;
+
+    > div{
+      justify-content: flex-end;
+      width: 100%;
+
+      a{
+        max-width: 100%;
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
   }
 `
 
@@ -70,9 +98,15 @@ const About = ( { state, libraries } ) =>
   return data.isReady ? (
     <PageWrapper>
       <Container>
-        <Title className={ cx( sectionTitle ) } level={ 1 }><OnlyTitleDesktop><Html2React html={ title } /></OnlyTitleDesktop><Html2React html={ title_bottom } /></Title>
-        <DescriptionWrapper><Html2React html={ description } /></DescriptionWrapper>
-        <ButtonDiv><ArrowLink type="white-solid" link="/contactar">{ button_text }</ArrowLink></ButtonDiv>
+        <Row>
+          <Col xl={ 8 }>
+            <Title className={ cx( sectionTitle ) } level={ 1 }><OnlyTitleDesktop><Html2React html={ title } /></OnlyTitleDesktop><Html2React html={ title_bottom } /></Title>
+          </Col>
+          <Col xl={ 4 }>
+            <DescriptionWrapper><Html2React html={ description } /></DescriptionWrapper>
+            <ButtonDiv><ArrowLink type="white-solid" link="/contactar">{ button_text }</ArrowLink></ButtonDiv>
+          </Col>
+        </Row>
       </Container>
     </PageWrapper>
   ) : null;

@@ -86,12 +86,23 @@ const AccordionUl = styled.ul`
 const AccordionLi = styled.li`
   padding-left: 3rem;
   padding-right: 5rem;
-  width: 33.33%;
   font-size: 2.4rem;
   margin-bottom: 2rem;
   line-height: 1.4;
   position: relative;
   color: ${ theme.colors.black };
+
+  ${ mq[ 'sm' ] }{
+    width: 100%;
+  }
+
+  ${ mq[ 'lg' ] }{
+    width: 50%;
+  }
+
+  ${ mq[ 'xl' ] }{
+    width: 33.33%;
+  }
 
   &:nth-of-type(3n){
     padding-right: 0;

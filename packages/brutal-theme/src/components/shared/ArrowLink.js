@@ -63,7 +63,7 @@ const ArrowWrapper = styled.div`
   align-items: center;
   width: 100%;
   color: ${ theme.colors.black }!important;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-family: ${ props => props.variant === 'bold' ? theme.fontFamily.bold : theme.fontFamily.regular };
   ${ props => handleBtnStyle( props.type ) };
 

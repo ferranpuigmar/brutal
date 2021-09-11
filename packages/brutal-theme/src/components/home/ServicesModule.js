@@ -45,7 +45,13 @@ const colButton = css`
     flex-basis: 30%;
     display: flex;
     justify-content: flex-end;
-    margin-top: 0;
+    margin-top: ${ spacing[ 'mt-6' ] };
+  }
+
+  ${ mq[ "xl" ] } {
+    > div{
+      justify-content: right;
+    }
   }
 `
 
@@ -72,7 +78,7 @@ const ServicesModule = ( { state, libraries, actions, ...rest } ) =>
   return <Block mode="light">
     <Container>
       <Row>
-        <Col className={ cx( colTitle ) }>
+        <Col md={ 12 } xl={ 8 } className={ cx( colTitle ) }>
           <Title className={ cx( sectionTitle ) } level={ 2 }><Html2React html={ title } /></Title>
         </Col>
         <Col className={ cx( colServices ) }>
@@ -80,7 +86,7 @@ const ServicesModule = ( { state, libraries, actions, ...rest } ) =>
             <Accordion key={ service.id } data={ service } />
           ) }
         </Col>
-        <Col className={ cx( colButton ) }>
+        <Col md={ 12 } xl={ 4 } className={ cx( colButton ) }>
           <ArrowLink variant="bold" type="outline" link='/servicios'>{ text_link }</ArrowLink>
         </Col>
       </Row>
