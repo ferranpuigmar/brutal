@@ -6,8 +6,6 @@ import NavLogo from './NavLogo';
 import { breakpoints } from '../../../assets/styles/variables'
 import { mq } from '../../../assets/styles/mediaqueries';
 
-// const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
-// console.log("pantallaaaaaaaaaaso", screen.width)
 
 const Nav = styled.nav`
   width: 100%;
@@ -16,11 +14,6 @@ const Nav = styled.nav`
   max-height: 60px;
   display: flex;
   justify-content: space-between;
-
-  z-index: 10000;
-  ${'' /* position: fixed; */}
-  ${'' /* background-color: #000; */}
- 
   
   .logo {
     height: 100%;
@@ -37,9 +30,13 @@ const Nav = styled.nav`
   }
 `
 const Header = styled.header`
+  width: 100%;
+  position: fixed;
+  background-color: #000;
+  z-index: 100000;
 
   .line {
-    z-index: 100000;
+
     ${ mq[ 'md' ] }{
       border: .5px solid white;
       border-left: 0;
@@ -47,21 +44,15 @@ const Header = styled.header`
       border-top: 0px;
     }
   }
+
+  @media (max-width: ${ breakpoints[ "md" ] }px) {
+  position: relative;
+
+  }  
 `;
 
 const Navbar = ({ scroll }) => {
-  // console.log(`window`, window.pageYOffset)
   console.log(`scroll`, scroll)
-//   const refMenu = useRef()
-// useEffect (()=>{
-//   // console.log(refMenu, "-------------------")
-//   if (refMenu.current){
-//     const currentWidth = refMenu.current.getBoundingClientRect().width > 992? true: false
-//     // console.log(refMenu.current.offsetWidth , "--------2-----------")
-//     console.log("----ref", currentWidth)
-//   }
-
-// }, [refMenu] )
 
   return (
     <Header>

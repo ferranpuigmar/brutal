@@ -76,29 +76,11 @@ const Cooo = styled.div`
 const NavMenu = ( { state, open, close } ) => {
 
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
-  const [ isMobileWidth, setIsMobileWidth ] = useState(true )
-  // const refMenu = useRef()
-
-  console.log(`isMobileWidth1`, isMobileWidth)
-  useEffect (()=>{
-    const mobileWidth = screen.width < 768 ? true: false;
-    setIsMobileWidth(mobileWidth)
-    console.log(`isMobileWidth2 `, isMobileWidth )
-  }, [] )
-
-    // if (screen.width){
-    //   const mobileWidthx = refMenu.current.getBoundingClientRect().width > 992? true: false
-    //   const scrolly = refMenu.current.getBoundingClientRect()
-    // }
-    // console.log(`scrolly`, scrolly)
-  // }, [refMenu] )
   
   return (
     
     <Ul open={ open }>
-    {/* <div ref={refMenu}>
-    </div> */}
-    { items.map( (item,index) => {
+      { items.map( (item,index) => {
         return (
           <li className="navigation__item" key={ item.ID }>
             {/* <div onClick={ isMobileWidth ? close : null}> */}
@@ -115,8 +97,7 @@ const NavMenu = ( { state, open, close } ) => {
             </div>       
           </li>
         )
-      })
-    }
+      })}
           
       <NavFooter className="navigation__footer">
         <div>

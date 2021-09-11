@@ -8,7 +8,7 @@ import { theme } from '../../../assets/styles/theme';
 import ScreenSizeDetector from 'screen-size-detector'
 
 const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
-console.log("pantallaaa width222 ......", screen.width)
+
 
 const BurgerIcon = styled.div`
   width: 3rem;
@@ -59,8 +59,7 @@ const Burger = () =>
         <div />
         <div />
       </BurgerIcon>
-        <NavMenu open={ open } close={ screen.width < 768 ? () => setOpen ( !open ) : () => setOpen ( open ) } />
-  
+      <NavMenu open={ open } close={ screen.width < 768 ? () => setOpen ( !open ) : () => setOpen ( open ) } />
     </NavStyle>
   )
 }

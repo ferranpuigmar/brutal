@@ -16,12 +16,6 @@ import { spacing } from '../assets/styles/spacing';
 import About from './layout/About';
 import Projects from './layout/Projects';
 
-// import ScreenSizeDetector from 'screen-size-detector'
-
-
-// const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
-// console.log("pantallaaaaaaaaaaso", screen.width)
-
 const Main = styled.main`
   padding: ${ spacing[ 'py-10' ] };
   padding-bottom: ${ props => props.bottom === false ? '0px' : 'inherit' }
@@ -33,28 +27,11 @@ const Root = ( { state } ) =>
   const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
   const blackBackground = objPageIDs?.acf.footer_default_black
 
-  const refMenu = useRef()
-
   const [lineY, setLineY] = useState(0);
   
   useEffect (()=>{
-    // console.log(`window`, window.pageYOffset)
-    window.onscroll = () => {
-      console.log(`window`, window.pageYOffset)
-      setLineY(window.pageYOffset)
-      console.log("im scrolling")
-    }
-  // console.log(refMenu, "-------------------")
-  if (refMenu.current){
-    const currentX = refMenu.current.getBoundingClientRect().x
-    if(currentX > 0) {
-      console.log("soy mayor a 0")
-    }
-    console.log(refMenu.current.offsetWidth , "--------2-----------")
-    console.log("----ref", currentX )
-  }
-
-}, [refMenu] )
+    window.onscroll = () => setLineY(window.pageYOffset)
+  }, [] )
 
   return (
     <>
@@ -66,7 +43,6 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
-        <div ref={refMenu}></div>
         <Navbar scroll={lineY}/>
         <main>
           <Switch>
