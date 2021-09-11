@@ -4,28 +4,23 @@ import Container from '../layout/Container';
 import { theme_colors, breakpoints } from '../../assets/styles/variables';
 import GridRow from './GridRow';
 import { getMediaUrl } from '../utils/images';
+import Title from '../shared/Title';
 
-// const StyleRow = styled.div`
 const Grid = styled.div`
-margin-top: 5vh;
+  margin: 1vh 0 5vh;
 `;
 
 const Projects = ( { state, actions } ) =>
 {
-
   const [ dataProjects, setDataProjects ] = useState();
 
   const data = state.source.get( state.router.link );
-  // const post = state.source[ data.type ][ data.id ].acf.grid_block.grid_row;
-  const post = state.source[ data.type ][ data.id ].acf.grid_row;
-  console.log( 'post.acf: ', post );
-  const rows = Object.values( post )
-  const rowFetch = async () =>
-  {
-
+  const gridRowData = state.source[ data.type ][ data.id ].acf.grid_row;
+  const rows = Object.values( gridRowData )
+  const rowFetch = async () => {
     await actions.source.fetch( "/proyectos" )
-
     const projectsBag = state.source.proyectos
+
     for ( const project in projectsBag ) {
       const projectURLimg = getMediaUrl( state, projectsBag[ project ], 1000 )
       projectsBag[ project ].cover_img = projectURLimg
@@ -36,7 +31,10 @@ const Projects = ( { state, actions } ) =>
   useEffect( async () => rowFetch(), [] );
 
   return (
-    <div>
+    <section className="projects-grid">
+      <Container>
+        <Title level={ 3 } >Proyectos</Title>
+      </Container>
       <Container>
         <Grid>
           { dataProjects && rows.map( row =>
@@ -52,44 +50,10 @@ const Projects = ( { state, actions } ) =>
           } ) }
         </Grid>
       </Container>
-    </div>
+    </section>
   )
 }
 
 
 export default connect( Projects )
 
-
-
-
-//  const data = state.source.get( state.router.link );
-//   const post = state.source[ data.type ][ data.id ].acf.grid_block["0"].grid_row;
-//   console.log(`post`, post)
-
-
-
-//   // console.log(`data`, data)
-//   // Background footer logic
-//   const rows = Object.values(post)
-//   console.log(`rows`, rows[0])
-
-
-//   // const rows = Object.values(post).find(row=>row.link=== data.link)
-//   // const blackBackground = objPageIDs?.acf.footer_default_black
-//   //buscar or ID
-
-//   // useEffect( () =>
-//   // {
-//   //   actions.source.fetch( "/proyecto" );
-//   // }, [] );
-
-//   // const proyects = Object.values( state.source.proyecto );
-//   // proyects.forEach( project =>
-//   // {
-//   //   const media = state.source.attachment[ project.featured_media ].media_details.sizes.full.source_url;
-//   // console.log(`proyects`, project)
-//   // srcset
-//     // console.log(`media`, media)
-//   // } ) 
-//   //title: {rendered/ link:
-//   // console.log("state.sourcede Projects", state.source)

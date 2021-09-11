@@ -10,7 +10,6 @@ const BurgerIcon = styled.div`
   height: 3rem;
   position: relative;
   top: 5vh;
-  right: 3vh;
   z-index: 20;
   display: none;
 

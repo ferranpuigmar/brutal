@@ -35,8 +35,14 @@ const SideBig = styled.div`
   overflow: hidden;
 
   @media (max-width: ${breakpoints["md"]}px) {
-    height: 60vw;
+    ${'' /* height: 60vw; */}
     width: 100%;
+    height: 30vh;
+    min-height: 200px;
+  }
+
+  img:hover {
+    opacity:.4;
   }
 `;
 const SideSmall = styled.div`
@@ -47,8 +53,15 @@ const SideSmall = styled.div`
   flex-direction: column;
   
   @media (max-width: ${breakpoints["md"]}px) {
+    ${'' /* height: 120vw; */}
     width: 100%;
+    height: 60vh;
+    min-height: 400px;
   }
+
+  img:hover {
+    opacity:.4;
+  } 
  `;
  
 const BiVertical = styled.div`
@@ -56,20 +69,23 @@ const BiVertical = styled.div`
   overflow: hidden;
 
   @media (max-width: ${breakpoints["md"]}px) {
-    height: 60vw;
-  }
+    height: 50%;
+  }  
 `;
 const ImgSmallSet = styled.div`
   display: flex;
+  justify-content:center;
   img {
     min-width: 100%;
     min-height: 30vh;
     object-fit: cover;
 
     @media (max-width: ${breakpoints["md"]}px) {
-    ${'' /* height: 20vw; */}
-    ${'' /* max-height: 200px; */}
-  }
+      min-height: 200px;
+      height: 30vh;
+      
+      margin: 20px 0;  
+    }
   }
 `;
 
@@ -81,45 +97,41 @@ const ImgBigSet = styled.div`
     height: 60vh;
     object-fit: cover;
     min-height: 350px;
-    ${'' /* max-height: 40vh; */}
-    
-  @media (max-width: ${breakpoints["lg"]}px) {
-    min-height: 300px;
+    color: #fff;
+
+
+    @media (max-width: ${breakpoints["lg"]}px) {
+      ${'' /* min-height: 300px; */}
+    }
+    @media (max-width: ${breakpoints["md"]}px) {
+      min-height: 200px;
+      height: 30vh;
+      margin: 20px 0;  
+    }
+
   }
-  @media (max-width: ${breakpoints["md"]}px) {
-    ${'' /* height: 20vw; */}
-    ${'' /* max-height: 200px; */}
-  }
-  }
+ 
 `;
 
 const GridRow = ({bigRight, big, top, bottom, projectsBag }) => {
-  // const Row3 = ({bigRight, rowObj}) => {
-  // const {big, top, bottom, bigLink, topLink, bottomLink} = rowObj
-// console.log('big', big, `projectsBagRooooooow`, projectsBag)
-// console.log('big cover img', big["cover_img"]
-
-// console.log(`projectsBag*****`, projectsBag)
-
-console.log(`big`, big)
-
+  console.log(`big`, top)
   return (
     <Big>
         <Row className={ bigRight && "bigright" } >
           <SideBig className="big">
               <Link link={big.link}>
-                <ImgBigSet><img  src={big.cover_img}/></ImgBigSet>
+                <ImgBigSet><img alt={big.title.rendered} src={big.cover_img}/></ImgBigSet>
               </Link> 
           </SideBig>
           <SideSmall>
             <BiVertical>
               <Link link={top.link}>
-                <ImgSmallSet><img   src={top.cover_img}/></ImgSmallSet>
+                <ImgSmallSet><img alt={top.title.rendered} src={top.cover_img}/></ImgSmallSet>
               </Link> 
             </BiVertical>
             <BiVertical>
               <Link link={bottom.link}>
-                <ImgSmallSet><img   src={bottom.cover_img}/></ImgSmallSet>
+                <ImgSmallSet><img alt={bottom.title.rendered} src={bottom.cover_img}/></ImgSmallSet>
               </Link> 
             </BiVertical>
           </SideSmall>
