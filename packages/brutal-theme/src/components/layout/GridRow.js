@@ -2,6 +2,7 @@ import React from 'react';
 import { styled, connect } from 'frontity';
 import { breakpoints } from '../../assets/styles/variables';
 import Link from "@frontity/components/link";
+import { getMediaUrl } from '../utils/images';
 
 const Big = styled.div`
   .bigright { flex-direction: row-reverse }
@@ -105,25 +106,30 @@ const ImgBigSet = styled.div`
 
 `;
 
-const GridRow = ( { bigRight, big, top, bottom, projectsBag } ) =>
+const GridRow = ( { bigRight, big, top, bottom } ) =>
 {
+
+  const bigImage = getMediaUrl( big, 1000 );
+  const smallTopImage = getMediaUrl( top, 1000 );
+  const smallBottomImage = getMediaUrl( bottom, 1000 );
+
   return (
     <Big>
       <Row className={ bigRight && "bigright" } >
         <SideBig className="big">
           <Link link={ big.link }>
-            <ImgBigSet><img alt={ big.title.rendered } src={ big.cover_img } /></ImgBigSet>
+            <ImgBigSet><img alt={ big.title.rendered } src={ bigImage } /></ImgBigSet>
           </Link>
         </SideBig>
         <SideSmall>
           <BiVertical>
             <Link link={ top.link }>
-              <ImgSmallSet><img alt={ top.title.rendered } src={ top.cover_img } /></ImgSmallSet>
+              <ImgSmallSet><img alt={ top.title.rendered } src={ smallTopImage } /></ImgSmallSet>
             </Link>
           </BiVertical>
           <BiVertical>
             <Link link={ bottom.link }>
-              <ImgSmallSet><img alt={ bottom.title.rendered } src={ bottom.cover_img } /></ImgSmallSet>
+              <ImgSmallSet><img alt={ bottom.title.rendered } src={ smallBottomImage } /></ImgSmallSet>
             </Link>
           </BiVertical>
         </SideSmall>

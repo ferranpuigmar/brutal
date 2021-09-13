@@ -16,6 +16,7 @@ const Ul = styled.ul`
   a { text-decoration: none }
   .navigation__titles:hover { color: ${ theme_colors.grey_dark } }
   .navigation__footer { display: none }
+  z-index: 10;
   
   //////////////////////////////mobile-phone-styles-menus
   @media (max-width: ${ breakpoints[ "md" ] }px) {
@@ -54,8 +55,6 @@ const NavFooter = styled.div`
 const NavMenu = ( { state, open, close } ) =>
 {
 
-
-  console.log( `state clau`, state )
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
   return (
     <Ul open={ open }>

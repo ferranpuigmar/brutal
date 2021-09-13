@@ -67,13 +67,8 @@ const WrapperInfo = styled.div`
 // Component 
 const OtherProjects = ( { state, actions, currentProject } ) =>
 {
-
-  useEffect( () =>
-  {
-    actions.source.fetch( "/proyectos" );
-  }, [] );
-
-  const projects = Object.values( state.source.proyectos ).filter( project => project.id !== currentProject ).slice( 0, 4 );
+  const allProjects = state.source.get( `/projectsdata/${ state.theme.projects }/` ).items;
+  const projects = allProjects.filter( project => project.id !== currentProject ).slice( 0, 4 );
 
   return (
     projects ?
@@ -89,7 +84,7 @@ const OtherProjects = ( { state, actions, currentProject } ) =>
                     <WrapperInfo>
                       <Title level={ 2 }>{ project.title.rendered }</Title>
                     </WrapperInfo>
-                    <OtherProjectImg src={ getMediaUrl( state, project, 1600 ) } alt={ project.title.rendered }></OtherProjectImg>
+                    <OtherProjectImg src={ getMediaUrl( project, 1600 ) } alt={ project.title.rendered }></OtherProjectImg>
                   </WrapperLink>
                 )
               } ) }

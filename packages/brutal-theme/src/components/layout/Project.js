@@ -14,7 +14,6 @@ import PageWrapper from '../shared/PageWrapper';
 
 
 // STYLES
-
 const pageWrapperStyle = css`
   padding-bottom: 0;
 `
@@ -69,42 +68,26 @@ const Wrapper = styled.div`
   }
 `
 
-
+// COMPONENT
 const Project = ( { state, actions, libraries, params } ) =>
 {
-
-  const [ services, setServices ] = useState();
-
   const Html2React = libraries.html2react.Component;
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
   const { cliente, industria, portfolio } = post.acf;
 
-  const getIdServiceTaxonomies = async ( post ) =>
+  const renderServices = ( post ) =>
   {
-    const idCategories = await post[ 'servicios' ].reduce( ( acc, category ) => [ ...acc, `${ category }` ], [] ).join( ',' )
-    return idCategories;
+    const allServices = state.source.get( `/categories/${ state.theme.services }/` ).items;
+    const availableServices = post[ 'servicios' ];
+    const services = allServices
+      .filter( service => post[ 'servicios' ].includes( service.id ) )
+      .map( service => service.name )
+      .join( ', ' )
+    return services
   }
 
-  const renderServices = async ( post ) =>
-  {
-    const includedPostTaxonomies = await getIdServiceTaxonomies( post );
-    const serviceTaxonomyRequest = await libraries.source.api.get( {
-      endpoint: `/wp/v2/servicios`,
-      params: { include: includedPostTaxonomies }
-    } );
-    const response = await serviceTaxonomyRequest.json();
-    setServices(
-      response
-        .map( ( taxonomy, index ) => index !== 0 ? taxonomy.name.toLowerCase() : taxonomy.name )
-        .join( ', ' )
-    );
-  }
-
-  useEffect( () =>
-  {
-    post && renderServices( post )
-  }, [] )
+  renderServices( post );
 
   return data.isReady ? (
     <PageWrapper className={ cx( pageWrapperStyle ) }>
@@ -123,7 +106,7 @@ const Project = ( { state, actions, libraries, params } ) =>
                 <ProjectTags tagLabel="Industria" tagValue={ industria } />
               </Col>
               <Col xs={ 12 } md={ 4 }>
-                <ProjectTags tagLabel="Servicios" tagValue={ services } />
+                <ProjectTags tagLabel="Servicios" tagValue={ renderServices( post ) } />
               </Col>
             </Row>
           </Col>
@@ -133,7 +116,6 @@ const Project = ( { state, actions, libraries, params } ) =>
       <OtherProjects currentProject={ data.id } />
 
     </PageWrapper>
-    // Esto sería un loading en vez de null
   ) : null;
 }
 

@@ -9,6 +9,7 @@ import { mq } from '../../assets/styles/mediaqueries';
 import ArrowLink from '../shared/ArrowLink';
 import { theme } from '../../assets/styles/theme';
 import { Col, Row } from 'styled-bootstrap-grid';
+import SpinnerWrapper from '../shared/SpinnerWrapper';
 
 
 // STYLES
@@ -109,7 +110,7 @@ const About = ( { state, libraries } ) =>
         </Row>
       </Container>
     </PageWrapper>
-  ) : null;
+  ) : <SpinnerWrapper />;
 }
 
 export default connect( About );
