@@ -1,22 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect, styled } from 'frontity';
 import Link from "@frontity/components/link";
 import Title from '../Title';
 import Text from '../Text';
+import { css, cx } from '@emotion/css'
 import { theme_colors, breakpoints } from '../../../assets/styles/variables'
+import ArrowLink from '../ArrowLink';
+import { theme } from '../../../assets/styles/theme';
+import ScreenSizeDetector from 'screen-size-detector'
 
-
+const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
 
 const Ul = styled.ul`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
   text-transform: uppercase;
-  li { margin: auto 2vw }
+  z-index: 10;
+  li { 
+    margin: auto 2vw; 
+    text-align: center;
+    
+  @media (max-width: ${ breakpoints[ "lg" ] }px) {
+    margin: auto 0 auto 1.2vw; 
+  }
+    }
   a { text-decoration: none }
   .navigation__titles:hover { color: ${ theme_colors.grey_dark } }
   .navigation__footer { display: none }
   
+  @media (max-width: ${ breakpoints[ "lg" ] }px) {
+    margin-left: 30px;
+  }
+
   //////////////////////////////mobile-phone-styles-menus
   @media (max-width: ${ breakpoints[ "md" ] }px) {
     flex-flow: column nowrap;
@@ -32,8 +48,9 @@ const Ul = styled.ul`
     text-align: center;
     li {
       color: ${ theme_colors[ "white" ] };
-      margin: 4.5vh auto;
+      ${'' /* margin: 4.5vh auto; */}
     }
+
     .navigation__titles { 
       font-size: 24px 
     }
@@ -51,27 +68,46 @@ const NavFooter = styled.div`
   .navigation__footer-title { font-size: 15px }
 `;
 
-const NavMenu = ( { state, open, close } ) =>
-{
+const whiteLink = css`
+  color: #fff!important;
+  ${theme.fontSize.h6};
+  .arrow-icon, 
+  .arrow-icon:after,
+  .arrow-icon:before {
+    background-color: #fff!important;
+  }
+`;
+const Cooo = styled.div`
+  .centermenu{
+    display: flex;
+    align-content: center;
+  }
+`;
+const NavMenu = ( { state, open, close } ) => {
 
-
-  console.log( `state clau`, state )
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
+  
   return (
+    
     <Ul open={ open }>
-      { items.map( item =>
-      {
+      { items.map( (item,index) => {
         return (
           <li className="navigation__item" key={ item.ID }>
-            <div onClick={ close }>
-              <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
-                <Title level={ 6 } className="navigation__titles">{ item.title }</Title>
-              </Link>
-            </div>
+            <div className="nav__link-item"onClick={ close }>
+              {(items.length-1) === index && !open ?  
+                <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
+                  <ArrowLink className={cx(whiteLink)} isAnchor={false}>{ item.title }</ArrowLink>
+                </Link>
+                :
+                <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
+                  <Title level={ 6 } className="navigation__titles">{ item.title }</Title>
+                </Link>                
+              }
+            </div>       
           </li>
         )
-      } ) }
-
+      })}
+          
       <NavFooter className="navigation__footer">
         <div>
           <Title level={ 5 } className="navigation__footer-title">ENCUÉNTRANOS</Title>

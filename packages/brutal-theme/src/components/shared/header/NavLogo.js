@@ -7,7 +7,6 @@ const Logo = styled.div`
   display: flex;
   align-items: center;
   justify-items: center;
-  margin: auto 0;
   a { height: 100% }
 `;
 
