@@ -10,8 +10,6 @@ import { theme } from '../../../assets/styles/theme';
 import ScreenSizeDetector from 'screen-size-detector'
 
 const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
-console.log("pantallaaa width ......", screen)
-// console.log("pantallaaaaaaaaaaso", screen)
 
 const Ul = styled.ul`
   list-style: none;
@@ -19,11 +17,22 @@ const Ul = styled.ul`
   flex-flow: row nowrap;
   text-transform: uppercase;
   z-index: 10;
-  li { margin: auto 2vw }
+  li { 
+    margin: auto 2vw; 
+    text-align: center;
+    
+  @media (max-width: ${ breakpoints[ "lg" ] }px) {
+    margin: auto 0 auto 1.2vw; 
+  }
+    }
   a { text-decoration: none }
   .navigation__titles:hover { color: ${ theme_colors.grey_dark } }
   .navigation__footer { display: none }
   
+  @media (max-width: ${ breakpoints[ "lg" ] }px) {
+    margin-left: 30px;
+  }
+
   //////////////////////////////mobile-phone-styles-menus
   @media (max-width: ${ breakpoints[ "md" ] }px) {
     flex-flow: column nowrap;
@@ -39,8 +48,9 @@ const Ul = styled.ul`
     text-align: center;
     li {
       color: ${ theme_colors[ "white" ] };
-      margin: 4.5vh auto;
+      ${'' /* margin: 4.5vh auto; */}
     }
+
     .navigation__titles { 
       font-size: 24px 
     }
@@ -83,8 +93,7 @@ const NavMenu = ( { state, open, close } ) => {
       { items.map( (item,index) => {
         return (
           <li className="navigation__item" key={ item.ID }>
-            {/* <div onClick={ isMobileWidth ? close : null}> */}
-            <div onClick={ close }>
+            <div className="nav__link-item"onClick={ close }>
               {(items.length-1) === index && !open ?  
                 <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
                   <ArrowLink className={cx(whiteLink)} isAnchor={false}>{ item.title }</ArrowLink>

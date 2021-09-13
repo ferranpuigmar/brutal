@@ -17,8 +17,10 @@ import About from './layout/About';
 import Projects from './layout/Projects';
 
 const Main = styled.main`
-  padding: ${ spacing[ 'py-10' ] };
-  padding-bottom: ${ props => props.bottom === false ? '0px' : 'inherit' }
+  ${'' /* padding: ${ spacing[ 'py-10' ] }; */}
+  ${'' /* padding-bottom: ${ props => props.bottom === false ? '0px' : 'inherit' }; */}
+  padding-top: 8vh;
+
 `
 
 const Root = ( { state } ) =>
@@ -30,7 +32,9 @@ const Root = ( { state } ) =>
   const [lineY, setLineY] = useState(0);
   
   useEffect (()=>{
+    console.log(`window.pageYOffset`, window.pageYOffset)
     window.onscroll = () => setLineY(window.pageYOffset)
+
   }, [] )
 
   return (
@@ -40,11 +44,12 @@ const Root = ( { state } ) =>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <html lang="en" />
       </Head>
+
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
         <Navbar scroll={lineY}/>
-        <main>
+        <Main>
           <Switch>
             <Home when={ data.isHome } />
             <Project when={ !data.isPage && data.isPostType && data.type === "proyectos" } />
@@ -53,7 +58,7 @@ const Root = ( { state } ) =>
             <About when={ data.isPage && data.link === '/sobre-nosotros/' } />
             <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } />
           </Switch>
-        </main>
+        </Main>
         <Footer blackBackground={ blackBackground } />
       </GridThemeProvider>
     </>
