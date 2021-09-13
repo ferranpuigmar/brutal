@@ -58,22 +58,12 @@ const colButton = css`
 // Component
 const ServicesModule = ( { state, libraries, actions, ...rest } ) =>
 {
-
   const { title, text_link, services } = rest;
-  const [ dataServices, setDataServices ] = useState( [] );
+
+  const allServices = state.source.get( `/categories/${ state.theme.services }/` ).items;
+  const dataServices = allServices.filter( service => services.includes( service.id ) )
+
   const Html2React = libraries.html2react.Component;
-
-  const loadServices = async () =>
-  {
-    await actions.source.fetch( "/servicios" );
-    const availableServices = Object.values( state?.source?.servicios ).filter( service => services.includes( service.id ) )
-    setDataServices( availableServices )
-  }
-
-  useEffect( async () =>
-  {
-    loadServices()
-  }, [] );
 
   return <Block mode="light">
     <Container>

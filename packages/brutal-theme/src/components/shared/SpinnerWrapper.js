@@ -1,12 +1,12 @@
 import { styled } from 'frontity';
 import React from 'react'
-import Loading from './icons/loading.svg'
+import loading from './icons/loading.svg'
 
 // styles
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  position: fixed;
+  position: relative;
   top: left;
   left: 0;
   display: flex;
@@ -18,7 +18,7 @@ const SpinnerWrapper = () =>
 {
   return (
     <Wrapper>
-      <Loading />
+      <img src={ loading } />
     </Wrapper>
   )
 }

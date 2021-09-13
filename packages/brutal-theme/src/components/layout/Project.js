@@ -32,8 +32,11 @@ const PortFolioImageWrapper = styled.div`
 
 const descriptionCol = css`
   order: 1;
+  margin-top: ${ spacing[ 'mt-6' ] };
+
   ${ mq[ "sm" ] } {
     order: 0;
+    margin-top: 0;
   }
 `
 
@@ -81,7 +84,7 @@ const Project = ( { state, actions, libraries, params } ) =>
     const allServices = state.source.get( `/categories/${ state.theme.services }/` ).items;
     const availableServices = post[ 'servicios' ];
     const services = allServices
-      .filter( service => post[ 'servicios' ].includes( service.id ) )
+      .filter( service => availableServices.includes( service.id ) )
       .map( service => service.name )
       .join( ', ' )
     return services

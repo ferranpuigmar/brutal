@@ -20,20 +20,23 @@ const Wrapper = styled.div`
   display: flex;
   align-items: middle;
   justify-content: ${ props => props.otherProjectsNumber < 4 ? 'flex-start' : 'space-around' };
-  margin: 0 -${ spacing[ 'm-4' ] };
+
+  ${ mq[ 'sm' ] }{
+    margin: 0 -${ spacing[ 'm-4' ] };
+  }
 `
 
 const WrapperLink = styled.a`
   display: block;
   height: 250px;
   width: 100%;
-  max-width: 308px;
-  margin-left: ${ spacing[ 'm-4' ] };
-  margin-right: ${ spacing[ 'm-4' ] };
   position: relative;
 
   ${ mq[ 'sm' ] }{
     height: 308px;
+    max-width: 308px;
+    margin-left: ${ spacing[ 'm-4' ] };
+    margin-right: ${ spacing[ 'm-4' ] };
   }
 
   &:hover{

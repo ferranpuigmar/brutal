@@ -110,7 +110,7 @@ const About = ( { state, libraries } ) =>
         </Row>
       </Container>
     </PageWrapper>
-  ) : <SpinnerWrapper />;
+  ) : null;
 }
 
 export default connect( About );
