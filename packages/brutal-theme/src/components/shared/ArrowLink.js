@@ -127,7 +127,7 @@ const ArrowLinkContent = ( { type, variant, link, children } ) => <>
 const ArrowLink = ( { link, children, className, variant, type, isAnchor = true } ) =>
 {
   return (
-    <ArrowWrapper className={ cx( className ) } variant={ variant }>
+    <ArrowWrapper className={ cx( "arrow-element", className ) } variant={ variant }>
       {
         isAnchor
           ? <ArrowAnchorWrapper type={ type } href={ link } ><ArrowLinkContent variant={ variant } children={ children } /></ArrowAnchorWrapper>

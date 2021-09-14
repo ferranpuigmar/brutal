@@ -35,27 +35,73 @@ const Ul = styled.ul`
 
   //////////////////////////////mobile-phone-styles-menus
   @media (max-width: ${ breakpoints[ "md" ] }px) {
+
+    .navigation__link {
+      .arrow-icon {
+      ${'' /* .arrow-element { */}
+        display: none;
+      }
+    }
+
     flex-flow: column nowrap;
     background-color: ${ theme_colors[ "black" ] };
     position: fixed;
-    transform: ${ ( { open } ) => open ? 'translateX(0)' : 'translateX(100%)' };
+    transform: ${ ( { open } ) => open ? 'translateY(0)' : 'translateY(-100%)' };
     top: 0;
     right: 0;
     height: 100vh;
     width: 100vw;
     padding-top: 12vh;
-    transition: transform 0.3s ease-in-out;
+    transition: transform .2s ease-in-out;
     text-align: center;
+
     li {
+
+      
+      .arrow-element span {
+        ${theme.fontSize.h6}
+      }
+    }
       color: ${ theme_colors[ "white" ] };
       ${'' /* margin: 4.5vh auto; */}
+
+      &:nth-of-type(1){
+        overflow: hidden;
+        ${'' /* animation-delay: 15s; */}
+        transition: transform .1s linear;
+        transform: ${ ( { open } ) => open ? 'translateY(0)' : 'translateY(-100%)' };
+        opacity: ${ ( { open } ) => open ? '1' : '0' };
+        :hover {
+
+        }
+      }
+      &:nth-of-type(2){
+        ${'' /* animation-delay: 15s; */}
+        transition: transform .12s linear;
+        transform: ${ ( { open } ) => open ? 'translateY(0)' : 'translateY(-100%)' };
+      }
+      &:nth-of-type(3){
+        ${'' /* animation-delay: 15s; */}
+        transition: transform .15s linear;
+        transform: ${ ( { open } ) => open ? 'translateY(0)' : 'translateY(-100%)' };
+      }
+      &:nth-of-type(4){
+        ${'' /* animation-delay: 15s; */}
+        transition: transform .18s linear;
+        transform: ${ ( { open } ) => open ? 'translateY(0)' : 'translateY(-100%)' };
+      }
     }
 
+    
+
     .navigation__titles { 
-      font-size: 24px 
+      font-size: 24px;
+      overflow: hidden; 
     }
     
     .navigation__footer { display: flex }
+
+    
   }
 `;
 
@@ -77,12 +123,7 @@ const whiteLink = css`
     background-color: #fff!important;
   }
 `;
-const Cooo = styled.div`
-  .centermenu{
-    display: flex;
-    align-content: center;
-  }
-`;
+
 const NavMenu = ( { state, open, close } ) => {
 
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
@@ -93,10 +134,10 @@ const NavMenu = ( { state, open, close } ) => {
       { items.map( (item,index) => {
         return (
           <li className="navigation__item" key={ item.ID }>
-            <div className="nav__link-item"onClick={ close }>
+            <div onClick={ close }>
               {(items.length-1) === index && !open ?  
                 <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
-                  <ArrowLink className={cx(whiteLink)} isAnchor={false}>{ item.title }</ArrowLink>
+                  <ArrowLink className={cx(whiteLink)} variant="bold" isAnchor={false}>{ item.title }</ArrowLink>
                 </Link>
                 :
                 <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
