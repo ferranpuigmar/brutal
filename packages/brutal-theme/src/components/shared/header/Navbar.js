@@ -9,23 +9,19 @@ import { mq } from '../../../assets/styles/mediaqueries';
 
 const Nav = styled.nav`
   width: 100%;
-  height: ${ ( { scrollSmall } ) => scrollSmall ? '6vh' : '14vh' };
+  height: ${ ( { scrollSmall } ) => scrollSmall ? '3rem' : '10rem' };
   min-height: 40px;
   max-height: 120px;
   display: flex;
   justify-content: space-between;
-  padding:  ${ ( { scrollSmall } ) => scrollSmall ? '1vh 0' : '3.5vh 0' };
-  
-  .logo { height: 100%; }
+  transition: all 0.3s ease-in-out;
 
-  @media (max-width: ${ breakpoints[ "md" ] }px) {
-    padding:  0 ;
-    height: 15vh;
-    max-height: none;
-    
-    .logo {
-      height: 100%;
-      padding: 2vh 0;
+  .logo { 
+    max-height: 3.7rem; 
+    transition: all 0.3s ease-in-out;
+
+    ${ mq[ 'md' ] }{
+      max-height: ${ ( { scrollSmall } ) => scrollSmall ? '2rem' : '4.8rem' };
     }
   }
 `
@@ -47,19 +43,20 @@ const Header = styled.header`
 
   @media (max-width: ${ breakpoints[ "md" ] }px) {
    position: relative;
-  }  
+  }
 `;
 
-const Navbar = ({ scroll }) => {
+const Navbar = ( { scroll } ) =>
+{
   return (
     <Header>
       <div className={ scroll > 40 ? "line" : "" }>
-      <Container>
-        <Nav scrollSmall={ scroll > 40 ? true : false}>
-          <NavLogo />
-          <NavBurger />
-        </Nav>
-      </Container>
+        <Container>
+          <Nav scrollSmall={ scroll > 40 ? true : false }>
+            <NavLogo />
+            <NavBurger />
+          </Nav>
+        </Container>
       </div>
     </Header>
   )

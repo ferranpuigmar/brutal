@@ -15,12 +15,12 @@ import { styled } from 'frontity';
 import { spacing } from '../assets/styles/spacing';
 import About from './layout/About';
 import Projects from './layout/Projects';
+import { mq } from '../assets/styles/variables';
 
 const Main = styled.main`
-  ${'' /* padding: ${ spacing[ 'py-10' ] }; */}
-  ${'' /* padding-bottom: ${ props => props.bottom === false ? '0px' : 'inherit' }; */}
-  padding-top: 8vh;
-
+  ${ mq[ 'lg' ] }{
+    padding-top: 8vh;
+  }
 `
 
 const Root = ( { state } ) =>
@@ -29,11 +29,12 @@ const Root = ( { state } ) =>
   const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
   const blackBackground = objPageIDs?.acf.footer_default_black
 
-  const [lineY, setLineY] = useState(0);
-  
-  useEffect (()=>{
-    console.log(`window.pageYOffset`, window.pageYOffset)
-    window.onscroll = () => setLineY(window.pageYOffset)
+  const [ lineY, setLineY ] = useState( 0 );
+
+  useEffect( () =>
+  {
+    console.log( `window.pageYOffset`, window.pageYOffset )
+    window.onscroll = () => setLineY( window.pageYOffset )
 
   }, [] )
 
@@ -48,7 +49,7 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
-        <Navbar scroll={lineY}/>
+        <Navbar scroll={ lineY } />
         <Main>
           <Switch>
             <Home when={ data.isHome } />

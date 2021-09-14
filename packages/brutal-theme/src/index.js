@@ -4,6 +4,8 @@ import link from "@frontity/html2react/processors/link";
 import menuHandler from "./components/handlers/menu-handler";
 import globalOptionsHandler from "./components/handlers/global-options-handler";
 import paragraph from "./processors/paragraph";
+import servicesHandler from "./components/handlers/services-handler";
+import projectsHandler from "./components/handlers/projects-handler";
 
 export default {
   name: "brutal-theme",
@@ -15,7 +17,8 @@ export default {
       menuUrl: "all_pages",
       postType: 'servicios',
       globalOptions: 'acf-brutal-settings',
-      services: 'servicios'
+      services: 'servicios',
+      projects: 'proyectos'
     }
   },
   actions: {
@@ -24,6 +27,8 @@ export default {
       {
         await actions.source.fetch( `/menu/${ state.theme.menuUrl }/` )
         await actions.source.fetch( `/globalOptions/${ state.theme.globalOptions }/` )
+        await actions.source.fetch( `/categories/${ state.theme.services }/` )
+        await actions.source.fetch( `/projectsData/${ state.theme.projects }/` )
       }
     }
   },
@@ -32,7 +37,7 @@ export default {
       processors: [ image, link, paragraph ]
     },
     source: {
-      handlers: [ menuHandler, globalOptionsHandler ]
+      handlers: [ menuHandler, globalOptionsHandler, servicesHandler, projectsHandler ]
     }
   }
 };

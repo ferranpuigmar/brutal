@@ -28,6 +28,7 @@ const Ul = styled.ul`
   a { text-decoration: none }
   .navigation__titles:hover { color: ${ theme_colors.grey_dark } }
   .navigation__footer { display: none }
+  z-index: 10;
   
   @media (max-width: ${ breakpoints[ "lg" ] }px) {
     margin-left: 30px;
@@ -116,7 +117,7 @@ const NavFooter = styled.div`
 
 const whiteLink = css`
   color: #fff!important;
-  ${theme.fontSize.h6};
+  ${ theme.fontSize.h6 };
   .arrow-icon, 
   .arrow-icon:after,
   .arrow-icon:before {
@@ -127,11 +128,12 @@ const whiteLink = css`
 const NavMenu = ( { state, open, close } ) => {
 
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
-  
+
   return (
-    
+
     <Ul open={ open }>
-      { items.map( (item,index) => {
+      { items.map( ( item, index ) =>
+      {
         return (
           <li className="navigation__item" key={ item.ID }>
             <div onClick={ close }>
@@ -142,13 +144,13 @@ const NavMenu = ( { state, open, close } ) => {
                 :
                 <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
                   <Title level={ 6 } className="navigation__titles">{ item.title }</Title>
-                </Link>                
+                </Link>
               }
-            </div>       
+            </div>
           </li>
         )
-      })}
-          
+      } ) }
+
       <NavFooter className="navigation__footer">
         <div>
           <Title level={ 5 } className="navigation__footer-title">ENCUÉNTRANOS</Title>
