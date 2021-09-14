@@ -17,31 +17,38 @@ const Ul = styled.ul`
   flex-flow: row nowrap;
   text-transform: uppercase;
   z-index: 10;
+
   li { 
-    margin: auto 2vw; 
+    margin: auto 2rem; 
     text-align: center;
     
-  @media (max-width: ${ breakpoints[ "lg" ] }px) {
-    margin: auto 0 auto 1.2vw; 
+    @media (max-width: ${ breakpoints[ "lg" ] }px) {
+      margin: auto 0 auto 1.5rem; 
+    }  
   }
-    }
-  a { text-decoration: none }
-  .navigation__titles:hover { color: ${ theme_colors.grey_dark } }
+
+  a { 
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+
+    :hover { color: ${theme_colors.primaryColor}; }
+  }
+
+  .arrow-element:hover {color: ${theme_colors.primaryColor};} //no funtiona
+  
   .navigation__footer { display: none }
-  z-index: 10;
+
   
   @media (max-width: ${ breakpoints[ "lg" ] }px) {
-    margin-left: 30px;
+    margin-left: 2rem;
   }
 
   //////////////////////////////mobile-phone-styles-menus
   @media (max-width: ${ breakpoints[ "md" ] }px) {
-
-    .navigation__link {
-      .arrow-icon {
-      ${'' /* .arrow-element { */}
-        display: none;
-      }
+    .arrow-icon {
+    ${'' /* .arrow-element { */}
+      display: none;
     }
 
     flex-flow: column nowrap;
@@ -53,18 +60,11 @@ const Ul = styled.ul`
     height: 100vh;
     width: 100vw;
     padding-top: 12vh;
-    transition: transform .2s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     text-align: center;
 
     li {
-
-      
-      .arrow-element span {
-        ${theme.fontSize.h6}
-      }
-    }
       color: ${ theme_colors[ "white" ] };
-      ${'' /* margin: 4.5vh auto; */}
 
       &:nth-of-type(1){
         overflow: hidden;
@@ -72,9 +72,6 @@ const Ul = styled.ul`
         transition: transform .1s linear;
         transform: ${ ( { open } ) => open ? 'translateY(0)' : 'translateY(-100%)' };
         opacity: ${ ( { open } ) => open ? '1' : '0' };
-        :hover {
-
-        }
       }
       &:nth-of-type(2){
         ${'' /* animation-delay: 15s; */}
@@ -93,16 +90,12 @@ const Ul = styled.ul`
       }
     }
 
-    
-
-    .navigation__titles { 
+    .navigation__link { 
       font-size: 24px;
-      overflow: hidden; 
+      ${'' /* overflow: hidden;  */}
     }
     
     .navigation__footer { display: flex }
-
-    
   }
 `;
 
@@ -132,25 +125,22 @@ const NavMenu = ( { state, open, close } ) => {
   return (
 
     <Ul open={ open }>
-      { items.map( ( item, index ) =>
-      {
+      { items.map( (item,index) => {
         return (
           <li className="navigation__item" key={ item.ID }>
-            <div onClick={ close }>
-              {(items.length-1) === index && !open ?  
+            <div className="nav__link-item"onClick={ close }>
+              {(items.length-1) === index && !open ?   
                 <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
-                  <ArrowLink className={cx(whiteLink)} variant="bold" isAnchor={false}>{ item.title }</ArrowLink>
+                  <ArrowLink className={"nav-arrow",cx(whiteLink)} isAnchor={false}>{ item.title }</ArrowLink>
                 </Link>
                 :
-                <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
-                  <Title level={ 6 } className="navigation__titles">{ item.title }</Title>
-                </Link>
+                <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }> { item.title } </Link>                
               }
-            </div>
+            </div>       
           </li>
         )
-      } ) }
-
+      })}
+          
       <NavFooter className="navigation__footer">
         <div>
           <Title level={ 5 } className="navigation__footer-title">ENCUÉNTRANOS</Title>

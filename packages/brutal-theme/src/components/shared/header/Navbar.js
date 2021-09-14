@@ -9,19 +9,19 @@ import { mq } from '../../../assets/styles/mediaqueries';
 
 const Nav = styled.nav`
   width: 100%;
-  height: ${ ( { scrollSmall } ) => scrollSmall ? '3rem' : '10rem' };
+  height: ${ ( { scrollSmall } ) => scrollSmall ? '4rem' : '10rem' };
   min-height: 40px;
   max-height: 120px;
   display: flex;
   justify-content: space-between;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s linear;
 
   .logo { 
     max-height: 3.7rem; 
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s linear;
 
     ${ mq[ 'md' ] }{
-      max-height: ${ ( { scrollSmall } ) => scrollSmall ? '2rem' : '4.8rem' };
+      max-height: ${ ( { scrollSmall } ) => scrollSmall ? '2.5rem' : '4.8rem' };
     }
   }
 `
