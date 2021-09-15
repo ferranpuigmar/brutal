@@ -51,29 +51,29 @@ const BurgerIcon = styled.div`
     }
     .open {
       &:nth-of-type(1){
-        animation: ${topOpen} .7s ease-in-out 0s ;
+        animation: ${topOpen} .6s ease-in-out 0s ;
         animation-fill-mode: forwards;
       } 
       &:nth-of-type(2) {
-        transition: opacity .7s ease-in-out;
+        transition: opacity .6s ease-in-out;
         opacity: 0;
       }
       &:nth-of-type(3) {
-        animation:${bottomOpen} .7s ease-in-out 0s ;
+        animation:${bottomOpen} .6s ease-in-out 0s ;
         animation-fill-mode: forwards;
       } 
     }
     .close {
       &:nth-of-type(1){
-        animation:${topClose} 1s ease;
+        animation:${topClose} .6s ease;
         transform: translateY(0) rotate(0);
       } 
       &:nth-of-type(2){
-        transition: opacity .7s ease-in-out;
+        transition: opacity .6 ease-in-out;
         opacity: 1;
       } 
       &:nth-of-type(3){
-        animation:${bottomClose} 1s ease;
+        animation:${bottomClose} .6s ease;
         transform: translateY(0) rotate(0);
       } 
     }
@@ -91,6 +91,8 @@ const Burger = ({ screenWidth }) =>
   const [ open, setOpen ] = useState()
 
   const handleAnimation = () => {
+    
+    console.log(`window`, window)
     const elem = document.querySelector('html');
     elem.style.overflow = open?.status ? "visible" : "hidden";
     setOpen( !open ? {status:true} : {status:!open.status}  )

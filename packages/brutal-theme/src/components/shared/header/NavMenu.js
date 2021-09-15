@@ -39,27 +39,27 @@ const Ul = styled.ul`
 
   //////////////////////////////mobile-phone-styles-menus
   @media (max-width: ${ breakpoints[ "md" ] }px) {
-    ${'' /* .arrow-icon { */}
-    ${'' /* .arrow-element { */}
-      ${'' /* display: none; */}
-    ${'' /* } */}
 
     flex-flow: column nowrap;
-    background-color: ${ theme_colors[ "black" ] };
+    background-color: ${ theme_colors.black};
     position: fixed;
-    transform: ${ ( { open } ) => open ? 'translateY(0)' : 'translateY(-100%)' };
     top: 0;
     right: 0;
     height: 100vh;
     width: 100vw;
     padding-top: 12vh;
     transition: transform 0.3s ease-in-out;
+    transform: ${ ( { open } ) => open ? 'translateY(0)' : 'translateY(-100%)' };
     text-align: center;
+
+    ${'' /* background-color: ${ theme_colors.primaryColor}; */}
 
     li {
       margin: auto 0 ;
-      color: ${ theme_colors[ "white" ] };
+      color: ${ theme_colors.white  };
 
+      ${'' /* a { color: ${ theme_colors.black }; } */}
+      
       &:nth-of-type(1){
         overflow: hidden;
         ${'' /* animation-delay: 15s; */}
@@ -110,6 +110,15 @@ const whiteLink = css`
   .arrow-icon:before {
     background-color: #fff!important;
   }
+    &:hover {
+      color: ${ `${theme_colors.primaryColor}!important` };
+      ${ theme.fontSize.h6 };
+      .arrow-icon, 
+      .arrow-icon:after,
+      .arrow-icon:before {
+        background-color: ${ `${theme_colors.primaryColor}!important` };
+    }
+    }
 `;
 
 const NavMenu = ( { state, open, close, screenWidth } ) => {
@@ -143,9 +152,7 @@ const NavMenu = ( { state, open, close, screenWidth } ) => {
         </div>
         <div>
           <Title level={ 5 } className="navigation__footer-title">SIGUENOS</Title>
-          <Link link="https://www.instagram.com/esmuybrutal/">
-            <Text text={ "@esmuybrutal" } size={ "1.2rem" } className="navigation__footer-text" />
-          </Link>
+          <Link link="https://www.instagram.com/esmuybrutal/">@esmuybrutal</Link>
         </div>
       </NavFooter>
     </Ul>

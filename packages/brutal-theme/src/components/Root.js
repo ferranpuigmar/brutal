@@ -30,11 +30,14 @@ const Root = ( { state } ) =>
 {
   const data = state.source.get( state.router.link );
   const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
-  const blackBackground = objPageIDs?.acf.footer_default_black
+  const blackBackground = objPageIDs?.acf.footer_default_black;
 
+  const footerFields =  state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields;
+  
   const [ lineY, setLineY ] = useState( 0 );
   const [ screenWidth, setScreenWidth ] = useState(screen.width)
-
+  
+ 
   useEffect( () =>{
     window.onscroll = () => setLineY( window.pageYOffset )
     window.onresize = () => setScreenWidth(screen.width)
@@ -51,7 +54,8 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
-        <Navbar screenWidth={screenWidth} scroll={ lineY } />
+        <Navbar footerFields={footerFields} screenWidth={screenWidth} scroll={ lineY } />
+        {/* <Navbar screenWidth={screenWidth} scroll={ lineY } /> */}
         <Main>
           <Switch>
             <Home when={ data.isHome } />
@@ -62,7 +66,8 @@ const Root = ( { state } ) =>
             <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } />
           </Switch>
         </Main>
-        <Footer blackBackground={ blackBackground } />
+        <Footer footerFields={footerFields} blackBackground={ blackBackground } />
+        {/* <Footer blackBackground={ blackBackground } /> */}
       </GridThemeProvider>
     </>
   );
