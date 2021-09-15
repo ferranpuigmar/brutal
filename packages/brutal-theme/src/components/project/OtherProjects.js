@@ -9,8 +9,8 @@ import { theme } from '../../assets/styles/theme';
 import Block from '../shared/Block';
 import { cx, css } from '@emotion/css';
 import { mq } from '../../assets/styles/variables';
-
-
+import { hexToRgb } from '../utils/colors';
+import Link from "@frontity/components/link";
 
 // Styles 
 const title = css`
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   }
 `
 
-const WrapperLink = styled.a`
+const WrapperLink = styled.div`
   display: block;
   height: 250px;
   width: 100%;
@@ -39,9 +39,29 @@ const WrapperLink = styled.a`
     margin-right: ${ spacing[ 'm-4' ] };
   }
 
+  > div{
+    transition: all 0.4s ease-out;
+    padding: 0 ${ spacing[ 'p-4' ] };
+    opacity: 0;
+
+    > *{
+      transition: all 0.3s ease-out 0.4s;
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+  }
+
   &:hover{
     > div{
+      padding: ${ spacing[ 'p-3' ] } ${ spacing[ 'p-4' ] };
       opacity: 1;
+      height: 100%;
+      background-color: rgba( ${ hexToRgb( theme.colors.primaryColor ) }, 1);
+
+      > *{
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
 `
@@ -54,21 +74,17 @@ const OtherProjectImg = styled.img`
 
 const WrapperInfo = styled.div`
   width: 100%;
-  height: 100%;
+  height: 0;
   position: absolute;
-  background-color: ${ theme.colors.primaryColor };
-  padding: ${ spacing[ 'p-6' ] };
-  transition: all 0.3s ease-in-out;
-  opacity: 0;
   pointer-events: none;
 
   h2{
     color: ${ theme.colors.black }
-  } 
+  }
 `
 
 // Component 
-const OtherProjects = ( { state, actions, currentProject } ) =>
+const OtherProjects = ( { state, currentProject } ) =>
 {
   const allProjects = state.source.get( `/projectsdata/${ state.theme.projects }/` ).items;
   const projects = allProjects.filter( project => project.id !== currentProject ).slice( 0, 4 );
@@ -83,11 +99,13 @@ const OtherProjects = ( { state, actions, currentProject } ) =>
               { projects.map( project =>
               {
                 return (
-                  <WrapperLink key={ project.id } href={ project.link }>
+                  <WrapperLink key={ project.id }>
                     <WrapperInfo>
                       <Title level={ 2 }>{ project.title.rendered }</Title>
                     </WrapperInfo>
-                    <OtherProjectImg src={ getMediaUrl( project, 1600 ) } alt={ project.title.rendered }></OtherProjectImg>
+                    <Link link={ project.link }>
+                      <OtherProjectImg src={ getMediaUrl( project, 1600 ) } alt={ project.title.rendered }></OtherProjectImg>
+                    </Link>
                   </WrapperLink>
                 )
               } ) }
