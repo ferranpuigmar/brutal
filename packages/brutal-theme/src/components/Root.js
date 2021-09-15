@@ -16,6 +16,9 @@ import { spacing } from '../assets/styles/spacing';
 import About from './layout/About';
 import Projects from './layout/Projects';
 import { mq } from '../assets/styles/variables';
+import ScreenSizeDetector from 'screen-size-detector'
+
+const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
 
 const Main = styled.main`
   ${ mq[ 'lg' ] }{
@@ -30,12 +33,11 @@ const Root = ( { state } ) =>
   const blackBackground = objPageIDs?.acf.footer_default_black
 
   const [ lineY, setLineY ] = useState( 0 );
+  const [ screenWidth, setScreenWidth ] = useState(screen.width)
 
-  useEffect( () =>
-  {
-    console.log( `window.pageYOffset`, window.pageYOffset )
+  useEffect( () =>{
     window.onscroll = () => setLineY( window.pageYOffset )
-
+    window.onresize = () => setScreenWidth(screen.width)
   }, [] )
 
   return (
@@ -49,7 +51,7 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
-        <Navbar scroll={ lineY } />
+        <Navbar screenWidth={screenWidth} scroll={ lineY } />
         <Main>
           <Switch>
             <Home when={ data.isHome } />

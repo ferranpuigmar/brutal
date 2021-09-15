@@ -7,9 +7,7 @@ import { css, cx } from '@emotion/css'
 import { theme_colors, breakpoints } from '../../../assets/styles/variables'
 import ArrowLink from '../ArrowLink';
 import { theme } from '../../../assets/styles/theme';
-import ScreenSizeDetector from 'screen-size-detector'
 
-const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
 
 const Ul = styled.ul`
   list-style: none;
@@ -39,17 +37,13 @@ const Ul = styled.ul`
   
   .navigation__footer { display: none }
 
-  
-  @media (max-width: ${ breakpoints[ "lg" ] }px) {
-    margin-left: 2rem;
-  }
 
   //////////////////////////////mobile-phone-styles-menus
   @media (max-width: ${ breakpoints[ "md" ] }px) {
-    .arrow-icon {
+    ${'' /* .arrow-icon { */}
     ${'' /* .arrow-element { */}
-      display: none;
-    }
+      ${'' /* display: none; */}
+    ${'' /* } */}
 
     flex-flow: column nowrap;
     background-color: ${ theme_colors[ "black" ] };
@@ -64,6 +58,7 @@ const Ul = styled.ul`
     text-align: center;
 
     li {
+      margin: auto 0 ;
       color: ${ theme_colors[ "white" ] };
 
       &:nth-of-type(1){
@@ -118,9 +113,10 @@ const whiteLink = css`
   }
 `;
 
-const NavMenu = ( { state, open, close } ) => {
-
+const NavMenu = ( { state, open, close, screenWidth } ) => {
+  
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
+  const desktopWidth = screenWidth >= breakpoints.md ? true : false;
 
   return (
 
@@ -129,7 +125,7 @@ const NavMenu = ( { state, open, close } ) => {
         return (
           <li className="navigation__item" key={ item.ID }>
             <div className="nav__link-item"onClick={ close }>
-              {(items.length-1) === index && !open ?   
+              {(items.length-1) === index && desktopWidth ?   
                 <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
                   <ArrowLink className={"nav-arrow",cx(whiteLink)} isAnchor={false}>{ item.title }</ArrowLink>
                 </Link>
