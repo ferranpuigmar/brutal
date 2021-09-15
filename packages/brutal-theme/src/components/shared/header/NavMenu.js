@@ -8,7 +8,6 @@ import { theme_colors, breakpoints } from '../../../assets/styles/variables'
 import ArrowLink from '../ArrowLink';
 import { theme } from '../../../assets/styles/theme';
 
-
 const Ul = styled.ul`
   list-style: none;
   display: flex;
