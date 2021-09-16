@@ -11,6 +11,7 @@ import Block from '../shared/Block';
 import ServiceItem from '../services/ServiceItem';
 import { renderModule } from '../utils/renderModule';
 import { v4 as uuid_v4 } from "uuid";
+import SpinnerWrapper from '../shared/SpinnerWrapper';
 
 // Styles
 const pageTitle = css`
@@ -92,22 +93,7 @@ const Services = ( { state, actions, libraries } ) =>
 
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
-
-  const [ services, setServices ] = useState( [] );
-
-  const loadServices = async () =>
-  {
-    const serviceTaxonomyRequest = await libraries.source.api.get( {
-      endpoint: `/wp/v2/servicios`
-    } );
-    const response = await serviceTaxonomyRequest.json();
-    setServices( response )
-  }
-
-  useEffect( async () =>
-  {
-    loadServices()
-  }, [] );
+  const services = state.source.get( `/categories/${ state.theme.services }/` ).items;
 
   return data.isReady ? (
     <>
@@ -133,7 +119,11 @@ const Services = ( { state, actions, libraries } ) =>
         <Block>
           <Container>
             <GridServicesWrapper>
-              { services.map( service => <ServiceItem key={ uuid_v4() } title={ service.name } data={ service.acf } /> ) }
+              {
+                services
+                  ? services.map( service => <ServiceItem key={ uuid_v4() } title={ service.name } data={ service.acf } /> )
+                  : <SpinnerWrapper />
+              }
             </GridServicesWrapper>
           </Container>
         </Block>

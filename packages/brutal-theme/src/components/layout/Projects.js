@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { styled, connect } from 'frontity';
 import Container from '../layout/Container';
 import GridRow from './GridRow';
-import { getMediaUrl } from '../utils/images';
 import { v4 as uuid_v4 } from "uuid";
 import Title from '../shared/Title';
 import Block from '../shared/Block';
@@ -11,26 +10,18 @@ const Grid = styled.div`
   margin: 1vh 0 5vh;
 `;
 
-const Projects = ( { state, actions } ) =>
+const Projects = ( { state } ) =>
 {
-  const [ dataProjects, setDataProjects ] = useState();
-
   const data = state.source.get( state.router.link );
   const gridRowData = state.source[ data.type ][ data.id ].acf.grid_row;
   const rows = Object.values( gridRowData )
-  const rowFetch = async () =>
+  const dataProjects = state.source.get( `/projectsdata/${ state.theme.projects }/` ).items;
+
+  const getMediaDetails = ( data, id ) =>
   {
-    await actions.source.fetch( "/proyectos" )
-    const projectsBag = state.source.proyectos
-
-    for ( const project in projectsBag ) {
-      const projectURLimg = getMediaUrl( state, projectsBag[ project ], 1000 )
-      projectsBag[ project ].cover_img = projectURLimg
-    }
-    setDataProjects( projectsBag )
+    const mediaDetails = data.find( media => media.id === id );
+    return mediaDetails;
   }
-
-  useEffect( async () => rowFetch(), [] );
 
   return (
     <section className="projects-grid">
@@ -45,9 +36,9 @@ const Projects = ( { state, actions } ) =>
                 <GridRow
                   key={ uuid_v4() }
                   bigRight={ row.acf_fc_layout === "big_right" ? true : false }
-                  big={ dataProjects[ row.id_big ] }
-                  bottom={ dataProjects[ row.id_bottom ] }
-                  top={ dataProjects[ row.id_top ] }
+                  big={ getMediaDetails( dataProjects, row.id_big ) }
+                  bottom={ getMediaDetails( dataProjects, row.id_bottom ) }
+                  top={ getMediaDetails( dataProjects, row.id_top ) }
                 />
               )
             } ) }

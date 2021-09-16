@@ -9,6 +9,7 @@ import { mq } from '../../assets/styles/mediaqueries';
 import ArrowLink from '../shared/ArrowLink';
 import { theme } from '../../assets/styles/theme';
 import { Col, Row } from 'styled-bootstrap-grid';
+import SpinnerWrapper from '../shared/SpinnerWrapper';
 
 
 // STYLES

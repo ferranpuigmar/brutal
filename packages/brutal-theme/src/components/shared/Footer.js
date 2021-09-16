@@ -4,7 +4,7 @@ import Container from '../layout/Container';
 import { theme_colors, breakpoints } from '../../assets/styles/variables'
 import FooterText from './FooterText';
 
-const FooterColor = styled.div`
+const FooterColor = styled.footer`
   .black-back {
     background-color: ${ theme_colors[ "black" ] };
     padding: 5vh 0;
@@ -27,7 +27,18 @@ const FooterTextStyle = styled.div`
     margin-right: 6vw;
     letter-spacing: 1px;
     margin-top: 3vh;
-    a { text-decoration: none }
+    color: ${ ( { blackBackground } ) => blackBackground ? `${ theme_colors.white }` : `${ theme_colors.black }` };;
+    line-height: 2.5rem;
+   
+    .footer__text-title {
+      font-size: 1.6rem; 
+    }
+    .footer__text-text a {
+      color: ${ ( { blackBackground } ) => blackBackground ? `${ theme_colors.white }` : `${ theme_colors.black }` };;
+      text-decoration: none;
+      font-size: 1.6rem; 
+    }
+
   }
   
   @media (max-width: ${ breakpoints[ "md" ] }px) {
@@ -35,8 +46,8 @@ const FooterTextStyle = styled.div`
   }
 `;
 
-const Footer = ( { state, blackBackground } ) =>
-{
+const Footer = ( { state, blackBackground, footerFields={footerFields}  } ) => {
+  
   const logo = state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf;
 
   return (
@@ -49,8 +60,8 @@ const Footer = ( { state, blackBackground } ) =>
             <img src={ blackBackground ? logo.logo_white : logo.logo_black } className="logo" />
           </FooterLogo>
 
-          <FooterTextStyle className="footer__text">
-            <FooterText blackBackground={ blackBackground } textsize={ "1.6rem" } titlelevel={ 5 } />
+          <FooterTextStyle blackBackground={blackBackground}>
+            <FooterText footerFields={footerFields}  blackBackground={ blackBackground } textsize={ "1.6rem" } titlelevel={ 5 } />
           </FooterTextStyle>
 
         </Container>

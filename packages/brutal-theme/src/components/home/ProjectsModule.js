@@ -1,5 +1,5 @@
 import { connect } from 'frontity'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Row } from 'styled-bootstrap-grid';
 import { css, cx } from '@emotion/css'
 import { theme } from '../../assets/styles/theme';
@@ -72,26 +72,13 @@ const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
 {
 
   const { link_text, projects } = rest;
-  const [ dataProjects, setDataProjects ] = useState( [] );
-
-
-
-  const loadProjects = async () =>
+  const stateProjects = state.source.get( `/projectsdata/${ state.theme.projects }/` ).items;
+  const availableProjects = stateProjects.filter( project => projects.includes( project.id ) )
+  const dataProjects = availableProjects.map( ( project ) =>
   {
-    await actions.source.fetch( "/proyectos" );
-    const availableProjects = Object.values( state?.source?.proyectos ).filter( project => projects.includes( project.id ) )
-    const availableListProjects = availableProjects.map( ( project ) =>
-    {
-      const url = getMediaUrl( state, project, 1600 );
-      return ( { ...project, project_media_url: url } )
-    } )
-    setDataProjects( availableListProjects )
-  }
-
-  useEffect( async () =>
-  {
-    loadProjects()
-  }, [] );
+    const url = getMediaUrl( project, 1600 );
+    return ( { ...project, project_media_url: url } )
+  } )
 
   return dataProjects.map( ( project, index ) =>
     <Link key={ uuid_v4() } className={ cx( projectLink ) } link={ project.link }>

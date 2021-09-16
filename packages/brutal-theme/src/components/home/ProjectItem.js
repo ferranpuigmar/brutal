@@ -31,13 +31,14 @@ const block = css`
   background-repeat: no-repeat;
   background: rgba( ${ hexToRgb( theme.colors.primaryColor ) }, 0.5);
   min-height: 329px!important;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
 
   ${ mq[ "md" ] } {
+    display: flex;
     background: ${ theme.colors.white };
     padding: ${ tabletPaddingBlock }!important;
   }

@@ -6,7 +6,7 @@ import { Row, Col } from 'styled-bootstrap-grid';
 import { css, cx } from '@emotion/css'
 import { spacing } from '../../assets/styles/spacing';
 import PageWrapper from '../shared/PageWrapper';
-import selectArrow from '../../assets/images/select_arrow.svg'
+import selectArrow from '../../assets/images/select_arrow.svg';
 import { mq } from '../../assets/styles/mediaqueries';
 import { theme } from '../../assets/styles/theme';
 
