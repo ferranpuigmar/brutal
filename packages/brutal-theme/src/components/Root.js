@@ -64,8 +64,8 @@ const Root = ( { state } ) =>
             <Services when={ data.isPage && data.link === '/servicios/' } />
             <Contact when={ data.isPage && data.link === '/contactar/' } />
             <About when={ data.isPage && data.link === '/sobre-nosotros/' } />
-            {/* <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } /> */}
-            <Error404 when={ data.isPostType && data.link === "/listado-proyectos/" } />
+            <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } />
+            <Error404 when={ data.is404 } />
           </Switch>
         </Main>
         <Footer footerFields={footerFields} blackBackground={ blackBackground } />
