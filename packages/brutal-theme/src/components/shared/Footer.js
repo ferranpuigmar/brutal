@@ -28,7 +28,6 @@ const FooterTextStyle = styled.div`
     letter-spacing: 1px;
     margin-top: 3vh;
     color: ${ ( { blackBackground } ) => blackBackground ? `${ theme_colors.white }` : `${ theme_colors.black }` };;
-    letter-spacing: 1px;
     line-height: 2.5rem;
    
     .footer__text-title {

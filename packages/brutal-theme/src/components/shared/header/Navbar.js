@@ -46,7 +46,7 @@ const Header = styled.header`
   }
 `;
 
-const Navbar = ( { scroll, screenWidth } ) =>
+const Navbar = ( { scroll, screenWidth, footerFields } ) =>
 {
   return (
     <Header>
@@ -54,7 +54,7 @@ const Navbar = ( { scroll, screenWidth } ) =>
         <Container>
           <Nav scrollSmall={ scroll > 40 ? true : false }>
             <NavLogo />
-            <NavBurger screenWidth={screenWidth}/>
+            <NavBurger footerFields={footerFields} screenWidth={screenWidth}/>
           </Nav>
         </Container>
       </div>

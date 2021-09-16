@@ -86,7 +86,7 @@ const NavStyle = styled.div`
 `;
 
 
-const Burger = ({ screenWidth }) =>
+const Burger = ({ screenWidth, footerFields }) =>
 { 
   const [ open, setOpen ] = useState()
 
@@ -114,6 +114,7 @@ const Burger = ({ screenWidth }) =>
           <div className={handelBurgerClass(open)}/>
       </BurgerIcon>
       <NavMenu 
+        footerFields={footerFields}
         screenWidth={screenWidth} 
         open={ open?.status } 
         close={ screenWidth < breakpoints.md? () => setOpen({status:!open.status}) : () => setOpen({status:open.status})} 

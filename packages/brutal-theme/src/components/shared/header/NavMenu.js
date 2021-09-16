@@ -7,6 +7,7 @@ import { css, cx } from '@emotion/css'
 import { theme_colors, breakpoints } from '../../../assets/styles/variables'
 import ArrowLink from '../ArrowLink';
 import { theme } from '../../../assets/styles/theme';
+import FooterText from '../FooterText';
 
 const Ul = styled.ul`
   list-style: none;
@@ -89,7 +90,31 @@ const Ul = styled.ul`
       ${'' /* overflow: hidden;  */}
     }
     
-    .navigation__footer { display: flex }
+    .navigation__footer { 
+      display: flex;
+   
+      .t1 {    
+        display: none;
+      }
+    }
+
+    .footer__text {
+      color: ${theme_colors.white} ;
+      letter-spacing: 1px;
+      line-height: 2rem;
+    
+      .footer__text-title { font-size: 1.2rem; }
+      .footer__text-text a {
+        color: ${theme_colors.white} ;
+        text-decoration: none;
+        font-size: 1.2rem; 
+      }
+
+      @media (max-width: ${ breakpoints[ "sm" ] }px) {
+        .footer__text-title  { font-size: 1.1rem; }
+        .footer__text-text a { font-size: 1.1rem; }
+      }  
+    }
   }
 `;
 
@@ -121,8 +146,8 @@ const whiteLink = css`
     }
 `;
 
-const NavMenu = ( { state, open, close, screenWidth } ) => {
-  
+const NavMenu = ( { state, open, close, screenWidth, footerFields } ) => {
+  console.log(`statedddd`, state)
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
   const desktopWidth = screenWidth >= breakpoints.md ? true : false;
 
@@ -146,15 +171,14 @@ const NavMenu = ( { state, open, close, screenWidth } ) => {
       })}
           
       <NavFooter className="navigation__footer">
-        <div>
+        {/* <div>
           <Title level={ 5 } className="navigation__footer-title">ENCUÉNTRANOS</Title>
           <Text text={ "hola@esmuybrutal.com" } size={ "1.2rem" } className="navigation__footer-text" />
-        </div>
-        <div>
-          <Title level={ 5 } className="navigation__footer-title">SIGUENOS</Title>
-          <Link link="https://www.instagram.com/esmuybrutal/">@esmuybrutal</Link>
-        </div>
+        </div> */}
+       
+        <FooterText footerFields={footerFields}/>
       </NavFooter>
+
     </Ul>
   )
 }
