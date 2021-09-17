@@ -29,11 +29,13 @@ const Main = styled.main`
 
 const Root = ( { state } ) =>
 {
+  console.log("renderizo")
   const data = state.source.get( state.router.link );
+  // console.log(`data`, data)
   const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
   const blackBackground = objPageIDs?.acf.footer_default_black;
 
-  //como hacer esta llamada una sola vez y no cada vez que refresca el componente??
+  //fERRAN!!!como hacer esta llamada una sola vez y no cada vez que refresca el componente??
   const footerFields =  state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields;
   
   const [ lineY, setLineY ] = useState( 0 );

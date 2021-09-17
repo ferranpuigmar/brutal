@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from 'frontity';
 import { theme } from '../../assets/styles/theme';
-import { cx } from '@emotion/css'
+import { cx, css } from '@emotion/css'
 import { mq } from '../../assets/styles/mediaqueries';
 import { spacing } from '../../assets/styles/spacing';
 
@@ -130,7 +130,9 @@ const ArrowLink = ( { link, children, className, variant, type, isAnchor = true 
     <ArrowWrapper className={ cx( "arrow-element", className ) } variant={ variant }>
       {
         isAnchor
-          ? <ArrowAnchorWrapper type={ type } href={ link } ><ArrowLinkContent variant={ variant } children={ children } /></ArrowAnchorWrapper>
+          ? <ArrowAnchorWrapper type={ type } link={ link } >
+              <ArrowLinkContent variant={ variant } children={ children } />
+            </ArrowAnchorWrapper>
           : <><ArrowLinkContent variant={ variant } children={ children } /></>
       }
     </ArrowWrapper>
