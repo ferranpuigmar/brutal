@@ -18,6 +18,7 @@ import Projects from './layout/Projects';
 import { mq } from '../assets/styles/variables';
 import ScreenSizeDetector from 'screen-size-detector'
 import Error404 from './layout/Error404';
+import Loading from './shared/Loading';
 
 const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
 
@@ -38,12 +39,19 @@ const Root = ( { state } ) =>
 
   const [ lineY, setLineY ] = useState( 0 );
   const [ screenWidth, setScreenWidth ] = useState( screen.width )
-
+  const [ isFetching, setIsFetching ] = useState( true )
   useEffect( () =>
   {
     window.onscroll = () => setLineY( window.pageYOffset )
     window.onresize = () => setScreenWidth( screen.width )
   }, [] )
+
+  useEffect( () =>
+  {
+    if ( !data.isFetching ) {
+      setIsFetching( false )
+    }
+  }, [ data.isFetching ] )
 
   return (
     <>
@@ -56,6 +64,7 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
+        { data.isFetching && !data.isReady && isFetching && <Loading /> }
         <Navbar footerFields={ footerFields } screenWidth={ screenWidth } scroll={ lineY } />
         <Main>
           <Switch>
@@ -64,8 +73,8 @@ const Root = ( { state } ) =>
             <Services when={ data.isPage && data.link === '/servicios/' } />
             <Contact when={ data.isPage && data.link === '/contactar/' } />
             <About when={ data.isPage && data.link === '/sobre-nosotros/' } />
-            {/* <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } /> */ }
-            <Error404 when={ data.isPostType && data.link === "/listado-proyectos/" } />
+            <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } />
+            <Error404 when={ data.is404 } />
           </Switch>
         </Main>
         <Footer footerFields={ footerFields } blackBackground={ blackBackground } />

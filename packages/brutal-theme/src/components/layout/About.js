@@ -9,7 +9,6 @@ import { mq } from '../../assets/styles/mediaqueries';
 import ArrowLink from '../shared/ArrowLink';
 import { theme } from '../../assets/styles/theme';
 import { Col, Row } from 'styled-bootstrap-grid';
-import SpinnerWrapper from '../shared/SpinnerWrapper';
 
 
 // STYLES
@@ -96,7 +95,7 @@ const About = ( { state, libraries } ) =>
 
   const { title, description, button_text, title_bottom } = post.acf;
 
-  return data.isReady ? (
+  return (
     <PageWrapper>
       <Container>
         <Row>
@@ -110,7 +109,7 @@ const About = ( { state, libraries } ) =>
         </Row>
       </Container>
     </PageWrapper>
-  ) : null;
+  );
 }
 
 export default connect( About );

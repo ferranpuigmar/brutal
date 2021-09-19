@@ -92,7 +92,7 @@ const Project = ( { state, actions, libraries, params } ) =>
 
   renderServices( post );
 
-  return data.isReady ? (
+  return (
     <PageWrapper className={ cx( pageWrapperStyle ) }>
       <Container className="projectpage">
         <Title className={ cx( projectTitle ) } level={ 1 }>{ post.title.rendered }</Title>
@@ -119,7 +119,7 @@ const Project = ( { state, actions, libraries, params } ) =>
       <OtherProjects currentProject={ data.id } />
 
     </PageWrapper>
-  ) : null;
+  );
 }
 
 // SMALL COMPONENTS
