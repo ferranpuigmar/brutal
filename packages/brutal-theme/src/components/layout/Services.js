@@ -11,7 +11,6 @@ import Block from '../shared/Block';
 import ServiceItem from '../services/ServiceItem';
 import { renderModule } from '../utils/renderModule';
 import { v4 as uuid_v4 } from "uuid";
-import SpinnerWrapper from '../shared/SpinnerWrapper';
 
 // Styles
 const pageTitle = css`
@@ -95,7 +94,7 @@ const Services = ( { state, actions, libraries } ) =>
   const Html2React = libraries.html2react.Component;
   const services = state.source.get( `/categories/${ state.theme.services }/` ).items;
 
-  return data.isReady ? (
+  return (
     <>
       <Block>
         <Container>
@@ -120,9 +119,7 @@ const Services = ( { state, actions, libraries } ) =>
           <Container>
             <GridServicesWrapper>
               {
-                services
-                  ? services.map( service => <ServiceItem key={ uuid_v4() } title={ service.name } data={ service.acf } /> )
-                  : <SpinnerWrapper />
+                services.map( service => <ServiceItem key={ uuid_v4() } title={ service.name } data={ service.acf } /> )
               }
             </GridServicesWrapper>
           </Container>
@@ -130,7 +127,7 @@ const Services = ( { state, actions, libraries } ) =>
       </div>
       { renderModule( 'contact_module', post?.acf ) }
     </>
-  ) : null;
+  );
 }
 
 export default connect( Services );

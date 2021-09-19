@@ -6,8 +6,8 @@ const Home = ( { state } ) =>
 {
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
-
-  return data.isReady ? (
+  console.log( 'data: ', data )
+  return (
     <>
       { renderModule( 'hero_home_module', post?.acf ) }
       <section id="buildingBrands" >
@@ -24,7 +24,7 @@ const Home = ( { state } ) =>
         { renderModule( 'services_module', post?.acf ) }
       </section>
     </>
-  ) : null;
+  );
 }
 
 export default connect( Home );
