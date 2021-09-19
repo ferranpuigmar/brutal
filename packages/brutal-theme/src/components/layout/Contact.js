@@ -9,6 +9,7 @@ import PageWrapper from '../shared/PageWrapper';
 import selectArrow from '../../assets/images/select_arrow.svg';
 import { mq } from '../../assets/styles/mediaqueries';
 import { theme } from '../../assets/styles/theme';
+import Loading from '../shared/Loading';
 
 
 // STYLES
@@ -177,7 +178,7 @@ const Contact = ( { state, libraries } ) =>
         </Row>
       </Container>
     </PageWrapper>
-  ) : null;
+  ) : <Loading />;
 }
 
 export default connect( Contact );
