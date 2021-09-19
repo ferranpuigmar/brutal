@@ -11,7 +11,6 @@ import Block from '../shared/Block';
 import ServiceItem from '../services/ServiceItem';
 import { renderModule } from '../utils/renderModule';
 import { v4 as uuid_v4 } from "uuid";
-import SpinnerWrapper from '../shared/SpinnerWrapper';
 import Loading from '../shared/Loading';
 
 // Styles
@@ -85,6 +84,7 @@ const Services = ( { state, actions, libraries } ) =>
 {
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
+
   const {
     col_left_text,
     col_right_text,
@@ -123,7 +123,7 @@ const Services = ( { state, actions, libraries } ) =>
               {
                 services
                   ? services.map( service => <ServiceItem key={ uuid_v4() } title={ service.name } data={ service.acf } /> )
-                  : <SpinnerWrapper />
+                  : <Loading />
               }
             </GridServicesWrapper>
           </Container>

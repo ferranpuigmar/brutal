@@ -1,9 +1,14 @@
+import { connect } from 'frontity';
 import React from 'react'
+import Loading from '../shared/Loading';
 import { renderModule } from '../utils/renderModule';
 
-const Home = ( { post } ) =>
+const Home = ( { state } ) =>
 {
-  return (
+  const data = state.source.get( state.router.link );
+  const post = state.source[ data.type ][ data.id ];
+
+  return data.isReady ? (
     <>
       { renderModule( 'hero_home_module', post?.acf ) }
       <section id="buildingBrands" >
@@ -20,7 +25,7 @@ const Home = ( { post } ) =>
         { renderModule( 'services_module', post?.acf ) }
       </section>
     </>
-  );
+  ) : <Loading />;
 }
 
-export default Home;
+export default connect( Home );

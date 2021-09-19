@@ -172,8 +172,8 @@ const Contact = ( { state, libraries } ) =>
       <Container>
         <Title className={ cx( sectionTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
         <Row>
-          <Col lg={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
-          <Col lg={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
+          <Col xl={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
+          <Col xl={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
         </Row>
       </Container>
     </PageWrapper>

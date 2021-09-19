@@ -64,10 +64,10 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
-        { data.isFetching && !data.isReady && isFetching && <Loading /> }
         <Navbar footerFields={ footerFields } screenWidth={ screenWidth } scroll={ lineY } />
         <Main>
           <Switch>
+            <Loading when={ data.isFetching } />
             <Home when={ data.isHome } />
             <Project when={ !data.isPage && data.isPostType && data.type === "proyectos" } />
             <Services when={ data.isPage && data.link === '/servicios/' } />
