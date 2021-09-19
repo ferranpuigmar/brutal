@@ -1,12 +1,8 @@
-import { connect } from 'frontity';
 import React from 'react'
 import { renderModule } from '../utils/renderModule';
 
-const Home = ( { state } ) =>
+const Home = ( { post } ) =>
 {
-  const data = state.source.get( state.router.link );
-  const post = state.source[ data.type ][ data.id ];
-  console.log( 'data: ', data )
   return (
     <>
       { renderModule( 'hero_home_module', post?.acf ) }
@@ -27,4 +23,4 @@ const Home = ( { state } ) =>
   );
 }
 
-export default connect( Home );
+export default Home;

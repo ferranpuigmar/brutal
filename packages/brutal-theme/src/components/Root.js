@@ -42,7 +42,6 @@ const Root = ( { state } ) =>
   const [ lineY, setLineY ] = useState( 0 );
   const [ screenWidth, setScreenWidth ] = useState( screen.width )
   const [ isFetching, setIsFetching ] = useState( true )
-
   useEffect( () =>
   {
     window.onscroll = () => setLineY( window.pageYOffset )

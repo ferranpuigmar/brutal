@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${ theme.colors.black };
 `
 
 const loadingAnimation = keyframes`
