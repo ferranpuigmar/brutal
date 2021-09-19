@@ -34,15 +34,15 @@ const Root = ( { state } ) =>
   const blackBackground = objPageIDs?.acf.footer_default_black;
 
   //como hacer esta llamada una sola vez y no cada vez que refresca el componente??
-  const footerFields =  state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields;
-  
+  const footerFields = state.source.get( `/globaloptions/${ state.theme.globalOptions }/` )?.acf?.footer_fields;
+
   const [ lineY, setLineY ] = useState( 0 );
-  const [ screenWidth, setScreenWidth ] = useState(screen.width)
-  
- 
-  useEffect( () =>{
+  const [ screenWidth, setScreenWidth ] = useState( screen.width )
+
+  useEffect( () =>
+  {
     window.onscroll = () => setLineY( window.pageYOffset )
-    window.onresize = () => setScreenWidth(screen.width)
+    window.onresize = () => setScreenWidth( screen.width )
   }, [] )
 
   return (
@@ -56,7 +56,7 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
-        <Navbar footerFields={footerFields} screenWidth={screenWidth} scroll={ lineY } />
+        <Navbar footerFields={ footerFields } screenWidth={ screenWidth } scroll={ lineY } />
         <Main>
           <Switch>
             <Home when={ data.isHome } />
@@ -64,11 +64,11 @@ const Root = ( { state } ) =>
             <Services when={ data.isPage && data.link === '/servicios/' } />
             <Contact when={ data.isPage && data.link === '/contactar/' } />
             <About when={ data.isPage && data.link === '/sobre-nosotros/' } />
-            {/* <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } /> */}
+            {/* <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } /> */ }
             <Error404 when={ data.isPostType && data.link === "/listado-proyectos/" } />
           </Switch>
         </Main>
-        <Footer footerFields={footerFields} blackBackground={ blackBackground } />
+        <Footer footerFields={ footerFields } blackBackground={ blackBackground } />
       </GridThemeProvider>
     </>
   );

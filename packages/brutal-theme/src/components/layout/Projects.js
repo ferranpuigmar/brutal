@@ -23,7 +23,7 @@ const Projects = ( { state } ) =>
     return mediaDetails;
   }
 
-  return (
+  return data.isReady ? (
     <section className="projects-grid">
       <Block>
 
@@ -47,7 +47,7 @@ const Projects = ( { state } ) =>
       </Block>
 
     </section>
-  )
+  ) : <p>Cargando...</p>
 }
 
 export default connect( Projects )
