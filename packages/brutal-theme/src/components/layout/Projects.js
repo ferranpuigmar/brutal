@@ -5,6 +5,7 @@ import GridRow from './GridRow';
 import { v4 as uuid_v4 } from "uuid";
 import Title from '../shared/Title';
 import Block from '../shared/Block';
+import Loading from '../shared/Loading';
 
 const Grid = styled.div`
   margin: 1vh 0 5vh;
@@ -23,7 +24,7 @@ const Projects = ( { state } ) =>
     return mediaDetails;
   }
 
-  return (
+  return data.isReady ? (
     <section className="projects-grid">
       <Block>
 
@@ -47,7 +48,7 @@ const Projects = ( { state } ) =>
       </Block>
 
     </section>
-  )
+  ) : <Loading />;
 }
 
 export default connect( Projects )

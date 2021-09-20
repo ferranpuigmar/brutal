@@ -1,5 +1,6 @@
 import { connect } from 'frontity';
 import React from 'react'
+import Loading from '../shared/Loading';
 import { renderModule } from '../utils/renderModule';
 
 const Home = ( { state } ) =>
@@ -24,7 +25,7 @@ const Home = ( { state } ) =>
         { renderModule( 'services_module', post?.acf ) }
       </section>
     </>
-  ) : null;
+  ) : <Loading />;
 }
 
 export default connect( Home );

@@ -18,6 +18,7 @@ import Projects from './layout/Projects';
 import { mq, breakpoints } from '../assets/styles/variables';
 import ScreenSizeDetector from 'screen-size-detector'
 import Error404 from './layout/Error404';
+import Loading from './shared/Loading';
 
 const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
 
@@ -27,8 +28,8 @@ const Main = styled.main`
   }
 `
 
-const Root = ( { state } ) => {
-
+const Root = ( { state } ) =>
+{
   const data = state.source.get( state.router.link );
   const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
   const blackBackground = objPageIDs?.acf.footer_default_black;
@@ -36,12 +37,20 @@ const Root = ( { state } ) => {
   const [ lineY, setLineY ] = useState( 0 );
   const [ mobilWidth, setMovilWidth ] = useState(true);
   const [ footerFields, setFooterFields ] = useState();
+  const [ isFetching, setIsFetching ] = useState( true )
   
   useEffect( () =>{
     window.onscroll = () => setLineY( window.pageYOffset ) 
     window.onresize = () => screen.width < breakpoints.md ? setMovilWidth(true) : setMovilWidth(false)
     !footerFields && setFooterFields (state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields)
   }, [] )
+
+  useEffect( () =>
+  {
+    if ( !data.isFetching ) {
+      setIsFetching( false )
+    }
+  }, [ data.isFetching ] )
 
   return (
     <>
@@ -61,6 +70,7 @@ const Root = ( { state } ) => {
         />
         <Main>
           <Switch>
+            <Loading when={ data.isFetching } />
             <Home when={ data.isHome } />
             <Project when={ !data.isPage && data.isPostType && data.type === "proyectos" } />
             <Services when={ data.isPage && data.link === '/servicios/' } />

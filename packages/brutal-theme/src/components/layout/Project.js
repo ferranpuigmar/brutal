@@ -11,6 +11,7 @@ import { css, cx } from '@emotion/css'
 import OtherProjects from '../project/OtherProjects';
 import { v4 as uuid_v4 } from "uuid";
 import PageWrapper from '../shared/PageWrapper';
+import Loading from '../shared/Loading';
 
 
 // STYLES
@@ -119,7 +120,7 @@ const Project = ( { state, actions, libraries, params } ) =>
       <OtherProjects currentProject={ data.id } />
 
     </PageWrapper>
-  ) : null;
+  ) : <Loading />;
 }
 
 // SMALL COMPONENTS
