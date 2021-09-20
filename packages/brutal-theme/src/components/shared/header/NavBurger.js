@@ -28,7 +28,7 @@ const bottomClose = keyframes`
 `;
 
 const BurgerIcon = styled.div`
-  width: 3rem;
+  width: 3.5rem;
   height: 3rem;
   position: relative;
   top: 3.6rem;
@@ -39,9 +39,10 @@ const BurgerIcon = styled.div`
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
-  }
+
+  
     .line {
-      width: 3rem;
+      ${'' /* width: 3rem; */}
       width: 3rem;
       height: 0.25rem;
       background-color: ${ theme.colors.white };
@@ -77,6 +78,12 @@ const BurgerIcon = styled.div`
         transform: translateY(0) rotate(0);
       } 
     }
+    :hover {
+      .line {
+        &:nth-of-type(1) { transform: translateY(-.2rem); } 
+        &:nth-of-type(3) { transform: translateY(0.2rem); }
+      }
+    }
   }   
 `;
 
@@ -86,26 +93,27 @@ const NavStyle = styled.div`
 `;
 
 
-const Burger = ({ screenWidth, footerFields }) =>
+const Burger = ({ screenWidth, mobilWidth, footerFields }) =>
 { 
   const [ open, setOpen ] = useState()
-
+  
   const handleAnimation = () => {
     
     console.log(`window`, window)
     const elem = document.querySelector('html');
     elem.style.overflow = open?.status ? "visible" : "hidden";
-    setOpen( !open ? {status:true} : {status:!open.status}  )
+    setOpen( !open ? {status:true} : {status:!open.status} )
+    console.log(`open2`, open.status)
   } 
   const handelBurgerClass = (open) => {
     return !open ? "line" : open.status? "line open" : "line close";
   }   
   
-  if (screenWidth > breakpoints.md) {
+  if (!mobilWidth) {
     const elem = document.querySelector('html');
     elem.style.overflow = "visible" ;
   }
-
+  
   return (
     <NavStyle>
       <BurgerIcon open={ open }  onClick={handleAnimation}>
@@ -115,9 +123,9 @@ const Burger = ({ screenWidth, footerFields }) =>
       </BurgerIcon>
       <NavMenu 
         footerFields={footerFields}
-        screenWidth={screenWidth} 
+        mobilWidth={mobilWidth}
         open={ open?.status } 
-        close={ screenWidth < breakpoints.md? () => setOpen({status:!open.status}) : () => setOpen({status:open.status})} 
+        close={ () => setOpen({status:!open.status})} 
       />
     </NavStyle>
   )

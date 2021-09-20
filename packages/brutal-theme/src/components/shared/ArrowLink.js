@@ -51,6 +51,7 @@ const ArrowAnchorWrapper = styled.a`
   text-decoration: none;
   ${ props => handleBtnStyle( props.type ) };
   color: ${ theme.colors.black }!important;
+  ${'' /* color: ${ theme.colors.black }!important; */}
   display: flex;
   justify-content: flex-start;
   align-items: center;

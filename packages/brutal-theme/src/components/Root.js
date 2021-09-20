@@ -15,7 +15,7 @@ import { styled } from 'frontity';
 import { spacing } from '../assets/styles/spacing';
 import About from './layout/About';
 import Projects from './layout/Projects';
-import { mq } from '../assets/styles/variables';
+import { mq, breakpoints } from '../assets/styles/variables';
 import ScreenSizeDetector from 'screen-size-detector'
 import Error404 from './layout/Error404';
 
@@ -27,24 +27,20 @@ const Main = styled.main`
   }
 `
 
-const Root = ( { state } ) =>
-{
-  console.log("renderizo")
+const Root = ( { state } ) => {
+
   const data = state.source.get( state.router.link );
-  // console.log(`data`, data)
   const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
   const blackBackground = objPageIDs?.acf.footer_default_black;
 
-  //fERRAN!!!como hacer esta llamada una sola vez y no cada vez que refresca el componente??
-  const footerFields =  state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields;
-  
   const [ lineY, setLineY ] = useState( 0 );
-  const [ screenWidth, setScreenWidth ] = useState(screen.width)
+  const [ mobilWidth, setMovilWidth ] = useState(true);
+  const [ footerFields, setFooterFields ] = useState();
   
- 
   useEffect( () =>{
-    window.onscroll = () => setLineY( window.pageYOffset )
-    window.onresize = () => setScreenWidth(screen.width)
+    window.onscroll = () => setLineY( window.pageYOffset ) 
+    window.onresize = () => screen.width < breakpoints.md ? setMovilWidth(true) : setMovilWidth(false)
+    !footerFields && setFooterFields (state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields)
   }, [] )
 
   return (
@@ -58,7 +54,11 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
-        <Navbar footerFields={footerFields} screenWidth={screenWidth} scroll={ lineY } />
+        <Navbar 
+          mobilWidth={ mobilWidth } 
+          scroll={ lineY }   
+          footerFields={ footerFields ? footerFields : {} } 
+        />
         <Main>
           <Switch>
             <Home when={ data.isHome } />
@@ -70,7 +70,7 @@ const Root = ( { state } ) =>
             <Error404 when={ data.is404 } />
           </Switch>
         </Main>
-        <Footer footerFields={footerFields} blackBackground={ blackBackground } />
+        <Footer footerFields={footerFields ? footerFields : {}} blackBackground={ blackBackground } />
       </GridThemeProvider>
     </>
   );

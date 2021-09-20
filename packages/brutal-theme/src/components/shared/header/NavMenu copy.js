@@ -11,18 +11,12 @@ import FooterText from '../FooterText';
 
 
 const menuDropDown = keyframes`
-  0%  { opacity: 0; }
- 10%  { transform: translateY(0); }
- 20%  { opacity: 1; }
-100%  { transform: translateY(-100%); }
+0%   { transform: translateY(0); }
+100% { transform: translateY(-100%); }
 `;
-
 const menuLinkpDown = keyframes`
-  0%  { transform: translate3d(0, -100%, 0); 
-        opacity: 0; }
- 10%  { transform: translate3d(0, -100%, 0); 
-        opacity: 1; }
-100%  { transform: translate3d(0, 0, 0);}
+ 0% { transform: translate3d(0, -111%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 `;
 
 
@@ -30,7 +24,7 @@ const Ul = styled.ul`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
-  text-transform: uppercase;
+  ${'' /* text-transform: uppercase; */}
   z-index: 10;
 
   li { 
@@ -53,7 +47,7 @@ const Ul = styled.ul`
       }
   }
 
-  .arrow-element:hover {color: ${theme_colors.primaryColor};}
+  .arrow-element:hover {color: ${theme_colors.primaryColor};} //no funtiona
   
   .navigation__footer { display: none }
 
@@ -69,51 +63,70 @@ const Ul = styled.ul`
     height: 100vh;
     width: 100vw;
     padding-top: 12vh;
-    transition: transform 0.5s ease-in-out;
-    transition-delay: .1s;
+    transition: transform 0.2s ease-in-out;
     transform: ${ ( { open } ) => open ? 'translateY(0)' : 'translateY(-100%)' };
     text-align: center;
 
-    li { margin: 3.2vh 0;  }
-
-    .navigation__link-box {
-      height: 100%;
+      ${'' /* overflow: hidden; */}
+    ${'' /* .box {
+      height: 20px;
       overflow: hidden;
-      position: relative;
-      width: 100%;
-    }
+    } */}
 
-    .navigation__link-box div {
-      animation: ${menuLinkpDown} 0.8s;
-      animation-fill-mode: forwards;
-      transform: translate(200%, -100%);
-    }
-
-    .navigation__link-box.box1 div { animation-delay: .75s; } 
-    .navigation__link-box.box2 div { animation-delay: .80s; } 
-    .navigation__link-box.box3 div { animation-delay: .70s; } 
-    .navigation__link-box.box4 div { animation-delay: .85s; } 
-
-    .navigation__link-box.box-footer div { animation-delay: 1.2s; }  
-
-    .navigation__link-box__close div {
-      opacity: 0;
-      animation: ${menuDropDown} 0.3s;
-
-      animation-delay: 1.2s;
-      animation-fill-mode: forwards;
-      transform: translate(-250%, 0);
-    }
-    .navigation__link { 
-      font-size: 2.6rem; 
-      letter-spacing: 0px;
-
-      @media (max-width: ${ breakpoints[ "sm" ] }px) {
-        font-size: 2.2rem; 
+    li {
+      ${'' /* display: block; */}
+      ${'' /* border: 2px solid green; */}
+      margin: auto 0; 
+      ${'' /* margin:  0;  */}
+      
+      a { 
+        
+        display: inline-block;
+        ${'' /* color: ${ theme_colors.white };  */}
+        ${'' /* position: relative;  */}
+        ${'' /* opacity: 0;  */}
       }
     }
+    .navigation__item{  
+      background-color: #000;
+ 
+      &:nth-of-type(1) {
+      background-color: #777;
+  
+        animation: ${menuLinkpDown} 5.5s;
+        animation-delay: .75s;
+        animation-fill-mode: forwards;
+        top: 0;
+        transform: translate(0, -100%);
 
-    //////////////////////////////////////////FOOTER-NAV
+      }
+      ${'' /* &:nth-of-type(2){       
+        transition: all 0.5s ease-in-out 1s; 
+        transform: ${ ({ open }) => open ? 'translateY(0)' : 'translateY(-200%)' };
+        opacity: ${ ({ open }) => open ? '1' : '-6.5' };
+        z-index: 30;
+      }
+      &:nth-of-type(3){
+        transition: all 0.5s ease-in-out 1s;        
+        transform: ${ ({ open }) => open ? 'translateY(0)' : 'translateY(-300%)' };
+        opacity: ${ ({ open }) => open ? '1' : '-6.5' };
+        z-index: 20;
+      }
+      &:nth-of-type(4){
+        transition: all 0.2s ease-in-out 1s; 
+        transform: ${ ({ open }) => open ? 'translateY(0)' : 'translateY(-400%)' };
+        opacity: ${ ({ open }) => open ? '1' : '-6.5' };
+        z-index: 10;
+      } */}
+      
+      
+    }
+    .navigation__link { 
+      font-size: 30px; 
+      letter-spacing: 2px;
+    }
+    
+    ${'' /* // footer del Nav ..............................................*/}
     .navigation__footer { 
       display: flex;
 
@@ -144,7 +157,7 @@ const Ul = styled.ul`
 `;
 
 const NavFooter = styled.div`
-  margin: 14vh 0 6vh;
+  margin: 15vh 0;
   text-align: left;
   text-transform: none;
   display: flex;
@@ -175,28 +188,43 @@ const NavMenu = ( { state, open, close, mobilWidth, footerFields } ) => {
   
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
 
-  console.log(`open----`, open)
+  console.log(`open----`,   open)
   return (
 
     <Ul open={ open }>
+      {/* { mobilWidth ?
+        <>
+        { items.map( (item,) => {
+        return (
+                <div className="set-link showAnchor">
+                  <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }> { item.title } </Link>                
+                  <div className="indent"></div>
+                </div>
+              
+        )}
+        </>
+      : */}
+
       { items.map( (item,index) => {
         return (
-          <li className="navigation__item" onClick={ close } key={ item.ID }>
-            {(items.length-1) === index && !mobilWidth ?   
-              <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
-                <ArrowLink className={"nav-arrow",cx(whiteLink)} isAnchor={false}>{ item.title }</ArrowLink>
-              </Link>
-              :              
-              <div className={ open ? `navigation__link-box box${index+1}` : "navigation__link-box__close"} >
-                <div className= "navigation__link-wrapper">
-                  <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }> { item.title } </Link>                
-                </div>
-              </div>
-            }
+          <li className="navigation__item" key={ item.ID }>
+
+          {/* <div className="navigation__item"> */}
+            <div className="nav__link-item" onClick={ close }>
+              {(items.length-1) === index && !mobilWidth ?   
+                <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
+                  <ArrowLink className={"nav-arrow",cx(whiteLink)} isAnchor={false}>{ item.title }</ArrowLink>
+                </Link>
+                :
+                <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }> { item.title } </Link>                
+              }
+            </div>       
+          {/* </div> */}
           </li>
         )
       })}
-      <NavFooter className={ open ? "navigation__footer navigation__link-box box-footer" : "navigation__footer navigation__link-box__close"}>
+          
+      <NavFooter className="navigation__footer">
         <FooterText footerFields={footerFields}/>
       </NavFooter>
     </Ul>
