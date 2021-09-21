@@ -12,7 +12,7 @@ import { mq } from '../../assets/styles/mediaqueries';
 
 // Styles
 const heroWrapper = css`
-  padding-top: ${ spacing[ 'pt-8' ] };
+  ${'' /* padding-top: ${ spacing[ 'pt-8' ] }; */}
 `;
 
 const heroTitle = css`
@@ -29,6 +29,7 @@ const heroTitle = css`
 
 const colHero = css`
   display: flex;
+  align-items: center;
 
   ${ mq[ "sm" ] } {
     align-items: center;
@@ -68,9 +69,9 @@ const HeroHomeModule = ( {
 
   return (
     <section id="hero">
-      <Block className={ heroWrapper } widthPadding={ true }>
+      <Block height={"92vh"} className={ heroWrapper } widthPadding={ true }>
         <Container>
-          <Row>
+          <Row >
             <Col md={ 7 } lg={ 7 } className={ cx( colHero ) }>
               <Title level={ 1 } className={ cx( heroTitle ) }><Html2React html={ text } /></Title>
             </Col>

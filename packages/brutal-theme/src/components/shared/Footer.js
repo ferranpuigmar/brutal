@@ -3,16 +3,45 @@ import React from 'react';
 import Container from '../layout/Container';
 import { theme_colors, breakpoints } from '../../assets/styles/variables'
 import FooterText from './FooterText';
+import { mq } from '../../assets/styles/mediaqueries';
 
 const FooterColor = styled.footer`
   .black-back {
     background-color: ${ theme_colors[ "black" ] };
-    padding: 5vh 0;
+    padding: 5em 0;
   }
   .white-back {
     background-color: ${ theme_colors[ "white" ] };
-    padding: 5vh 0;
+    padding: 5em 0;
   }
+`;
+
+const FooterSpace = styled.div`
+  height: 60vh;
+  max-height: calc(34vw + 18rem + 129px);
+  background-color: transparent;
+  ${ mq[ 'sm' ] }{ height: calc(147px + 18rem + 129px) }
+  ${ mq[ 'md' ] }{ height: calc(205px + 14rem + 52px) }
+  ${ mq[ 'lg' ] }{ height: calc(283px + 14rem + 52px) }
+  ${ mq[ 'xl' ] }{ height: calc(344px + 14rem + 52px) }
+  ${ mq[ 'xxl'] }{ height: calc(426px + 14rem + 52px) }
+`;
+
+// xs: 320,
+// sm: 500,
+// md: 768,
+// lg: 992,
+// xl: 1200,
+// xxl: 1440
+const FixedPart = styled.div`
+  background-color:  ${ ( { blackBackground } ) => blackBackground ? '#000' : '#fff' };
+  width:100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  z-index: -10;
 `;
 
 const FooterLogo = styled.div`
@@ -20,13 +49,15 @@ const FooterLogo = styled.div`
 `;
 
 const FooterTextStyle = styled.div`
-  margin-top: 3vh;
+  width: 100vw;
+  ${'' /* margin-top: 3vh; */}
+  margin-top: 1.5rem;
   display: flex;
   flex-wrap: wrap;
   .footer__text {
     margin-right: 6vw;
     letter-spacing: 1px;
-    margin-top: 3vh;
+    margin-top: 2.5rem;
     color: ${ ( { blackBackground } ) => blackBackground ? `${ theme_colors.white }` : `${ theme_colors.black }` };;
     line-height: 2.5rem;
    
@@ -52,21 +83,41 @@ const Footer = ( { state, blackBackground, footerFields={footerFields}  } ) => {
 
   return (
     <FooterColor >
-      <div className={ blackBackground ? "black-back" : "white-back" }>
+      <FooterSpace/>
+      {/* <FooterSpace>
+        <div className={ blackBackground ? "black-back" : "white-back" }>
 
-        <Container>
+            <Container>
 
-          <FooterLogo>
-            <img src={ blackBackground ? logo.logo_white : logo.logo_black } className="logo" />
-          </FooterLogo>
+              <FooterLogo>
+                <img src={ blackBackground ? logo.logo_white : logo.logo_black } className="logo" />
+              </FooterLogo>
 
-          <FooterTextStyle blackBackground={blackBackground}>
-            <FooterText footerFields={footerFields}  blackBackground={ blackBackground } textsize={ "1.6rem" } titlelevel={ 5 } />
-          </FooterTextStyle>
+              <FooterTextStyle blackBackground={blackBackground}>
+                <FooterText footerFields={footerFields}  blackBackground={ blackBackground } textsize={ "1.6rem" } titlelevel={ 5 } />
+              </FooterTextStyle>
 
-        </Container>
+            </Container>
 
-      </div>
+          </div>
+      </FooterSpace> */}
+      <FixedPart blackBackground={ blackBackground} className="fixedclau">
+        <div className={ blackBackground ? "black-back" : "white-back" }>
+
+          <Container>
+
+            <FooterLogo>
+              <img src={ blackBackground ? logo.logo_white : logo.logo_black } className="logo" />
+            </FooterLogo>
+
+            <FooterTextStyle blackBackground={blackBackground}>
+              <FooterText footerFields={footerFields}  blackBackground={ blackBackground } textsize={ "1.6rem" } titlelevel={ 5 } />
+            </FooterTextStyle>
+
+          </Container>
+
+        </div>
+      </FixedPart>
     </FooterColor>
   )
 }

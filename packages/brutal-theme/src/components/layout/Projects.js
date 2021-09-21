@@ -8,7 +8,7 @@ import Block from '../shared/Block';
 import Loading from '../shared/Loading';
 
 const Grid = styled.div`
-  margin: 1vh 0 5vh;
+  margin: 3vh 0 1vh;
 `;
 
 const Projects = ( { state } ) =>

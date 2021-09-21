@@ -9,6 +9,10 @@ import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../
 
 // Styles
 const BlockWrapper = styled.div`
+  min-height: ${props => props.height ? props.height : "" };
+  display: ${props => props.height ? "flex" : "" };
+  align-items: ${props => props.height ? "center" : "" };
+
   width: 100%;
   padding: ${ props => props.widthPadding ? 0 : `${ mobilePaddingBlock }` };
   background-color: ${ props => props.mode === 'dark' ? theme.colors.black : theme.colors.white };
@@ -30,11 +34,12 @@ const BlockWrapper = styled.div`
 const Block = ( {
   children,
   className,
+  height,
   mode = 'dark'
-} ) =>
-{
+} ) => {
+  console.log(`height`, height)
   return (
-    <BlockWrapper widthPadding={ false } mode={ mode } className={ cx( className ) }>
+    <BlockWrapper height={height} widthPadding={ false } mode={ mode } className={ cx( className ) }>
       { children }
     </BlockWrapper>
   )
