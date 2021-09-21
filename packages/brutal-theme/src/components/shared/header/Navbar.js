@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { connect, styled } from 'frontity'
 import Container from '../../layout/Container';
 import NavBurger from './NavBurger';
@@ -50,9 +50,9 @@ const Navbar = ( { scroll, mobilWidth, footerFields } ) => {
 
   return (
     <Header>
-      <div className={ scroll > 40 ? "line" : "" }>
+      <div className={ scroll ? "line" : "" }>
         <Container>
-          <Nav scrollSmall={ scroll > 40 ? true : false }>
+          <Nav scrollSmall={ scroll ? true : false }>
             <NavLogo />
             <NavBurger footerFields={footerFields} mobilWidth={mobilWidth} />
           </Nav>

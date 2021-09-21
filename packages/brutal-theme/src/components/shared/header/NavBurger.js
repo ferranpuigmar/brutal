@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect, styled } from 'frontity';
 import NavMenu from './NavMenu';
-import { jsx, css, cx, keyframes } from '@emotion/react'
+import { keyframes } from '@emotion/react'
 import { theme_colors, breakpoints } from '../../../assets/styles/variables'
 import { theme } from '../../../assets/styles/theme';
 
@@ -93,27 +93,32 @@ const NavStyle = styled.div`
 `;
 
 
-const Burger = ({ screenWidth, mobilWidth, footerFields }) =>
+const Burger = ({ mobilWidth, footerFields }) =>
 { 
   const [ open, setOpen ] = useState()
   
   const handleAnimation = () => {
-    
-    console.log(`window`, window)
     const elem = document.querySelector('html');
     elem.style.overflow = open?.status ? "visible" : "hidden";
     setOpen( !open ? {status:true} : {status:!open.status} )
-    console.log(`open2`, open.status)
   } 
+  
   const handelBurgerClass = (open) => {
     return !open ? "line" : open.status? "line open" : "line close";
   }   
   
-  if (!mobilWidth) {
+  
+  const closeAndShow = () => {
     const elem = document.querySelector('html');
+    setOpen({status:!open.status})
     elem.style.overflow = "visible" ;
   }
   
+  if (!mobilWidth) {
+    const elem = document.querySelector('html');
+    elem.style.overflow = "visible";
+  }
+
   return (
     <NavStyle>
       <BurgerIcon open={ open }  onClick={handleAnimation}>
@@ -125,7 +130,8 @@ const Burger = ({ screenWidth, mobilWidth, footerFields }) =>
         footerFields={footerFields}
         mobilWidth={mobilWidth}
         open={ open?.status } 
-        close={ () => setOpen({status:!open.status})} 
+        // close={ () => setOpen({status:!open.status})} 
+        close={ closeAndShow } 
       />
     </NavStyle>
   )

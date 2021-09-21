@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { connect, styled } from 'frontity';
 import Link from "@frontity/components/link";
-import Title from '../Title';
-import Text from '../Text';
 import { css, cx, keyframes  } from '@emotion/css'
 import { theme_colors, breakpoints } from '../../../assets/styles/variables'
 import ArrowLink from '../ArrowLink';
@@ -168,14 +166,13 @@ const whiteLink = css`
       .arrow-icon:before {
         background-color: ${ `${theme_colors.primaryColor}!important` };
     }
-    }
+  }
 `;
 
 const NavMenu = ( { state, open, close, mobilWidth, footerFields } ) => {
   
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
 
-  console.log(`open----`, open)
   return (
 
     <Ul open={ open }>

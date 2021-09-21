@@ -33,25 +33,27 @@ const Root = ( { state } ) =>
   const data = state.source.get( state.router.link );
   const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
   const blackBackground = objPageIDs?.acf.footer_default_black;
-
-  const [ lineY, setLineY ] = useState( 0 );
+  
+  const [ isScolling, setIsScolling ] = useState( false );
   const [ mobilWidth, setMovilWidth ] = useState(true);
   const [ footerFields, setFooterFields ] = useState();
   const [ isFetching, setIsFetching ] = useState( true )
   
   useEffect( () =>{
-    window.onscroll = () => setLineY( window.pageYOffset ) 
+    setMovilWidth(screen.width < breakpoints.md ? true : false)
+    window.onscroll = () => setIsScolling( window.pageYOffset > 40 ? true : false ) 
     window.onresize = () => screen.width < breakpoints.md ? setMovilWidth(true) : setMovilWidth(false)
+    console.log(`mobilWidth2`, mobilWidth,`screen`, screen.width, breakpoints.md)
     !footerFields && setFooterFields (state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields)
   }, [] )
-
+  
   useEffect( () =>
   {
     if ( !data.isFetching ) {
       setIsFetching( false )
     }
   }, [ data.isFetching ] )
-
+  
   return (
     <>
       <Head>
@@ -65,7 +67,7 @@ const Root = ( { state } ) =>
       <GridThemeProvider gridTheme={ gridTheme }>
         <Navbar 
           mobilWidth={ mobilWidth } 
-          scroll={ lineY }   
+          scroll={ isScolling }     
           footerFields={ footerFields ? footerFields : {} } 
         />
         <Main>
