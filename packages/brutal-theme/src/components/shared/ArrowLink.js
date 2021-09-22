@@ -4,6 +4,7 @@ import { theme } from '../../assets/styles/theme';
 import { cx, css } from '@emotion/css'
 import { mq } from '../../assets/styles/mediaqueries';
 import { spacing } from '../../assets/styles/spacing';
+import { theme_colors } from '../../assets/styles/variables';
 
 const handleBtnStyle = ( type ) =>
 {
@@ -51,10 +52,13 @@ const ArrowAnchorWrapper = styled.a`
   text-decoration: none;
   ${ props => handleBtnStyle( props.type ) };
   color: ${ theme.colors.black }!important;
-  ${'' /* color: ${ theme.colors.black }!important; */}
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  
+  &:hover {
+    background-color: ${theme_colors.primaryColor};
+  }
 `
 
 const ArrowWrapper = styled.div`
@@ -73,6 +77,7 @@ const ArrowWrapper = styled.div`
   }
 
   &:hover{
+    
     span:last-child{
       transform: translateX(5px);
     }
@@ -125,7 +130,7 @@ const ArrowLinkContent = ( { type, variant, link, children } ) => <>
   <Arrow type={ type } variant={ variant } link={ link } className="arrow-icon"></Arrow>
 </>
 
-const ArrowLink = ( { link, children, className, variant, type, isAnchor = true } ) =>
+const ArrowLink = ( { link, children, className, hoverColor, variant, type, isAnchor = true } ) =>
 {
   return (
     <ArrowWrapper className={ cx( "arrow-element", className ) } variant={ variant }>

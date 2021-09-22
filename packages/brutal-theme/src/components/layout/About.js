@@ -10,6 +10,7 @@ import ArrowLink from '../shared/ArrowLink';
 import { theme } from '../../assets/styles/theme';
 import { Col, Row } from 'styled-bootstrap-grid';
 import Loading from '../shared/Loading';
+import { theme_colors } from '../../assets/styles/variables';
 
 
 // STYLES
@@ -68,6 +69,7 @@ const ButtonDiv = styled.div`
 
     > div{
       justify-content: flex-end;
+    
       width: 100%;
 
       a{
@@ -76,6 +78,9 @@ const ButtonDiv = styled.div`
         justify-content: space-between;
       }
     }
+  }
+  a:hover {
+    color: ${theme_colors.primaryColor};
   }
 `
 
