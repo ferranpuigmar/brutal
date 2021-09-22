@@ -53,7 +53,7 @@ const Header = styled.header`
   }
 `;
 
-const Navbar = ( { scroll, mobilWidth, footerFields } ) => {
+const Navbar = ( { scroll, mobilWidth, footerFields, currentPage } ) => {
 
   return (
     <Header>
@@ -61,7 +61,7 @@ const Navbar = ( { scroll, mobilWidth, footerFields } ) => {
         <Container>
           <Nav scrollSmall={ scroll ? true : false }>
             <NavLogo />
-            <NavBurger footerFields={footerFields} mobilWidth={mobilWidth} />
+            <NavBurger currentPage={currentPage} footerFields={footerFields} mobilWidth={mobilWidth} />
           </Nav>
         </Container>
       </div>

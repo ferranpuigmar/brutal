@@ -86,11 +86,11 @@ const BurgerIcon = styled.div`
 const NavStyle = styled.div`
   display: flex;
   align-content: center;
-justify-content: center;
-margin: auto 0;
+  justify-content: center;
+  margin: auto 0;
 `;
 
-const Burger = ({ mobilWidth, footerFields }) =>
+const Burger = ({ currentPage, mobilWidth, footerFields }) =>
 { 
   const [ open, setOpen ] = useState()
   
@@ -124,6 +124,7 @@ const Burger = ({ mobilWidth, footerFields }) =>
             <div className={handelBurgerClass(open)}/>
         </BurgerIcon>
       <NavMenu 
+        currentPage={currentPage}
         footerFields={footerFields}
         mobilWidth={mobilWidth}
         open={ open?.status } 
