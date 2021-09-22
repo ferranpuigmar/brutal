@@ -53,9 +53,9 @@ const ServiceItem = ( { title, data, libraries } ) =>
 
   return (
     <Item>
-      <Icon><img src={ icon_service } alt={ `icono ${ title }` } /></Icon>
+      { icon_service && <Icon><img src={ icon_service } alt={ `icono ${ title }` } /></Icon> }
       <Title className={ cx( serviceTitle ) } level={ 3 }>{ title }</Title>
-      <Description><Html2React html={ description } /></Description>
+      { description && <Description><Html2React html={ description } /></Description> }
     </Item >
   )
 }
