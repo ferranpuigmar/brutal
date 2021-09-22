@@ -38,11 +38,17 @@ const Root = ( { state } ) =>
   const blackBackground = objPageIDs?.acf.footer_default_black;
   
   const [ isScolling, setIsScolling ] = useState( false );
+  const [ currentPage, setCurrentPage ] = useState("")
+  console.log(`currentPage root`, currentPage)
+
   const [ mobilWidth, setMovilWidth ] = useState(true);
   const [ footerFields, setFooterFields ] = useState();
   const [ isFetching, setIsFetching ] = useState( true )
   
   useEffect( () =>{
+    window.onhashchange = (x) => console.log(`xxxx`, xxxx)
+    window.onhashchange = () => setCurrentPage( window.location.pathname.split("").slice(1,-1).join(""));
+    console.log(`window sssss`, window.location.pathname.split("").slice(1,-1).join(""))
     setMovilWidth(screen.width < breakpoints.md ? true : false)
     window.onscroll = () => setIsScolling( window.pageYOffset > 30 ? true : false ) 
     window.onresize = () => screen.width < breakpoints.md ? setMovilWidth(true) : setMovilWidth(false)
@@ -69,6 +75,7 @@ const Root = ( { state } ) =>
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
         <Navbar 
+          currentPage={ currentPage }
           mobilWidth={ mobilWidth } 
           scroll={ isScolling }     
           footerFields={ footerFields ? footerFields : {} } 

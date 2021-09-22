@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, styled } from 'frontity';
 import Link from "@frontity/components/link";
 import { css, cx, keyframes  } from '@emotion/css'
@@ -45,13 +45,11 @@ const Ul = styled.ul`
     color: ${theme_colors.white};
     font-size: 1.2rem;
 
-    :hover { 
-      transition: color .3s linear .08s;
-      color: ${theme_colors.primaryColor}; 
-      }
+    
   }
+  .green a { color: ${theme_colors.primaryColor} }
 
-  .arrow-element:hover {color: ${theme_colors.primaryColor};}
+  
   
   .navigation__footer { display: none }
 
@@ -72,15 +70,16 @@ const Ul = styled.ul`
     transform: ${ ( { open } ) => open ? 'translateY(0)' : 'translateY(-100%)' };
     text-align: center;
 
-    li { margin: 3.2vh 0;  }
+    li { margin: 3vh 0;  }
 
     .navigation__link-box {
       height: 100%;
       overflow: hidden;
       position: relative;
       width: 100%;
-    }
 
+    }
+    
     .navigation__link-box div {
       animation: ${menuLinkpDown} 0.8s;
       animation-fill-mode: forwards;
@@ -110,6 +109,7 @@ const Ul = styled.ul`
         font-size: 2.2rem; 
       }
     }
+    ${'' /* .green a { color: ${theme_colors.white} } */}
 
     //////////////////////////////////////////FOOTER-NAV
     .navigation__footer { 
@@ -132,17 +132,22 @@ const Ul = styled.ul`
         :hover { color: ${theme_colors.primaryColor}; }
       }
 
-
       @media (max-width: ${ breakpoints[ "sm" ] }px) {
         .footer__text-title  { font-size: 1.1rem; }
         .footer__text-text a { font-size: 1.1rem; }
       }  
     }
   }
+.arrow-element:hover {color: ${theme_colors.primaryColor};}
+
+  li a:hover { 
+      transition: color .2s linear .08s;
+      color: ${theme_colors.primaryColor}; 
+      }
 `;
 
 const NavFooter = styled.div`
-  margin: 14vh 0 6vh;
+  margin: 12vh 0 6vh;
   text-align: left;
   text-transform: none;
   display: flex;
@@ -169,10 +174,23 @@ const whiteLink = css`
   }
 `;
 
-const NavMenu = ( { state, open, close, mobilWidth, footerFields } ) => {
-  
+const NavMenu = ( { state, open, close, mobilWidth, footerFields, currentPage } ) => {
+  console.log(`currentPage----`, currentPage)
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
+  console.log(`items`, items)
+  // console.log(`window`, window.location.pathname.split("").slice(1,-1).join("") )
+  // const currentPage = window.location.pathname.split("").slice(1,-1).join("")
+  // const [ currentPage, setCurrentPage ] = const [state, setstate] = useState(initialState)
 
+  // console.log(`window------------------`, window.location.pathname.split("").slice(1,-1).join(""), window)
+
+  const [ currentPage2, setCurrentPage ] = useState("")
+  console.log(`currentPage 2`, currentPage)
+
+  useEffect( () =>{
+    window && console.log(`window1`,window.location.pathname.split("").slice(1,-1).join(""),  window)
+    // window && setCurrentPage( window.location.pathname.split("").slice(1,-1).join(""));
+  }, [] )
   return (
 
     <Ul open={ open }>
@@ -185,8 +203,13 @@ const NavMenu = ( { state, open, close, mobilWidth, footerFields } ) => {
               </Link>
               :              
               <div className={ open ? `navigation__link-box box${index+1}` : "navigation__link-box__close"} >
-                <div className= "navigation__link-wrapper">
-                  <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }> { item.title } </Link>                
+                {/* <div className= {currentPage2===item.slug && !mobilWidth ? "navigation__link-wrapper green" : "navigation__link-wrapper" } > */}
+                <div className= {currentPage===item.slug && !mobilWidth ? "navigation__link-wrapper green" : "navigation__link-wrapper" } >
+                  <Link nonekey={ item.ID }
+                    className={"navigation__link"} 
+                    link={ `/${ item.slug }` }> 
+                      { item.title } 
+                  </Link>                
                 </div>
               </div>
             }
