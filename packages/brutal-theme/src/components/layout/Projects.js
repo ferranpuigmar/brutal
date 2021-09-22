@@ -4,12 +4,11 @@ import Container from '../layout/Container';
 import GridRow from './GridRow';
 import { v4 as uuid_v4 } from "uuid";
 import Title from '../shared/Title';
-import Block from '../shared/Block';
 import PageWrapper from '../shared/PageWrapper';
 import Loading from '../shared/Loading';
 
 const Grid = styled.div`
-  margin: 3vh 0 1vh;
+  margin: 3vh 0 0;
 `;
 
 const Projects = ( { state, libraries } ) =>
