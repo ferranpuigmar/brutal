@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Global, css, connect, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Project from './layout/Project';
@@ -12,51 +12,67 @@ import Navbar from './shared/header/Navbar';
 import Services from './layout/Services';
 import Contact from './layout/Contact';
 import { styled } from 'frontity';
-import { spacing } from '../assets/styles/spacing';
 import About from './layout/About';
 import Projects from './layout/Projects';
-import { mq, breakpoints } from '../assets/styles/variables';
+import { breakpoints } from '../assets/styles/variables';
 import ScreenSizeDetector from 'screen-size-detector'
 import Error404 from './layout/Error404';
 import Loading from './shared/Loading';
+import { cx, css as cssEmotion } from '@emotion/css';
 
-const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
+//Styles
+const footerFixed = cssEmotion`
+  width:100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  z-index: -10;
+`
 
 const Main = styled.main`
   margin: 10rem 0 calc(33vw + 18rem + 129px);
-
-  ${ mq[ 'md' ] }{ margin-bottom: calc(205px + 14rem + 52px) }
-  ${ mq[ 'lg' ] }{ margin-bottom: calc(283px + 14rem + 52px) }
-  ${ mq[ 'xl' ] }{ margin-bottom: calc(344px + 14rem + 52px) }
-  ${ mq[ 'xxl'] }{ margin-bottom: calc(426px + 14rem + 52px) }
 `
+
+// Component
+const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
 
 const Root = ( { state } ) =>
 {
+  const footerRef = useRef( null );
   const data = state.source.get( state.router.link );
   const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
   const blackBackground = objPageIDs?.acf.footer_default_black;
-  
+
   const [ isScolling, setIsScolling ] = useState( false );
-  const [ mobilWidth, setMovilWidth ] = useState(true);
+  const [ mobilWidth, setMovilWidth ] = useState( true );
   const [ footerFields, setFooterFields ] = useState();
-  const [ isFetching, setIsFetching ] = useState( true )
-  
-  useEffect( () =>{
-    setMovilWidth(screen.width < breakpoints.md ? true : false)
-    window.onscroll = () => setIsScolling( window.pageYOffset > 30 ? true : false ) 
-    window.onresize = () => screen.width < breakpoints.md ? setMovilWidth(true) : setMovilWidth(false)
-    console.log(`mobilWidth2`, mobilWidth,`screen`, screen.width, breakpoints.md)
-    !footerFields && setFooterFields (state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields)
-  }, [] )
-  
+  const [ mainMarginBottom, setMainMarginBottom ] = useState( 0 );
+
+  const handleFooterHeight = () =>
+  {
+    if ( footerRef.current ) {
+      setTimeout( () => setMainMarginBottom( footerRef.current.offsetHeight ), 400 );
+    }
+  }
+
   useEffect( () =>
   {
-    if ( !data.isFetching ) {
-      setIsFetching( false )
+    setMovilWidth( screen.width < breakpoints.md ? true : false )
+    window.onscroll = () => setIsScolling( window.pageYOffset > 30 ? true : false )
+    window.onresize = () => screen.width < breakpoints.md ? setMovilWidth( true ) : setMovilWidth( false )
+    !footerFields && setFooterFields( state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields )
+  }, [] )
+
+  useEffect( () =>
+  {
+    if ( footerRef.current ) {
+      window.addEventListener( 'resize', handleFooterHeight )
+      window.addEventListener( 'load', handleFooterHeight )
     }
-  }, [ data.isFetching ] )
-  
+  }, [ footerRef ] )
+
   return (
     <>
       <Head>
@@ -68,12 +84,12 @@ const Root = ( { state } ) =>
       <FontFace />
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
-        <Navbar 
-          mobilWidth={ mobilWidth } 
-          scroll={ isScolling }     
-          footerFields={ footerFields ? footerFields : {} } 
+        <Navbar
+          mobilWidth={ mobilWidth }
+          scroll={ isScolling }
+          footerFields={ footerFields ? footerFields : {} }
         />
-        <Main>
+        <Main style={ { marginBottom: mainMarginBottom } }>
           <Switch>
             <Loading when={ data.isFetching } />
             <Home when={ data.isHome } />
@@ -85,7 +101,8 @@ const Root = ( { state } ) =>
             <Error404 when={ data.is404 } />
           </Switch>
         </Main>
-        <Footer footerFields={footerFields ? footerFields : {}} blackBackground={ blackBackground } />
+
+        <div aria-hidden="false" ref={ footerRef } className={ cx( footerFixed ) }><Footer footerFields={ footerFields ? footerFields : {} } blackBackground={ blackBackground } /></div>
       </GridThemeProvider>
     </>
   );
