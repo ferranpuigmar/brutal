@@ -30,8 +30,6 @@ const bottomClose = keyframes`
 const BurgerIcon = styled.div`
   width: 3.5rem;
   height: 3rem;
-  position: relative;
-  top: 3.6rem;
   z-index: 20;
   display: none;
 
@@ -39,10 +37,8 @@ const BurgerIcon = styled.div`
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
-
-  
+      
     .line {
-      ${'' /* width: 3rem; */}
       width: 3rem;
       height: 0.25rem;
       background-color: ${ theme.colors.white };
@@ -90,8 +86,9 @@ const BurgerIcon = styled.div`
 const NavStyle = styled.div`
   display: flex;
   align-content: center;
+justify-content: center;
+margin: auto 0;
 `;
-
 
 const Burger = ({ mobilWidth, footerFields }) =>
 { 
@@ -121,16 +118,15 @@ const Burger = ({ mobilWidth, footerFields }) =>
 
   return (
     <NavStyle>
-      <BurgerIcon open={ open }  onClick={handleAnimation}>
-          <div className={handelBurgerClass(open)}/>
-          <div className={handelBurgerClass(open)}/>
-          <div className={handelBurgerClass(open)}/>
-      </BurgerIcon>
+        <BurgerIcon open={ open }  onClick={handleAnimation}>
+            <div className={handelBurgerClass(open)}/>
+            <div className={handelBurgerClass(open)}/>
+            <div className={handelBurgerClass(open)}/>
+        </BurgerIcon>
       <NavMenu 
         footerFields={footerFields}
         mobilWidth={mobilWidth}
         open={ open?.status } 
-        // close={ () => setOpen({status:!open.status})} 
         close={ closeAndShow } 
       />
     </NavStyle>

@@ -3,46 +3,53 @@ import { connect, styled } from 'frontity'
 import Container from '../../layout/Container';
 import NavBurger from './NavBurger';
 import NavLogo from './NavLogo';
-import { breakpoints } from '../../../assets/styles/variables'
+import { breakpoints, theme_colors } from '../../../assets/styles/variables'
 import { mq } from '../../../assets/styles/mediaqueries';
 
 
 const Nav = styled.nav`
   width: 100%;
-  height: ${ ( { scrollSmall } ) => scrollSmall ? '4rem' : '10rem' };
+  height: ${ ( { scrollSmall } ) => scrollSmall ? '3rem' : '10rem' };
   min-height: 40px;
-  max-height: 120px;
+  max-height: 110px;
   display: flex;
+
   justify-content: space-between;
+  ${'' /* align-content: center; */}
+${'' /* justify-content: center; */}
   transition: all 0.3s linear;
 
+    ${ mq[ 'md' ] }{
+      height: ${ ( { scrollSmall } ) => scrollSmall ? '5rem' : '10rem' };
+    }
+
   .logo { 
-    max-height: 3.7rem; 
+    max-height: 3rem; 
     transition: all 0.3s linear;
+    min-height: ${ ( { scrollSmall } ) => scrollSmall ? '.5rem' : '4.8rem' };
 
     ${ mq[ 'md' ] }{
-      max-height: ${ ( { scrollSmall } ) => scrollSmall ? '2.5rem' : '4.8rem' };
+      max-height: ${ ( { scrollSmall } ) => scrollSmall ? '3rem' : '4.8rem' };
     }
   }
 `
 const Header = styled.header`
+  background-color: ${ theme_colors.black };
   width: 100%;
   position: fixed;
-  background-color: #000;
+  margin-top: -10rem;
   z-index: 100000;
 
   .line {
-
-    ${ mq[ 'md' ] }{
-      border: .5px solid white;
-      border-left: 0;
-      border-right: 0;
-      border-top: 0px;
-    }
+    border: .5px solid white;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0px;
   }
 
   @media (max-width: ${ breakpoints[ "md" ] }px) {
-   position: relative;
+   ${'' /* position: relative; */}
+   position: fixed;
   }
 `;
 
@@ -56,7 +63,6 @@ const Navbar = ( { scroll, mobilWidth, footerFields } ) => {
             <NavLogo />
             <NavBurger footerFields={footerFields} mobilWidth={mobilWidth} />
           </Nav>
-          
         </Container>
       </div>
     </Header>

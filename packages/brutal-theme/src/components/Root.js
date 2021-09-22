@@ -23,9 +23,12 @@ import Loading from './shared/Loading';
 const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
 
 const Main = styled.main`
-  ${ mq[ 'lg' ] }{
-    padding-top: 8vh;
-  }
+  margin: 10rem 0 calc(33vw + 18rem + 129px);
+
+  ${ mq[ 'md' ] }{ margin-bottom: calc(205px + 14rem + 52px) }
+  ${ mq[ 'lg' ] }{ margin-bottom: calc(283px + 14rem + 52px) }
+  ${ mq[ 'xl' ] }{ margin-bottom: calc(344px + 14rem + 52px) }
+  ${ mq[ 'xxl'] }{ margin-bottom: calc(426px + 14rem + 52px) }
 `
 
 const Root = ( { state } ) =>
@@ -41,7 +44,7 @@ const Root = ( { state } ) =>
   
   useEffect( () =>{
     setMovilWidth(screen.width < breakpoints.md ? true : false)
-    window.onscroll = () => setIsScolling( window.pageYOffset > 40 ? true : false ) 
+    window.onscroll = () => setIsScolling( window.pageYOffset > 30 ? true : false ) 
     window.onresize = () => screen.width < breakpoints.md ? setMovilWidth(true) : setMovilWidth(false)
     console.log(`mobilWidth2`, mobilWidth,`screen`, screen.width, breakpoints.md)
     !footerFields && setFooterFields (state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields)

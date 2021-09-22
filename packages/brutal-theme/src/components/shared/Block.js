@@ -37,7 +37,7 @@ const Block = ( {
   height,
   mode = 'dark'
 } ) => {
-  console.log(`height`, height)
+  // console.log(`height`, height)
   return (
     <BlockWrapper height={height} widthPadding={ false } mode={ mode } className={ cx( className ) }>
       { children }

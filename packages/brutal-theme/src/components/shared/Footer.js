@@ -17,9 +17,10 @@ const FooterColor = styled.footer`
 `;
 
 const FooterSpace = styled.div`
-  height: 60vh;
-  max-height: calc(34vw + 18rem + 129px);
   background-color: transparent;
+  height: 75vh;
+  max-height: calc(33vw + 18rem + 129px);
+
   ${ mq[ 'sm' ] }{ height: calc(147px + 18rem + 129px) }
   ${ mq[ 'md' ] }{ height: calc(205px + 14rem + 52px) }
   ${ mq[ 'lg' ] }{ height: calc(283px + 14rem + 52px) }
@@ -27,12 +28,6 @@ const FooterSpace = styled.div`
   ${ mq[ 'xxl'] }{ height: calc(426px + 14rem + 52px) }
 `;
 
-// xs: 320,
-// sm: 500,
-// md: 768,
-// lg: 992,
-// xl: 1200,
-// xxl: 1440
 const FixedPart = styled.div`
   background-color:  ${ ( { blackBackground } ) => blackBackground ? '#000' : '#fff' };
   width:100vw;
@@ -83,39 +78,17 @@ const Footer = ( { state, blackBackground, footerFields={footerFields}  } ) => {
 
   return (
     <FooterColor >
-      <FooterSpace/>
-      {/* <FooterSpace>
+      {/* <FooterSpace/> */}
+      <FixedPart blackBackground={ blackBackground}>
         <div className={ blackBackground ? "black-back" : "white-back" }>
-
-            <Container>
-
-              <FooterLogo>
-                <img src={ blackBackground ? logo.logo_white : logo.logo_black } className="logo" />
-              </FooterLogo>
-
-              <FooterTextStyle blackBackground={blackBackground}>
-                <FooterText footerFields={footerFields}  blackBackground={ blackBackground } textsize={ "1.6rem" } titlelevel={ 5 } />
-              </FooterTextStyle>
-
-            </Container>
-
-          </div>
-      </FooterSpace> */}
-      <FixedPart blackBackground={ blackBackground} className="fixedclau">
-        <div className={ blackBackground ? "black-back" : "white-back" }>
-
           <Container>
-
             <FooterLogo>
               <img src={ blackBackground ? logo.logo_white : logo.logo_black } className="logo" />
             </FooterLogo>
-
             <FooterTextStyle blackBackground={blackBackground}>
               <FooterText footerFields={footerFields}  blackBackground={ blackBackground } textsize={ "1.6rem" } titlelevel={ 5 } />
             </FooterTextStyle>
-
           </Container>
-
         </div>
       </FixedPart>
     </FooterColor>

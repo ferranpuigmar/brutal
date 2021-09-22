@@ -5,15 +5,18 @@ import GridRow from './GridRow';
 import { v4 as uuid_v4 } from "uuid";
 import Title from '../shared/Title';
 import Block from '../shared/Block';
+import PageWrapper from '../shared/PageWrapper';
 import Loading from '../shared/Loading';
 
 const Grid = styled.div`
   margin: 3vh 0 1vh;
 `;
 
-const Projects = ( { state } ) =>
+const Projects = ( { state, libraries } ) =>
 {
+  const Html2React = libraries.html2react.Component;
   const data = state.source.get( state.router.link );
+  const pageTitle = state.source[ data.type ][ data.id ].title.rendered;
   const gridRowData = state.source[ data.type ][ data.id ].acf.grid_row;
   const rows = Object.values( gridRowData )
   const dataProjects = state.source.get( `/projectsdata/${ state.theme.projects }/` ).items;
@@ -26,10 +29,9 @@ const Projects = ( { state } ) =>
 
   return data.isReady ? (
     <section className="projects-grid">
-      <Block>
-
+      <PageWrapper>
         <Container>
-          <Title level={ 3 } >Proyectos</Title>
+          <Title level={ 1 } ><Html2React html={pageTitle}/></Title>
           <Grid>
             { dataProjects && rows.map( row =>
             {
@@ -45,7 +47,7 @@ const Projects = ( { state } ) =>
             } ) }
           </Grid>
         </Container>
-      </Block>
+      </PageWrapper>
 
     </section>
   ) : <Loading />;
