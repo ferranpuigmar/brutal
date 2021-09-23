@@ -140,15 +140,7 @@ const ProjectItem = ( {
   const link = project?.link;
   const bg_url = project?.project_media_url;
 
-  // <SideBig className={ cx( 'big', portfolioContainer ) }>
-  //         <OverLapContent className="overlap">
-  //           <Title level={ 3 }>{ big.title.rendered }</Title>
-  //         </OverLapContent>
-  //         <Link link={ big.link }>
-  //           <ImgBigSet><img alt={ big.title.rendered } src={ bigImage } /></ImgBigSet>
-  //         </Link>
-  //       </SideBig>
-
+  
   const colContent = <Col key={ uuid_v4() } md={ 6 } className={ cx( block ) }>
     <Title className={ titleColor } level={ 3 } >{ title }</Title>
     <DescriptionWrapper>
@@ -160,7 +152,7 @@ const ProjectItem = ( {
   const colBg = 
   <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg, portfolioContainer  ) }>
     <OverLapContent className="overlap">
-      {/* <Title level={ 3 }>{ title }</Title> */}
+      <Title level={ 3 }>{ title }</Title>
     </OverLapContent>
     <img src={ bg_url } alt={ title } />
   </Col>

@@ -1,7 +1,7 @@
-import { styled, connect } from 'frontity';
+import { connect } from 'frontity';
 import React from 'react'
 import Title from '../shared/Title';
-import Container from '../layout/Container';
+import Container from './Container';
 import { Row, Col } from 'styled-bootstrap-grid';
 import { css, cx } from '@emotion/css'
 import { spacing } from '../../assets/styles/spacing';
@@ -32,10 +32,17 @@ const descriptionWrapper = css`
   }
 `
 
+const formcontainer = css`
+  #sendButton {
+    background-color: #000;
+  }
+`;
+
 const colForm = css`
 
   .form{
     margin-top: 30px;
+
 
     &Row {
       display: flex;
@@ -157,23 +164,6 @@ const colForm = css`
     }
   }
 `
-const ButtonFixer = styled.div`
-  #sendButton {
-    background-color: ${theme.colors.black};
-    font-family: ${theme.fontFamily.regular};
-    color: ${theme.colors.white};
-    border-color: ${theme.colors.white};
-    transition: color .35s linear;
-    :hover {
-      background-color: ${theme.colors.primaryColor};
-      color: ${theme.colors.black};
-      border-color: transparent;
-      outline: none;
-      cursor: pointer;
-      
-    }
-  }
-`;
 
 // COMPONENT
 const Contact = ( { state, libraries } ) =>
@@ -187,14 +177,12 @@ const Contact = ( { state, libraries } ) =>
 
   return data.isReady ? (
     <PageWrapper>
-      <Container>
-        <ButtonFixer>
+      <Container className={ cx( formcontainer ) }>
         <Title className={ cx( sectionTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
         <Row>
           <Col xl={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
           <Col xl={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
         </Row>
-        </ButtonFixer>
       </Container>
     </PageWrapper>
   ) : <Loading />;
