@@ -20,6 +20,9 @@ const Projects = ( { state, libraries } ) =>
   const rows = Object.values( gridRowData )
   const dataProjects = state.source.get( `/projectsdata/${ state.theme.projects }/` ).items;
 
+  console.log(`gridRowData`, gridRowData)
+  
+  console.log(`dataProjects`, state.source)
   const getMediaDetails = ( data, id ) =>
   {
     const mediaDetails = data.find( media => media.id === id );

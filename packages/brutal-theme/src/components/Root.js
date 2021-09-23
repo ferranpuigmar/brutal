@@ -13,7 +13,7 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Projects from './pages/Projects';
-import { breakpoints } from '../assets/styles/variables';
+import { breakpoints, theme_colors } from '../assets/styles/variables';
 import ScreenSizeDetector from 'screen-size-detector'
 import Error404 from './pages/Error404';
 import Loading from './shared/Loading';
@@ -32,6 +32,7 @@ const footerFixed = cssEmotion`
 
 const Main = styled.main`
   margin: 10rem 0 calc(33vw + 18rem + 129px);
+  background-color: ${theme_colors.black}
 `
 
 // Component
