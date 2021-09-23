@@ -135,7 +135,7 @@ const overlapContentTitle = css`
 
 //Component
 const ProjectItem = ( {
-  project, index, link_text, libraries
+  project, link_text, libraries
 } ) =>
 {
   const Html2React = libraries.html2react.Component;
