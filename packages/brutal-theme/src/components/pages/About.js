@@ -34,42 +34,28 @@ const sectionTitle = css`
 
 const DescriptionWrapper = styled.div`
   margin-bottom: ${ spacing[ 'pb-6' ] };
-  ${ mq[ "md" ] } {
-    width: 100%;
-    max-width: 85%;
-    margin-bottom: ${ spacing[ 'pb-12' ] };
+
+  p{
+    ${ theme.fontSize.h4 }
   }
 
-  ${ mq[ "xl" ] } {
-    max-width: 100%;
+  ${ mq[ "md" ] } {
+    width: 100%;
+    max-width: 65%;
+    margin-bottom: ${ spacing[ 'pb-12' ] };
+    p{
+      ${ theme.fontSize.h3 }
+    }
   }
 `
 
 const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 
-> div{
-    justify-content: flex-end;
-    width: 100%;
-
-    a{
-      max-width: 100%;
-      width: 100%;
-      justify-content: space-between;
-    }
-  }
-
-  ${ mq[ "sm" ] } {
-    width: 100%;
-    max-width: 349px;
-  }
-
-  ${ mq[ "xl" ] } {
-    margin-left: auto;
-    width: 100%;
-
-    > div{
-      justify-content: flex-end;
-    
+  > div{
+      justify-content: flex-start;
       width: 100%;
 
       a{
@@ -78,10 +64,30 @@ const ButtonDiv = styled.div`
         justify-content: space-between;
       }
     }
-  }
-  a:hover {
-    color: ${ theme_colors.primaryColor };
-  }
+
+    ${ mq[ "sm" ] } {
+      width: 100%;
+      max-width: 349px;
+    }
+
+    ${ mq[ "xl" ] } {
+      width: 100%;
+
+      > div{
+        justify-content: flex-start;
+
+        width: 100%;
+
+        a{
+          max-width: 100%;
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
+    }
+    a:hover {
+      color: ${ theme_colors.primaryColor };
+    }
 `
 
 const OnlyTitleDesktop = styled.span`
@@ -105,10 +111,10 @@ const About = ( { state, libraries } ) =>
     <PageWrapper>
       <Container>
         <Row>
-          <Col xl={ 8 }>
+          <Col>
             <Title className={ cx( sectionTitle ) } level={ 1 }><OnlyTitleDesktop><Html2React html={ title } /></OnlyTitleDesktop><Html2React html={ title_bottom } /></Title>
           </Col>
-          <Col xl={ 4 }>
+          <Col>
             <DescriptionWrapper><Html2React html={ description } /></DescriptionWrapper>
             <ButtonDiv><ArrowLink type="white-solid" link="/contactar">{ button_text }</ArrowLink></ButtonDiv>
           </Col>
