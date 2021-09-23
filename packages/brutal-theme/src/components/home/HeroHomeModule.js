@@ -1,5 +1,5 @@
 import connect from '@frontity/connect'
-import React from 'react'
+import React, { useState } from 'react'
 import { Col, Row } from 'styled-bootstrap-grid'
 import CustomImage from '../shared/CustomImage';
 import { css, cx } from '@emotion/css'
@@ -9,10 +9,11 @@ import { spacing } from '../../assets/styles/spacing';
 import Block from '../shared/Block';
 import { theme } from '../../assets/styles/theme';
 import { mq } from '../../assets/styles/mediaqueries';
+import Typewriter from 'typewriter-effect';
 
 // Styles
 const heroWrapper = css`
-  ${'' /* padding-top: ${ spacing[ 'pt-8' ] }; */}
+  ${ '' /* padding-top: ${ spacing[ 'pt-8' ] }; */ }
 `;
 
 const heroTitle = css`
@@ -69,11 +70,23 @@ const HeroHomeModule = ( {
 
   return (
     <section id="hero">
-      <Block height={"calc(100vh - 14rem)"} className={ heroWrapper } widthPadding={ true }>
+      <Block height={ "calc(100vh - 14rem)" } className={ heroWrapper } widthPadding={ true }>
         <Container>
           <Row >
             <Col md={ 7 } lg={ 7 } className={ cx( colHero ) }>
-              <Title level={ 1 } className={ cx( heroTitle ) }><Html2React html={ text } /></Title>
+              <Title level={ 1 } className={ cx( heroTitle ) }>
+                <Typewriter
+                  onInit={ ( typewriter ) =>
+                  {
+                    typewriter.typeString( text )
+                      .start();
+                  } }
+                  options={ {
+                    autoStart: true,
+                    changeDeleteSpeed: 'natural',
+                  } }
+                />
+              </Title>
             </Col>
             <Col md={ 5 } className={ cx( colHero, colImage ) }>
               <CustomImage className={ cx( imageStyles ) } srcSet={ image.sizes } src={ image.url } alt={ image.title } />

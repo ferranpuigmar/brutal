@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Global, css, connect, Head } from "frontity";
+import React, { useState, useEffect, useRef } from 'react';
+import { Global, css, connect, Head, styled } from "frontity";
 import Switch from "@frontity/components/switch";
 import Project from './layout/Project';
 import Home from './layout/Home';
@@ -11,7 +11,6 @@ import styleCSS from '../assets/styles/style.css'
 import Navbar from './shared/header/Navbar';
 import Services from './layout/Services';
 import Contact from './layout/Contact';
-import { styled } from 'frontity';
 import About from './layout/About';
 import Projects from './layout/Projects';
 import { breakpoints } from '../assets/styles/variables';
