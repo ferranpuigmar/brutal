@@ -72,21 +72,23 @@ const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
 {
 
   const { link_text, projects } = rest;
+  console.log( 'rest: ', rest )
   const stateProjects = state.source.get( `/projectsdata/${ state.theme.projects }/` ).items;
-  const availableProjects = stateProjects.filter( project => projects.includes( project.id ) )
-  const dataProjects = availableProjects.map( ( project ) =>
-  {
-    const url = getMediaUrl( project, 1600 );
-    return ( { ...project, project_media_url: url } )
-  } )
+  // const availableProjects = stateProjects.filter( project => projects.includes( project.id ) )
+  // const dataProjects = availableProjects.map( ( project ) =>
+  // {
+  //   const url = getMediaUrl( project, 1600 );
+  //   return ( { ...project, project_media_url: url } )
+  // } )
 
-  return dataProjects.map( ( project, index ) =>
-    <Link key={ uuid_v4() } className={ cx( projectLink ) } link={ project.link }>
-      <Row>
-        <ProjectItem project={ project } index={ index } link_text={ link_text } />
-      </Row>
-    </Link>
-  )
+  // return dataProjects.map( ( project, index ) =>
+  //   <Link key={ uuid_v4() } className={ cx( projectLink ) } link={ project.link }>
+  //     <Row>
+  //       <ProjectItem project={ project } index={ index } link_text={ link_text } />
+  //     </Row>
+  //   </Link>
+  // )
+  return <p>Hola...</p>
 }
 
 export default connect( ProjectsModule )
