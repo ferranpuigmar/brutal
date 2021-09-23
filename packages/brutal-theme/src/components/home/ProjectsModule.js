@@ -6,9 +6,9 @@ import { theme } from '../../assets/styles/theme';
 import { mq } from '../../assets/styles/mediaqueries';
 import ProjectItem from './ProjectItem';
 import { v4 as uuid_v4 } from "uuid";
-import { getMediaUrl } from '../utils/images';
 import Link from "@frontity/components/link"
 import { spacing } from '../../assets/styles/spacing';
+import { hexToRgb } from '../utils/colors';
 
 // Styles
 const projectLink = css`
@@ -55,33 +55,48 @@ const projectLink = css`
     transition: all 0.3s ease-in-out;
   }
 
-  ${'' /* &:hover {
-    img{ transform: scale(1.05); }
-    .arrow-icon{ transform: translateX(5px); }
-  } */}
+  .overlap{
+    transition: all 0.4s ease-out;
+    padding: 0 ${ spacing[ 'p-4' ] };
+    height: 0;
+    opacity: 0;
+
+    > *{
+      transition: all 0.3s ease-out 0.4s;
+    }
+  }
+
+  &:hover{
+    .overlap {
+      padding: ${ spacing[ 'p-3' ] } ${ spacing[ 'p-4' ] };
+      opacity: 1;
+      height: 100%;
+      background-color: rgba( ${ hexToRgb( theme.colors.primaryColor ) }, 1);
+
+      *{
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
 `
 
 // Component
-
 const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
 {
 
   const { link_text, projects } = rest;
   const stateProjects = state.source.get( `/projectsdata/${ state.theme.projects }/` ).items;
   const availableProjects = stateProjects.filter( project => projects.includes( project.id ) )
-  const dataProjects = availableProjects.map( ( project ) =>
-  {
-    const url = getMediaUrl( project, 1600 );
-    return ( { ...project, project_media_url: url } )
-  } )
 
-  return dataProjects.map( ( project, index ) =>
+  return availableProjects.map( ( project, index ) =>
     <Link key={ uuid_v4() } className={ cx( projectLink ) } link={ project.link }>
       <Row>
         <ProjectItem project={ project } index={ index } link_text={ link_text } />
       </Row>
     </Link>
   )
+
 }
 
 export default connect( ProjectsModule )
