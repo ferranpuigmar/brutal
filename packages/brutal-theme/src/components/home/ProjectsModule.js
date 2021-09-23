@@ -9,6 +9,7 @@ import { v4 as uuid_v4 } from "uuid";
 import { getMediaUrl } from '../utils/images';
 import Link from "@frontity/components/link"
 import { spacing } from '../../assets/styles/spacing';
+import { hexToRgb } from '../utils/colors';
 
 // Styles
 const projectLink = css`
@@ -54,14 +55,31 @@ const projectLink = css`
     transform-origin: center;
     transition: all 0.3s ease-in-out;
   }
+`
 
-  &:hover {
-    img{
-      transform: scale(1.05);
+const portfolioContainer = css`
+  .overlap{
+    transition: all 0.4s ease-out;
+    padding: 0 ${ spacing[ 'p-4' ] };
+    height: 0;
+    opacity: 0;
+
+    > *{
+      transition: all 0.3s ease-out 0.4s;
     }
+  }
 
-     .arrow-icon{
-      transform: translateX(5px);
+  &:hover{
+    .overlap {
+      padding: ${ spacing[ 'p-3' ] } ${ spacing[ 'p-4' ] };
+      opacity: 1;
+      height: 100%;
+      background-color: rgba( ${ hexToRgb( theme.colors.primaryColor ) }, 1);
+
+      *{
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
 `
@@ -77,7 +95,7 @@ const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
   const availableProjects = stateProjects.filter( project => projects.includes( project.id ) )
 
   return availableProjects.map( ( project, index ) =>
-    <Link key={ uuid_v4() } className={ cx( projectLink ) } link={ project.link }>
+    <Link key={ uuid_v4() } className={ cx( projectLink, portfolioContainer ) } link={ project.link }>
       <Row>
         <ProjectItem project={ project } index={ index } link_text={ link_text } />
       </Row>

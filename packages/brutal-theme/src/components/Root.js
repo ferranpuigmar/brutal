@@ -13,7 +13,7 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Projects from './pages/Projects';
-import { breakpoints } from '../assets/styles/variables';
+import { breakpoints, theme_colors } from '../assets/styles/variables';
 import ScreenSizeDetector from 'screen-size-detector'
 import Error404 from './pages/Error404';
 import Loading from './shared/Loading';
@@ -32,6 +32,7 @@ const footerFixed = cssEmotion`
 
 const Main = styled.main`
   margin: 10rem 0 calc(33vw + 18rem + 129px);
+  background-color: ${theme_colors.black}
 `
 
 // Component
@@ -45,7 +46,7 @@ const Root = ( { state } ) =>
   const blackBackground = objPageIDs?.acf.footer_default_black;
 
   const [ isScolling, setIsScolling ] = useState( false );
-  const [ mobilWidth, setMovilWidth ] = useState( true );
+  const [ movilWidth, setMovilWidth ] = useState( true );
   const [ footerFields, setFooterFields ] = useState();
   const [ mainMarginBottom, setMainMarginBottom ] = useState( 0 );
 
@@ -58,9 +59,9 @@ const Root = ( { state } ) =>
 
   useEffect( () =>
   {
-    setMovilWidth( screen.width < breakpoints.md ? true : false )
+    setMovilWidth( screen.width <= breakpoints.md +1 ? true : false )
     window.onscroll = () => setIsScolling( window.pageYOffset > 30 ? true : false )
-    window.onresize = () => screen.width < breakpoints.md ? setMovilWidth( true ) : setMovilWidth( false )
+    window.onresize = () => screen.width <= breakpoints.md ? setMovilWidth( true ) : setMovilWidth( false )
     !footerFields && setFooterFields( state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields )
   }, [] )
 
@@ -84,7 +85,7 @@ const Root = ( { state } ) =>
       <Global styles={ css( styleCSS ) } />
       <GridThemeProvider gridTheme={ gridTheme }>
         <Navbar
-          mobilWidth={ mobilWidth }
+          mobilWidth={ movilWidth }
           scroll={ isScolling }
           footerFields={ footerFields ? footerFields : {} }
         />

@@ -101,6 +101,38 @@ const initImage = css`
   }
 `
 
+const whiteLink = css`
+  &:hover {
+      color: ${ `${ theme.colors.primaryColor }!important` };
+      .arrow-icon,
+      .arrow-icon:after,
+      .arrow-icon:before {
+        background-color: ${ `${ theme.colors.primaryColor }!important` };
+      }
+  }
+`;
+
+const OverLapContent = styled.div`
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+
+  *{
+    opacity: 0;
+    transform: translateY(-10px);
+    color: ${ theme.colors.black };
+  }
+`
+
+const overlapContentTitle = css`
+  ${ mq[ 'lg' ] }{
+    display: none;
+  }
+`
+
 //Component
 const ProjectItem = ( {
   project, index, link_text, libraries
@@ -134,16 +166,21 @@ const ProjectItem = ( {
     <DescriptionWrapper>
       <Html2React html={ description } />
     </DescriptionWrapper>
-    <ArrowLink isAnchor={ false } variant="bold">{ link_text }</ArrowLink>
+    <ArrowLink isAnchor={ false } className={ "nav-arrow", cx( whiteLink ) } variant="bold">{ link_text }</ArrowLink>
   </Col>
 
   const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }>
     { !featuredUrl && <ImgSqueleton /> }
-    <Image className={ cx( initImage, {
-      [ 'isLoaded' ]: featuredUrl
-    } ) } loading="lazy" src={ featuredUrl?.url } width={ featuredUrl?.width } height={ featuredUrl?.height } alt={ title } />
-  </Col >
+    { featuredUrl && <>
+      <OverLapContent className="overlap">
+        <Title className={ cx( overlapContentTitle ) } level={ 3 }>{ title }</Title>
+      </OverLapContent>
+      <Image className={ cx( initImage, {
+        [ 'isLoaded' ]: featuredUrl
+      } ) } loading="lazy" src={ featuredUrl?.url } width={ featuredUrl?.width } height={ featuredUrl?.height } alt={ title } />
+    </> }
 
+  </Col >
   return [ colBg, colContent ]
 }
 

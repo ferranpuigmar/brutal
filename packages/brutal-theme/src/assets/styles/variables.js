@@ -8,7 +8,7 @@ export const breakpoints = {
 }
 
 export const maxWidths = {
-  sm: breakpoints.xs - 40,
+  xs: breakpoints.xs - 40,
   sm: breakpoints.sm - 40,
   md: breakpoints.md - 80,
   lg: breakpoints.lg - 40,

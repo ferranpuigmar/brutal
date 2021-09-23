@@ -70,7 +70,7 @@ const HeroHomeModule = ( {
 
   return (
     <section id="hero">
-      <Block height={ "calc(100vh - 14rem)" } className={ heroWrapper } widthPadding={ true }>
+      <Block height={ "calc(100vh - 10rem)" } className={ heroWrapper } widthPadding={ true }>
         <Container>
           <Row >
             <Col md={ 7 } lg={ 7 } className={ cx( colHero ) }>
