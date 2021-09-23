@@ -169,28 +169,16 @@ const whiteLink = css`
       .arrow-icon, 
       .arrow-icon:after,
       .arrow-icon:before {
-        background-color: ${ `${theme_colors.primaryColor}!important` };
+      background-color: ${ `${theme_colors.primaryColor}!important` };
     }
   }
 `;
 
 const NavMenu = ( { state, open, close, mobilWidth, footerFields, currentPage } ) => {
-  console.log(`currentPage----`, currentPage)
+ 
+  console.log(`mobilWidth`, mobilWidth)
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
-  console.log(`items`, items)
-  // console.log(`window`, window.location.pathname.split("").slice(1,-1).join("") )
-  // const currentPage = window.location.pathname.split("").slice(1,-1).join("")
-  // const [ currentPage, setCurrentPage ] = const [state, setstate] = useState(initialState)
 
-  // console.log(`window------------------`, window.location.pathname.split("").slice(1,-1).join(""), window)
-
-  const [ currentPage2, setCurrentPage ] = useState("")
-  console.log(`currentPage 2`, currentPage)
-
-  useEffect( () =>{
-    window && console.log(`window1`,window.location.pathname.split("").slice(1,-1).join(""),  window)
-    // window && setCurrentPage( window.location.pathname.split("").slice(1,-1).join(""));
-  }, [] )
   return (
 
     <Ul open={ open }>

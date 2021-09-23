@@ -55,15 +55,10 @@ const projectLink = css`
     transition: all 0.3s ease-in-out;
   }
 
-  &:hover {
-    img{
-      transform: scale(1.05);
-    }
-
-     .arrow-icon{
-      transform: translateX(5px);
-    }
-  }
+  ${'' /* &:hover {
+    img{ transform: scale(1.05); }
+    .arrow-icon{ transform: translateX(5px); }
+  } */}
 `
 
 // Component

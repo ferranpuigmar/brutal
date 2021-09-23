@@ -9,7 +9,7 @@ import { spacing } from '../../assets/styles/spacing';
 import { mq } from '../../assets/styles/mediaqueries';
 import { v4 as uuid_v4 } from "uuid";
 import { hexToRgb } from '../utils/colors';
-import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
+import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock, theme_colors } from '../../assets/styles/variables';
 
 // Styles
 const DescriptionWrapper = styled.div`
@@ -74,6 +74,59 @@ const blockColImg = css`
   }
 `
 
+const whiteLink = css`
+  &:hover {
+      color: ${ `${theme.colors.primaryColor}!important` };
+      .arrow-icon, 
+      .arrow-icon:after,
+      .arrow-icon:before {
+        background-color: ${ `${theme.colors.primaryColor}!important` };
+      }
+  }
+`;
+
+const OverLapContent = styled.div`
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+
+  *{
+    opacity: 0;
+    transform: translateY(-10px);
+    color: ${ theme.colors.black };
+  }
+`
+
+const portfolioContainer = css`
+  > div{
+    transition: all 0.4s ease-out;
+    padding: 0 ${ spacing[ 'p-4' ] };
+    height: 0;
+    opacity: 0;
+
+    > *{
+      transition: all 0.3s ease-out 0.4s;
+    }
+  }
+
+  &:hover{
+    > div {
+      padding: ${ spacing[ 'p-3' ] } ${ spacing[ 'p-4' ] };
+      opacity: 1;
+      height: 100%;
+      background-color: rgba( ${ hexToRgb( theme.colors.primaryColor ) }, 1);
+
+      *{
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+`
+
 //Component 
 const ProjectItem = ( {
   project, index, link_text, libraries
@@ -87,15 +140,31 @@ const ProjectItem = ( {
   const link = project?.link;
   const bg_url = project?.project_media_url;
 
+  // <SideBig className={ cx( 'big', portfolioContainer ) }>
+  //         <OverLapContent className="overlap">
+  //           <Title level={ 3 }>{ big.title.rendered }</Title>
+  //         </OverLapContent>
+  //         <Link link={ big.link }>
+  //           <ImgBigSet><img alt={ big.title.rendered } src={ bigImage } /></ImgBigSet>
+  //         </Link>
+  //       </SideBig>
+
   const colContent = <Col key={ uuid_v4() } md={ 6 } className={ cx( block ) }>
     <Title className={ titleColor } level={ 3 } >{ title }</Title>
     <DescriptionWrapper>
       <Html2React html={ description } />
     </DescriptionWrapper>
-    <ArrowLink isAnchor={ false } variant="bold">{ link_text }</ArrowLink>
+    <ArrowLink isAnchor={ false } className={"nav-arrow",cx(whiteLink)} variant="bold">{ link_text }</ArrowLink>
   </Col>
 
-  const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }><img src={ bg_url } alt={ title } /></Col>
+  const colBg = 
+  <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg, portfolioContainer  ) }>
+    <OverLapContent className="overlap">
+      {/* <Title level={ 3 }>{ title }</Title> */}
+    </OverLapContent>
+    <img src={ bg_url } alt={ title } />
+  </Col>
+ 
 
   return [ colBg, colContent ]
 }

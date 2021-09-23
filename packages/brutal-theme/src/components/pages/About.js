@@ -85,9 +85,7 @@ const ButtonDiv = styled.div`
         }
       }
     }
-    a:hover {
-      color: ${ theme_colors.primaryColor };
-    }
+    
 `
 
 const OnlyTitleDesktop = styled.span`
