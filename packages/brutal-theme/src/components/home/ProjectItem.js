@@ -74,7 +74,7 @@ const blockColImg = css`
   }
 `
 
-//Component 
+//Component
 const ProjectItem = ( {
   project, index, link_text, libraries
 } ) =>
@@ -85,7 +85,7 @@ const ProjectItem = ( {
   const title = project?.title.rendered;
   const description = project?.excerpt.rendered;
   const link = project?.link;
-  const bg_url = project?.project_media_url;
+  // const bg_url = project?.project_media_url;
 
   const colContent = <Col key={ uuid_v4() } md={ 6 } className={ cx( block ) }>
     <Title className={ titleColor } level={ 3 } >{ title }</Title>
@@ -95,7 +95,8 @@ const ProjectItem = ( {
     <ArrowLink isAnchor={ false } variant="bold">{ link_text }</ArrowLink>
   </Col>
 
-  const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }><img src={ bg_url } alt={ title } /></Col>
+  const colBg = '';
+  // const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }><img src={ bg_url } alt={ title } /></Col>
 
   return [ colBg, colContent ]
 }
