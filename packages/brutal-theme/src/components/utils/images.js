@@ -17,6 +17,28 @@ export const calculateSrcSet = ( sizes ) =>
     .sort( orderByBreakpoint )
 }
 
+export const calculateImageAttributes = ( sizes ) =>
+{
+  if ( !sizes ) return [];
+  return Object.keys( sizes )
+    .reduce( ( acc, size ) =>
+    {
+      const sizesOption = {
+        url: sizes[ size ].source_url,
+        width: sizes[ size ].width,
+        height: sizes[ size ].height
+      }
+      return [ ...acc, { ...sizesOption } ]
+    }, [] )
+}
+
+export const getFeaturedImageUrl = ( sizes, maxSize ) =>
+{
+  if ( !sizes ) return '';
+  const sizeFormats = calculateImageAttributes( sizes ).sort( orderByBreakpoint( 'desc' ) );
+  return sizeFormats.find( size => size.width < maxSize );
+}
+
 export const getImageUrlSize = ( sizes, maxSize ) =>
 {
   if ( !sizes ) return '';

@@ -1,5 +1,5 @@
 import { connect, styled } from 'frontity'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col } from 'styled-bootstrap-grid';
 import { theme } from '../../assets/styles/theme';
 import ArrowLink from '../shared/ArrowLink';
@@ -10,6 +10,9 @@ import { mq } from '../../assets/styles/mediaqueries';
 import { v4 as uuid_v4 } from "uuid";
 import { hexToRgb } from '../utils/colors';
 import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
+import { getFeaturedImageUrl } from '../utils/images';
+import { keyframes } from '@emotion/react'
+import Image from "@frontity/components/image";
 
 // Styles
 const DescriptionWrapper = styled.div`
@@ -55,7 +58,6 @@ const titleColor = css`
   width: 100%;
   margin-bottom: ${ spacing[ 'mb-3' ] };
   ${ theme.fontSize.h2 }
-
 `
 
 const blockColImg = css`
@@ -74,18 +76,58 @@ const blockColImg = css`
   }
 `
 
+const loadingImage = keyframes`
+  0%      { opacity: 0.5; }
+  50%      { opacity: 1; }
+  100%    { opacity: 0.5 }
+`;
+
+const ImgSqueleton = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba( ${ hexToRgb( theme.colors.primaryColor ) }, 0.5);
+  animation:${ loadingImage } 1s infinite 0s ease-in-out;
+`
+
+const initImage = css`
+  opacity: 0;
+  transition: all 1s ease-in-out;
+
+  &.isLoaded{
+    opacity: 1;
+  }
+`
+
 //Component
 const ProjectItem = ( {
   project, index, link_text, libraries
 } ) =>
 {
   const Html2React = libraries.html2react.Component;
-
-  const evenRow = index % 2 === 0;
   const title = project?.title.rendered;
   const description = project?.excerpt.rendered;
-  const link = project?.link;
-  // const bg_url = project?.project_media_url;
+  const imageId = project?.featured_media;
+
+  const [ featuredUrl, setFeaturedUrl ] = useState();
+
+  const loadFeaturedMedia = async ( id ) =>
+  {
+    const requestFeaturedMedia = await libraries.source.api.get( {
+      endpoint: `/wp/v2/media/${ id }`
+    } )
+
+    const response = await requestFeaturedMedia.json();
+
+    setFeaturedUrl( getFeaturedImageUrl( response.media_details.sizes, 1600 ) )
+  }
+
+  useEffect( () =>
+  {
+    loadFeaturedMedia( imageId );
+  }, [] )
 
   const colContent = <Col key={ uuid_v4() } md={ 6 } className={ cx( block ) }>
     <Title className={ titleColor } level={ 3 } >{ title }</Title>
@@ -95,8 +137,12 @@ const ProjectItem = ( {
     <ArrowLink isAnchor={ false } variant="bold">{ link_text }</ArrowLink>
   </Col>
 
-  const colBg = '';
-  // const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }><img src={ bg_url } alt={ title } /></Col>
+  const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }>
+    { !featuredUrl && <ImgSqueleton /> }
+    <Image className={ cx( initImage, {
+      [ 'isLoaded' ]: featuredUrl
+    } ) } loading="lazy" src={ featuredUrl?.url } width={ featuredUrl?.width } height={ featuredUrl?.height } alt={ title } />
+  </Col >
 
   return [ colBg, colContent ]
 }
