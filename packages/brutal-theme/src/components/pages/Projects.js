@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, connect } from 'frontity';
 import Container from '../layout/Container';
-import GridRow from './GridRow';
+import GridRow from '../layout/GridRow';
 import { v4 as uuid_v4 } from "uuid";
 import Title from '../shared/Title';
 import PageWrapper from '../shared/PageWrapper';
@@ -30,7 +30,7 @@ const Projects = ( { state, libraries } ) =>
     <section className="projects-grid">
       <PageWrapper>
         <Container>
-          <Title level={ 1 } ><Html2React html={pageTitle}/></Title>
+          <Title level={ 1 } ><Html2React html={ pageTitle } /></Title>
           <Grid>
             { dataProjects && rows.map( row =>
             {

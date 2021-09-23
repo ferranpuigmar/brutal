@@ -1,7 +1,7 @@
 import { connect, styled } from 'frontity';
 import React from 'react'
 import Title from '../shared/Title';
-import Container from './Container';
+import Container from '../layout/Container';
 import { css, cx } from '@emotion/css'
 import { spacing } from '../../assets/styles/spacing';
 import PageWrapper from '../shared/PageWrapper';
@@ -80,7 +80,7 @@ const ButtonDiv = styled.div`
     }
   }
   a:hover {
-    color: ${theme_colors.primaryColor};
+    color: ${ theme_colors.primaryColor };
   }
 `
 

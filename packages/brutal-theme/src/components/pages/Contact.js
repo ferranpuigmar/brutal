@@ -1,7 +1,7 @@
 import { connect } from 'frontity';
 import React from 'react'
 import Title from '../shared/Title';
-import Container from './Container';
+import Container from '../layout/Container';
 import { Row, Col } from 'styled-bootstrap-grid';
 import { css, cx } from '@emotion/css'
 import { spacing } from '../../assets/styles/spacing';

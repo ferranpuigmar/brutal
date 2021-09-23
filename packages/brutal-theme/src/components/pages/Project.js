@@ -1,6 +1,5 @@
 import { connect } from 'frontity';
 import React, { useEffect, useState } from 'react'
-import Container from './Container';
 import { Row, Col } from 'styled-bootstrap-grid';
 import Text from '../shared/Text';
 import Title from '../shared/Title';
@@ -12,6 +11,7 @@ import OtherProjects from '../project/OtherProjects';
 import { v4 as uuid_v4 } from "uuid";
 import PageWrapper from '../shared/PageWrapper';
 import Loading from '../shared/Loading';
+import Container from '../layout/Container';
 
 
 // STYLES

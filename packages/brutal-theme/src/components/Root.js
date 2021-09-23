@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Global, css, connect, Head, styled } from "frontity";
 import Switch from "@frontity/components/switch";
-import Project from './layout/Project';
-import Home from './layout/Home';
+import Project from './pages/Project';
+import Home from './pages/Home';
 import Footer from './shared/Footer';
 import FontFace from './shared/FontFace';
 import { GridThemeProvider } from 'styled-bootstrap-grid';
 import { gridTheme } from '../assets/styles/grid';
 import styleCSS from '../assets/styles/style.css'
 import Navbar from './shared/header/Navbar';
-import Services from './layout/Services';
-import Contact from './layout/Contact';
-import About from './layout/About';
-import Projects from './layout/Projects';
+import Services from './pages/Services';
+import Contact from './pages/Contact';
+import About from './pages/About';
+import Projects from './pages/Projects';
 import { breakpoints } from '../assets/styles/variables';
 import ScreenSizeDetector from 'screen-size-detector'
-import Error404 from './layout/Error404';
+import Error404 from './pages/Error404';
 import Loading from './shared/Loading';
 import { cx, css as cssEmotion } from '@emotion/css';
 

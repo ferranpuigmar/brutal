@@ -1,10 +1,10 @@
 import { connect, styled } from 'frontity';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Col, Row } from 'styled-bootstrap-grid';
 import { spacing } from '../../assets/styles/spacing';
 import Title from '../shared/Title';
 import { css, cx } from '@emotion/css'
-import Container from './Container';
+import Container from '../layout/Container';
 import { mq } from '../../assets/styles/mediaqueries';
 import { theme } from '../../assets/styles/theme';
 import Block from '../shared/Block';
