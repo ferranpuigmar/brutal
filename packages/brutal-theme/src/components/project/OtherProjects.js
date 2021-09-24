@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'frontity';
 import Container from '../layout/Container';
 import { styled } from 'frontity';
 import { spacing } from '../../assets/styles/spacing';
 import Title from '../shared/Title';
-import { getMediaUrl } from '../utils/images';
 import { theme } from '../../assets/styles/theme';
 import Block from '../shared/Block';
 import { cx, css } from '@emotion/css';
-import { mq } from '../../assets/styles/variables';
+import { breakpoints, mq } from '../../assets/styles/variables';
 import { hexToRgb } from '../utils/colors';
-import Link from "@frontity/components/link";
+import GridImage from '../layout/GridImage';
+import { portfolioContainer } from '../layout/GridRow';
 
 // Styles 
 const title = css`
@@ -18,16 +18,23 @@ const title = css`
 `
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: middle;
   justify-content: ${ props => props.otherProjectsNumber < 4 ? 'flex-start' : 'space-around' };
 
+  > * {
+    margin-bottom: ${ spacing[ 'mb-8' ] };
+  }
+
   ${ mq[ 'sm' ] }{
+    flex-direction: row;
+    flex-wrap: nowrap;
     margin: 0 -${ spacing[ 'm-4' ] };
   }
 `
 
 const WrapperLink = styled.div`
-  display: block;
+  display: inline-flex;
   height: 250px;
   width: 100%;
   position: relative;
@@ -64,22 +71,12 @@ const WrapperLink = styled.div`
       }
     }
   }
-`
 
-const OtherProjectImg = styled.img`
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-`
-
-const WrapperInfo = styled.div`
-  width: 100%;
-  height: 0;
-  position: absolute;
-  pointer-events: none;
-
-  h2{
-    color: ${ theme.colors.black }
+  img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    color: #fff;
   }
 `
 
@@ -97,18 +94,10 @@ const OtherProjects = ( { state, currentProject } ) =>
             <Title level={ 3 } className={ cx( title ) }>Otros Proyectos</Title>
             <Wrapper otherProjectsNumber={ projects.length }>
               { projects.map( project =>
-              {
-                return (
-                  <WrapperLink key={ project.id }>
-                    <WrapperInfo>
-                      <Title level={ 2 }>{ project.title.rendered }</Title>
-                    </WrapperInfo>
-                    <Link link={ project.link }>
-                      <OtherProjectImg src={ getMediaUrl( project, 1600 ) } alt={ project.title.rendered }></OtherProjectImg>
-                    </Link>
-                  </WrapperLink>
-                )
-              } ) }
+                <WrapperLink key={ project.id } className={ cx( portfolioContainer ) }>
+                  <GridImage item={ project } maxSize={ 500 } />
+                </WrapperLink>
+              ) }
             </Wrapper>
           </Container>
         </Block>

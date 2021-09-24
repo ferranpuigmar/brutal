@@ -12,6 +12,8 @@ import { v4 as uuid_v4 } from "uuid";
 import PageWrapper from '../shared/PageWrapper';
 import Loading from '../shared/Loading';
 import Container from '../layout/Container';
+import { calculateSrcSet, getImageUrlSize } from '../utils/images';
+import CustomImage from '../shared/CustomImage';
 
 
 // STYLES
@@ -137,8 +139,9 @@ const ProjectTags = ( { tagLabel, tagValue } ) =>
 
 const PortfolioList = ( { portfolio, projectName } ) =>
 {
+  console.log( 'porfolio: ', portfolio )
   return <div>
-    { portfolio.map( ( portfolioImage, index ) => <PortFolioImageWrapper key={ uuid_v4() }><img src={ portfolioImage.imagen } alt={ `${ projectName } portfolio` } /></PortFolioImageWrapper> ) }
+    { portfolio.map( ( portfolioImage, index ) => <PortFolioImageWrapper key={ uuid_v4() }><CustomImage srcSet={ portfolioImage.imagen.sizes } src={ portfolioImage.imagen.url } alt={ `${ projectName } portfolio` } /></PortFolioImageWrapper> ) }
   </div>
 }
 

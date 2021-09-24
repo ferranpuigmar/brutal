@@ -26,13 +26,18 @@ const OverLapContent = styled.div`
 const imageStatus = css`
   transition: all 1s ease-in-out;
   opacity: 0;
+  height: 100%;
 
   &.isLoaded{
     opacity: 1;
   }
 `
 
-const GridImage = ( { item, libraries } ) =>
+const linkBlock = css`
+  display: block;
+`
+
+const GridImage = ( { item, maxSize = 1600, libraries } ) =>
 {
   const [ featuredUrl, setFeaturedUrl ] = useState( null );
   const [ loading, setIsLoading ] = useState( true );
@@ -43,7 +48,7 @@ const GridImage = ( { item, libraries } ) =>
       endpoint: `/wp/v2/media/${ item.featured_media }`
     } )
     const response = await requestFeaturedMedia.json();
-    const imageObj = getFeaturedImageUrl( response.media_details.sizes, 1600 );
+    const imageObj = getFeaturedImageUrl( response.media_details.sizes, maxSize );
     setFeaturedUrl( imageObj )
   }
 
@@ -54,7 +59,7 @@ const GridImage = ( { item, libraries } ) =>
 
   return <>
     <ImageSkeleton isLoading={ loading } />
-    <Link link={ item?.link }>
+    <Link link={ item?.link } className={ linkBlock }>
       { !loading && <OverLapContent className="overlap">
         <Title level={ 3 }>{ item?.title.rendered }</Title>
       </OverLapContent> }

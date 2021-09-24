@@ -119,7 +119,7 @@ const imgBigSet = css`
 
 `;
 
-const portfolioContainer = css`
+export const portfolioContainer = css`
   .overlap{
     transition: all 0.4s ease-out;
     padding: 0 ${ spacing[ 'p-4' ] };

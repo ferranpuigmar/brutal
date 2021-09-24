@@ -32,7 +32,7 @@ const footerFixed = cssEmotion`
 
 const Main = styled.main`
   margin: 10rem 0 calc(33vw + 18rem + 129px);
-  background-color: ${theme_colors.black}
+  background-color: ${ theme_colors.black }
 `
 
 // Component
@@ -59,7 +59,7 @@ const Root = ( { state } ) =>
 
   useEffect( () =>
   {
-    setMovilWidth( screen.width <= breakpoints.md +1 ? true : false )
+    setMovilWidth( screen.width <= breakpoints.md + 1 ? true : false )
     window.onscroll = () => setIsScolling( window.pageYOffset > 30 ? true : false )
     window.onresize = () => screen.width <= breakpoints.md ? setMovilWidth( true ) : setMovilWidth( false )
     !footerFields && setFooterFields( state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields )
