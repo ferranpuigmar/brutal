@@ -181,8 +181,7 @@ const ProjectItem = ( {
         [ 'isLoaded' ]: featuredUrl
       } ) } loading="lazy" src={ featuredUrl?.url } width={ featuredUrl?.width } height={ featuredUrl?.height } alt={ title } />
     </> }
-
-  </Col >
+  </Col>
   return [ colBg, colContent ]
 }
 
