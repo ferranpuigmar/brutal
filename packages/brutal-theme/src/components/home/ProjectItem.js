@@ -14,7 +14,7 @@ import { getFeaturedImageUrl } from '../utils/images';
 import { keyframes } from '@emotion/react'
 import Image from "@frontity/components/image";
 import ImageSkeleton from '../shared/ImageSkeleton';
-
+import CustomImage from '../shared/CustomImage';
 
 // Styles
 const DescriptionWrapper = styled.div`
@@ -96,7 +96,8 @@ const ImgSqueleton = styled.div`
 
 const initImage = css`
   opacity: 0;
-  transition: all 1s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
 
   &.isLoaded{
     opacity: 1;
@@ -145,17 +146,16 @@ const ProjectItem = ( {
   const description = project?.excerpt.rendered;
   const imageId = project?.featured_media;
 
-  const [ featuredUrl, setFeaturedUrl ] = useState();
+  const [ featuredUrl, setFeaturedUrl ] = useState( null );
+  const [ isLoading, setIsLoading ] = useState( true );
 
   const loadFeaturedMedia = async ( id ) =>
   {
     const requestFeaturedMedia = await libraries.source.api.get( {
       endpoint: `/wp/v2/media/${ id }`
     } )
-
     const response = await requestFeaturedMedia.json();
-
-    setFeaturedUrl( getFeaturedImageUrl( response.media_details.sizes, 1600 ) )
+    setFeaturedUrl( response )
   }
 
   useEffect( () =>
@@ -172,15 +172,15 @@ const ProjectItem = ( {
   </Col>
 
   const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }>
-    <ImageSkeleton isLoading={ !featuredUrl } />
-    { featuredUrl && <>
+    <ImageSkeleton isLoading={ isLoading } />
+    { <div className={ cx( initImage, {
+      [ 'isLoaded' ]: !isLoading
+    } ) }>
       <OverLapContent className="overlap">
         <Title className={ cx( overlapContentTitle ) } level={ 3 }>{ title }</Title>
       </OverLapContent>
-      <Image className={ cx( initImage, {
-        [ 'isLoaded' ]: featuredUrl
-      } ) } loading="lazy" src={ featuredUrl?.url } width={ featuredUrl?.width } height={ featuredUrl?.height } alt={ title } />
-    </> }
+      { featuredUrl && <CustomImage loading="lazy" width={ featuredUrl.media_details.width } height={ featuredUrl.media_details.height } src={ featuredUrl.source_url } srcSet={ featuredUrl.media_details.sizes } alt={ title } onLoad={ () => setIsLoading( false ) } /> }
+    </div> }
   </Col>
   return [ colBg, colContent ]
 }

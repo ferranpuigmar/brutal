@@ -3,18 +3,22 @@ import { orderByBreakpoint } from "./order"
 export const calculateSrcSet = ( sizes ) =>
 {
   if ( !sizes ) return;
-  return Object.keys( sizes )
-    .filter( size => typeof ( sizes[ size ] ) === 'string' )
+  console.log( 'sizes: ', sizes )
+  const srcSet = Object.keys( sizes )
+    .filter( size => typeof ( sizes[ size ] ) === 'string' || Object )
     .reduce( ( acc, size ) =>
     {
       const sizesOption = {
         brakpoint: size,
-        url: sizes[ size ],
-        width: sizes[ `${ size }-width` ]
+        url: sizes[ size ].source_url || sizes[ size ],
+        width: sizes[ `${ size }-width` ] || sizes[ size ].width
       }
       return [ ...acc, { ...sizesOption } ]
     }, [] )
     .sort( orderByBreakpoint )
+  console.log( 'srcSet: ', Object.keys( sizes ).filter( size => typeof ( sizes[ size ] ) === 'string' || Object ) )
+
+  return srcSet
 }
 
 export const calculateImageAttributes = ( sizes ) =>

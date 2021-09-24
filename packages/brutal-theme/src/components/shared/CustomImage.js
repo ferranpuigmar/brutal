@@ -4,6 +4,7 @@ import { calculateSrcSet } from '../utils/images';
 const CustomImage = ( { srcSet, className, ...rest } ) =>
 {
   const srcSetSizes = calculateSrcSet( srcSet );
+
   const srcset = srcSetSizes.map( image => `${ image.url } ${ image.width }px` ).join( ',' )
 
   return (

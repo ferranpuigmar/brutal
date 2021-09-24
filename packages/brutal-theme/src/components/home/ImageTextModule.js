@@ -9,6 +9,7 @@ import { getImageUrlSize } from '../utils/images';
 import { mq } from '../../assets/styles/mediaqueries';
 import { v4 as uuid_v4 } from "uuid";
 import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
+import CustomImage from '../shared/CustomImage';
 
 // Styles
 const block = css`
@@ -109,7 +110,7 @@ const ImageTextModule = ( {
         case 'description':
           return <div key={ uuid_v4() } className={ cx( moduleDescription ) }><Html2React html={ description } /></div>
         case 'image':
-          return <img key={ uuid_v4() } src={ getImageUrlSize( image.sizes, 1600 ).url } alt={ title } />
+          return <CustomImage key={ uuid_v4() } src={ image.url } srcSet={ image.sizes } alt={ title } />
         default:
           return null
       }
