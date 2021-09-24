@@ -46,9 +46,9 @@ export const getImageUrlSize = ( sizes, maxSize ) =>
   return sizeFormats.find( size => size.width < maxSize );
 }
 
-export const getMediaUrl = ( project, maxSize, state ) =>
+export const getMediaUrl = async ( project, maxSize, state ) =>
 {
-  const media = state ? state.source.attachment[ project.featured_media ] : project.featured_media;
+  const media = await state ? state.source.attachment[ project.featured_media ] : project.featured_media;
   const urlList = Object.values( media.media_details.sizes ).sort( orderByBreakpoint( 'desc' ) )
   const url = urlList.find( urlListItem => urlListItem.width < maxSize ).source_url
   return url;

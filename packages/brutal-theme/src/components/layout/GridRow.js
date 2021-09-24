@@ -1,13 +1,11 @@
 import React from 'react';
-import { styled, connect } from 'frontity';
+import { styled } from 'frontity';
 import { breakpoints } from '../../assets/styles/variables';
-import Link from "@frontity/components/link";
-import { getMediaUrl } from '../utils/images';
-import Title from '../shared/Title';
 import { spacing } from '../../assets/styles/spacing';
 import { theme } from '../../assets/styles/theme';
 import { hexToRgb } from '../utils/colors';
 import { css, cx } from '@emotion/css'
+import GridImage from './GridImage';
 
 
 // STYLES
@@ -17,6 +15,7 @@ const Big = styled.div`
   a{
     display: block;
     height: 100%;
+    width: 100%;
   }
 `;
 
@@ -83,13 +82,14 @@ const BiVertical = styled.div`
     margin-bottom: ${ spacing[ 'mb-5' ] };
   }
 `;
-const ImgSmallSet = styled.div`
+const imgSmallSet = css`
   display: flex;
   justify-content:center;
-  
+
   img {
-    min-width: 100%;
+    /* min-width: 100%; */
     min-height: 30vh;
+    width: 100%;
     object-fit: cover;
 
     @media (max-width: ${ breakpoints[ "md" ] }px) {
@@ -99,12 +99,13 @@ const ImgSmallSet = styled.div`
   }
 `;
 
-const ImgBigSet = styled.div`
+const imgBigSet = css`
   display: flex;
 
   img {
-    min-width: 100%;
-    height: 60vh;
+    /* min-width: 100%;
+    height: 60vh; */
+    width: 100%;
     object-fit: cover;
     min-height: 350px;
     color: #fff;
@@ -118,23 +119,8 @@ const ImgBigSet = styled.div`
 
 `;
 
-const OverLapContent = styled.div`
-  position:absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 2;
-  pointer-events: none;
-
-  *{
-    opacity: 0;
-    transform: translateY(-10px);
-    color: ${ theme.colors.black };
-  }
-`
-
 const portfolioContainer = css`
-  > div{
+  .overlap{
     transition: all 0.4s ease-out;
     padding: 0 ${ spacing[ 'p-4' ] };
     height: 0;
@@ -146,7 +132,7 @@ const portfolioContainer = css`
   }
 
   &:hover{
-    > div {
+    .overlap {
       padding: ${ spacing[ 'p-3' ] } ${ spacing[ 'p-4' ] };
       opacity: 1;
       height: 100%;
@@ -160,42 +146,21 @@ const portfolioContainer = css`
   }
 `
 
-
 // COMPONENT
 const GridRow = ( { bigRight, big, top, bottom } ) =>
 {
-
-  const bigImage = getMediaUrl( big, 1000 );
-  const smallTopImage = getMediaUrl( top, 1000 );
-  const smallBottomImage = getMediaUrl( bottom, 1000 );
-
   return (
     <Big>
       <Row className={ bigRight && "bigright" } >
-        <SideBig className={ cx( 'big', portfolioContainer ) }>
-          <OverLapContent className="overlap">
-            <Title level={ 3 }>{ big.title.rendered }</Title>
-          </OverLapContent>
-          <Link link={ big.link }>
-            <ImgBigSet><img alt={ big.title.rendered } src={ bigImage } /></ImgBigSet>
-          </Link>
+        <SideBig className={ cx( 'big', portfolioContainer, imgBigSet ) }>
+          <GridImage item={ big } />
         </SideBig>
         <SideSmall>
-          <BiVertical className={ cx( portfolioContainer ) }>
-            <OverLapContent className="overlap">
-              <Title level={ 3 }>{ top.title.rendered }</Title>
-            </OverLapContent>
-            <Link link={ top.link }>
-              <ImgSmallSet><img alt={ top.title.rendered } src={ smallTopImage } /></ImgSmallSet>
-            </Link>
+          <BiVertical className={ cx( portfolioContainer, imgSmallSet ) }>
+            <GridImage item={ top } />
           </BiVertical>
-          <BiVertical className={ cx( portfolioContainer ) }>
-            <OverLapContent className="overlap">
-              <Title level={ 3 }>{ bottom.title.rendered }</Title>
-            </OverLapContent>
-            <Link link={ bottom.link }>
-              <ImgSmallSet><img alt={ bottom.title.rendered } src={ smallBottomImage } /></ImgSmallSet>
-            </Link>
+          <BiVertical className={ cx( portfolioContainer, imgSmallSet ) }>
+            <GridImage item={ bottom } />
           </BiVertical>
         </SideSmall>
       </Row>
@@ -203,4 +168,4 @@ const GridRow = ( { bigRight, big, top, bottom } ) =>
   )
 }
 
-export default connect( GridRow )
+export default GridRow

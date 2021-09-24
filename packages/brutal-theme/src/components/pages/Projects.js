@@ -4,25 +4,19 @@ import Container from '../layout/Container';
 import GridRow from '../layout/GridRow';
 import { v4 as uuid_v4 } from "uuid";
 import Title from '../shared/Title';
-import PageWrapper from '../shared/PageWrapper';
 import Loading from '../shared/Loading';
+import Block from '../shared/Block'
 
 const Grid = styled.div`
   margin: 3vh 0 0;
 `;
 
-const Projects = ( { state, libraries } ) =>
+const Projects = ( { state } ) =>
 {
-  const Html2React = libraries.html2react.Component;
   const data = state.source.get( state.router.link );
-  const pageTitle = state.source[ data.type ][ data.id ].title.rendered;
   const gridRowData = state.source[ data.type ][ data.id ].acf.grid_row;
   const rows = Object.values( gridRowData )
   const dataProjects = state.source.get( `/projectsdata/${ state.theme.projects }/` ).items;
-
-  console.log(`gridRowData`, gridRowData)
-  
-  console.log(`dataProjects`, state.source)
   const getMediaDetails = ( data, id ) =>
   {
     const mediaDetails = data.find( media => media.id === id );
@@ -31,9 +25,9 @@ const Projects = ( { state, libraries } ) =>
 
   return data.isReady ? (
     <section className="projects-grid">
-      <PageWrapper>
+      <Block>
         <Container>
-          <Title level={ 1 } ><Html2React html={ pageTitle } /></Title>
+          <Title level={ 3 } >Proyectos</Title>
           <Grid>
             { dataProjects && rows.map( row =>
             {
@@ -49,8 +43,7 @@ const Projects = ( { state, libraries } ) =>
             } ) }
           </Grid>
         </Container>
-      </PageWrapper>
-
+      </Block>
     </section>
   ) : <Loading />;
 }

@@ -13,6 +13,8 @@ import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../
 import { getFeaturedImageUrl } from '../utils/images';
 import { keyframes } from '@emotion/react'
 import Image from "@frontity/components/image";
+import ImageSkeleton from '../shared/ImageSkeleton';
+
 
 // Styles
 const DescriptionWrapper = styled.div`
@@ -170,7 +172,7 @@ const ProjectItem = ( {
   </Col>
 
   const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }>
-    { !featuredUrl && <ImgSqueleton /> }
+    <ImageSkeleton isLoading={ !featuredUrl } />
     { featuredUrl && <>
       <OverLapContent className="overlap">
         <Title className={ cx( overlapContentTitle ) } level={ 3 }>{ title }</Title>

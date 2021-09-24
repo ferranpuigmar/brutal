@@ -2,9 +2,7 @@ import React from 'react'
 import { styled } from 'frontity';
 import { cx } from '@emotion/css'
 import { theme } from '../../assets/styles/theme';
-import { minPadding } from '../layout/Container';
 import { mq } from '../../assets/styles/mediaqueries';
-import { spacing } from '../../assets/styles/spacing';
 import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
 
 // Styles
