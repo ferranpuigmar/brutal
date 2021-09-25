@@ -87,8 +87,7 @@ const imgSmallSet = css`
   justify-content:center;
 
   img {
-    /* min-width: 100%; */
-    min-height: 30vh;
+    height: 100%;
     width: 100%;
     object-fit: cover;
 
@@ -103,12 +102,11 @@ const imgBigSet = css`
   display: flex;
 
   img {
-    /* min-width: 100%;
-    height: 60vh; */
     width: 100%;
     object-fit: cover;
     min-height: 350px;
     color: #fff;
+    height: 100%;
 
     @media (max-width: ${ breakpoints[ "md" ] }px) {
       min-height: 200px;
