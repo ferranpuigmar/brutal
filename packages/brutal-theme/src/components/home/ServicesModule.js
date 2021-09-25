@@ -1,5 +1,5 @@
 import { connect } from 'frontity'
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Block from '../shared/Block';
 import Container from '../layout/Container'
 import Title from '../shared/Title';

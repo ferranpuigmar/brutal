@@ -140,13 +140,13 @@ const Accordion = ( {
   return <AccordionWrapper>
     <AccordionHeader expand={ expand }>
       <Title className={ cx( accordionTitle ) } level={ 3 }>{ name }</Title>
-      <AccordionCloseBtn onClick={ () => handleExpand() } expand={ expand } />
+      { acf?.areas && <AccordionCloseBtn onClick={ () => handleExpand() } expand={ expand } /> }
     </AccordionHeader>
-    <AccordionContentWrapper expandHeight={ expandHeight } ref={ contentWrapper }>
+    { acf?.areas && <AccordionContentWrapper expandHeight={ expandHeight } ref={ contentWrapper }>
       <AccordionUl ref={ contentUlWrapper } opacityValue={ expand }>
-        { acf.areas.map( service => <AccordionLi key={ uuid_v4() }>{ service.area }</AccordionLi> ) }
+        { Object.values( acf.areas ).map( service => <AccordionLi key={ uuid_v4() }>{ service.area }</AccordionLi> ) }
       </AccordionUl>
-    </AccordionContentWrapper>
+    </AccordionContentWrapper> }
   </AccordionWrapper>
 
 }

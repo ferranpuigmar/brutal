@@ -3,7 +3,6 @@ import { orderByBreakpoint } from "./order"
 export const calculateSrcSet = ( sizes ) =>
 {
   if ( !sizes ) return;
-  console.log( 'sizes: ', sizes )
   const srcSet = Object.keys( sizes )
     .filter( size => typeof ( sizes[ size ] ) === 'string' || Object )
     .reduce( ( acc, size ) =>
@@ -16,7 +15,6 @@ export const calculateSrcSet = ( sizes ) =>
       return [ ...acc, { ...sizesOption } ]
     }, [] )
     .sort( orderByBreakpoint )
-  console.log( 'srcSet: ', Object.keys( sizes ).filter( size => typeof ( sizes[ size ] ) === 'string' || Object ) )
 
   return srcSet
 }

@@ -139,7 +139,6 @@ const ProjectTags = ( { tagLabel, tagValue } ) =>
 
 const PortfolioList = ( { portfolio, projectName } ) =>
 {
-  console.log( 'porfolio: ', portfolio )
   return <div>
     { portfolio.map( ( portfolioImage, index ) => <PortFolioImageWrapper key={ uuid_v4() }><CustomImage srcSet={ portfolioImage.imagen.sizes } src={ portfolioImage.imagen.url } alt={ `${ projectName } portfolio` } /></PortFolioImageWrapper> ) }
   </div>
