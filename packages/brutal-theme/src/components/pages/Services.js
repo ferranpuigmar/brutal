@@ -40,7 +40,7 @@ const GridServicesWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  ${ mq[ "md" ] } {
+  ${ mq[ "sm" ] } {
     margin: 0 -4rem -4rem;
     flex-direction: row;
     flex-wrap: wrap;
@@ -51,7 +51,7 @@ const GridServicesWrapper = styled.div`
     }
   }
 
-  ${ mq[ "lg" ] } {
+  ${ mq[ "xxl" ] } {
     > div{
       width: 33.33%;
     }
