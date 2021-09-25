@@ -139,9 +139,7 @@ const ArrowLink = ( { link, children, className, hoverColor, variant, type, isAn
     <ArrowWrapper className={ cx( "arrow-element", className ) } variant={ variant }>
       {
         isAnchor
-          ? <ArrowAnchorWrapper type={ type } link={ link } >
-            <ArrowLinkContent variant={ variant } children={ children } />
-          </ArrowAnchorWrapper>
+          ? <ArrowAnchorWrapper href={ link } type={ type }><ArrowLinkContent variant={ variant } children={ children } /></ArrowAnchorWrapper>
           : <><ArrowLinkContent variant={ variant } children={ children } /></>
       }
     </ArrowWrapper>
