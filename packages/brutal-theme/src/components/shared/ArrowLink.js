@@ -26,7 +26,8 @@ const handleBtnStyle = ( type ) =>
 const buttonGenerics = {
   display: 'inline-flex',
   alignItems: 'center',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  cursor: 'pointer'
 }
 
 const primarySolid = {
@@ -55,9 +56,11 @@ const ArrowAnchorWrapper = styled.a`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
   &:hover {
-    background-color: ${theme_colors.primaryColor};
+    background-color: ${ theme_colors.primaryColor };
   }
 `
 
@@ -77,7 +80,7 @@ const ArrowWrapper = styled.div`
   }
 
   &:hover{
-    
+
     span:last-child{
       transform: translateX(5px);
     }
@@ -137,8 +140,8 @@ const ArrowLink = ( { link, children, className, hoverColor, variant, type, isAn
       {
         isAnchor
           ? <ArrowAnchorWrapper type={ type } link={ link } >
-              <ArrowLinkContent variant={ variant } children={ children } />
-            </ArrowAnchorWrapper>
+            <ArrowLinkContent variant={ variant } children={ children } />
+          </ArrowAnchorWrapper>
           : <><ArrowLinkContent variant={ variant } children={ children } /></>
       }
     </ArrowWrapper>
