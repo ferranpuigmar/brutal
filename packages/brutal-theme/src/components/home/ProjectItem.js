@@ -1,6 +1,6 @@
 import { connect, styled } from 'frontity'
 import React, { useEffect, useState } from 'react'
-import { Col } from 'styled-bootstrap-grid';
+import { Col, Row } from 'styled-bootstrap-grid';
 import { theme } from '../../assets/styles/theme';
 import ArrowLink from '../shared/ArrowLink';
 import Title from '../shared/Title';
@@ -30,7 +30,6 @@ const DescriptionWrapper = styled.div`
 
 const block = css`
   padding: ${ mobilePaddingBlock }!important;
-  position: relative;
   background-size: cover!important;
   background-position: center;
   background-repeat: no-repeat;
@@ -46,6 +45,14 @@ const block = css`
     display: flex;
     background: ${ theme.colors.white };
     padding: ${ tabletPaddingBlock }!important;
+
+    &.isLeft{
+      padding-left: 0!important;
+    }
+
+    &.isRight{
+      padding-right: 0!important;
+    }
   }
 
   ${ mq[ "lg" ] } {
@@ -62,13 +69,19 @@ const titleColor = css`
   ${ theme.fontSize.h2 }
 `
 
-const blockColImg = css`
-  ${ block };
+const ProjectImg = styled.div`
   display: flex;
   padding: 0!important;
 
+  height: 100%;
+
+
   ${ mq[ "sm" ] } {
     padding: 0!important;
+    position: absolute;
+    left: ${ props => props.isEven ? 0 : 'auto' };
+    right: ${ props => props.isEven ? 'auto' : 0 };
+    width: 50%;
   }
 
   img{
@@ -78,26 +91,11 @@ const blockColImg = css`
   }
 `
 
-const loadingImage = keyframes`
-  0%      { opacity: 0.5; }
-  50%      { opacity: 1; }
-  100%    { opacity: 0.5 }
-`;
-
-const ImgSqueleton = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba( ${ hexToRgb( theme.colors.primaryColor ) }, 0.5);
-  animation:${ loadingImage } 1s infinite 0s ease-in-out;
-`
-
-const initImage = css`
+const projectImageWrapper = css`
   opacity: 0;
   transition: all 0.3s ease-in-out;
   height: 100%;
+  width: 100%;
 
   &.isLoaded{
     opacity: 1;
@@ -138,7 +136,7 @@ const overlapContentTitle = css`
 
 //Component
 const ProjectItem = ( {
-  project, link_text, libraries
+  project, index, link_text, libraries
 } ) =>
 {
   const Html2React = libraries.html2react.Component;
@@ -148,6 +146,8 @@ const ProjectItem = ( {
 
   const [ featuredUrl, setFeaturedUrl ] = useState( null );
   const [ isLoading, setIsLoading ] = useState( true );
+
+  const isEven = index % 2 === 0;
 
   const loadFeaturedMedia = async ( id ) =>
   {
@@ -163,17 +163,19 @@ const ProjectItem = ( {
     loadFeaturedMedia( imageId );
   }, [] )
 
-  const colContent = <Col key={ uuid_v4() } md={ 6 } className={ cx( block ) }>
-    <Title className={ titleColor } level={ 3 } >{ title }</Title>
-    <DescriptionWrapper>
-      <Html2React html={ description } />
-    </DescriptionWrapper>
-    <ArrowLink isAnchor={ false } className={ "nav-arrow", cx( whiteLink ) } variant="bold">{ link_text }</ArrowLink>
-  </Col>
+  const colContent = <Row><Col key={ uuid_v4() } md={ 6 } mdOffset={ isEven ? 6 : 0 }>
+    <div className={ cx( block, { [ 'isLeft' ]: !isEven, [ 'isRight' ]: isEven } ) } >
+      <Title className={ titleColor } level={ 3 } >{ title }</Title>
+      <DescriptionWrapper>
+        <Html2React html={ description } />
+      </DescriptionWrapper>
+      <ArrowLink isAnchor={ false } className={ "nav-arrow", cx( whiteLink ) } variant="bold">{ link_text }</ArrowLink>
+    </div>
+  </Col></Row>
 
-  const colBg = <Col key={ uuid_v4() } md={ 6 } className={ cx( blockColImg ) }>
+  const colBg = <ProjectImg key={ uuid_v4() } isEven={ isEven }>
     <ImageSkeleton isLoading={ isLoading } />
-    { <div className={ cx( initImage, {
+    { <div className={ cx( projectImageWrapper, {
       [ 'isLoaded' ]: !isLoading
     } ) }>
       <OverLapContent className="overlap">
@@ -181,7 +183,7 @@ const ProjectItem = ( {
       </OverLapContent>
       { featuredUrl && <CustomImage loading="lazy" width={ featuredUrl.media_details.width } height={ featuredUrl.media_details.height } src={ featuredUrl.source_url } srcSet={ featuredUrl.media_details.sizes } alt={ title } onLoad={ () => setIsLoading( false ) } /> }
     </div> }
-  </Col>
+  </ProjectImg>
   return [ colBg, colContent ]
 }
 

@@ -9,34 +9,26 @@ import { v4 as uuid_v4 } from "uuid";
 import Link from "@frontity/components/link"
 import { spacing } from '../../assets/styles/spacing';
 import { hexToRgb } from '../utils/colors';
+import Container from '../layout/Container'
 
 // Styles
 const projectLink = css`
+  position: relative;
   text-decoration: none;
   display: block;
   margin-bottom: ${ spacing[ 'mb-6' ] };
-  background-color: ${ theme.colors.white };
+  min-height: 290px;
 
-  > div{
-    margin: 0;
-    position: relative;
+  ${ mq[ 'md' ] }{
+    background-color: ${ theme.colors.white };
   }
 
-  > div > div{
-    &:last-child{
-      position: absolute;
-    }
+  > div{
+    margin: 0 auto;
   }
 
   ${ mq[ 'md' ] }{
     margin-bottom: 0;
-
-    > div > div{
-      &:first-child,
-      &:last-child{
-        position: relative;
-      }
-    }
 
     &:nth-of-type(even) > div > div {
       &:first-child{
@@ -47,6 +39,12 @@ const projectLink = css`
         order: 0;
         position: relative;
       }
+    }
+  }
+
+  @media (max-width: 767px){
+    > div {
+      padding: 0;
     }
   }
 
@@ -91,9 +89,9 @@ const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
 
   return availableProjects.map( ( project, index ) =>
     <Link key={ uuid_v4() } className={ cx( projectLink ) } link={ project.link }>
-      <Row>
+      <Container>
         <ProjectItem project={ project } index={ index } link_text={ link_text } />
-      </Row>
+      </Container>
     </Link>
   )
 
