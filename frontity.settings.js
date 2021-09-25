@@ -2,9 +2,8 @@ const settings = {
   name: "brutal-front",
   state: {
     frontity: {
-      url: "http://test.frontity.org/",
-      title: "Brutal",
-      description: "WordPress installation for Frontity development"
+      url: "http://esmuybrutal.com/",
+      title: "Es Muy Brutal"
     }
   },
   packages: [
