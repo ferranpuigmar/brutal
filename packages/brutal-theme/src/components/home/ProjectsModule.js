@@ -16,7 +16,6 @@ const projectLink = css`
   position: relative;
   text-decoration: none;
   display: block;
-  margin-bottom: ${ spacing[ 'mb-6' ] };
   min-height: 290px;
 
   ${ mq[ 'md' ] }{

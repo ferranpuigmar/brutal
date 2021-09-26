@@ -10,9 +10,6 @@ import { mq } from '../../assets/styles/mediaqueries';
 import { v4 as uuid_v4 } from "uuid";
 import { hexToRgb } from '../utils/colors';
 import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
-import { getFeaturedImageUrl } from '../utils/images';
-import { keyframes } from '@emotion/react'
-import Image from "@frontity/components/image";
 import ImageSkeleton from '../shared/ImageSkeleton';
 import CustomImage from '../shared/CustomImage';
 
@@ -39,6 +36,7 @@ const block = css`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
 
   ${ mq[ "md" ] } {
@@ -94,7 +92,7 @@ const ProjectImg = styled.div`
 const projectImageWrapper = css`
   opacity: 0;
   transition: all 0.3s ease-in-out;
-  height: 100%;
+  min-height: 290px;
   width: 100%;
 
   &.isLoaded{
@@ -134,6 +132,14 @@ const overlapContentTitle = css`
   }
 `
 
+const rowContent = css`
+  display: none!important;
+
+  ${ mq[ 'md' ] }{
+    display: flex!important;
+  }
+`
+
 //Component
 const ProjectItem = ( {
   project, index, link_text, libraries
@@ -163,7 +169,7 @@ const ProjectItem = ( {
     loadFeaturedMedia( imageId );
   }, [] )
 
-  const colContent = <Row><Col key={ uuid_v4() } md={ 6 } mdOffset={ isEven ? 6 : 0 }>
+  const colContent = <Row className={ rowContent }><Col key={ uuid_v4() } md={ 6 } mdOffset={ isEven ? 6 : 0 }>
     <div className={ cx( block, { [ 'isLeft' ]: !isEven, [ 'isRight' ]: isEven } ) } >
       <Title className={ titleColor } level={ 3 } >{ title }</Title>
       <DescriptionWrapper>

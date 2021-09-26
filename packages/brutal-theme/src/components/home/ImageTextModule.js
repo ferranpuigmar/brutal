@@ -1,53 +1,32 @@
-import connect from '@frontity/connect'
+import { connect, styled } from 'frontity'
 import React from 'react'
 import { Col, Row } from 'styled-bootstrap-grid'
 import { css, cx } from '@emotion/css'
 import { theme } from '../../assets/styles/theme';
 import { spacing } from '../../assets/styles/spacing';
 import Title from '../shared/Title';
-import { getImageUrlSize } from '../utils/images';
 import { mq } from '../../assets/styles/mediaqueries';
+import Container from '../layout/Container'
 import { v4 as uuid_v4 } from "uuid";
 import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
 import CustomImage from '../shared/CustomImage';
+import Block from '../shared/Block'
 
 // Styles
 const block = css`
-  padding: ${ mobilePaddingBlock }!important;
   position: relative;
-  background: ${ theme.colors.white };
-  min-height: 329px!important;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 200px!important;
 
-  ${ mq[ "md" ] } {
-    min-height: 550px!important;
-    padding: ${ tabletPaddingBlock }!important;
-  }
 
   ${ mq[ "lg" ] } {
-    padding: ${ desktopPaddingBlock }!important;
+    min-height: 530px!important;
+    padding-right: ${ desktopPaddingBlock }!important;
   }
 `;
-
-
-const blockColImg = css`
-  ${ block };
-  display: flex;
-  padding: 0!important;
-
-  ${ mq[ "sm" ] } {
-    padding: 0!important;
-  }
-
-  img{
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-`
 
 const moduleTitle = css`
   color: ${ theme.colors.black };
@@ -60,7 +39,39 @@ const moduleDescription = css`
 `;
 
 const fullRow = css`
-  margin: 0!important;
+  margin: 0 auto!important;
+`
+
+const Wrapper = styled.div`
+  background: ${ theme.colors.white };
+  position: relative;
+  flex-direction: column;
+
+  ${ mq[ 'lg' ] }{
+    flex-direction: row;
+  }
+`
+
+const ColImage = styled.div`
+  position: relative;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  ${ mq[ 'lg' ] }{
+    position: absolute;
+    width: 50%;
+    align-items: center;
+  }
 `
 
 // External Methods
@@ -121,15 +132,33 @@ const ImageTextModule = ( {
     </>
   }
 
+  const colContent = ( data, position ) =>
+  {
+    return <Block mode="light">
+      <Container className={ fullRow }>
+        <Row>
+          <Col lg={ 6 } lgOffset={ position === 'col_left' ? -6 : 6 } className={ block }>
+            { renderCol( data[ position ] ) }
+          </Col>
+        </Row >
+
+      </Container>
+    </Block>
+  }
+
+  const colImg = ( data, position ) =>
+  {
+    return <ColImage>
+      { renderCol( data[ position ] ) }
+    </ColImage>
+  }
+
   return (
-    <Row className={ cx( fullRow ) }>
-      <Col md={ 6 } className={ cx( data.col_left.image ? blockColImg : block ) }>
-        { renderCol( data.col_left ) }
-      </Col>
-      <Col md={ 6 } className={ cx( data.col_right.image ? blockColImg : block ) }>
-        { renderCol( data.col_right ) }
-      </Col>
-    </Row >
+    <Wrapper>
+      {
+        data.col_left.image ? [ colImg( data, 'col_left' ), colContent( data, 'col_right' ) ] : [ colContent( data, 'col_left' ), colImg( data, 'col_right' ) ]
+      }
+    </Wrapper>
   )
 }
 
