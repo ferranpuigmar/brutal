@@ -10,7 +10,6 @@ import { theme } from '../../assets/styles/theme';
 import Block from '../shared/Block';
 import ServiceItem from '../services/ServiceItem';
 import { renderModule } from '../utils/renderModule';
-import { v4 as uuid_v4 } from "uuid";
 import Loading from '../shared/Loading';
 
 // Styles
@@ -88,13 +87,15 @@ const Services = ( { state, actions, libraries } ) =>
   const {
     col_left_text,
     col_right_text,
-    servic_items,
+    services_items,
     solutions_section_title
   } = post.acf;
 
+  console.log( post.acf )
+
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
-  const services = state.source.get( `/categories/${ state.theme.services }/` ).items;
+  const services = state.source.get( `/categories/${ state.theme.services }/` ).items.filter( service => services_items.includes( service.id ) );
 
   return data.isReady ? (
     <>
@@ -122,7 +123,7 @@ const Services = ( { state, actions, libraries } ) =>
             <GridServicesWrapper>
               {
                 services
-                  ? services.map( service => <ServiceItem key={ uuid_v4() } title={ service.name } data={ service.acf } /> )
+                  ? services.map( service => <ServiceItem key={ service.id } title={ service.name } data={ service.acf } /> )
                   : <Loading />
               }
             </GridServicesWrapper>
