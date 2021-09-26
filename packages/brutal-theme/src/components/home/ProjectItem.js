@@ -184,9 +184,6 @@ const ProjectItem = ( {
     { <div className={ cx( projectImageWrapper, {
       [ 'isLoaded' ]: !isLoading
     } ) }>
-      <OverLapContent className="overlap">
-        <Title className={ cx( overlapContentTitle ) } level={ 3 }>{ title }</Title>
-      </OverLapContent>
       { featuredUrl && <CustomImage loading="lazy" width={ featuredUrl.media_details.width } height={ featuredUrl.media_details.height } src={ featuredUrl.source_url } srcSet={ featuredUrl.media_details.sizes } alt={ title } onLoad={ () => setIsLoading( false ) } /> }
     </div> }
   </ProjectImg>

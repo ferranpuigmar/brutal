@@ -52,28 +52,27 @@ const projectLink = css`
     transition: all 0.3s ease-in-out;
   }
 
-  .overlap{
-    transition: all 0.4s ease-out;
-    padding: 0 ${ spacing[ 'p-4' ] };
-    height: 0;
-    opacity: 0;
-
-    > *{
-      transition: all 0.3s ease-out 0.4s;
-    }
+  .arrow-icon,
+  .arrow-icon:before,
+  .arrow-icon:after {
+    transition: all 0.1s ease-in-out!important;
   }
 
-  &:hover{
-    .overlap {
-      padding: ${ spacing[ 'p-3' ] } ${ spacing[ 'p-4' ] };
-      opacity: 1;
-      height: 100%;
-      background-color: rgba( ${ hexToRgb( theme.colors.primaryColor ) }, 1);
-
-      *{
-        opacity: 1;
-        transform: translateY(0);
+  &:hover {
+    .arrow-element{
+      span{
+        color: ${ theme.colors.primaryColor }!important;
       }
+
+      .arrow-icon,
+      .arrow-icon:before,
+      .arrow-icon:after {
+        background-color: ${ theme.colors.primaryColor }!important;
+      }
+    }
+
+    .arrow-icon {
+      transform: translateX(5px);
     }
   }
 `
