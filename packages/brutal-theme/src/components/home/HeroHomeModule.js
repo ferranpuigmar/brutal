@@ -1,4 +1,4 @@
-import connect from '@frontity/connect'
+import { connect, styled } from 'frontity'
 import React, { useState } from 'react'
 import { Col, Row } from 'styled-bootstrap-grid'
 import CustomImage from '../shared/CustomImage';
@@ -11,11 +11,7 @@ import { theme } from '../../assets/styles/theme';
 import { mq } from '../../assets/styles/mediaqueries';
 import Typewriter from 'typewriter-effect';
 
-// Styles
-const heroWrapper = css`
-  ${ '' /* padding-top: ${ spacing[ 'pt-8' ] }; */ }
-`;
-
+// STYLES
 const heroTitle = css`
   margin-bottom: ${ spacing[ 'mb-8' ] };
   em {
@@ -60,36 +56,64 @@ const imageStyles = css`
   max-width: 300px;
 `
 
+const HeroContent = styled.div`
+  margin-top: ${ spacing[ 'mt-12' ] }
+`
+
+const ColHeroContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const contentTitle = css`
+  ${ theme.fontSize.h3 }
+  font-size: 24px!important;
+  margin-bottom: ${ spacing[ 'mb-4' ] };
+`
+
 const HeroHomeModule = ( {
   libraries,
-  text,
+  title,
+  content,
   image
 } ) =>
 {
+
   const Html2React = libraries.html2react.Component;
 
   return (
     <section id="hero">
-      <Block height={ "calc(100vh - 10rem)" } className={ heroWrapper } widthPadding={ true }>
+      <Block height={ "calc(100vh - 10rem)" } widthPadding={ true }>
         <Container>
           <Row >
-            <Col md={ 7 } lg={ 7 } className={ cx( colHero ) }>
-              <Title level={ 1 } className={ cx( heroTitle ) }>
-                <Typewriter
-                  onInit={ ( typewriter ) =>
-                  {
-                    typewriter.typeString( text )
-                      .start();
-                  } }
-                  options={ {
-                    autoStart: true,
-                    changeDeleteSpeed: 'natural',
-                  } }
-                />
-              </Title>
+            <Col md={ 7 } lg={ 7 } className={ colHero }>
+              <ColHeroContentWrapper>
+                <Title level={ 1 } className={ heroTitle }>
+                  <Typewriter
+                    onInit={
+                      ( typewriter ) =>
+                      {
+                        typewriter.typeString( title )
+                          .start()
+                          .callFunction( () => document.querySelector( '.Typewriter__cursor' ).remove() )
+                      }
+                    }
+                    options={
+                      {
+                        autoStart: true,
+                        changeDeleteSpeed: 'natural',
+                      }
+                    }
+                  />
+                </Title>
+                <HeroContent>
+                  <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
+                  <Html2React html={ content.text } />
+                </HeroContent>
+              </ColHeroContentWrapper>
             </Col>
             <Col md={ 5 } className={ cx( colHero, colImage ) }>
-              <CustomImage className={ cx( imageStyles ) } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
+              <CustomImage className={ imageStyles } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
             </Col>
           </Row>
         </Container>
