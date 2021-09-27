@@ -82,6 +82,7 @@ const BiVertical = styled.div`
     margin-bottom: ${ spacing[ 'mb-5' ] };
   }
 `;
+
 const imgSmallSet = css`
   display: flex;
   justify-content:center;
@@ -112,9 +113,7 @@ const imgBigSet = css`
       min-height: 200px;
       height: 30vh;
     }
-
   }
-
 `;
 
 export const portfolioContainer = css`

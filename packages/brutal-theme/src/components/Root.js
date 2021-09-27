@@ -57,12 +57,17 @@ const Root = ( { state } ) =>
     }
   }
 
+  const loadFrontCover = () => {
+    
+  }
+
   useEffect( () =>
   {
     setMovilWidth( screen.width <= breakpoints.md + 1 ? true : false )
     window.onscroll = () => setIsScolling( window.pageYOffset > 30 ? true : false )
     window.onresize = () => screen.width <= breakpoints.md ? setMovilWidth( true ) : setMovilWidth( false )
     !footerFields && setFooterFields( state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields )
+  
   }, [] )
 
   useEffect( () =>

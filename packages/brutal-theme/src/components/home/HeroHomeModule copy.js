@@ -1,17 +1,15 @@
 import { connect, styled } from 'frontity'
-import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react'
+import { Col, Row } from 'styled-bootstrap-grid'
 import CustomImage from '../shared/CustomImage';
 import { css, cx } from '@emotion/css'
 import Container from '../layout/Container';
 import Title from '../shared/Title';
 import { spacing } from '../../assets/styles/spacing';
+import Block from '../shared/Block';
 import { theme } from '../../assets/styles/theme';
 import { mq } from '../../assets/styles/mediaqueries';
 import Typewriter from 'typewriter-effect';
-
-import Link from "@frontity/components/link"
-import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
-
 
 // STYLES
 const heroTitle = css`
@@ -72,97 +70,23 @@ const contentTitle = css`
   font-size: 24px!important;
   margin-bottom: ${ spacing[ 'mb-4' ] };
 `
-const CoverContainer = styled.div`
-  opacity: 1;
-  min-height: calc(100vh - 9rem);
-  ${'' /* min-height: 100vh; */}
-  display: flex;
-  flex-direction: column;
-  justify-content:center;
-  align-items:center;
 
+const HeroHomeModule = ( {
+  libraries,
+  title,
+  content,
+  image
+} ) =>
+{
 
-  ${ mq[ "md" ] } {
-  flex-direction: row;
-  
-  }
-`
-const CoverCol  = styled.div`
-  ${ mq[ "md" ] } {
-    width: ${ props => props.grow ? props.grow : "" };
-  }
-
-`
-const imgMovil  = css`
-  padding: 2rem 0;
-
-  ${ mq[ "md" ] } {
-    padding-left: 3rem;
-  }
-`
-
-const CoverWrapper = styled.div`
-  width: 100%;
-  padding: ${ mobilePaddingBlock } ;
-  padding-top: 0;
-  background-color: ${theme.colors.black};
-  transition: all 1s linear 1s;
-  opacity: ${ props => props.loadCover ? 1 : 0};
-  transform: ${ props => props.loadCover ? 'translateX(0)' : 'translateX(-50px)'};
-
-
-  ${ mq[ "md" ] } {
-    padding: 0 ${ tabletPaddingBlock };
-  }
-
-  ${ mq[ "lg" ] } {
-    padding: 0 ${ desktopPaddingBlock };
-  }
-  `;
-
-  const GoDown = styled.div`
-    display: flex;
-    justify-content:center;
-    align-items:center;
-  
-  `;
-
-
-  
-  const HeroHomeModule = ( {
-    libraries,
-    state,
-    title,
-    content,
-    image
-  } ) =>
-  {
-    const data = state.source.get( state.router.link );
-    const [ loadCover, setLoadCover] = useState(false);
-    const loadFrontCover = () => {
-      setLoadCover(true)
-    }
-    
-    useEffect(()=> {
-      console.log("object rendered", "loadCover", loadCover)
-
-      !loadCover && window.addEventListener( 'load', loadFrontCover )
-      return () => {
-        window.removeEventListener( 'load', loadFrontCover )
-        setLoadCover(false)
-      }
-    }, [loadCover] )
-      
-    const Html2React = libraries.html2react.Component;
+  const Html2React = libraries.html2react.Component;
 
   return (
     <section id="hero">
-    
-      <CoverWrapper loadCover={loadCover} widthPadding={ true }>
-      {/* <CoverWrapper height={ "calc(100vh - 10rem)" } widthPadding={ true }> */}
+      <Block height={ "calc(100vh - 10rem)" } widthPadding={ true }>
         <Container>
-          <CoverContainer>
-            <CoverCol grow={"60%"} className={ colHero }>
+          <Row >
+            <Col md={ 7 } lg={ 7 } className={ colHero }>
               <ColHeroContentWrapper>
                 <Title level={ 1 } className={ heroTitle }>
                   <Typewriter
@@ -187,13 +111,13 @@ const CoverWrapper = styled.div`
                   <Html2React html={ content.text } />
                 </HeroContent>
               </ColHeroContentWrapper>
-            </CoverCol>
-            <CoverCol  grow={"40%"} className={ cx( colHero, colImage, imgMovil ) }>
+            </Col>
+            <Col md={ 5 } className={ cx( colHero, colImage ) }>
               <CustomImage className={ imageStyles } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
-            </CoverCol>
-          </CoverContainer>
+            </Col>
+          </Row>
         </Container>
-      </CoverWrapper>
+      </Block>
     </section>
   )
 }

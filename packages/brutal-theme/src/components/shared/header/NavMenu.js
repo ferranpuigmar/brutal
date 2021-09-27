@@ -32,9 +32,12 @@ const Ul = styled.ul`
   z-index: 10;
 
   li { 
-    margin: auto 2rem; 
+    margin: auto 3.5rem; 
     text-align: center;
     
+    @media (max-width: ${ breakpoints[ "xl" ] }px) {
+    margin: auto 2rem; 
+    }  
     @media (max-width: ${ breakpoints[ "lg" ] }px) {
       margin: auto 0 auto 1.5rem; 
     }  

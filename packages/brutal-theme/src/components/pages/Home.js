@@ -3,7 +3,7 @@ import React from 'react'
 import Loading from '../shared/Loading';
 import { renderModule } from '../utils/renderModule';
 
-const Home = ( { state } ) =>
+const Home = ( { state,  } ) =>
 {
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
