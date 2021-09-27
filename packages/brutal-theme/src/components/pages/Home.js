@@ -27,5 +27,5 @@ const Home = ( { state,  } ) =>
     </>
   ) : <Loading />;
 }
-
+ 
 export default connect( Home );

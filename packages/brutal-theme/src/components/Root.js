@@ -32,13 +32,14 @@ const footerFixed = cssEmotion`
 
 const Main = styled.main`
   margin: 10rem 0 calc(33vw + 18rem + 129px);
-  background-color: ${ theme_colors.black }
+  background-color: ${ theme_colors.black };
+
 `
 
 // Component
 const screen = typeof window !== 'undefined' && new ScreenSizeDetector(); // Default options
 
-const Root = ( { state } ) =>
+const Root = ( { state, actions } ) =>
 {
   const footerRef = useRef( null );
   const data = state.source.get( state.router.link );
@@ -57,14 +58,15 @@ const Root = ( { state } ) =>
     }
   }
 
-  const loadFrontCover = () => {
-    
-  }
 
   useEffect( () =>
   {
     setMovilWidth( screen.width <= breakpoints.md + 1 ? true : false )
-    window.onscroll = () => setIsScolling( window.pageYOffset > 30 ? true : false )
+    window.onscroll = () => {    
+      setIsScolling( window.pageYOffset > 30 ? true : false )
+      actions.theme.setWindowScroll(Math.round(window.pageYOffset))
+    }
+    
     window.onresize = () => screen.width <= breakpoints.md ? setMovilWidth( true ) : setMovilWidth( false )
     !footerFields && setFooterFields( state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields )
   

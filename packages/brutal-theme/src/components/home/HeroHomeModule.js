@@ -106,9 +106,9 @@ const CoverWrapper = styled.div`
   padding: ${ mobilePaddingBlock } ;
   padding-top: 0;
   background-color: ${theme.colors.black};
-  transition: all 1s linear 1s;
+  ${'' /* transition: all 1s linear 1s;
   opacity: ${ props => props.loadCover ? 1 : 0};
-  transform: ${ props => props.loadCover ? 'translateX(0)' : 'translateX(-50px)'};
+  transform: ${ props => props.loadCover ? 'translateX(0)' : 'translateX(-50px)'}; */}
 
 
   ${ mq[ "md" ] } {
@@ -138,28 +138,28 @@ const CoverWrapper = styled.div`
   } ) =>
   {
     const data = state.source.get( state.router.link );
-    const [ loadCover, setLoadCover] = useState(false);
-    const loadFrontCover = () => {
-      setLoadCover(true)
-    }
+    // const [ loadCover, setLoadCover] = useState(false);
+    // const loadFrontCover = () => {
+    //   setLoadCover(true)
+    // }
     
-    useEffect(()=> {
-      console.log("object rendered", "loadCover", loadCover)
+    // useEffect(()=> {
+    //   console.log("object rendered", "loadCover", loadCover)
 
-      !loadCover && window.addEventListener( 'load', loadFrontCover )
-      return () => {
-        window.removeEventListener( 'load', loadFrontCover )
-        setLoadCover(false)
-      }
-    }, [loadCover] )
+    //   !loadCover && window.addEventListener( 'load', loadFrontCover )
+    //   return () => {
+    //     window.removeEventListener( 'load', loadFrontCover )
+    //     setLoadCover(false)
+    //   }
+    // }, [loadCover] )
       
     const Html2React = libraries.html2react.Component;
 
   return (
     <section id="hero">
     
-      <CoverWrapper loadCover={loadCover} widthPadding={ true }>
-      {/* <CoverWrapper height={ "calc(100vh - 10rem)" } widthPadding={ true }> */}
+      {/* <CoverWrapper loadCover={loadCover} widthPadding={ true }> */}
+      <CoverWrapper  widthPadding={ true }>
         <Container>
           <CoverContainer>
             <CoverCol grow={"60%"} className={ colHero }>
