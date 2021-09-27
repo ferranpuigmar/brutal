@@ -21,10 +21,11 @@ const BlockWrapper = styled.div`
   }
 
   ${ mq[ "md" ] } {
-    padding: ${ props => props.widthPadding ? 0 : `${ tabletPaddingBlock }` };
+    padding: ${ props => props.widthPadding ? `0 ${ tabletPaddingBlock }` : `${ tabletPaddingBlock }` };
   }
 
   ${ mq[ "lg" ] } {
+    ${'' /* padding: ${ props => props.widthPadding ? `0 ${ tabletPaddingBlock }` : `${ desktopPaddingBlock }` }; */}
     padding: ${ props => props.widthPadding ? 0 : `${ desktopPaddingBlock }` };
   }
 `
@@ -33,7 +34,7 @@ const Block = ( {
   children,
   className,
   height,
-  mode = 'dark'
+  mode = 'dark',
 } ) =>
 {
   return (

@@ -6,10 +6,11 @@ import { css, cx } from '@emotion/css'
 import Container from '../layout/Container';
 import Title from '../shared/Title';
 import { spacing } from '../../assets/styles/spacing';
-import Block from '../shared/Block';
 import { theme } from '../../assets/styles/theme';
 import { mq } from '../../assets/styles/mediaqueries';
 import Typewriter from 'typewriter-effect';
+import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
+
 
 // STYLES
 const heroTitle = css`
@@ -70,6 +71,61 @@ const contentTitle = css`
   font-size: 24px!important;
   margin-bottom: ${ spacing[ 'mb-4' ] };
 `
+const CoverContainer = styled.div`
+  opacity: 1;
+  min-height: calc(100vh - 9rem);
+  ${ '' /* min-height: 100vh; */ }
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+
+
+  ${ mq[ "md" ] } {
+  flex-direction: row;
+  
+  }
+`
+const CoverCol = styled.div`
+  ${ mq[ "md" ] } {
+    width: ${ props => props.grow ? props.grow : "" };
+  }
+
+`
+const imgMovil = css`
+  padding: 2rem 0;
+
+  ${ mq[ "md" ] } {
+    padding-left: 3rem;
+  }
+`
+
+const CoverWrapper = styled.div`
+  width: 100%;
+  padding: ${ mobilePaddingBlock } ;
+  padding-top: 0;
+  background-color: ${ theme.colors.black };
+  ${ '' /* transition: all 1s linear 1s;
+  opacity: ${ props => props.loadCover ? 1 : 0};
+  transform: ${ props => props.loadCover ? 'translateX(0)' : 'translateX(-50px)'}; */}
+
+
+  ${ mq[ "md" ] } {
+    padding: 0 ${ tabletPaddingBlock };
+  }
+
+  ${ mq[ "lg" ] } {
+    padding: 0 ${ desktopPaddingBlock };
+  }
+  `;
+
+const GoDown = styled.div`
+    display: flex;
+    justify-content:center;
+    align-items:center;
+  
+  `;
+
 
 const animation = css`
   opacity: 0;

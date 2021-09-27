@@ -162,6 +162,7 @@ const ButtonFixer = styled.div`
     background-color: ${theme.colors.black};
     font-family: ${theme.fontFamily.regular};
     color: ${theme.colors.white};
+    border-radius: 0;
     border-color: ${theme.colors.white};
     transition: color .35s linear;
     :hover {
