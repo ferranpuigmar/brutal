@@ -134,7 +134,7 @@ const ImageTextModule = ( {
 
   const colContent = ( data, position ) =>
   {
-    return <Block mode="light">
+    return <Block key={ uuid_v4() } mode="light">
       <Container className={ fullRow }>
         <Row>
           <Col lg={ 6 } lgOffset={ position === 'col_left' ? -6 : 6 } className={ block }>
@@ -148,7 +148,7 @@ const ImageTextModule = ( {
 
   const colImg = ( data, position ) =>
   {
-    return <ColImage>
+    return <ColImage key={ uuid_v4() }>
       { renderCol( data[ position ] ) }
     </ColImage>
   }

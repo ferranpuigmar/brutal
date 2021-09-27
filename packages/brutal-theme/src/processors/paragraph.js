@@ -25,11 +25,9 @@ const Paragraph = ( { text, className } ) =>
 
   `
 
-  return (
-    <Wrapper className={ className }>
-      { text }
-    </Wrapper>
-  )
+  return text ? <Wrapper className={ className }>
+    { text }
+  </Wrapper> : null
 }
 
 const paragraph = {
@@ -39,7 +37,7 @@ const paragraph = {
     component === "p",
   processor: ( { node, className } ) =>
   {
-    const text = node.children[ 0 ].content;
+    const text = node.children[ 0 ]?.content;
     return {
       component: Paragraph,
       props: { text, className },

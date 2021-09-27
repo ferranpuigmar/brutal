@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Block from '../shared/Block';
 import { css, cx } from '@emotion/css'
 import { spacing } from '../../assets/styles/spacing';
@@ -28,7 +28,6 @@ const ItemsList = styled.div`
   display: flex;
   flex-direction: column;
 
-  
   ${ mq[ "md" ] } {
     flex-direction: row;
     flex-wrap: wrap;
@@ -48,10 +47,6 @@ const ItemsList = styled.div`
 
   ${ mq[ "lg" ] } {
     margin-top: 8rem;
-    transition: all .5s linear .5s;
-    opacity: ${ props => props.strengthAnimation ? 1 : 0};
-    transform: ${ props => props.strengthAnimation ? 'translateY(0)' : 'translateY(100px)'};
- 
     flex-direction: row;
     flex-wrap: wrap;
 
@@ -61,7 +56,7 @@ const ItemsList = styled.div`
   }
 `
 
-const StrenghtModuleMargin=styled.div`
+const StrenghtModuleMargin = styled.div`
 
   margin: 4rem 0;
 
@@ -86,22 +81,19 @@ const StrenghtModule = ( {
   section_title,
   strenght,
   libraries,
-  state
 } ) =>
 {
   const Html2React = libraries.html2react.Component;
-  const strengthAniActive = state.theme.windowScroll > 1200 ? true : false
 
   return (
     <div>
       <Block>
         <Container>
-        {/* <Container className={cx(moreMargin)}> */}
           <StrenghtModuleMargin>
             <Title level={ 2 } className={ cx( heroTitle ) }><Html2React html={ section_title } /></Title>
-            <ItemsList strengthAnimation={strengthAniActive}>
+            <ItemsList>
               {
-                strenght.map( module => <StrenghItem key={ uuid_v4() } { ...module } /> )
+                strenght?.map( module => <StrenghItem key={ uuid_v4() } { ...module } /> )
               }
             </ItemsList>
           </StrenghtModuleMargin>

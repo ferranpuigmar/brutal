@@ -5,7 +5,7 @@ const CustomImage = ( { srcSet, className, ...rest } ) =>
 {
   const srcSetSizes = calculateSrcSet( srcSet );
 
-  const srcset = srcSetSizes.map( image => `${ image.url } ${ image.width }px` ).join( ',' )
+  const srcset = srcSetSizes?.map( image => `${ image.url } ${ image.width }px` ).join( ',' )
 
   return (
     <Image { ...rest } srcSet={ srcset } loading="lazy" className={ className } />

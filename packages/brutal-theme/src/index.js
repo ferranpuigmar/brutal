@@ -31,26 +31,10 @@ export default {
         await actions.source.fetch( `/categories/${ state.theme.services }/` )
         await actions.source.fetch( `/projectsData/${ state.theme.projects }/` )
       },
-      setWindowScroll: ( {state}) => ( number ) => {
+      setWindowScroll: ( { state } ) => ( number ) =>
+      {
         state.theme.windowScroll = number;
-        // console.log("get window scrol", number, state.theme.windowScroll)
-      },
-      getWindowScroll: ({ state }) => {
-        // console.log("get window scrol", state.theme.windowScroll)
-        return state.theme.windowScroll
       }
-
-    //   actions: {
-    //     theme: {
-    //         setMenu: ({ state }) => value => {
-    //             if (value === "open")
-    //                 state.theme.isMenuOpen = true;
-    //             else if (value === "closed")
-    //                 state.theme.isMenuOpen = false;
-    //         },
-    //     }
-    // }
-      
     }
   },
   libraries: {

@@ -14,6 +14,13 @@ import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../
 
 
 // STYLES
+const wrapperHeroHome = css`
+  height: auto;
+
+  ${ mq[ 'md' ] }{
+    min-height: calc(100vh - 10rem)
+  }
+`
 const heroTitle = css`
   margin-bottom: ${ spacing[ 'mb-8' ] };
   em {
@@ -29,21 +36,32 @@ const heroTitle = css`
 const colHero = css`
   display: flex;
   align-items: center;
+  order: 0;
 
-  ${ mq[ "sm" ] } {
-    align-items: center;
+  ${ mq[ "md" ] } {
+    order: 1;
+  }
+
+  ${ mq[ "lg" ] } {
+    order: 0;
   }
 `
 
 const colImage = css`
+  order: 2;
+  margin-top: ${ spacing[ 'mt-5' ] };
+  
   ${ mq[ "md" ] } {
+    order: 0;
     img{
-      margin: 0 auto;
-      max-width: 100%;
+      margin: 0 auto ${ spacing[ 'mb-10' ] };
+      max-width: 300px;
     }
   }
 
   ${ mq[ "lg" ] } {
+    order: 1;
+
     img{
       margin: 0 auto;
       height: 100%;
@@ -55,11 +73,23 @@ const colImage = css`
 
 const imageStyles = css`
   width: 100%;
-  max-width: 300px;
+  max-width: 200px;
+
+  ${ mq[ 'md' ] }{
+    max-width: 100px;
+  }
+
+  ${ mq[ 'lg' ] }{
+    max-width: 300px;
+  }
 `
 
 const HeroContent = styled.div`
-  margin-top: ${ spacing[ 'mt-12' ] }
+  margin-top: ${ spacing[ 'mt-4' ] };
+
+  ${ mq[ 'md' ] }{
+    margin-top: ${ spacing[ 'mt-12' ] };
+  }
 `
 
 const ColHeroContentWrapper = styled.div`
@@ -71,67 +101,6 @@ const contentTitle = css`
   ${ theme.fontSize.h3 }
   font-size: 24px!important;
   margin-bottom: ${ spacing[ 'mb-4' ] };
-`
-const CoverContainer = styled.div`
-  opacity: 1;
-  min-height: calc(100vh - 9rem);
-  ${ '' /* min-height: 100vh; */ }
-  display: flex;
-  flex-direction: column;
-  justify-content:center;
-  align-items:center;
-
-
-  ${ mq[ "md" ] } {
-  flex-direction: row;
-  
-  }
-`
-const CoverCol = styled.div`
-  ${ mq[ "md" ] } {
-    width: ${ props => props.grow ? props.grow : "" };
-  }
-
-`
-const imgMovil = css`
-  padding: 2rem 0;
-
-  ${ mq[ "md" ] } {
-    padding-left: 3rem;
-  }
-`
-
-const CoverWrapper = styled.div`
-  width: 100%;
-  padding: ${ mobilePaddingBlock } ;
-  padding-top: 0;
-  background-color: ${ theme.colors.black };
-  ${ '' /* transition: all 1s linear 1s;
-  opacity: ${ props => props.loadCover ? 1 : 0};
-  transform: ${ props => props.loadCover ? 'translateX(0)' : 'translateX(-50px)'}; */}
-
-
-  ${ mq[ "md" ] } {
-    padding: 0 ${ tabletPaddingBlock };
-  }
-
-  ${ mq[ "lg" ] } {
-    padding: 0 ${ desktopPaddingBlock };
-  }
-  `;
-
-const GoDown = styled.div`
-    display: flex;
-    justify-content:center;
-    align-items:center;
-  
-  `;
-
-
-const animation = css`
-  opacity: 0;
-  transform: translateX(-15px);
-  transition: all 0.3s ease-in-out;
 `
 
 const WrapperAnimation = styled.div`
@@ -145,7 +114,6 @@ const WrapperAnimation = styled.div`
 
   }
 `
-
 const HeroHomeModule = ( {
   libraries,
   title,
@@ -170,45 +138,43 @@ const HeroHomeModule = ( {
 
   return (
     <section id="hero">
-      <div style={ { height: 'calc( 100vh - 10rem )' } }>
-        <Block widthPadding={ true }>
-          <Container>
-            <WrapperAnimation className={ cx( { [ 'isAnimated' ]: startAnimation } ) }>
-              <Row >
-                <Col md={ 7 } lg={ 7 } className={ colHero }>
-                  <ColHeroContentWrapper>
-                    <Title level={ 1 } className={ heroTitle }>
-                      <Typewriter
-                        onInit={
-                          ( typewriter ) =>
-                          {
-                            typewriter.typeString( title )
-                              .start()
-                              .callFunction( () => document.querySelector( '.Typewriter__cursor' ).remove() )
-                          }
+      <Block widthPadding={ true } className={ wrapperHeroHome }>
+        <Container>
+          <WrapperAnimation className={ cx( { [ 'isAnimated' ]: startAnimation } ) }>
+            <Row >
+              <Col lg={ 7 } className={ colHero }>
+                <ColHeroContentWrapper>
+                  <Title level={ 1 } className={ heroTitle }>
+                    <Typewriter
+                      onInit={
+                        ( typewriter ) =>
+                        {
+                          typewriter.typeString( title )
+                            .start()
+                            .callFunction( () => document.querySelector( '.Typewriter__cursor' ).remove() )
                         }
-                        options={
-                          {
-                            autoStart: true,
-                            changeDeleteSpeed: 'natural',
-                          }
+                      }
+                      options={
+                        {
+                          autoStart: true,
+                          changeDeleteSpeed: 'natural',
                         }
-                      />
-                    </Title>
-                    <HeroContent>
-                      <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
-                      <Html2React html={ content.text } />
-                    </HeroContent>
-                  </ColHeroContentWrapper>
-                </Col>
-                <Col md={ 5 } className={ cx( colHero, colImage ) }>
-                  <CustomImage className={ imageStyles } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
-                </Col>
-              </Row>
-            </WrapperAnimation>
-          </Container>
-        </Block>
-      </div>
+                      }
+                    />
+                  </Title>
+                  <HeroContent>
+                    <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
+                    <Html2React html={ content.text } />
+                  </HeroContent>
+                </ColHeroContentWrapper>
+              </Col>
+              <Col lg={ 5 } className={ cx( colHero, colImage ) }>
+                <CustomImage className={ imageStyles } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
+              </Col>
+            </Row>
+          </WrapperAnimation>
+        </Container>
+      </Block>
     </section >
   )
 }
