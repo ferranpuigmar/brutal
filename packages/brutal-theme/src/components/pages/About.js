@@ -11,9 +11,14 @@ import { theme } from '../../assets/styles/theme';
 import { Col, Row } from 'styled-bootstrap-grid';
 import Loading from '../shared/Loading';
 import { theme_colors } from '../../assets/styles/variables';
+import CustomImage from '../shared/CustomImage';
 
 
 // STYLES
+const wrapper = css`
+  padding-bottom: 0;
+`
+
 const sectionTitle = css`
   margin-bottom: ${ spacing[ 'pb-6' ] };
   em {
@@ -85,13 +90,28 @@ const ButtonDiv = styled.div`
         }
       }
     }
-    
 `
 
 const OnlyTitleDesktop = styled.span`
   display: none;
   ${ mq[ "sm" ] } {
     display: block;
+  }
+`
+
+const BottomImg = styled.div`
+  display: flex;
+  align-items: flex-end;
+  margin-top: ${ spacing[ 'mt-6' ] };
+
+  img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  ${ mq[ 'md' ] }{
+    margin-top: ${ spacing[ 'mt-14' ] };
   }
 `
 
@@ -103,10 +123,10 @@ const About = ( { state, libraries } ) =>
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
 
-  const { title, description, button_text, title_bottom } = post.acf;
+  const { title, description, button_text, title_bottom, image } = post.acf;
 
   return data.isReady ? (
-    <PageWrapper>
+    <PageWrapper className={ wrapper }>
       <Container>
         <Row>
           <Col>
@@ -118,6 +138,9 @@ const About = ( { state, libraries } ) =>
           </Col>
         </Row>
       </Container>
+      <BottomImg>
+        <CustomImage src={ image.url } srcSet={ image.sizes } alt={ image.title } />
+      </BottomImg>
     </PageWrapper>
   ) : <Loading />;
 }
