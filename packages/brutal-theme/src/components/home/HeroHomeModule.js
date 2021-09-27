@@ -9,6 +9,7 @@ import { spacing } from '../../assets/styles/spacing';
 import { theme } from '../../assets/styles/theme';
 import { mq } from '../../assets/styles/mediaqueries';
 import Typewriter from 'typewriter-effect';
+import Block from '../shared/Block'
 import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
 
 
