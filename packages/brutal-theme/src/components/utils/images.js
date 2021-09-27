@@ -3,19 +3,19 @@ import { orderByBreakpoint } from "./order"
 export const calculateSrcSet = ( sizes ) =>
 {
   if ( !sizes ) return;
+
   const srcSet = Object.keys( sizes )
-    .filter( size => typeof ( sizes[ size ] ) === 'string' || Object )
+    .filter( size => typeof ( sizes[ size ] ) === 'string' || typeof ( sizes[ size ] ) === 'object' )
     .reduce( ( acc, size ) =>
     {
       const sizesOption = {
-        brakpoint: size,
+        breakpoint: size,
         url: sizes[ size ].source_url || sizes[ size ],
         width: sizes[ `${ size }-width` ] || sizes[ size ].width
       }
       return [ ...acc, { ...sizesOption } ]
     }, [] )
     .sort( orderByBreakpoint )
-
   return srcSet
 }
 
