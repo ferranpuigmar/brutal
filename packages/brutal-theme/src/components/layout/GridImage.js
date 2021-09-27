@@ -37,7 +37,7 @@ const linkBlock = css`
   display: block;
 `
 
-const GridImage = ( { item, maxSize = 1600, libraries } ) =>
+const GridImage = ( { item, maxSize = 900, libraries } ) =>
 {
   const [ featuredUrl, setFeaturedUrl ] = useState( null );
   const [ loading, setIsLoading ] = useState( true );
@@ -66,7 +66,7 @@ const GridImage = ( { item, maxSize = 1600, libraries } ) =>
       <div className={ cx( imageStatus, {
         [ 'isLoaded' ]: !loading
       } ) }>
-        { featuredUrl && <Image alt={ item?.title.rendered } loading="eager" src={ featuredUrl?.url } onLoad={ () => setIsLoading( false ) } /> }
+        { featuredUrl && <Image alt={ item.title.rendered } loading="lazy" src={ featuredUrl.url } onLoad={ () => setIsLoading( false ) } /> }
       </div>
     </Link>
   </>

@@ -95,7 +95,7 @@ const OtherProjects = ( { state, currentProject } ) =>
             <Wrapper otherProjectsNumber={ projects.length }>
               { projects.map( project =>
                 <WrapperLink key={ project.id } className={ cx( portfolioContainer ) }>
-                  <GridImage item={ project } maxSize={ 500 } />
+                  <GridImage item={ project } maxSize={ 900 } />
                 </WrapperLink>
               ) }
             </Wrapper>
