@@ -1,5 +1,5 @@
 import { connect, styled } from 'frontity'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'styled-bootstrap-grid'
 import CustomImage from '../shared/CustomImage';
 import { css, cx } from '@emotion/css'
@@ -71,6 +71,24 @@ const contentTitle = css`
   margin-bottom: ${ spacing[ 'mb-4' ] };
 `
 
+const animation = css`
+  opacity: 0;
+  transform: translateX(-15px);
+  transition: all 0.3s ease-in-out;
+`
+
+const WrapperAnimation = styled.div`
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 1s ease-in-out;
+
+  &.isAnimated {
+    opacity: 1;
+    transform: translateX(0);
+
+  }
+`
+
 const HeroHomeModule = ( {
   libraries,
   title,
@@ -81,44 +99,60 @@ const HeroHomeModule = ( {
 
   const Html2React = libraries.html2react.Component;
 
+  const [ startAnimation, setStartAnimation ] = useState( false )
+
+  const handleAnimation = () =>
+  {
+    setStartAnimation( !startAnimation )
+  }
+
+  useEffect( () =>
+  {
+    setTimeout( handleAnimation, 0 )
+  }, [] )
+
   return (
     <section id="hero">
-      <Block height={ "calc(100vh - 10rem)" } widthPadding={ true }>
-        <Container>
-          <Row >
-            <Col md={ 7 } lg={ 7 } className={ colHero }>
-              <ColHeroContentWrapper>
-                <Title level={ 1 } className={ heroTitle }>
-                  <Typewriter
-                    onInit={
-                      ( typewriter ) =>
-                      {
-                        typewriter.typeString( title )
-                          .start()
-                          .callFunction( () => document.querySelector( '.Typewriter__cursor' ).remove() )
-                      }
-                    }
-                    options={
-                      {
-                        autoStart: true,
-                        changeDeleteSpeed: 'natural',
-                      }
-                    }
-                  />
-                </Title>
-                <HeroContent>
-                  <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
-                  <Html2React html={ content.text } />
-                </HeroContent>
-              </ColHeroContentWrapper>
-            </Col>
-            <Col md={ 5 } className={ cx( colHero, colImage ) }>
-              <CustomImage className={ imageStyles } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
-            </Col>
-          </Row>
-        </Container>
-      </Block>
-    </section>
+      <div style={ { height: 'calc( 100vh - 10rem )' } }>
+        <Block widthPadding={ true }>
+          <Container>
+            <WrapperAnimation className={ cx( { [ 'isAnimated' ]: startAnimation } ) }>
+              <Row >
+                <Col md={ 7 } lg={ 7 } className={ colHero }>
+                  <ColHeroContentWrapper>
+                    <Title level={ 1 } className={ heroTitle }>
+                      <Typewriter
+                        onInit={
+                          ( typewriter ) =>
+                          {
+                            typewriter.typeString( title )
+                              .start()
+                              .callFunction( () => document.querySelector( '.Typewriter__cursor' ).remove() )
+                          }
+                        }
+                        options={
+                          {
+                            autoStart: true,
+                            changeDeleteSpeed: 'natural',
+                          }
+                        }
+                      />
+                    </Title>
+                    <HeroContent>
+                      <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
+                      <Html2React html={ content.text } />
+                    </HeroContent>
+                  </ColHeroContentWrapper>
+                </Col>
+                <Col md={ 5 } className={ cx( colHero, colImage ) }>
+                  <CustomImage className={ imageStyles } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
+                </Col>
+              </Row>
+            </WrapperAnimation>
+          </Container>
+        </Block>
+      </div>
+    </section >
   )
 }
 

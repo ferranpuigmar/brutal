@@ -83,27 +83,29 @@ const Root = ( { state } ) =>
 
       <FontFace />
       <Global styles={ css( styleCSS ) } />
-      <GridThemeProvider gridTheme={ gridTheme }>
-        <Navbar
-          mobilWidth={ movilWidth }
-          scroll={ isScolling }
-          footerFields={ footerFields ? footerFields : {} }
-        />
-        <Main style={ { marginBottom: mainMarginBottom } }>
-          <Switch>
-            <Loading when={ data.isFetching } />
-            <Home when={ data.isHome } />
-            <Project when={ !data.isPage && data.isPostType && data.type === "proyectos" } />
-            <Services when={ data.isPage && data.link === '/servicios/' } />
-            <Contact when={ data.isPage && data.link === '/contactar/' } />
-            <About when={ data.isPage && data.link === '/sobre-nosotros/' } />
-            <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } />
-            <Error404 when={ data.is404 } />
-          </Switch>
-        </Main>
+      { data.isFetching ? <Loading /> :
+        <GridThemeProvider gridTheme={ gridTheme }>
+          <Navbar
+            mobilWidth={ movilWidth }
+            scroll={ isScolling }
+            footerFields={ footerFields ? footerFields : {} }
+          />
+          <Main style={ { marginBottom: mainMarginBottom } }>
+            <Switch>
+              <Loading when={ data.isFetching } />
+              <Home when={ data.isHome } />
+              <Project when={ !data.isPage && data.isPostType && data.type === "proyectos" } />
+              <Services when={ data.isPage && data.link === '/servicios/' } />
+              <Contact when={ data.isPage && data.link === '/contactar/' } />
+              <About when={ data.isPage && data.link === '/sobre-nosotros/' } />
+              <Projects when={ data.isPostType && data.link === "/listado-proyectos/" } />
+              <Error404 when={ data.is404 } />
+            </Switch>
+          </Main>
 
-        <div aria-hidden="false" ref={ footerRef } className={ cx( footerFixed ) }><Footer footerFields={ footerFields ? footerFields : {} } blackBackground={ blackBackground } /></div>
-      </GridThemeProvider>
+          <div aria-hidden="false" ref={ footerRef } className={ cx( footerFixed ) }><Footer footerFields={ footerFields ? footerFields : {} } blackBackground={ blackBackground } /></div>
+        </GridThemeProvider>
+      }
     </>
   );
 };
