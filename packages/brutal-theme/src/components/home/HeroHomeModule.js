@@ -10,7 +10,7 @@ import { theme } from '../../assets/styles/theme';
 import { mq } from '../../assets/styles/mediaqueries';
 import Typewriter from 'typewriter-effect';
 import Block from '../shared/Block'
-import arrowSVG from './arrow_home.svg'
+import arrowSVG from './../../assets/images/arrow_home.svg'
 
 // STYLES
 const wrapperHeroHome = css`
