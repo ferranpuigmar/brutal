@@ -122,6 +122,7 @@ const About = ( { state, libraries } ) =>
   const Html2React = libraries.html2react.Component;
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
+  console.log(`post-------`, post)
 
   const { title, description, button_text, title_bottom, image } = post.acf;
 

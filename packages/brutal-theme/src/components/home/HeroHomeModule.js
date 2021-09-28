@@ -2,7 +2,7 @@ import { connect, styled } from 'frontity'
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'styled-bootstrap-grid'
 import CustomImage from '../shared/CustomImage';
-import { css, cx } from '@emotion/css'
+import { css, cx, keyframes } from '@emotion/css'
 import Container from '../layout/Container';
 import Title from '../shared/Title';
 import { spacing } from '../../assets/styles/spacing';
@@ -10,12 +10,12 @@ import { theme } from '../../assets/styles/theme';
 import { mq } from '../../assets/styles/mediaqueries';
 import Typewriter from 'typewriter-effect';
 import Block from '../shared/Block'
-import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
-
+import arrowSVG from './arrow_home.svg'
 
 // STYLES
 const wrapperHeroHome = css`
   height: auto;
+
 
   ${ mq[ 'md' ] }{
     min-height: calc(100vh - 10rem)
@@ -114,6 +114,41 @@ const WrapperAnimation = styled.div`
 
   }
 `
+const bounce = keyframes`
+  from, 20%, 53%, 80%, to {
+    transform: translate3d(0,0,0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0,-4px,0);
+  }
+`
+
+const ArrowDown = styled.div`
+  margin: 3rem 0 0;
+  display: flex;
+  justify-content: center;
+  animation: ${bounce} 1.5s ease infinite;
+  
+  img{ 
+    width: 50px ;
+  }
+
+  ${ mq[ 'md' ] }{
+    margin: 5rem 0 0;
+  }
+  ${ mq[ 'lg' ] }{
+    position: absolute;
+    bottom: 25px;
+    left: calc(50% - 25px);
+  }
+`;
+
 const HeroHomeModule = ( {
   libraries,
   title,
@@ -174,8 +209,9 @@ const HeroHomeModule = ( {
             </Row>
           </WrapperAnimation>
         </Container>
+      <ArrowDown><a href="#buildingBrands"><img src={arrowSVG}/></a></ArrowDown>
       </Block>
-    </section >
+    </section>
   )
 }
 
