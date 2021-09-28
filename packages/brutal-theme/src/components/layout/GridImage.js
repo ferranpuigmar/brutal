@@ -37,19 +37,34 @@ const linkBlock = css`
   display: block;
 `
 
-const GridImage = ( { item, maxSize = 900, libraries } ) =>
+const GridImage = ( { item, maxSize = 900, libraries, state } ) =>
 {
   const [ featuredUrl, setFeaturedUrl ] = useState( null );
   const [ loading, setIsLoading ] = useState( true );
 
-  const handleImage = async () =>
+  const fetchMedia = async ( mediaId ) =>
   {
     const requestFeaturedMedia = await libraries.source.api.get( {
-      endpoint: `/wp/v2/media/${ item.featured_media }`
+      endpoint: `/wp/v2/media/${ mediaId }`
     } )
-    const response = await requestFeaturedMedia.json();
-    const imageObj = getFeaturedImageUrl( response.media_details.sizes, maxSize );
-    setFeaturedUrl( imageObj )
+    const image = await requestFeaturedMedia.json();
+    state.source.data[ 'attachments' ] = {
+      ...state.source.data[ 'attachments' ],
+      [ mediaId ]: { ...image }
+    }
+    return image;
+  }
+
+  const handleImage = async () =>
+  {
+    const existAttachments = Object.keys( state.source.data ).includes( 'attachments' );
+    if ( !existAttachments ) {
+      state.source.data[ 'attachments' ] = {}
+    }
+    const imageId = `${ item.featured_media }`;
+    const isImageCached = Object.keys( state.source.data[ 'attachments' ] ).includes( imageId )
+    const image = isImageCached ? state.source.data[ 'attachments' ][ item.featured_media ] : await fetchMedia( item.featured_media )
+    setFeaturedUrl( getFeaturedImageUrl( image.media_details.sizes, maxSize ) );
   }
 
   useEffect( () =>
