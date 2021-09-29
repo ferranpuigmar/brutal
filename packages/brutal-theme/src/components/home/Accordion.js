@@ -19,6 +19,15 @@ const AccordionHeader = styled.div`
   padding-top: ${ spacing[ 'pt-6' ] };
   padding-bottom: ${ spacing[ 'pt-6' ] };
   position: relative;
+
+  &:hover{
+    button {
+      &:before,
+      &:after{
+        background-color: ${ props => props.expand ? theme.colors.primaryColor : theme.colors.black };
+      }
+    }
+  }
 `
 const AccordionCloseBtn = styled.button`
 
@@ -50,14 +59,14 @@ const AccordionCloseBtn = styled.button`
     &:hover{
       &:before,
       &:after{
-        background-color: ${ theme.colors.primaryColor };
+        background-color: ${ theme.colors.primaryColor }!important;
       }
     }
 
     &:before{
       transform: translateY(-50%);
     }
-  
+
     &:after{
       transform: translateY(-50%) rotate( 90deg );
     }
@@ -143,9 +152,9 @@ const Accordion = ( {
   }
 
   return <AccordionWrapper>
-    <AccordionHeader expand={ expand }>
+    <AccordionHeader expand={ expand } onClick={ () => handleExpand() }>
       <Title className={ cx( accordionTitle ) } level={ 3 }>{ name }</Title>
-      { acf?.areas && <AccordionCloseBtn onClick={ () => handleExpand() } expand={ expand } /> }
+      { acf?.areas && <AccordionCloseBtn expand={ expand } /> }
     </AccordionHeader>
     { acf?.areas && <AccordionContentWrapper expandHeight={ expandHeight } ref={ contentWrapper }>
       <AccordionUl ref={ contentUlWrapper } opacityValue={ expand }>
