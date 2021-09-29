@@ -12,7 +12,6 @@ import { hexToRgb } from '../utils/colors';
 import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
 import ImageSkeleton from '../shared/ImageSkeleton';
 import CustomImage from '../shared/CustomImage';
-import Link from "@frontity/components/link"
 
 // Styles
 const DescriptionWrapper = styled.div`
@@ -36,7 +35,7 @@ const block = css`
   display: none;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow: hidden;
 
@@ -105,38 +104,6 @@ const projectImageWrapper = css`
   }
 `
 
-// const whiteLink = css`
-//   &:hover {
-//       color: ${ `${ theme.colors.primaryColor }!important` };
-//       .arrow-icon,
-//       .arrow-icon:after,
-//       .arrow-icon:before {
-//         background-color: ${ `${ theme.colors.primaryColor }!important` };
-//       }
-//   }
-// `;
-
-const OverLapContent = styled.div`
-  position:absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 2;
-  pointer-events: none;
-
-  *{
-    opacity: 0;
-    transform: translateY(-10px);
-    color: ${ theme.colors.black };
-  }
-`
-
-const overlapContentTitle = css`
-  ${ mq[ 'lg' ] }{
-    display: none;
-  }
-`
-
 const rowContent = css`
   display: none!important;
 
@@ -144,12 +111,6 @@ const rowContent = css`
     display: flex!important;
   }
 `
-const linkStyle = css`
-text-decoration: none;
-text-align: left;
-display: flex;
-justify-content: flex-start;
-`;
 
 //Component
 const ProjectItem = ( {
@@ -188,7 +149,7 @@ const ProjectItem = ( {
         <Html2React html={ description } />
       </DescriptionWrapper>
 
-      <ArrowLink link={ link_project } hoverBackground={ false } className={ "nav-arrow" } variant="bold">{ link_text }</ArrowLink>
+      <ArrowLink size="small" link={ link_project } hoverBackground={ false } className={ "nav-arrow" } variant="bold">{ link_text }</ArrowLink>
 
     </div>
   </Col></Row>

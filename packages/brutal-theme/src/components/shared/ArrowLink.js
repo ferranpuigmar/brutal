@@ -32,7 +32,20 @@ const handleHoverColor = ( color ) =>
   }
 }
 
-// Styles
+const handleSize = ( size ) =>
+{
+  switch ( size ) {
+    case 'small':
+      return btn_size_small;
+    default: {
+      return ''
+    }
+  }
+}
+
+// STYLES
+
+// genéric link
 const linkButton = css`
   display: inline-flex;
   align-items: center;
@@ -47,7 +60,7 @@ const linkButton = css`
 
   span{
     color: ${ theme.colors.black };
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 
     &:last-child{
       top: 1px;
@@ -55,7 +68,7 @@ const linkButton = css`
 
     &:before,
     &:after{
-      transition: all 0.1s ease-in-out;
+      transition: all 0.2s ease-in-out;
     }
   }
 
@@ -65,7 +78,7 @@ const linkButton = css`
         &:last-child{
           background-color: ${ theme.colors.primaryColor };
           width: 51px;
-          margin-left: calc(2rem + 11px);
+          margin-left: calc(2rem + 10px);
           transform: translateX(5px);
         }
         &:before,
@@ -91,6 +104,7 @@ const hover__white = css`
   }
 `
 
+// genéric button link
 const buttonGenerics = css`
   padding: ${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] };
   font-size: 1.8rem;
@@ -100,12 +114,34 @@ const buttonGenerics = css`
   }
 `
 
+const btn_size_small = css`
+  font-size: 1.6rem;
+  ${ mq[ 'md' ] }{
+    font-size: 1.8rem;
+  }
+`
+
 const primarySolid = css`
   background-color: ${ theme.colors.primaryColor };
 `
 
 const whiteSolid = css`
   background-color: ${ theme.colors.white };
+
+  &:hover {
+    background-color: ${ theme.colors.primaryColor };
+
+    span{
+      color: ${ theme.colors.black };
+      &:last-child{
+        background-color: ${ theme.colors.black }
+      }
+      &:before,
+      &:after{
+        background-color: ${ theme.colors.black }
+      }
+    }
+  }
 `
 
 const outline = css`
@@ -174,28 +210,29 @@ const Arrow = styled.span`
 
 `
 
-const ArrowLinkContent = ( { type, variant, link, hoverColor, children } ) =>
+const ArrowLinkContent = ( { type, variant, link, hoverColor, size, children } ) =>
 {
   const buttonType = type ? cx( buttonGenerics, handleBtnStyle( type ) ) : '';
-  return <div className={ cx( linkButton, buttonType, handleHoverColor( hoverColor ) ) }>
+  return <div className={ cx( linkButton, buttonType, handleHoverColor( hoverColor ), handleSize( size ) ) }>
     <span>{ children }</span>
     <Arrow type={ type } variant={ variant } link={ link } className="arrow-icon"></Arrow>
   </div >
 }
 
-const ArrowLink = ( { link, children, className, hoverColor, variant, type, isAnchor = true, hoverBackground = true } ) =>
+const ArrowLink = ( { link, children, className, hoverColor, variant, type, size = 'medium' } ) =>
 {
   return (
     <div className={ cx( "arrow-button", className ) }>
-      {
-        isAnchor
-          ?
-          <Link link={ link } className={ linkTagStyle }>
-            <ArrowLinkContent hoverColor={ hoverColor } type={ type } variant={ variant } children={ children } link={ link } />
-          </Link>
-          :
-          <div><ArrowLinkContent type={ type } variant={ variant } children={ children } /></div>
-      }
+      <Link link={ link } className={ linkTagStyle }>
+        <ArrowLinkContent
+          hoverColor={ hoverColor }
+          type={ type }
+          variant={ variant }
+          children={ children }
+          link={ link }
+          size={ size }
+        />
+      </Link>
     </div>
   )
 }
