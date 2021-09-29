@@ -50,7 +50,7 @@ const Ul = styled.ul`
 
     
   }
-  .green a { color: ${ theme_colors.primaryColor } }
+  .green a { color: ${ `${theme_colors.primaryColor}!important` } }
 
   
   
@@ -177,6 +177,17 @@ const whiteLink = css`
   }
 `;
 
+const greenLink = css`
+  color: ${ `${ theme_colors.primaryColor }!important` };
+  ${ theme.fontSize.h6 };
+  .arrow-icon, 
+  .arrow-icon:after,
+  .arrow-icon:before {
+    background-color: ${ `${ theme_colors.primaryColor }!important` }
+  }
+  }
+`;
+
 const NavMenu = ( { state, open, close, mobilWidth, footerFields, currentPage } ) =>
 {
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
@@ -190,13 +201,12 @@ const NavMenu = ( { state, open, close, mobilWidth, footerFields, currentPage } 
         return (
           <li className="navigation__item" onClick={ close } key={ item.ID }>
             { ( items.length - 1 ) === index && !mobilWidth ?
-              <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }` }>
-                <ArrowLink className={ "nav-arrow", cx( whiteLink ) } isAnchor={ false }>{ item.title }</ArrowLink>
+              <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }`} >
+                <ArrowLink className={ "nav-arrow", cx( currentPage === item.slug && !mobilWidth ? greenLink : whiteLink  ) } isAnchor={ false } colorLink={currentPage === item.slug ? true : false }>{ item.title }</ArrowLink>
               </Link>
               :
               <div className={ open ? `navigation__link-box box${ index + 1 }` : "navigation__link-box__close" } >
-                {/* <div className= {currentPage2===item.slug && !mobilWidth ? "navigation__link-wrapper green" : "navigation__link-wrapper" } > */ }
-                <div className={ currentPage === item.slug && !mobilWidth ? "navigation__link-wrapper green" : "navigation__link-wrapper" } >
+                <div className={ currentPage === item.slug && !mobilWidth ? "green" : "" } >
                   <Link nonekey={ item.ID }
                     className={ "navigation__link" }
                     link={ `/${ item.slug }` }>

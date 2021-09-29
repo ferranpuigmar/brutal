@@ -158,19 +158,26 @@ const colForm = css`
   }
 `
 const ButtonFixer = styled.div`
-  #sendButton {
-    background-color: ${theme.colors.black};
-    font-family: ${theme.fontFamily.regular};
-    color: ${theme.colors.white};
-    border-radius: 0;
-    border-color: ${theme.colors.white};
+  form div{
+    &:nth-of-type(3) {
+      text-align: left!important;
+    }
+  } 
+
+ #sendButton {
+    background-color: ${`${theme.colors.black}!important`};
+    font-family: ${`${theme.fontFamily.regular}!important`};
+    color: ${`${theme.colors.white}!important`};
+    border-radius: 0!important;
+    border-color: ${`${theme.colors.white}!important`};
     transition: color .35s linear;
+    
     :hover {
-      background-color: ${theme.colors.primaryColor};
-      color: ${theme.colors.black};
-      border-color: transparent;
-      outline: none;
-      cursor: pointer;
+      background-color: ${`${theme.colors.primaryColor}!important`};
+      color: ${`${theme.colors.black}!important`};
+      border-color: transparent!important;
+      outline: none!important;
+      cursor: pointer!important;
       
     }
   }
@@ -189,7 +196,7 @@ const Contact = ( { state, libraries } ) =>
   return data.isReady ? (
     <PageWrapper>
       <Container>
-        <ButtonFixer>
+        <ButtonFixer className="acaaaaaaa">
         <Title className={ cx( sectionTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
         <Row>
           <Col xl={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
