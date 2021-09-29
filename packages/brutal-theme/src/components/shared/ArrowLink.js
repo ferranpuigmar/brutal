@@ -5,6 +5,7 @@ import { cx, css } from '@emotion/css'
 import { mq } from '../../assets/styles/mediaqueries';
 import { spacing } from '../../assets/styles/spacing';
 import { theme_colors } from '../../assets/styles/variables';
+import Link from "@frontity/components/link";
 
 const handleBtnStyle = ( type ) =>
 {
@@ -49,18 +50,25 @@ const outline = {
   ...buttonGenerics
 }
 
-const ArrowAnchorWrapper = styled.a`
-  text-decoration: none;
-  ${ props => handleBtnStyle( props.type ) };
-  color: ${ theme.colors.black }!important;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
+const ArrowAnchorWrapper = styled.div`
+  a{
+    text-decoration: none;
+    ${ props => handleBtnStyle( props.type ) };
+    color: ${ theme.colors.black }!important;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 
-  &:hover {
-    background-color: ${ theme_colors.primaryColor };
+    &:hover {
+      background-color: ${ theme_colors.primaryColor };
+
+      .arrow-icon{
+        transform: translateX(10px);
+        width: 40px;
+      }
+    }
   }
 `
 
@@ -139,7 +147,7 @@ const ArrowLink = ( { link, children, className, hoverColor, variant, type, isAn
     <ArrowWrapper className={ cx( "arrow-element", className ) } variant={ variant }>
       {
         isAnchor
-          ? <ArrowAnchorWrapper href={ link } type={ type }><ArrowLinkContent variant={ variant } children={ children } /></ArrowAnchorWrapper>
+          ? <ArrowAnchorWrapper type={ type } variant={ variant }><Link className={ ArrowAnchorWrapper } link={ link } type={ type }><ArrowLinkContent variant={ variant } children={ children } /></Link></ArrowAnchorWrapper>
           : <><ArrowLinkContent variant={ variant } children={ children } /></>
       }
     </ArrowWrapper>
