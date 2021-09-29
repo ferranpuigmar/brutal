@@ -19,12 +19,23 @@ const AccordionHeader = styled.div`
   padding-top: ${ spacing[ 'pt-6' ] };
   padding-bottom: ${ spacing[ 'pt-6' ] };
   position: relative;
+  cursor: pointer;
 
   &:hover{
-    button {
+    button{
       &:before,
       &:after{
-        background-color: ${ props => props.expand ? theme.colors.primaryColor : theme.colors.black };
+        background-color: ${ props => props.expand ? theme.colors.primaryColor : theme.colors.black }!important;
+      }
+    }
+    ${ mq[ 'md' ] }{
+      button{
+        &:hover{
+          &:before,
+          &:after{
+            background-color: ${ theme.colors.primaryColor }!important;
+          }
+        }
       }
     }
   }
@@ -57,9 +68,18 @@ const AccordionCloseBtn = styled.button`
     }
 
     &:hover{
-      &:before,
-      &:after{
-        background-color: ${ theme.colors.primaryColor }!important;
+        &:before,
+        &:after{
+          background-color: ${ props => props.expand ? theme.colors.primaryColor : theme.colors.black }!important;
+        }
+      }
+
+    ${ mq[ 'md' ] }{
+      &:hover{
+        &:before,
+        &:after{
+          background-color: ${ theme.colors.primaryColor }!important;
+        }
       }
     }
 
