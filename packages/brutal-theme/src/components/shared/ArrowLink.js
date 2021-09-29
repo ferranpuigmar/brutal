@@ -60,12 +60,11 @@ const ArrowAnchorWrapper = styled.a`
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: ${ theme_colors.primaryColor };
+    background-color: ${ (props) => props.hoverBackground ? `${theme_colors.primaryColor}` : "none" };
   }
 `
 
 const ArrowWrapper = styled.div`
-  display: inline-block;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -133,13 +132,13 @@ const ArrowLinkContent = ( { type, variant, link, children } ) => <>
   <Arrow type={ type } variant={ variant } link={ link } className="arrow-icon"></Arrow>
 </>
 
-const ArrowLink = ( { link, children, className, hoverColor, variant, type, isAnchor = true } ) =>
+const ArrowLink = ( { link, children, className, hoverColor, variant, type, isAnchor = true, hoverBackground = true } ) =>
 {
   return (
     <ArrowWrapper className={ cx( "arrow-element", className ) } variant={ variant }>
       {
         isAnchor
-          ? <ArrowAnchorWrapper href={ link } type={ type }><ArrowLinkContent variant={ variant } children={ children } /></ArrowAnchorWrapper>
+          ? <ArrowAnchorWrapper hoverBackground={ hoverBackground } href={ link } type={ type }><ArrowLinkContent variant={ variant } children={ children } /></ArrowAnchorWrapper>
           : <><ArrowLinkContent variant={ variant } children={ children } /></>
       }
     </ArrowWrapper>

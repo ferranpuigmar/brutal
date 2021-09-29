@@ -15,7 +15,8 @@ import arrowSVG from './../../assets/images/arrow_home.svg'
 // STYLES
 const wrapperHeroHome = css`
   height: auto;
-
+  display: flex;
+  align-items: center;
 
   ${ mq[ 'md' ] }{
     min-height: calc(100vh - 10rem)
@@ -107,6 +108,10 @@ const WrapperAnimation = styled.div`
   opacity: 0;
   transform: translateX(-30px);
   transition: all 1s ease-in-out;
+  padding-bottom: 2rem; 
+  ${ mq[ 'md' ] }{
+  padding-bottom: 10rem; 
+  }
 
   &.isAnimated {
     opacity: 1;
@@ -176,7 +181,7 @@ const HeroHomeModule = ( {
       <Block widthPadding={ true } className={ wrapperHeroHome }>
         <Container>
           <WrapperAnimation className={ cx( { [ 'isAnimated' ]: startAnimation } ) }>
-            <Row >
+            <Row>
               <Col lg={ 7 } className={ colHero }>
                 <ColHeroContentWrapper>
                   <Title level={ 1 } className={ heroTitle }>

@@ -1,4 +1,4 @@
-import { connect } from 'frontity'
+import { connect, styled } from 'frontity'
 import React from 'react'
 import { Row } from 'styled-bootstrap-grid';
 import { css, cx } from '@emotion/css'
@@ -12,7 +12,8 @@ import { hexToRgb } from '../utils/colors';
 import Container from '../layout/Container'
 
 // Styles
-const projectLink = css`
+const ProjectWrapper = styled.div`
+${'' /* const projectLink = css` */}
   position: relative;
   text-decoration: none;
   display: block;
@@ -80,17 +81,16 @@ const projectLink = css`
 // Component
 const ProjectsModule = ( { state, libraries, actions, ...rest } ) =>
 {
-
   const { link_text, projects } = rest;
   const stateProjects = state.source.get( `/projectsdata/${ state.theme.projects }/` ).items;
   const availableProjects = stateProjects.filter( project => projects.includes( project.id ) )
 
   return availableProjects.map( ( project, index ) =>
-    <Link key={ uuid_v4() } className={ cx( projectLink ) } link={ project.link }>
+    <ProjectWrapper key={ uuid_v4() }>
       <Container>
-        <ProjectItem project={ project } index={ index } link_text={ link_text } />
+        <ProjectItem link_project={ project.link } project={ project } index={ index } link_text={ link_text } />
       </Container>
-    </Link>
+    </ProjectWrapper>
   )
 
 }
