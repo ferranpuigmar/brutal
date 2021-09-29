@@ -27,9 +27,10 @@ const Item = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  transition: all 0.8s ease-out;
+  transition: all 1s ease-out;
   opacity: 1;
   transform: translateY(0);
+  filter: blur(8px);
 
   img{
     width: 100%;
@@ -40,7 +41,8 @@ const Item = styled.div`
   ${ mq[ 'md' ] }{
     margin-bottom: 0;
     opacity: ${ props => !props.animateStarted ? 0 : 1 };
-    transform: ${ props => !props.animateStarted ? 'translateY(-20px)' : 'translateY(0)' };
+    transform: ${ props => !props.animateStarted ? 'translateY(-40px)' : 'translateY(0)' };
+    filter: blur(0);
   }
 `
 

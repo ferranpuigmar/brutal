@@ -15,6 +15,7 @@ import arrowSVG from './../../assets/images/arrow_home.svg'
 // STYLES
 const wrapperHeroHome = css`
   height: auto;
+  overflow: hidden;
 
 
   ${ mq[ 'md' ] }{
@@ -50,7 +51,7 @@ const colHero = css`
 const colImage = css`
   order: 2;
   margin-top: ${ spacing[ 'mt-5' ] };
-  
+
   ${ mq[ "md" ] } {
     order: 0;
     img{
@@ -105,27 +106,28 @@ const contentTitle = css`
 
 const WrapperAnimation = styled.div`
   opacity: 0;
-  transform: translateX(-30px);
-  transition: all 1s ease-in-out;
+  transform: translateX(-80px);
+  transition: all 2s ease-out;
+  filter: blur(8px);
 
   &.isAnimated {
     opacity: 1;
     transform: translateX(0);
-
+    filter: blur(0);
   }
 `
 const bounce = keyframes`
   from, 20%, 53%, 80%, to {
-    transform: translate3d(0,0,0);
+    transform: translate3d(-50%,0,0);
   }
   40%, 43% {
-    transform: translate3d(0, -30px, 0);
+    transform: translate3d(-50%, -10px, 0);
   }
   70% {
-    transform: translate3d(0, -15px, 0);
+    transform: translate3d(-50%, -10px, 0);
   }
   90% {
-    transform: translate3d(0,-4px,0);
+    transform: translate3d(-50%,-4px,0);
   }
 `
 
@@ -133,19 +135,19 @@ const ArrowDown = styled.div`
   margin: 3rem 0 0;
   display: flex;
   justify-content: center;
-  animation: ${bounce} 1.5s ease infinite;
-  
-  img{ 
+  animation: ${ bounce } 1.5s ease infinite;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  opacity: ${ props => props.isScroll ? 0 : 1 };
+  pointer-events: none;
+
+  img{
     width: 50px ;
   }
 
   ${ mq[ 'md' ] }{
-    margin: 5rem 0 0;
-  }
-  ${ mq[ 'lg' ] }{
-    position: absolute;
-    bottom: 25px;
-    left: calc(50% - 25px);
+    margin: 5rem auto 0;
   }
 `;
 
@@ -153,7 +155,8 @@ const HeroHomeModule = ( {
   libraries,
   title,
   content,
-  image
+  image,
+  state
 } ) =>
 {
 
@@ -171,47 +174,51 @@ const HeroHomeModule = ( {
     setTimeout( handleAnimation, 0 )
   }, [] )
 
+  console.log()
+
   return (
-    <section id="hero">
-      <Block widthPadding={ true } className={ wrapperHeroHome }>
-        <Container>
-          <WrapperAnimation className={ cx( { [ 'isAnimated' ]: startAnimation } ) }>
-            <Row >
-              <Col lg={ 7 } className={ colHero }>
-                <ColHeroContentWrapper>
-                  <Title level={ 1 } className={ heroTitle }>
-                    <Typewriter
-                      onInit={
-                        ( typewriter ) =>
-                        {
-                          typewriter.typeString( title )
-                            .start()
-                            .callFunction( () => document.querySelector( '.Typewriter__cursor' ).remove() )
+    <>
+      <section id="hero">
+        <Block widthPadding={ true } className={ wrapperHeroHome }>
+          <Container>
+            <WrapperAnimation className={ cx( { [ 'isAnimated' ]: startAnimation } ) }>
+              <Row >
+                <Col lg={ 7 } className={ colHero }>
+                  <ColHeroContentWrapper>
+                    <Title level={ 1 } className={ heroTitle }>
+                      <Typewriter
+                        onInit={
+                          ( typewriter ) =>
+                          {
+                            typewriter.typeString( title )
+                              .start()
+                              .callFunction( () => document.querySelector( '.Typewriter__cursor' ).remove() )
+                          }
                         }
-                      }
-                      options={
-                        {
-                          autoStart: true,
-                          changeDeleteSpeed: 'natural',
+                        options={
+                          {
+                            autoStart: true,
+                            delay: '70',
+                          }
                         }
-                      }
-                    />
-                  </Title>
-                  <HeroContent>
-                    <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
-                    <Html2React html={ content.text } />
-                  </HeroContent>
-                </ColHeroContentWrapper>
-              </Col>
-              <Col lg={ 5 } className={ cx( colHero, colImage ) }>
-                <CustomImage className={ imageStyles } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
-              </Col>
-            </Row>
-          </WrapperAnimation>
-        </Container>
-      <ArrowDown><a href="#buildingBrands"><img src={arrowSVG}/></a></ArrowDown>
-      </Block>
-    </section>
+                      />
+                    </Title>
+                    <HeroContent>
+                      <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
+                      <Html2React html={ content.text } />
+                    </HeroContent>
+                  </ColHeroContentWrapper>
+                </Col>
+                <Col lg={ 5 } className={ cx( colHero, colImage ) }>
+                  <CustomImage className={ imageStyles } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
+                </Col>
+              </Row>
+            </WrapperAnimation>
+          </Container>
+        </Block>
+      </section>
+      <ArrowDown isScroll={ state.theme.windowScroll > 0 }><a href="#buildingBrands"><img src={ arrowSVG } /></a></ArrowDown>
+    </>
   )
 }
 
