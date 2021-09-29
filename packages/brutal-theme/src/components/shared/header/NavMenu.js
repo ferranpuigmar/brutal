@@ -141,7 +141,7 @@ const Ul = styled.ul`
       }  
     }
   }
-.arrow-element:hover {color: ${ theme_colors.primaryColor };}
+.arrow-button:hover {color: ${ theme_colors.primaryColor };}
 
   li a:hover { 
       transition: color .2s linear .08s;

@@ -15,6 +15,8 @@ import arrowSVG from './../../assets/images/arrow_home.svg'
 // STYLES
 const wrapperHeroHome = css`
   height: auto;
+  display: flex;
+  align-items: center;
   overflow: hidden;
 
 
@@ -109,6 +111,11 @@ const WrapperAnimation = styled.div`
   transform: translateX(-80px);
   transition: all 2s ease-out;
   filter: blur(8px);
+  padding-bottom: 2rem; 
+
+  ${ mq[ 'md' ] }{
+    padding-bottom: 10rem; 
+  }
 
   &.isAnimated {
     opacity: 1;

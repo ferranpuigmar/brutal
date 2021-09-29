@@ -12,6 +12,7 @@ import { hexToRgb } from '../utils/colors';
 import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
 import ImageSkeleton from '../shared/ImageSkeleton';
 import CustomImage from '../shared/CustomImage';
+import Link from "@frontity/components/link"
 
 // Styles
 const DescriptionWrapper = styled.div`
@@ -38,6 +39,10 @@ const block = css`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  Link {
+    text-align: left!important;
+  }
 
   ${ mq[ "md" ] } {
     display: flex;
@@ -100,16 +105,16 @@ const projectImageWrapper = css`
   }
 `
 
-const whiteLink = css`
-  &:hover {
-      color: ${ `${ theme.colors.primaryColor }!important` };
-      .arrow-icon,
-      .arrow-icon:after,
-      .arrow-icon:before {
-        background-color: ${ `${ theme.colors.primaryColor }!important` };
-      }
-  }
-`;
+// const whiteLink = css`
+//   &:hover {
+//       color: ${ `${ theme.colors.primaryColor }!important` };
+//       .arrow-icon,
+//       .arrow-icon:after,
+//       .arrow-icon:before {
+//         background-color: ${ `${ theme.colors.primaryColor }!important` };
+//       }
+//   }
+// `;
 
 const OverLapContent = styled.div`
   position:absolute;
@@ -139,12 +144,19 @@ const rowContent = css`
     display: flex!important;
   }
 `
+const linkStyle = css`
+text-decoration: none;
+text-align: left;
+display: flex;
+justify-content: flex-start;
+`;
 
 //Component
 const ProjectItem = ( {
-  project, index, link_text, libraries
+  project, index, link_text, libraries, link_project
 } ) =>
 {
+  console.log( 'project: ', project )
   const Html2React = libraries.html2react.Component;
   const title = project?.title.rendered;
   const description = project?.excerpt.rendered;
@@ -175,7 +187,9 @@ const ProjectItem = ( {
       <DescriptionWrapper>
         <Html2React html={ description } />
       </DescriptionWrapper>
-      <ArrowLink isAnchor={ false } className={ "nav-arrow", cx( whiteLink ) } variant="bold">{ link_text }</ArrowLink>
+
+      <ArrowLink link={ link_project } hoverBackground={ false } className={ "nav-arrow" } variant="bold">{ link_text }</ArrowLink>
+
     </div>
   </Col></Row>
 

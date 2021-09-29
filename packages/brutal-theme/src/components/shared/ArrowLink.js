@@ -4,7 +4,6 @@ import { theme } from '../../assets/styles/theme';
 import { cx, css } from '@emotion/css'
 import { mq } from '../../assets/styles/mediaqueries';
 import { spacing } from '../../assets/styles/spacing';
-import { theme_colors } from '../../assets/styles/variables';
 import Link from "@frontity/components/link";
 
 const handleBtnStyle = ( type ) =>
@@ -17,90 +16,129 @@ const handleBtnStyle = ( type ) =>
     case 'outline':
       return outline
     default: {
-      false
+      ''
     }
   }
+}
 
+const handleHoverColor = ( color ) =>
+{
+  switch ( color ) {
+    case 'white':
+      return hover__white;
+    default: {
+      ''
+    }
+  }
 }
 
 // Styles
-const buttonGenerics = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  cursor: 'pointer'
-}
+const linkButton = css`
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
 
-const primarySolid = {
-  backgroundColor: theme.colors.primaryColor,
-  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
-  ...buttonGenerics
-}
+  ${ mq[ 'md' ] }{
+    font-size: 2.5rem;
+  }
 
-const whiteSolid = {
-  backgroundColor: theme.colors.white,
-  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
-  ...buttonGenerics
-}
-
-const outline = {
-  backgroundColor: 'transparent',
-  padding: `${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] }`,
-  border: `2px solid ${ theme.colors.black }`,
-  ...buttonGenerics
-}
-
-const ArrowAnchorWrapper = styled.div`
-  a{
-    text-decoration: none;
-    ${ props => handleBtnStyle( props.type ) };
-    color: ${ theme.colors.black }!important;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    cursor: pointer;
+  span{
+    color: ${ theme.colors.black };
     transition: all 0.3s ease-in-out;
 
-    &:hover {
-      background-color: ${ theme_colors.primaryColor };
+    &:last-child{
+      top: 1px;
+    }
 
-      .arrow-icon{
-        transform: translateX(10px);
-        width: 40px;
+    &:before,
+    &:after{
+      transition: all 0.1s ease-in-out;
+    }
+  }
+
+  &:hover {
+    span{
+        color: ${ theme.colors.primaryColor };
+        &:last-child{
+          background-color: ${ theme.colors.primaryColor };
+          width: 51px;
+          margin-left: calc(2rem + 11px);
+          transform: translateX(5px);
+        }
+        &:before,
+        &:after{
+          background-color: ${ theme.colors.primaryColor }
+        }
+      }
+    }
+`
+
+const hover__white = css`
+  &:hover {
+    span{
+      color: ${ theme.colors.white };
+      &:last-child{
+        background-color: ${ theme.colors.white }
+      }
+      &:before,
+      &:after{
+        background-color: ${ theme.colors.white }
       }
     }
   }
 `
 
-const ArrowWrapper = styled.div`
-  display: inline-block;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  color: ${ theme.colors.black }!important;
-  font-size: 1.6rem;
-  font-family: ${ props => props.variant === 'bold' ? theme.fontFamily.bold : theme.fontFamily.regular };
-  ${ props => handleBtnStyle( props.type ) };
+const buttonGenerics = css`
+  padding: ${ spacing[ 'pt-3' ] } ${ spacing[ 'p-4' ] };
+  font-size: 1.8rem;
 
-  span{
-    display: inline-block;
+  ${ mq[ 'md' ] }{
+    font-size: 2rem;
   }
+`
 
-  &:hover{
+const primarySolid = css`
+  background-color: ${ theme.colors.primaryColor };
+`
 
-    span:last-child{
-      transform: translateX(5px);
+const whiteSolid = css`
+  background-color: ${ theme.colors.white };
+`
+
+const outline = css`
+  background-color: transparent;
+  border: 2px solid ${ theme.colors.black };
+  
+  &:hover {
+    background-color: ${ theme.colors.primaryColor };
+
+    span{
+      color: ${ theme.colors.black };
+      &:last-child{
+        background-color: ${ theme.colors.black }
+      }
+      &:before,
+      &:after{
+        background-color: ${ theme.colors.black }
+      }
     }
   }
-
-  ${ mq[ "sm" ] } {
-    font-size: 1.8rem;
-  }
-
 `
+
+const linkTagStyle = css`
+  text-decoration: none;
+  display: inline-block;
+
+  > * {
+    width: 100%;
+  }
+`
+
 const Arrow = styled.span`
-  width: 48px;
+  width: 61px;
   display: inline-block;
   height: ${ props => props.variant === 'bold' ? '2px' : '1px' };
   background-color: black;
@@ -136,21 +174,29 @@ const Arrow = styled.span`
 
 `
 
-const ArrowLinkContent = ( { type, variant, link, children } ) => <>
-  <span>{ children }</span>
-  <Arrow type={ type } variant={ variant } link={ link } className="arrow-icon"></Arrow>
-</>
+const ArrowLinkContent = ( { type, variant, link, hoverColor, children } ) =>
+{
+  const buttonType = type ? cx( buttonGenerics, handleBtnStyle( type ) ) : '';
+  return <div className={ cx( linkButton, buttonType, handleHoverColor( hoverColor ) ) }>
+    <span>{ children }</span>
+    <Arrow type={ type } variant={ variant } link={ link } className="arrow-icon"></Arrow>
+  </div >
+}
 
-const ArrowLink = ( { link, children, className, hoverColor, variant, type, isAnchor = true } ) =>
+const ArrowLink = ( { link, children, className, hoverColor, variant, type, isAnchor = true, hoverBackground = true } ) =>
 {
   return (
-    <ArrowWrapper className={ cx( "arrow-element", className ) } variant={ variant }>
+    <div className={ cx( "arrow-button", className ) }>
       {
         isAnchor
-          ? <ArrowAnchorWrapper type={ type } variant={ variant }><Link className={ ArrowAnchorWrapper } link={ link } type={ type }><ArrowLinkContent variant={ variant } children={ children } /></Link></ArrowAnchorWrapper>
-          : <><ArrowLinkContent variant={ variant } children={ children } /></>
+          ?
+          <Link link={ link } className={ linkTagStyle }>
+            <ArrowLinkContent hoverColor={ hoverColor } type={ type } variant={ variant } children={ children } link={ link } />
+          </Link>
+          :
+          <div><ArrowLinkContent type={ type } variant={ variant } children={ children } /></div>
       }
-    </ArrowWrapper>
+    </div>
   )
 }
 
