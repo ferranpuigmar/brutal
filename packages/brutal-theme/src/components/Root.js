@@ -45,6 +45,7 @@ const Root = ( { state, actions } ) =>
   const data = state.source.get( state.router.link );
   const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
   const blackBackground = objPageIDs?.acf.footer_default_black;
+  const currentPage = data.route.split("").slice(1,-1).join("");
 
   const [ isScolling, setIsScolling ] = useState( false );
   const [ movilWidth, setMovilWidth ] = useState( true );
@@ -93,6 +94,7 @@ const Root = ( { state, actions } ) =>
       { data.isFetching ? <Loading /> :
         <GridThemeProvider gridTheme={ gridTheme }>
           <Navbar
+            currentPage={currentPage}
             mobilWidth={ movilWidth }
             scroll={ isScolling }
             footerFields={ footerFields ? footerFields : {} }
