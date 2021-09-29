@@ -60,8 +60,11 @@ const ServicesModule = ( { state, libraries, actions, ...rest } ) =>
 {
   const { title, text_link, services } = rest;
 
-  const allServices = state.source.get( `/categories/${ state.theme.services }/` ).items;
-  const dataServices = allServices.filter( service => services.includes( service.id ) )
+  const availableServices = state.source.get( `/categories/${ state.theme.services }/` ).items;
+  const selectedServices = services.map( service =>
+  {
+    return availableServices.find( availableService => availableService.id === service.category )
+  } )
 
   const Html2React = libraries.html2react.Component;
 
@@ -72,7 +75,7 @@ const ServicesModule = ( { state, libraries, actions, ...rest } ) =>
           <Title className={ cx( sectionTitle ) } level={ 2 }><Html2React html={ title } /></Title>
         </Col>
         <Col className={ cx( colServices ) }>
-          { dataServices.map( ( service, index ) =>
+          { selectedServices.map( ( service, index ) =>
             <Accordion key={ service.id } data={ service } />
           ) }
         </Col>

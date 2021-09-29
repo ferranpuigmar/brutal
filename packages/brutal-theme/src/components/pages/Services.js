@@ -87,7 +87,7 @@ const Services = ( { state, actions, libraries } ) =>
   const {
     col_left_text,
     col_right_text,
-    services_items,
+    services,
     solutions_section_title
   } = post.acf;
 
@@ -95,7 +95,11 @@ const Services = ( { state, actions, libraries } ) =>
 
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
-  const services = state.source.get( `/categories/${ state.theme.services }/` ).items.filter( service => services_items.includes( service.id ) );
+  const availableServices = state.source.get( `/categories/${ state.theme.services }/` ).items
+  const selectedServices = services.map( service =>
+  {
+    return availableServices.find( availableService => availableService.id === service.category )
+  } );
 
   return data.isReady ? (
     <>
@@ -122,8 +126,8 @@ const Services = ( { state, actions, libraries } ) =>
           <Container>
             <GridServicesWrapper>
               {
-                services
-                  ? services.map( service => <ServiceItem key={ service.id } title={ service.name } data={ service.acf } /> )
+                selectedServices
+                  ? selectedServices.map( service => <ServiceItem key={ service.id } title={ service.name } data={ service.acf } /> )
                   : <Loading />
               }
             </GridServicesWrapper>

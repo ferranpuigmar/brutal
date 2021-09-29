@@ -9,29 +9,21 @@ import { mq } from '../../assets/styles/mediaqueries'
 
 // Styles
 const AccordionWrapper = styled.div`
-  ${ mq[ "sm" ] } {
     border-top: 2px solid ${ theme.colors.black };
-  }
 `
 const accordionTitle = css`
   color: ${ theme.colors.black };
   font-family: ${ theme.fontFamily.regular };
 `
 const AccordionHeader = styled.div`
-  padding-bottom: ${ spacing[ 'pt-2' ] };
+  padding-top: ${ spacing[ 'pt-6' ] };
+  padding-bottom: ${ spacing[ 'pt-6' ] };
   position: relative;
-
-  ${ mq[ "sm" ] } {
-    padding-top: ${ spacing[ 'pt-6' ] };
-    padding-bottom: ${ spacing[ 'pt-6' ] };
-  }
 `
 const AccordionCloseBtn = styled.button`
-  display: none;
 
-  ${ mq[ "sm" ] } {
-    width: 47px;
-    height: 47px;
+    width: 37px;
+    height: 37px;
     position: absolute;
     display: block;
     top: 50%;
@@ -40,29 +32,42 @@ const AccordionCloseBtn = styled.button`
     transform: ${ props => props.expand ? 'translateY(-50%) rotate(135deg)' : 'translateY(-50%) rotate(0deg)' };
     background: transparent;
     border: 0;
+    cursor: pointer;
 
     &:before,
     &:after{
-    content: "";
-    position: absolute;
-    width: 100%;
-    left: 0;
-    height: 2px;
-    background-color: ${ theme.colors.black };
-    transform-origin: center;
-    top:50%;
-  }
-}
+      content: "";
+      position: absolute;
+      width: 100%;
+      left: 0;
+      height: 2px;
+      transition: all 0.3s ease-in-out;
+      background-color: ${ theme.colors.black };
+      transform-origin: center;
+      top:50%;
+    }
 
-  &:before{
-  transform: translateY(-50%);
-}
+    &:hover{
+      &:before,
+      &:after{
+        background-color: ${ theme.colors.primaryColor };
+      }
+    }
 
-  &:after{
-  transform: translateY(-50%) rotate( 90deg );
-}
+    &:before{
+      transform: translateY(-50%);
+    }
+  
+    &:after{
+      transform: translateY(-50%) rotate( 90deg );
+    }
+
+    ${ mq[ 'md' ] }{
+      width: 47px;
+      height: 47px;
+    }
+
 `
-
 const AccordionContentWrapper = styled.div`
   width: 100%;
   height: ${ props => `${ props.expandHeight || 0 }px` };
