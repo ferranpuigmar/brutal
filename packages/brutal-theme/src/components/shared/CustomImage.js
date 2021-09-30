@@ -14,6 +14,11 @@ const CustomImage = ( { src, srcSet, className, loading = 'lazy', onReadyToShow,
     onReadyToShow && onReadyToShow();
   }
 
+  useEffect( () =>
+  {
+    setTimeout( onLoadImage, 300 )
+  }, [] )
+
   return (
     <Image src={ srcUrl } style={ style } { ...rest } srcSet={ srcset } loading={ loading } className={ className } onLoad={ onLoadImage } />
   )

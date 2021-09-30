@@ -46,30 +46,6 @@ const ProjectWrapper = styled.div`
     transform-origin: center;
     transition: all 0.3s ease-in-out;
   }
-
-  .arrow-icon,
-  .arrow-icon:before,
-  .arrow-icon:after {
-    transition: all 0.1s ease-in-out!important;
-  }
-
-  &:hover {
-    .arrow-button{
-      span{
-        color: ${ theme.colors.primaryColor }!important;
-      }
-
-      .arrow-icon,
-      .arrow-icon:before,
-      .arrow-icon:after {
-        background-color: ${ theme.colors.primaryColor }!important;
-      }
-    }
-
-    .arrow-icon {
-      transform: translateX(5px);
-    }
-  }
 `
 
 // Component
