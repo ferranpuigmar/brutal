@@ -2,7 +2,7 @@ import connect from '@frontity/connect'
 import React, { useEffect, useRef, useState } from 'react'
 import Title from '../shared/Title'
 import { styled } from 'frontity';
-import { css, cx } from '@emotion/css'
+import { css, cx, keyframes } from '@emotion/css'
 import { spacing } from '../../assets/styles/spacing';
 import { mq } from '../../assets/styles/mediaqueries';
 import CustomImage from '../shared/CustomImage';
@@ -10,6 +10,16 @@ import { offset } from '../../utils/scroll';
 
 
 // Styles
+const fadeInUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(0,30%,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+}
+`
 
 const wrapperItems = css`
   margin-bottom: ${ spacing[ 'mb-15' ] };
@@ -28,7 +38,6 @@ const Item = styled.div`
   flex-direction: column;
   align-items: flex-start;
   transition: all 1s ease-out;
-  opacity: 1;
   transform: translateY(0);
 
   img{
@@ -38,10 +47,16 @@ const Item = styled.div`
   }
 
   ${ mq[ 'md' ] }{
-    margin-bottom: 0;
-    opacity: ${ props => !props.animateStarted ? 0 : 1 };
-    transform: ${ props => !props.animateStarted ? 'translateY(-40px)' : 'translateY(0)' };
-    filter: ${ props => !props.animateStarted ? 'blur( 8px )' : 'blur( 0 )' };
+    visibility: hidden;
+
+    &.isAnimate{
+      visibility: visible;
+      margin-bottom: 0;
+      animation-delay: ${ props => props.delay };
+      animation-duration: .5s;
+      animation-fill-mode: backwards;
+      animation-name: ${ fadeInUp };
+    }
   }
 `
 
@@ -59,6 +74,7 @@ const itemTitle = css`
 const StrenghItem = ( {
   libraries,
   state,
+  delay,
   ...rest
 } ) =>
 {
@@ -92,7 +108,9 @@ const StrenghItem = ( {
 
   return (
     <div className={ wrapperItems } ref={ itemRef }>
-      <Item animateStarted={ animateStarted }>
+      <Item delay={ delay } className={ cx( {
+        [ 'isAnimate' ]: animateStarted
+      } ) }>
         <CustomImage src={ rest?.image } alt={ rest?.title } />
         <Title className={ cx( itemTitle ) } level={ 3 } >{ rest?.title }</Title>
         <Html2React html={ rest?.description } />

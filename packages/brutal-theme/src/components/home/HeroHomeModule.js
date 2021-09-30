@@ -32,7 +32,7 @@ const heroTitle = css`
   }
   
   .Typewriter__cursor{
-    display: inline-block;
+    color: ${ theme.colors.black } 
   }
 
   ${ mq[ "sm" ] } {
@@ -58,6 +58,8 @@ const colHero = css`
 const colImage = css`
   order: 2;
   margin-top: ${ spacing[ 'mt-5' ] };
+  display: flex;
+  justify-content: center;
 
   ${ mq[ "md" ] } {
     order: 0;
@@ -100,36 +102,59 @@ const HeroContent = styled.div`
   }
 `
 
+
+const fadeInRight = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(30%,0,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+`
+
+const fadeInRight2 = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(30%,0,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+`
+
 const ColHeroContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  ${ mq[ 'md' ] }{
+    animation-delay: 0.5s;
+    animation-duration: .5s;
+    animation-fill-mode: backwards;
+    animation-name: ${ fadeInRight };
+  }
+`
+
+const ImageAnimation = styled.div`
+  position: relative;
+  opacity: 0;
+
+  ${ mq[ 'md' ] }{
+    &.isAnimate {
+      animation-delay: 0.6s;
+      animation-duration: .8s;
+      animation-name: ${ fadeInRight2 };
+      animation-fill-mode: forwards;
+    }
+  }
 `
 
 const contentTitle = css`
   ${ theme.fontSize.h3 }
   font-size: 24px!important;
   margin-bottom: ${ spacing[ 'mb-4' ] };
-`
-
-const WrapperAnimation = styled.div`
-  opacity: 1;
-  transform: translateX(0);
-  transition: none;
-  padding-bottom: 2rem; 
-
-  ${ mq[ 'md' ] }{
-    opacity: 0;
-    transform: translateX(-80px);
-    transition: all 0.8s ease-out;
-    filter: blur(8px);
-    padding-bottom: 10rem;
-
-    &.isAnimated {
-      opacity: 1;
-      transform: translateX(0);
-      filter: blur(0);
-    }
-  }
 `
 const bounce = keyframes`
   from, 20%, 53%, 80%, to {
@@ -154,7 +179,7 @@ const ArrowDown = styled.div`
   position: absolute;
   bottom: 0;
   left: 50%;
-  opacity: ${ props => props.isScroll ? 0 : 1 };
+  opacity: ${ props => props.isScroll ? '0!important' : '1!important' };
   pointer-events: none;
 
   img{
@@ -180,65 +205,62 @@ const HeroHomeModule = ( {
   const [ startAnimation, setStartAnimation ] = useState( false )
   const [ isTypeWritting, setIsTypeWritting ] = useState( true )
 
-  const handleAnimation = () =>
-  {
-    setStartAnimation( !startAnimation )
-  }
-
   const handleTypeWritting = () =>
   {
     setIsTypeWritting( false )
     setTimeout( () => setIsTypeWritting( true ), 500 )
   }
 
-  useEffect( () =>
+  const handleOnLoadHand = () =>
   {
-    setTimeout( handleAnimation, 0 )
-  }, [] )
+    setStartAnimation( true )
+  }
 
   return (
     <>
       <section id="hero">
         <Block widthPadding={ true } className={ wrapperHeroHome }>
           <Container>
-            <WrapperAnimation className={ cx( { [ 'isAnimated' ]: startAnimation } ) }>
-              <Row >
-                <Col lg={ 7 } className={ colHero }>
-                  <ColHeroContentWrapper>
-                    <Title level={ 1 } className={ heroTitle }>
-                      { isTypeWritting && <Typewriter
-                        onInit={
-                          ( typewriter ) =>
-                          {
-                            typewriter.typeString( title )
-                              .start()
-                              .pauseFor( 2000 )
-                              .callFunction( () =>
-                              {
-                                document.querySelector( '.Typewriter__cursor' ).remove()
-                                handleTypeWritting()
-                              } )
-                          }
+            <Row >
+              <Col lg={ 7 } className={ colHero }>
+                { startAnimation && <ColHeroContentWrapper>
+                  <Title level={ 1 } className={ heroTitle }>
+                    { isTypeWritting && <Typewriter
+                      onInit={
+                        ( typewriter ) =>
+                        {
+                          typewriter.typeString( title )
+                            .start()
+                            .pauseFor( 2000 )
+                            .callFunction( () =>
+                            {
+                              document.querySelector( '.Typewriter__cursor' ).remove()
+                              handleTypeWritting()
+                            } )
                         }
-                        options={
-                          {
-                            autoStart: true,
-                            delay: '70',
-                          }
+                      }
+                      options={
+                        {
+                          autoStart: true,
+                          delay: '70',
                         }
-                      /> }
-                    </Title>
-                    <HeroContent>
-                      <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
-                      <Html2React html={ content.text } />
-                    </HeroContent>
-                  </ColHeroContentWrapper>
-                </Col>
-                <Col lg={ 5 } className={ cx( colHero, colImage ) }>
-                  <CustomImage className={ imageStyles } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
-                </Col>
-              </Row>
-            </WrapperAnimation>
+                      }
+                    /> }
+                  </Title>
+                  <HeroContent>
+                    <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
+                    <Html2React html={ content.text } />
+                  </HeroContent>
+                </ColHeroContentWrapper> }
+              </Col>
+              <Col lg={ 5 } className={ cx( colHero, colImage ) }>
+                <ImageAnimation className={ cx( {
+                  [ 'isAnimate' ]: startAnimation
+                } ) }>
+                  <CustomImage loading='edger' className={ imageStyles } src={ image.url } alt={ image.title } onLoad={ handleOnLoadHand } />
+                </ImageAnimation>
+              </Col>
+            </Row>
           </Container>
         </Block>
       </section>

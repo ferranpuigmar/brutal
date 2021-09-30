@@ -3,8 +3,6 @@ import { styled } from 'frontity';
 import { mq } from '../../assets/styles/mediaqueries';
 import { maxWidths, mobilePaddingBlock } from '../../assets/styles/variables';
 import { spacing } from '../../assets/styles/spacing';
-import { cx } from '@emotion/css'
-
 
 export const minPadding = spacing[ 'p-7' ];
 

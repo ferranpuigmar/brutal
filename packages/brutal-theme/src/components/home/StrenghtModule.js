@@ -93,7 +93,7 @@ const StrenghtModule = ( {
             <Title level={ 2 } className={ cx( heroTitle ) }><Html2React html={ section_title } /></Title>
             <ItemsList>
               {
-                strenght?.map( module => <StrenghItem key={ uuid_v4() } { ...module } /> )
+                strenght?.map( ( module, index ) => <StrenghItem key={ uuid_v4() } { ...module } delay={ `${ 0 + index / 10 }s` } /> )
               }
             </ItemsList>
           </StrenghtModuleMargin>

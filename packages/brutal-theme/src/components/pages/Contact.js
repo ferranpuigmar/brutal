@@ -194,7 +194,6 @@ const Contact = ( { state, libraries } ) =>
 
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
-  console.log( 'DATA: ', data )
   const { description } = post.acf;
 
   const handleRemoveError = ( errors ) =>
