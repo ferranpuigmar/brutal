@@ -19,9 +19,8 @@ const wrapperHeroHome = css`
   align-items: center;
   overflow: hidden;
 
-
   ${ mq[ 'md' ] }{
-    min-height: calc(100vh - 10rem)
+    min-height: calc(100vh - 10rem);
   }
 `
 const heroTitle = css`
@@ -31,14 +30,15 @@ const heroTitle = css`
     color: ${ theme.colors.primaryColor };
     font-style: normal;
   }
+  
+  .Typewriter__cursor{
+    display: inline-block;
+  }
 
   ${ mq[ "sm" ] } {
     margin-bottom: 0
   }
 
-  .Typewriter__cursor{
-    display: inline-block;
-  }
 `;
 
 const colHero = css`
