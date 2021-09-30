@@ -1,5 +1,5 @@
 import { styled, connect } from 'frontity';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Title from '../shared/Title';
 import Container from '../layout/Container';
 import { Row, Col } from 'styled-bootstrap-grid';
@@ -122,7 +122,7 @@ const colForm = css`
     padding: 18px;
     font-size: 14px;
     color: white;
-    text-align: left;
+    text-align: left!important;
     margin-top: 30px;
   }
 
@@ -130,10 +130,10 @@ const colForm = css`
     .form{
       margin-top: 0;
 
-      &Row { 
+      &Row {
         display: flex;
         flex-direction: row;
-        margin: 0 -16px 0; 
+        margin: 0 -16px 0;
 
         div {
           padding: 0 16px;
@@ -163,7 +163,7 @@ const ButtonFixer = styled.div`
     &:nth-of-type(3) {
       text-align: left!important;
     }
-  } 
+  }
 
  #sendButton {
     background-color: ${ `${ theme.colors.black }!important` };
@@ -172,27 +172,62 @@ const ButtonFixer = styled.div`
     border-radius: 0!important;
     border-color: ${ `${ theme.colors.white }!important` };
     transition: color .35s linear;
-    
+
     :hover {
       background-color: ${ `${ theme.colors.primaryColor }!important` };
       color: ${ `${ theme.colors.black }!important` };
       border-color: transparent!important;
       outline: none!important;
       cursor: pointer!important;
-      
     }
   }
 `;
+
+const loadForm = ( form, Html2React ) =>
+{
+  return <Html2React html={ form } />
+}
 
 // COMPONENT
 const Contact = ( { state, libraries } ) =>
 {
 
-  const Html2React = libraries.html2react.Component;
+
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
 
   const { description } = post.acf;
+
+  const handleRemoveError = ( errors ) =>
+  {
+    errors.forEach( error => error.remove() )
+  }
+
+  const resetForm = () =>
+  {
+    const errors = document.querySelectorAll( '[class*="-NotValidTip"' );
+    const errroMsg = document.querySelector( '.error-message' );
+    const inputs = document.querySelectorAll( '.wpcf7-form-control:not(.wpcf7-submit)' )
+    inputs.forEach( input => input.value = '' )
+    console.log( 'errors: ', errors.length )
+    console.log( 'errroMsg: ', errroMsg )
+    errors.length > 0 && errors.forEach( error => error.remove() )
+    errroMsg && errroMsg.remove();
+  }
+
+  const [ startForm, setStartForm ] = useState( false )
+
+  const handleForm = () =>
+  {
+    setStartForm( !startForm )
+  }
+
+  useEffect( () =>
+  {
+    setTimeout( handleForm, 0 )
+  }, [] )
+
+  const Html2React = libraries.html2react.Component;
 
   return data.isReady ? (
     <PageWrapper>
@@ -201,7 +236,7 @@ const Contact = ( { state, libraries } ) =>
           <Title className={ cx( sectionTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
           <Row>
             <Col xl={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
-            <Col xl={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
+            <Col xl={ 6 } className={ cx( colForm ) }>{ startForm && loadForm( post.content.rendered, Html2React ) }</Col>
           </Row>
         </ButtonFixer>
       </Container>
