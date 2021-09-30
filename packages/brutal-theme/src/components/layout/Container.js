@@ -3,13 +3,15 @@ import { styled } from 'frontity';
 import { mq } from '../../assets/styles/mediaqueries';
 import { maxWidths, mobilePaddingBlock } from '../../assets/styles/variables';
 import { spacing } from '../../assets/styles/spacing';
+import { cx } from '@emotion/css'
+
 
 export const minPadding = spacing[ 'p-7' ];
 
 const Container = ( { children, align = 'flex-start', bgColor = 'transparent', className } ) =>
 {
   return (
-    <ContainerDiv className={ className } bgColor={ bgColor } align={ align }>
+    <ContainerDiv className='containerDiv' bgColor={ bgColor } align={ align }>
       { children }
     </ContainerDiv>
   )

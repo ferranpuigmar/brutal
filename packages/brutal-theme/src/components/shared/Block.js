@@ -15,7 +15,7 @@ const BlockWrapper = styled.div`
   padding: ${ props => props.widthPadding ? 0 : `${ mobilePaddingBlock }` };
   background-color: ${ props => props.mode === 'dark' ? theme.colors.black : theme.colors.white };
 
-  > [class*="ContainerDiv"] {
+  > .containerDiv {
     padding-left: 0;
     padding-right: 0;
   }
@@ -25,7 +25,7 @@ const BlockWrapper = styled.div`
   }
 
   ${ mq[ "lg" ] } {
-    ${'' /* padding: ${ props => props.widthPadding ? `0 ${ tabletPaddingBlock }` : `${ desktopPaddingBlock }` }; */}
+    ${ '' /* padding: ${ props => props.widthPadding ? `0 ${ tabletPaddingBlock }` : `${ desktopPaddingBlock }` }; */ }
     padding: ${ props => props.widthPadding ? 0 : `${ desktopPaddingBlock }` };
   }
 `
