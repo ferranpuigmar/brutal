@@ -9,12 +9,12 @@ const CustomImage = ( { src, srcSet, className, loading = 'lazy', onReadyToShow,
   const srcSetSizes = calculateSrcSet( srcSet );
   const srcset = srcSetSizes?.map( image => `${ image.url } ${ image.width }px` ).join( ',' )
 
-  const onLoadImage = useCallback( () =>
+  const onLoadImage = () =>
   {
     setLoaded( true );
     setStyle( { visibility: 'visible', opacity: 1 } )
     onReadyToShow && onReadyToShow()
-  }, [] )
+  }
 
   return (
     <Image src={ srcUrl } style={ style } { ...rest } srcSet={ srcset } loading={ loading } className={ className } onLoad={ onLoadImage } />
