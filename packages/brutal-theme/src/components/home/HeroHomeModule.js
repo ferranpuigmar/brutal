@@ -257,7 +257,7 @@ const HeroHomeModule = ( {
                 <ImageAnimation className={ cx( {
                   [ 'isAnimate' ]: startAnimation
                 } ) }>
-                  <CustomImage loading='edger' className={ imageStyles } src={ image.url } alt={ image.title } onLoad={ handleOnLoadHand } />
+                  <CustomImage loading='eager' className={ imageStyles } src={ image.url } alt={ image.title } onReadyToShow={ handleOnLoadHand } />
                 </ImageAnimation>
               </Col>
             </Row>

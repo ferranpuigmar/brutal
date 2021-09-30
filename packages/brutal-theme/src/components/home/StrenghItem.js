@@ -37,8 +37,6 @@ const Item = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  transition: all 1s ease-out;
-  transform: translateY(0);
 
   img{
     width: 100%;
@@ -47,15 +45,14 @@ const Item = styled.div`
   }
 
   ${ mq[ 'md' ] }{
-    visibility: hidden;
+    opacity: 0;
 
     &.isAnimate{
-      visibility: visible;
       margin-bottom: 0;
+      animation-name: ${ fadeInUp };
       animation-delay: ${ props => props.delay };
       animation-duration: .5s;
-      animation-fill-mode: backwards;
-      animation-name: ${ fadeInUp };
+      animation-fill-mode: forwards;
     }
   }
 `
@@ -111,7 +108,7 @@ const StrenghItem = ( {
       <Item delay={ delay } className={ cx( {
         [ 'isAnimate' ]: animateStarted
       } ) }>
-        <CustomImage src={ rest?.image } alt={ rest?.title } />
+        <CustomImage src={ rest?.image } alt={ rest?.title } loading='eager' />
         <Title className={ cx( itemTitle ) } level={ 3 } >{ rest?.title }</Title>
         <Html2React html={ rest?.description } />
       </Item>

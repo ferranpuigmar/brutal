@@ -1,31 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Image from "@frontity/components/image";
 import { calculateSrcSet } from '../utils/images';
-const CustomImage = ( { src, srcSet, className, loading = 'lazy', onLoad, ...rest } ) =>
+const CustomImage = ( { src, srcSet, className, loading = 'lazy', onReadyToShow, ...rest } ) =>
 {
-  const [ didLoad, setLoad ] = React.useState( false );
+  const [ loaded, setLoaded ] = useState( false );
   const [ style, setStyle ] = useState( { visibility: 'hidden', opacity: 0 } )
   const srcUrl = src;
-
-
   const srcSetSizes = calculateSrcSet( srcSet );
   const srcset = srcSetSizes?.map( image => `${ image.url } ${ image.width }px` ).join( ',' )
 
-  const handleLoad = () =>
+  const onLoadImage = useCallback( () =>
   {
-    setLoad( true )
-    onLoad && onLoad()
-  }
-
-  useEffect( () =>
-  {
-    if ( didLoad ) {
-      setStyle( { visibility: 'visible', opacity: 1 } )
-    }
-  }, [ didLoad ] )
+    console.log( 'loaded' );
+    setLoaded( true );
+    setStyle( { visibility: 'visible', opacity: 1 } )
+    onReadyToShow && onReadyToShow()
+  }, [] )
 
   return (
-    <Image src={ srcUrl } style={ style } { ...rest } srcSet={ srcset } loading={ loading } className={ className } onLoad={ handleLoad } />
+    <Image src={ srcUrl } style={ style } { ...rest } srcSet={ srcset } loading={ loading } className={ className } onLoad={ onLoadImage } />
   )
 }
 
