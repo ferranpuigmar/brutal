@@ -117,7 +117,6 @@ const ProjectItem = ( {
   project, index, link_text, libraries, link_project
 } ) =>
 {
-  console.log( 'project: ', project )
   const Html2React = libraries.html2react.Component;
   const title = project?.title.rendered;
   const description = project?.excerpt.rendered;
@@ -142,7 +141,7 @@ const ProjectItem = ( {
     loadFeaturedMedia( imageId );
   }, [] )
 
-  const colContent = <Row className={ rowContent }><Col key={ uuid_v4() } md={ 6 } mdOffset={ isEven ? 6 : 0 }>
+  const colContent = <Row key={ uuid_v4() } className={ rowContent }><Col md={ 6 } mdOffset={ isEven ? 6 : 0 }>
     <div className={ cx( block, { [ 'isLeft' ]: !isEven, [ 'isRight' ]: isEven } ) } >
       <Title className={ titleColor } level={ 3 } >{ title }</Title>
       <DescriptionWrapper>

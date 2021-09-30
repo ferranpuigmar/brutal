@@ -199,7 +199,7 @@ const NavMenu = ( { state, open, close, mobilWidth, footerFields, currentPage } 
                 { ( items.length - 1 ) === index
                   ?
                   <ArrowLink
-                    nonekey={ item.ID }
+                    key={ item.ID }
                     link={ `/${ item.slug }` }
                     type='white'
                     className={ cx( "navigation__link nav-arrow", currentPage === item.slug ? greenLink : '' ) }
@@ -208,7 +208,7 @@ const NavMenu = ( { state, open, close, mobilWidth, footerFields, currentPage } 
                     { item.title }
                   </ArrowLink>
                   :
-                  <Link nonekey={ item.ID }
+                  <Link key={ item.ID }
                     className={ "navigation__link" }
                     link={ `/${ item.slug }` }>
                     { item.title }

@@ -96,6 +96,7 @@ const Burger = ( { currentPage, mobilWidth, footerFields } ) =>
 
   const handleAnimation = () =>
   {
+    if ( !mobilWidth ) return;
     const elem = document.querySelector( 'html' );
     elem.style.overflow = open?.status ? "visible" : "hidden";
     setOpen( !open ? { status: true } : { status: !open.status } )
@@ -109,6 +110,7 @@ const Burger = ( { currentPage, mobilWidth, footerFields } ) =>
 
   const closeAndShow = () =>
   {
+    if ( !mobilWidth ) return;
     const elem = document.querySelector( 'html' );
     setOpen( { status: !open.status } )
     elem.style.overflow = "visible";

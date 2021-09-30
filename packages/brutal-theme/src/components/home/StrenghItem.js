@@ -30,7 +30,6 @@ const Item = styled.div`
   transition: all 1s ease-out;
   opacity: 1;
   transform: translateY(0);
-  filter: blur(8px);
 
   img{
     width: 100%;
@@ -42,7 +41,7 @@ const Item = styled.div`
     margin-bottom: 0;
     opacity: ${ props => !props.animateStarted ? 0 : 1 };
     transform: ${ props => !props.animateStarted ? 'translateY(-40px)' : 'translateY(0)' };
-    filter: blur(0);
+    filter: ${ props => !props.animateStarted ? 'blur( 8px )' : 'blur( 0 )' };
   }
 `
 

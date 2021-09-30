@@ -3,6 +3,7 @@ import { styled } from 'frontity'
 import { keyframes } from '@emotion/react'
 import { hexToRgb } from '../utils/colors';
 import { theme } from '../../assets/styles/theme';
+import { css } from '@emotion/css'
 
 // Styles
 const loadingImage = keyframes`
@@ -18,13 +19,15 @@ const WrapperSqueleton = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba( ${ hexToRgb( theme.colors.primaryColor ) }, 0.3);
-  animation:${ loadingImage } 2s infinite ${ Math.random() * 2 }s ease-in-out;
+  animation: ${ props => props.isLoading ? css`${ loadingImage } 2s infinite ${ Math.random() * 2 }s ease-in-out` : `none` };
+  pointer-events: none;
+  opacity: ${ props => props.isLoading ? 1 : 0 }
 `
 // Component
 const ImageSkeleton = ( { isLoading } ) =>
 {
   return (
-    isLoading ? <WrapperSqueleton /> : null
+    <WrapperSqueleton isLoading={ isLoading } />
   )
 }
 

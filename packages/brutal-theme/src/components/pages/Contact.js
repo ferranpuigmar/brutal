@@ -192,10 +192,9 @@ const loadForm = ( form, Html2React ) =>
 const Contact = ( { state, libraries } ) =>
 {
 
-
   const data = state.source.get( state.router.link );
   const post = state.source[ data.type ][ data.id ];
-
+  console.log( 'DATA: ', data )
   const { description } = post.acf;
 
   const handleRemoveError = ( errors ) =>
@@ -209,22 +208,17 @@ const Contact = ( { state, libraries } ) =>
     const errroMsg = document.querySelector( '.error-message' );
     const inputs = document.querySelectorAll( '.wpcf7-form-control:not(.wpcf7-submit)' )
     inputs.forEach( input => input.value = '' )
-    console.log( 'errors: ', errors.length )
-    console.log( 'errroMsg: ', errroMsg )
     errors.length > 0 && errors.forEach( error => error.remove() )
     errroMsg && errroMsg.remove();
   }
 
   const [ startForm, setStartForm ] = useState( false )
 
-  const handleForm = () =>
-  {
-    setStartForm( !startForm )
-  }
-
   useEffect( () =>
   {
-    setTimeout( handleForm, 0 )
+    if ( !startForm ) {
+      setStartForm( true )
+    }
   }, [] )
 
   const Html2React = libraries.html2react.Component;

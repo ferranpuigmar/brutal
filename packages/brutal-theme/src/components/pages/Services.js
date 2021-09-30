@@ -91,8 +91,6 @@ const Services = ( { state, actions, libraries } ) =>
     solutions_section_title
   } = post.acf;
 
-  console.log( post.acf )
-
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
   const availableServices = state.source.get( `/categories/${ state.theme.services }/` ).items

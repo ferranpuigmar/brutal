@@ -45,7 +45,7 @@ const Root = ( { state, actions } ) =>
   const data = state.source.get( state.router.link );
   const objPageIDs = Object.values( state.source.page ).find( page => page.link === data.link )
   const blackBackground = objPageIDs?.acf.footer_default_black;
-  const currentPage = data.route.split("").slice(1,-1).join("");
+  const currentPage = data.route.split( "" ).slice( 1, -1 ).join( "" );
 
   const [ isScolling, setIsScolling ] = useState( false );
   const [ movilWidth, setMovilWidth ] = useState( true );
@@ -63,14 +63,15 @@ const Root = ( { state, actions } ) =>
   useEffect( () =>
   {
     setMovilWidth( screen.width <= breakpoints.md + 1 ? true : false )
-    window.onscroll = () => {    
+    window.onscroll = () =>
+    {
       setIsScolling( window.pageYOffset > 30 ? true : false )
-      actions.theme.setWindowScroll(Math.round(window.pageYOffset))
+      actions.theme.setWindowScroll( Math.round( window.pageYOffset ) )
     }
-    
+
     window.onresize = () => screen.width <= breakpoints.md ? setMovilWidth( true ) : setMovilWidth( false )
     !footerFields && setFooterFields( state.source.get( `/globaloptions/${ state.theme.globalOptions }/` ).acf.footer_fields )
-  
+
   }, [] )
 
   useEffect( () =>
@@ -94,7 +95,7 @@ const Root = ( { state, actions } ) =>
       { data.isFetching ? <Loading /> :
         <GridThemeProvider gridTheme={ gridTheme }>
           <Navbar
-            currentPage={currentPage}
+            currentPage={ currentPage }
             mobilWidth={ movilWidth }
             scroll={ isScolling }
             footerFields={ footerFields ? footerFields : {} }
