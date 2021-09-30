@@ -71,6 +71,7 @@ const colForm = css`
           + span{
             margin-top: 1rem;
             font-size: 1.4rem;
+            text-align: left;
           }
         }
 
@@ -165,16 +166,16 @@ const ButtonFixer = styled.div`
   } 
 
  #sendButton {
-    background-color: ${`${theme.colors.black}!important`};
-    font-family: ${`${theme.fontFamily.regular}!important`};
-    color: ${`${theme.colors.white}!important`};
+    background-color: ${ `${ theme.colors.black }!important` };
+    font-family: ${ `${ theme.fontFamily.regular }!important` };
+    color: ${ `${ theme.colors.white }!important` };
     border-radius: 0!important;
-    border-color: ${`${theme.colors.white}!important`};
+    border-color: ${ `${ theme.colors.white }!important` };
     transition: color .35s linear;
     
     :hover {
-      background-color: ${`${theme.colors.primaryColor}!important`};
-      color: ${`${theme.colors.black}!important`};
+      background-color: ${ `${ theme.colors.primaryColor }!important` };
+      color: ${ `${ theme.colors.black }!important` };
       border-color: transparent!important;
       outline: none!important;
       cursor: pointer!important;
@@ -197,11 +198,11 @@ const Contact = ( { state, libraries } ) =>
     <PageWrapper>
       <Container>
         <ButtonFixer className="acaaaaaaa">
-        <Title className={ cx( sectionTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
-        <Row>
-          <Col xl={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
-          <Col xl={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
-        </Row>
+          <Title className={ cx( sectionTitle ) } level={ 1 }><Html2React html={ post.title.rendered } /></Title>
+          <Row>
+            <Col xl={ 6 }><div className={ cx( descriptionWrapper ) }><Html2React html={ description } /></div></Col>
+            <Col xl={ 6 } className={ cx( colForm ) }><Html2React html={ post.content.rendered } /></Col>
+          </Row>
         </ButtonFixer>
       </Container>
     </PageWrapper>
