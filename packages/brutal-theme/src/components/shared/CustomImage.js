@@ -3,7 +3,6 @@ import Image from "@frontity/components/image";
 import { calculateSrcSet } from '../utils/images';
 const CustomImage = ( { src, srcSet, className, loading = 'lazy', onReadyToShow, ...rest } ) =>
 {
-  const [ loaded, setLoaded ] = useState( false );
   const [ style, setStyle ] = useState( { visibility: 'hidden', opacity: 0 } )
   const srcUrl = src;
   const srcSetSizes = calculateSrcSet( srcSet );
@@ -11,9 +10,8 @@ const CustomImage = ( { src, srcSet, className, loading = 'lazy', onReadyToShow,
 
   const onLoadImage = () =>
   {
-    setLoaded( true );
     setStyle( { visibility: 'visible', opacity: 1 } )
-    onReadyToShow && onReadyToShow()
+    onReadyToShow && onReadyToShow();
   }
 
   return (

@@ -216,6 +216,11 @@ const HeroHomeModule = ( {
     setStartAnimation( true )
   }
 
+  useEffect( () =>
+  {
+    setTimeout( handleOnLoadHand, 400 )
+  }, [] )
+
   return (
     <>
       <section id="hero">
@@ -257,7 +262,7 @@ const HeroHomeModule = ( {
                 <ImageAnimation className={ cx( {
                   [ 'isAnimate' ]: startAnimation
                 } ) }>
-                  <CustomImage loading='eager' className={ imageStyles } src={ image.url } alt={ image.title } onReadyToShow={ handleOnLoadHand } />
+                  <CustomImage loading='eager' className={ imageStyles } src={ image.url } alt={ image.title } />
                 </ImageAnimation>
               </Col>
             </Row>

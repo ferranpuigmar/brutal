@@ -158,7 +158,7 @@ const ProjectItem = ( {
     { <div className={ cx( projectImageWrapper, {
       [ 'isLoaded' ]: !isLoading
     } ) }>
-      { featuredUrl && <CustomImage loading="lazy" width={ featuredUrl.media_details.width } height={ featuredUrl.media_details.height } src={ featuredUrl.source_url } srcSet={ featuredUrl.media_details.sizes } alt={ title } onLoad={ () => setIsLoading( false ) } /> }
+      { featuredUrl && <CustomImage loading="lazy" width={ featuredUrl.media_details.width } height={ featuredUrl.media_details.height } src={ featuredUrl.source_url } srcSet={ featuredUrl.media_details.sizes } alt={ title } onReadyToShow={ () => setIsLoading( false ) } /> }
     </div> }
   </ProjectImg>
   return [ colBg, colContent ]
