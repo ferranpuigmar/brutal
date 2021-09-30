@@ -26,6 +26,7 @@ const wrapperHeroHome = css`
 `
 const heroTitle = css`
   margin-bottom: ${ spacing[ 'mb-8' ] };
+  min-height: 140px;
   em {
     color: ${ theme.colors.primaryColor };
     font-style: normal;
@@ -33,6 +34,10 @@ const heroTitle = css`
 
   ${ mq[ "sm" ] } {
     margin-bottom: 0
+  }
+
+  .Typewriter__cursor{
+    display: inline-block;
   }
 `;
 
@@ -107,20 +112,23 @@ const contentTitle = css`
 `
 
 const WrapperAnimation = styled.div`
-  opacity: 0;
-  transform: translateX(-80px);
-  transition: all 2s ease-out;
-  filter: blur(8px);
+  opacity: 1;
+  transform: translateX(0);
+  transition: none;
   padding-bottom: 2rem; 
 
   ${ mq[ 'md' ] }{
-    padding-bottom: 10rem; 
-  }
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: all 0.8s ease-out;
+    filter: blur(8px);
+    padding-bottom: 10rem;
 
-  &.isAnimated {
-    opacity: 1;
-    transform: translateX(0);
-    filter: blur(0);
+    &.isAnimated {
+      opacity: 1;
+      transform: translateX(0);
+      filter: blur(0);
+    }
   }
 `
 const bounce = keyframes`
@@ -170,18 +178,23 @@ const HeroHomeModule = ( {
   const Html2React = libraries.html2react.Component;
 
   const [ startAnimation, setStartAnimation ] = useState( false )
+  const [ isTypeWritting, setIsTypeWritting ] = useState( true )
 
   const handleAnimation = () =>
   {
     setStartAnimation( !startAnimation )
   }
 
+  const handleTypeWritting = () =>
+  {
+    setIsTypeWritting( false )
+    setTimeout( () => setIsTypeWritting( true ), 500 )
+  }
+
   useEffect( () =>
   {
     setTimeout( handleAnimation, 0 )
   }, [] )
-
-  console.log()
 
   return (
     <>
@@ -193,13 +206,18 @@ const HeroHomeModule = ( {
                 <Col lg={ 7 } className={ colHero }>
                   <ColHeroContentWrapper>
                     <Title level={ 1 } className={ heroTitle }>
-                      <Typewriter
+                      { isTypeWritting && <Typewriter
                         onInit={
                           ( typewriter ) =>
                           {
                             typewriter.typeString( title )
                               .start()
-                              .callFunction( () => document.querySelector( '.Typewriter__cursor' ).remove() )
+                              .pauseFor( 2000 )
+                              .callFunction( () =>
+                              {
+                                document.querySelector( '.Typewriter__cursor' ).remove()
+                                handleTypeWritting()
+                              } )
                           }
                         }
                         options={
@@ -208,7 +226,7 @@ const HeroHomeModule = ( {
                             delay: '70',
                           }
                         }
-                      />
+                      /> }
                     </Title>
                     <HeroContent>
                       <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
