@@ -11,7 +11,6 @@ const CustomImage = ( { src, srcSet, className, loading = 'lazy', onReadyToShow,
 
   const onLoadImage = useCallback( () =>
   {
-    console.log( 'loaded' );
     setLoaded( true );
     setStyle( { visibility: 'visible', opacity: 1 } )
     onReadyToShow && onReadyToShow()

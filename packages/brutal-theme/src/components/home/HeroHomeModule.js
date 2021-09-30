@@ -139,9 +139,9 @@ const ColHeroContentWrapper = styled.div`
 
 const ImageAnimation = styled.div`
   position: relative;
-  opacity: 0;
 
   ${ mq[ 'md' ] }{
+    opacity: 0;
     &.isAnimate {
       animation-delay: 0.6s;
       animation-duration: .8s;
