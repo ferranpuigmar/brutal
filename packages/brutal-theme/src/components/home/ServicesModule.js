@@ -40,13 +40,13 @@ const colServices = css`
 const colButton = css`
   margin-top: ${ spacing[ 'mt-6' ] };
 
-  ${ mq[ "sm" ] } {
+  ${ mq[ "md" ] } {
     align-items: center;
     order: 1;
     flex-basis: 30%;
     display: flex;
     justify-content: flex-end;
-    margin-top: ${ spacing[ 'mt-6' ] };
+    margin-top: 0;
   }
 
   ${ mq[ "xl" ] } {
