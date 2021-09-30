@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect, styled } from 'frontity';
 import Link from "@frontity/components/link";
 import { css, cx, keyframes } from '@emotion/css'
@@ -31,33 +31,40 @@ const Ul = styled.ul`
   text-transform: uppercase;
   z-index: 10;
 
-  li { 
-    margin: auto 3.5rem; 
+  li {
+    margin: auto 3.5rem;
     text-align: center;
-    
+
     @media (max-width: ${ breakpoints[ "xl" ] }px) {
-    margin: auto 2rem; 
-    }  
+    margin: auto 2rem;
+    }
     @media (max-width: ${ breakpoints[ "lg" ] }px) {
-      margin: auto 0 auto 1.5rem; 
-    }  
+      margin: auto 0 auto 1.5rem;
+    }
   }
 
-  a { 
+  a,
+  a span {
     text-decoration: none;
     color: ${ theme_colors.white };
     font-size: 1.2rem;
-
-    
   }
-  .green a { color: ${ `${theme_colors.primaryColor}!important` } }
 
-  
-  
+  .green a,
+  .green a span {
+    color: ${ `${ theme_colors.primaryColor }!important` };
+
+    + span:last-child{
+      background-color: ${ theme_colors.primaryColor }!important;
+      &:before,
+      &:after{
+        background-color: ${ theme_colors.primaryColor }!important;
+      }
+    }
+  }
+
   .navigation__footer { display: none }
 
-
-  //////////////////////////////mobile-phone-styles-menus
   @media (max-width: ${ breakpoints[ "md" ] }px) {
 
     flex-flow: column nowrap;
@@ -80,21 +87,20 @@ const Ul = styled.ul`
       overflow: hidden;
       position: relative;
       width: 100%;
-
     }
-    
+
     .navigation__link-box div {
       animation: ${ menuLinkpDown } 0.8s;
       animation-fill-mode: forwards;
       transform: translate(200%, -100%);
     }
 
-    .navigation__link-box.box1 div { animation-delay: .75s; } 
-    .navigation__link-box.box2 div { animation-delay: .80s; } 
-    .navigation__link-box.box3 div { animation-delay: .70s; } 
-    .navigation__link-box.box4 div { animation-delay: .85s; } 
+    .navigation__link-box.box1 div { animation-delay: .75s; }
+    .navigation__link-box.box2 div { animation-delay: .80s; }
+    .navigation__link-box.box3 div { animation-delay: .70s; }
+    .navigation__link-box.box4 div { animation-delay: .85s; }
 
-    .navigation__link-box.box-footer div { animation-delay: 1.2s; }  
+    .navigation__link-box.box-footer div { animation-delay: 1.2s; }
 
     .navigation__link-box__close div {
       opacity: 0;
@@ -104,18 +110,24 @@ const Ul = styled.ul`
       animation-fill-mode: forwards;
       transform: translate(-250%, 0);
     }
-    .navigation__link { 
-      font-size: 2.6rem; 
+    .navigation__link,
+    .nav-arrow span {
+      font-size: 2.6rem;
       letter-spacing: 0px;
-
       @media (max-width: ${ breakpoints[ "sm" ] }px) {
-        font-size: 2.2rem; 
+        font-size: 2.2rem;
       }
     }
-    ${ '' /* .green a { color: ${theme_colors.white} } */ }
 
-    //////////////////////////////////////////FOOTER-NAV
-    .navigation__footer { 
+    .nav-arrow{
+      span{
+        &:last-child{
+          display: none;
+        }
+      }
+    }
+
+    .navigation__footer {
       display: flex;
 
       .t1 { display: none; }
@@ -125,28 +137,31 @@ const Ul = styled.ul`
       color: ${ theme_colors.white } ;
       letter-spacing: 1px;
       line-height: 2rem;
-    
+
       .footer__text-title { font-size: 1.2rem; }
       .footer__text-text a {
         color: ${ theme_colors.white } ;
         text-decoration: none;
-        font-size: 1.2rem; 
-        
+        font-size: 1.2rem;
+
         :hover { color: ${ theme_colors.primaryColor }; }
       }
 
       @media (max-width: ${ breakpoints[ "sm" ] }px) {
         .footer__text-title  { font-size: 1.1rem; }
         .footer__text-text a { font-size: 1.1rem; }
-      }  
+      }
     }
   }
-.arrow-button:hover {color: ${ theme_colors.primaryColor };}
 
-  li a:hover { 
-      transition: color .2s linear .08s;
-      color: ${ theme_colors.primaryColor }; 
-      }
+  .arrow-button:hover {
+    color: ${ theme_colors.primaryColor };
+  }
+
+  li a:hover {
+    transition: color .2s linear .08s;
+    color: ${ theme_colors.primaryColor };
+  }
 `;
 
 const NavFooter = styled.div`
@@ -158,41 +173,20 @@ const NavFooter = styled.div`
   .navigation__footer-title { font-size: 15px }
 `;
 
-const whiteLink = css`
-  color: #fff!important;
-  ${ theme.fontSize.h6 };
-  .arrow-icon, 
-  .arrow-icon:after,
-  .arrow-icon:before {
-    background-color: #fff!important;
-  }
-    &:hover {
-      color: ${ `${ theme_colors.primaryColor }!important` };
-      ${ theme.fontSize.h6 };
-      .arrow-icon, 
-      .arrow-icon:after,
-      .arrow-icon:before {
-      background-color: ${ `${ theme_colors.primaryColor }!important` };
-    }
-  }
-`;
-
 const greenLink = css`
   color: ${ `${ theme_colors.primaryColor }!important` };
   ${ theme.fontSize.h6 };
-  .arrow-icon, 
+  .arrow-icon,
   .arrow-icon:after,
   .arrow-icon:before {
     background-color: ${ `${ theme_colors.primaryColor }!important` }
-  }
   }
 `;
 
 const NavMenu = ( { state, open, close, mobilWidth, footerFields, currentPage } ) =>
 {
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
-// console.log(`currentPage-----------`, currentPage)
-// console.log(`items-----------`, items)
+
   return (
 
     <Ul open={ open }>
@@ -200,21 +194,28 @@ const NavMenu = ( { state, open, close, mobilWidth, footerFields, currentPage } 
       {
         return (
           <li className="navigation__item" onClick={ close } key={ item.ID }>
-            { ( items.length - 1 ) === index && !mobilWidth ?
-              <Link className="navigation__link" nonekey={ item.ID } link={ `/${ item.slug }`} >
-                <ArrowLink className={ "nav-arrow", cx( currentPage === item.slug && !mobilWidth ? greenLink : whiteLink  ) } isAnchor={ false } colorLink={currentPage === item.slug ? true : false }>{ item.title }</ArrowLink>
-              </Link>
-              :
-              <div className={ open ? `navigation__link-box box${ index + 1 }` : "navigation__link-box__close" } >
-                <div className={ currentPage === item.slug && !mobilWidth ? "green" : "" } >
+            <div className={ open ? `navigation__link-box box${ index + 1 }` : "navigation__link-box__close" } >
+              <div className={ currentPage === item.slug ? "green" : "" } >
+                { ( items.length - 1 ) === index
+                  ?
+                  <ArrowLink
+                    nonekey={ item.ID }
+                    link={ `/${ item.slug }` }
+                    type='white'
+                    className={ cx( "navigation__link nav-arrow", currentPage === item.slug ? greenLink : '' ) }
+                    isAnchor={ false }
+                    colorLink={ currentPage === item.slug ? true : false }>
+                    { item.title }
+                  </ArrowLink>
+                  :
                   <Link nonekey={ item.ID }
                     className={ "navigation__link" }
                     link={ `/${ item.slug }` }>
                     { item.title }
                   </Link>
-                </div>
+                }
               </div>
-            }
+            </div>
           </li>
         )
       } ) }

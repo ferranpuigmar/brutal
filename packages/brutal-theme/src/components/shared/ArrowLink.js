@@ -15,6 +15,8 @@ const handleBtnStyle = ( type ) =>
       return whiteSolid;
     case 'outline':
       return outline
+    case 'white':
+      return white
     default: {
       ''
     }
@@ -159,6 +161,35 @@ const outline = css`
       &:before,
       &:after{
         background-color: ${ theme.colors.black }
+      }
+    }
+  }
+`
+
+const white = css`
+  background-color: transparent;
+  padding: 0;
+
+  span{
+    color: ${ theme.colors.white };
+    &:last-child{
+      background-color: ${ theme.colors.white }
+    }
+    &:before,
+    &:after{
+      background-color: ${ theme.colors.white }
+    }
+  }
+
+  &:hover {
+    span{
+      color: ${ theme.colors.primaryColor };
+      &:last-child{
+        background-color: ${ theme.colors.primaryColor }
+      }
+      &:before,
+      &:after{
+        background-color: ${ theme.colors.primaryColor }
       }
     }
   }
