@@ -191,8 +191,7 @@ const greenLink = css`
 const NavMenu = ( { state, open, close, mobilWidth, footerFields, currentPage } ) =>
 {
   const items = state.source.get( `/menu/${ state.theme.menuUrl }/` ).items;
-// console.log(`currentPage-----------`, currentPage)
-// console.log(`items-----------`, items)
+  
   return (
 
     <Ul open={ open }>

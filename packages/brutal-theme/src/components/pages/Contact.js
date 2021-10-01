@@ -160,26 +160,38 @@ const colForm = css`
 const ButtonFixer = styled.div`
   form div{
     &:nth-of-type(3) {
-      text-align: left!important;
+      text-align: right!important;
     }
   } 
 
- #sendButton {
-    background-color: ${`${theme.colors.black}!important`};
-    font-family: ${`${theme.fontFamily.regular}!important`};
-    color: ${`${theme.colors.white}!important`};
-    border-radius: 0!important;
-    border-color: ${`${theme.colors.white}!important`};
+ #submit {
+    font-size: 1.8rem;
+    height: 5rem;
+    background-color: ${`${theme.colors.black}`};
+    font-family: ${`${theme.fontFamily.regular}`};
+    color: ${`${theme.colors.white}`};
+    border-radius: 0;
+    border-color: ${`${theme.colors.white}`};
     transition: color .35s linear;
     
     :hover {
-      background-color: ${`${theme.colors.primaryColor}!important`};
-      color: ${`${theme.colors.black}!important`};
-      border-color: transparent!important;
-      outline: none!important;
-      cursor: pointer!important;
+      background-color: ${`${theme.colors.primaryColor}`};
+      color: ${`${theme.colors.black}`};
+      border-color: transparent;
+      outline: none;
+      cursor: pointer;
       
     }
+
+   width: 100%;
+
+    ${ mq[ 'md' ] }{
+      text-aling: right;\
+      width: 47%;
+      max-width: 46rem;
+    }
+    
+    
   }
 `;
 
