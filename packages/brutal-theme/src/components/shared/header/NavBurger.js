@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect, styled } from 'frontity';
 import NavMenu from './NavMenu';
 import { keyframes } from '@emotion/react'
-import { theme_colors, breakpoints } from '../../../assets/styles/variables'
+import { breakpoints } from '../../../assets/styles/variables'
 import { theme } from '../../../assets/styles/theme';
 
 
@@ -37,7 +37,7 @@ const BurgerIcon = styled.div`
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
-      
+
     .line {
       width: 3rem;
       height: 0.25rem;
@@ -48,31 +48,31 @@ const BurgerIcon = styled.div`
     }
     .open {
       &:nth-of-type(1){
-        animation: ${topOpen} .6s ease-in-out 0s ;
+        animation: ${ topOpen } .6s ease-in-out 0s ;
         animation-fill-mode: forwards;
-      } 
+      }
       &:nth-of-type(2) {
         transition: opacity .6s ease-in-out;
         opacity: 0;
       }
       &:nth-of-type(3) {
-        animation:${bottomOpen} .6s ease-in-out 0s ;
+        animation:${ bottomOpen } .6s ease-in-out 0s ;
         animation-fill-mode: forwards;
-      } 
+      }
     }
     .close {
       &:nth-of-type(1){
-        animation:${topClose} .6s ease;
+        animation:${ topClose } .6s ease;
         transform: translateY(0) rotate(0);
-      } 
+      }
       &:nth-of-type(2){
         transition: opacity .6 ease-in-out;
         opacity: 1;
-      } 
+      }
       &:nth-of-type(3){
-        animation:${bottomClose} .6s ease;
+        animation:${ bottomClose } .6s ease;
         transform: translateY(0) rotate(0);
-      } 
+      }
     }
     :hover {
       .line {
@@ -80,7 +80,7 @@ const BurgerIcon = styled.div`
         &:nth-of-type(3) { transform: translateY(0.2rem); }
       }
     }
-  }   
+  }
 `;
 
 const NavStyle = styled.div`
@@ -90,45 +90,50 @@ const NavStyle = styled.div`
   margin: auto 0;
 `;
 
-const Burger = ({ currentPage, mobilWidth, footerFields }) =>
-{ 
+const Burger = ( { currentPage, mobilWidth, footerFields } ) =>
+{
   const [ open, setOpen ] = useState()
-  
-  const handleAnimation = () => {
-    const elem = document.querySelector('html');
+
+  const handleAnimation = () =>
+  {
+    if ( !mobilWidth ) return;
+    const elem = document.querySelector( 'html' );
     elem.style.overflow = open?.status ? "visible" : "hidden";
-    setOpen( !open ? {status:true} : {status:!open.status} )
-  } 
-  
-  const handelBurgerClass = (open) => {
-    return !open ? "line" : open.status? "line open" : "line close";
-  }   
-  
-  
-  const closeAndShow = () => {
-    const elem = document.querySelector('html');
-    setOpen({status:!open.status})
-    elem.style.overflow = "visible" ;
+    setOpen( !open ? { status: true } : { status: !open.status } )
   }
-  
-  if (!mobilWidth) {
-    const elem = document.querySelector('html');
+
+  const handelBurgerClass = ( open ) =>
+  {
+    return !open ? "line" : open.status ? "line open" : "line close";
+  }
+
+
+  const closeAndShow = () =>
+  {
+    if ( !mobilWidth ) return;
+    const elem = document.querySelector( 'html' );
+    setOpen( { status: !open.status } )
+    elem.style.overflow = "visible";
+  }
+
+  if ( !mobilWidth ) {
+    const elem = document.querySelector( 'html' );
     elem.style.overflow = "visible";
   }
 
   return (
     <NavStyle>
-        <BurgerIcon open={ open }  onClick={handleAnimation}>
-            <div className={handelBurgerClass(open)}/>
-            <div className={handelBurgerClass(open)}/>
-            <div className={handelBurgerClass(open)}/>
-        </BurgerIcon>
-      <NavMenu 
-        currentPage={currentPage}
-        footerFields={footerFields}
-        mobilWidth={mobilWidth}
-        open={ open?.status } 
-        close={ closeAndShow } 
+      <BurgerIcon open={ open } onClick={ handleAnimation }>
+        <div className={ handelBurgerClass( open ) } />
+        <div className={ handelBurgerClass( open ) } />
+        <div className={ handelBurgerClass( open ) } />
+      </BurgerIcon>
+      <NavMenu
+        currentPage={ currentPage }
+        footerFields={ footerFields }
+        mobilWidth={ mobilWidth }
+        open={ open?.status }
+        close={ closeAndShow }
       />
     </NavStyle>
   )

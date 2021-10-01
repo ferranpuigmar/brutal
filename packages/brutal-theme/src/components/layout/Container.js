@@ -9,7 +9,7 @@ export const minPadding = spacing[ 'p-7' ];
 const Container = ( { children, align = 'flex-start', bgColor = 'transparent', className } ) =>
 {
   return (
-    <ContainerDiv className={ className } bgColor={ bgColor } align={ align }>
+    <ContainerDiv className='containerDiv' bgColor={ bgColor } align={ align }>
       { children }
     </ContainerDiv>
   )

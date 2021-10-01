@@ -12,7 +12,6 @@ import { hexToRgb } from '../utils/colors';
 import { desktopPaddingBlock, mobilePaddingBlock, tabletPaddingBlock } from '../../assets/styles/variables';
 import ImageSkeleton from '../shared/ImageSkeleton';
 import CustomImage from '../shared/CustomImage';
-import Link from "@frontity/components/link"
 
 // Styles
 const DescriptionWrapper = styled.div`
@@ -36,14 +35,12 @@ const block = css`
   display: none;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow: hidden;
 
   Link {
-    ${'' /* .arrow-element { */}
-      text-align: left!important;
-    ${'' /* } */}
+    text-align: left!important;
   }
 
   ${ mq[ "md" ] } {
@@ -107,38 +104,6 @@ const projectImageWrapper = css`
   }
 `
 
-// const whiteLink = css`
-//   &:hover {
-//       color: ${ `${ theme.colors.primaryColor }!important` };
-//       .arrow-icon,
-//       .arrow-icon:after,
-//       .arrow-icon:before {
-//         background-color: ${ `${ theme.colors.primaryColor }!important` };
-//       }
-//   }
-// `;
-
-const OverLapContent = styled.div`
-  position:absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 2;
-  pointer-events: none;
-
-  *{
-    opacity: 0;
-    transform: translateY(-10px);
-    color: ${ theme.colors.black };
-  }
-`
-
-const overlapContentTitle = css`
-  ${ mq[ 'lg' ] }{
-    display: none;
-  }
-`
-
 const rowContent = css`
   display: none!important;
 
@@ -146,32 +111,12 @@ const rowContent = css`
     display: flex!important;
   }
 `
-const linkStyle = css`
-text-decoration: none;
-text-align: left;
-display: flex;
-justify-content: flex-start;
-
-`;
-// const linkBlock = css`
-// display: flex;
-// justify-content: flex-start;
-// text-align: left;
-// .arrow-element a{
-// display: flex;
-// justify-content: flex-start;
-// text-align: left;
-//   position:relative!important;
-//   left: 0!important;
-// }
-// `;
 
 //Component
 const ProjectItem = ( {
   project, index, link_text, libraries, link_project
 } ) =>
 {
-
   const Html2React = libraries.html2react.Component;
   const title = project?.title.rendered;
   const description = project?.excerpt.rendered;
@@ -196,15 +141,15 @@ const ProjectItem = ( {
     loadFeaturedMedia( imageId );
   }, [] )
 
-  const colContent = <Row className={ rowContent }><Col key={ uuid_v4() } md={ 6 } mdOffset={ isEven ? 6 : 0 }>
+  const colContent = <Row key={ uuid_v4() } className={ rowContent }><Col md={ 6 } mdOffset={ isEven ? 6 : 0 }>
     <div className={ cx( block, { [ 'isLeft' ]: !isEven, [ 'isRight' ]: isEven } ) } >
       <Title className={ titleColor } level={ 3 } >{ title }</Title>
       <DescriptionWrapper>
         <Html2React html={ description } />
       </DescriptionWrapper>
 
-      <ArrowLink link={ link_project } hoverBackground={ false } className={ "nav-arrow"} variant="bold">{ link_text }</ArrowLink>
-     
+      <ArrowLink size="small" link={ link_project } hoverBackground={ false } className={ "nav-arrow" } variant="bold">{ link_text }</ArrowLink>
+
     </div>
   </Col></Row>
 
@@ -213,7 +158,7 @@ const ProjectItem = ( {
     { <div className={ cx( projectImageWrapper, {
       [ 'isLoaded' ]: !isLoading
     } ) }>
-      { featuredUrl && <CustomImage loading="lazy" width={ featuredUrl.media_details.width } height={ featuredUrl.media_details.height } src={ featuredUrl.source_url } srcSet={ featuredUrl.media_details.sizes } alt={ title } onLoad={ () => setIsLoading( false ) } /> }
+      { featuredUrl && <CustomImage loading="lazy" width={ featuredUrl.media_details.width } height={ featuredUrl.media_details.height } src={ featuredUrl.source_url } srcSet={ featuredUrl.media_details.sizes } alt={ title } onReadyToShow={ () => setIsLoading( false ) } /> }
     </div> }
   </ProjectImg>
   return [ colBg, colContent ]

@@ -10,7 +10,7 @@ import { theme } from '../../assets/styles/theme';
 import { Row, Col } from 'styled-bootstrap-grid';
 import Accordion from './Accordion';
 import ArrowLink from '../shared/ArrowLink';
-
+import { v4 as uuid_v4 } from "uuid";
 
 // Styles
 const sectionTitle = css`
@@ -40,13 +40,13 @@ const colServices = css`
 const colButton = css`
   margin-top: ${ spacing[ 'mt-6' ] };
 
-  ${ mq[ "sm" ] } {
+  ${ mq[ "md" ] } {
     align-items: center;
     order: 1;
     flex-basis: 30%;
     display: flex;
     justify-content: flex-end;
-    margin-top: ${ spacing[ 'mt-6' ] };
+    margin-top: 0;
   }
 
   ${ mq[ "xl" ] } {
@@ -77,7 +77,7 @@ const ServicesModule = ( { state, libraries, actions, ...rest } ) =>
         </Col>
         <Col className={ cx( colServices ) }>
           { selectedServices.map( ( service, index ) =>
-            <Accordion key={ service.id } data={ service } />
+            <Accordion key={ uuid_v4() } data={ service } />
           ) }
         </Col>
         <Col md={ 12 } xl={ 4 } className={ cx( colButton ) }>

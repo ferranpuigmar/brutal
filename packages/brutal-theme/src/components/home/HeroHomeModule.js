@@ -19,21 +19,26 @@ const wrapperHeroHome = css`
   align-items: center;
   overflow: hidden;
 
-
   ${ mq[ 'md' ] }{
-    min-height: calc(100vh - 10rem)
+    min-height: calc(100vh - 10rem);
   }
 `
 const heroTitle = css`
   margin-bottom: ${ spacing[ 'mb-8' ] };
+  min-height: 140px;
   em {
     color: ${ theme.colors.primaryColor };
     font-style: normal;
+  }
+  
+  .Typewriter__cursor{
+    color: ${ theme.colors.black } 
   }
 
   ${ mq[ "sm" ] } {
     margin-bottom: 0
   }
+
 `;
 
 const colHero = css`
@@ -53,6 +58,8 @@ const colHero = css`
 const colImage = css`
   order: 2;
   margin-top: ${ spacing[ 'mt-5' ] };
+  display: flex;
+  justify-content: center;
 
   ${ mq[ "md" ] } {
     order: 0;
@@ -95,33 +102,59 @@ const HeroContent = styled.div`
   }
 `
 
+
+const fadeInRight = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(30%,0,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+`
+
+const fadeInRight2 = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(30%,0,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+`
+
 const ColHeroContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  ${ mq[ 'md' ] }{
+    animation-delay: 0.5s;
+    animation-duration: .5s;
+    animation-fill-mode: backwards;
+    animation-name: ${ fadeInRight };
+  }
+`
+
+const ImageAnimation = styled.div`
+  position: relative;
+
+  ${ mq[ 'md' ] }{
+    opacity: 0;
+    &.isAnimate {
+      animation-delay: 0.6s;
+      animation-duration: .8s;
+      animation-name: ${ fadeInRight2 };
+      animation-fill-mode: forwards;
+    }
+  }
 `
 
 const contentTitle = css`
   ${ theme.fontSize.h3 }
   font-size: 24px!important;
   margin-bottom: ${ spacing[ 'mb-4' ] };
-`
-
-const WrapperAnimation = styled.div`
-  opacity: 0;
-  transform: translateX(-80px);
-  transition: all 2s ease-out;
-  filter: blur(8px);
-  padding-bottom: 2rem; 
-
-  ${ mq[ 'md' ] }{
-    padding-bottom: 10rem; 
-  }
-
-  &.isAnimated {
-    opacity: 1;
-    transform: translateX(0);
-    filter: blur(0);
-  }
 `
 const bounce = keyframes`
   from, 20%, 53%, 80%, to {
@@ -146,7 +179,7 @@ const ArrowDown = styled.div`
   position: absolute;
   bottom: 0;
   left: 50%;
-  opacity: ${ props => props.isScroll ? 0 : 1 };
+  opacity: ${ props => props.isScroll ? '0!important' : '1!important' };
   pointer-events: none;
 
   img{
@@ -170,57 +203,69 @@ const HeroHomeModule = ( {
   const Html2React = libraries.html2react.Component;
 
   const [ startAnimation, setStartAnimation ] = useState( false )
+  const [ isTypeWritting, setIsTypeWritting ] = useState( true )
 
-  const handleAnimation = () =>
+  const handleTypeWritting = () =>
   {
-    setStartAnimation( !startAnimation )
+    setIsTypeWritting( false )
+    setTimeout( () => setIsTypeWritting( true ), 500 )
+  }
+
+  const handleOnLoadHand = () =>
+  {
+    setStartAnimation( true )
   }
 
   useEffect( () =>
   {
-    setTimeout( handleAnimation, 0 )
+    setTimeout( handleOnLoadHand, 400 )
   }, [] )
-
-  console.log()
 
   return (
     <>
       <section id="hero">
         <Block widthPadding={ true } className={ wrapperHeroHome }>
           <Container>
-            <WrapperAnimation className={ cx( { [ 'isAnimated' ]: startAnimation } ) }>
-              <Row >
-                <Col lg={ 7 } className={ colHero }>
-                  <ColHeroContentWrapper>
-                    <Title level={ 1 } className={ heroTitle }>
-                      <Typewriter
-                        onInit={
-                          ( typewriter ) =>
-                          {
-                            typewriter.typeString( title )
-                              .start()
-                              .callFunction( () => document.querySelector( '.Typewriter__cursor' ).remove() )
-                          }
+            <Row >
+              <Col lg={ 7 } className={ colHero }>
+                { startAnimation && <ColHeroContentWrapper>
+                  <Title level={ 1 } className={ heroTitle }>
+                    { isTypeWritting && <Typewriter
+                      onInit={
+                        ( typewriter ) =>
+                        {
+                          typewriter.typeString( title )
+                            .start()
+                            .pauseFor( 2000 )
+                            .callFunction( () =>
+                            {
+                              document.querySelector( '.Typewriter__cursor' ).remove()
+                              handleTypeWritting()
+                            } )
                         }
-                        options={
-                          {
-                            autoStart: true,
-                            delay: '70',
-                          }
+                      }
+                      options={
+                        {
+                          autoStart: true,
+                          delay: '70',
                         }
-                      />
-                    </Title>
-                    <HeroContent>
-                      <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
-                      <Html2React html={ content.text } />
-                    </HeroContent>
-                  </ColHeroContentWrapper>
-                </Col>
-                <Col lg={ 5 } className={ cx( colHero, colImage ) }>
-                  <CustomImage className={ imageStyles } srcSet={ image.sizes } src={ image.url } alt={ image.title } />
-                </Col>
-              </Row>
-            </WrapperAnimation>
+                      }
+                    /> }
+                  </Title>
+                  <HeroContent>
+                    <Title level={ 4 } className={ contentTitle }>{ content.title }</Title>
+                    <Html2React html={ content.text } />
+                  </HeroContent>
+                </ColHeroContentWrapper> }
+              </Col>
+              <Col lg={ 5 } className={ cx( colHero, colImage ) }>
+                <ImageAnimation className={ cx( {
+                  [ 'isAnimate' ]: startAnimation
+                } ) }>
+                  <CustomImage className={ imageStyles } src={ image.url } alt={ image.title } />
+                </ImageAnimation>
+              </Col>
+            </Row>
           </Container>
         </Block>
       </section>

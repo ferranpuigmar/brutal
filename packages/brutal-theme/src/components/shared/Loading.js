@@ -1,7 +1,6 @@
 import { styled, keyframes } from 'frontity';
 import React from 'react'
 import { theme } from '../../assets/styles/theme';
-import loading from './icons/loading.svg'
 
 // Styles
 const Wrapper = styled.div`

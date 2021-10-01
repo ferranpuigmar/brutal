@@ -12,7 +12,6 @@ import { v4 as uuid_v4 } from "uuid";
 import PageWrapper from '../shared/PageWrapper';
 import Loading from '../shared/Loading';
 import Container from '../layout/Container';
-import { calculateSrcSet, getImageUrlSize } from '../utils/images';
 import CustomImage from '../shared/CustomImage';
 
 

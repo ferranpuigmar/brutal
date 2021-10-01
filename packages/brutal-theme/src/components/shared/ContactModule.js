@@ -36,6 +36,7 @@ const projectLink = css`
   font-size: 1.4rem;
   line-height: normal;
   margin-top: ${ spacing[ 'mt-4' ] };
+  width: auto;
 
   ${ mq[ "sm" ] } {
     font-size: 2rem;
@@ -81,7 +82,7 @@ const ContactModule = ( {
             </Col>
             <Col md={ 5 } className={ cx( colRight ) }>
               <Subtitle><Html2React html={ subtitle } /></Subtitle>
-              <ArrowLink variant="bold" className={ cx( projectLink ) } link={ '/contactar' }>{ link }</ArrowLink>
+              <ArrowLink hoverColor="white" variant="bold" className={ cx( projectLink ) } link={ '/contactar' }>{ link }</ArrowLink>
             </Col>
           </Row>
         </Container>
