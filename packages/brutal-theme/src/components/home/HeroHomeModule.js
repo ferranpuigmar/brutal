@@ -181,12 +181,14 @@ const ArrowDown = styled.div`
   left: 50%;
   opacity: ${ props => props.isScroll ? '0!important' : '1!important' };
   pointer-events: none;
+  display: none;
 
   img{
     width: 50px ;
   }
 
   ${ mq[ 'md' ] }{
+    display: block;
     margin: 5rem auto 0;
   }
 `;
