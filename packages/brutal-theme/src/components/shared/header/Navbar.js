@@ -1,11 +1,16 @@
 import React from 'react';
 import { connect, styled } from 'frontity'
-import Container from '../../layout/Container';
-import NavBurger from './NavBurger';
-import NavLogo from './NavLogo';
 import { breakpoints, theme_colors } from '../../../assets/styles/variables'
 import { mq } from '../../../assets/styles/mediaqueries';
+// import NavBurger from './NavBurger';
+// import NavLogo from './NavLogo';
+// import Container from '../../layout/Container';
 
+import loadable from '@loadable/component';
+
+const NavBurger = loadable(() => import('./NavBurger'), { fallback: <div>Loading...</div> });
+const NavLogo = loadable(() => import('./NavLogo'), { fallback: <div>Loading...</div> });
+const Container = loadable(() => import('../../layout/Container'), { fallback: <div>Loading...</div> });
 
 const Nav = styled.nav`
   width: 100%;

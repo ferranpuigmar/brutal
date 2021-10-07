@@ -25,6 +25,7 @@
     "@frontity/tiny-router": "^1.4.3",
     "@frontity/wp-source": "^1.11.5",
     "@frontity/yoast": "^2.1.1",
+    "@loadable/component": "^5.15.0",
     "brutal-theme": "./packages/brutal-theme",
     "classnames": "^2.3.1",
     "frontity": "^1.16.1",

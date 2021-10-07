@@ -2,7 +2,7 @@ const settings = {
   name: "brutal-front",
   state: {
     frontity: {
-      url: "https://www.esmuybrutal.com/",
+      url: "http://localhost:3000/",
       title: "Es Muy Brutal"
     }
   },

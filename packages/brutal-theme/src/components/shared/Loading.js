@@ -32,7 +32,7 @@ const LoadingElement = styled.div`
 	height:100%;
 	margin: auto;
 	font-family: "DMSansRegular", sans-serif, Arial;
-	animation: ${ loadingAnimation } 1.2s infinite 0s ease-in-out;
+	animation: ${ loadingAnimation } 1s infinite 0s ease-in-out;
 	animation-direction: alternate;
 	text-shadow: 0 0 1px white;
   font-size: ${ theme.fontSize.h3 };

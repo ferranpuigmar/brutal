@@ -1,23 +1,37 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Global, css, connect, Head, styled } from "frontity";
 import Switch from "@frontity/components/switch";
-import Project from './pages/Project';
 import Home from './pages/Home';
 import Footer from './shared/Footer';
 import FontFace from './shared/FontFace';
 import { GridThemeProvider } from 'styled-bootstrap-grid';
 import { gridTheme } from '../assets/styles/grid';
 import styleCSS from '../assets/styles/style.css'
-import Navbar from './shared/header/Navbar';
-import Services from './pages/Services';
-import Contact from './pages/Contact';
-import About from './pages/About';
-import Projects from './pages/Projects';
+import { cx, css as cssEmotion } from '@emotion/css';
 import { breakpoints, theme_colors } from '../assets/styles/variables';
 import ScreenSizeDetector from 'screen-size-detector'
-import Error404 from './pages/Error404';
-import Loading from './shared/Loading';
-import { cx, css as cssEmotion } from '@emotion/css';
+
+// import Error404 from './pages/Error404';
+// import Loading from './shared/Loading';
+// import Navbar from './shared/header/Navbar';
+// import About from './pages/About';
+// import Services from './pages/Services';
+// import Projects from './pages/Projects';
+// import Project from './pages/Project';
+// import Contact from './pages/Contact';
+
+import loadable from '@loadable/component';
+
+const Error404 = loadable(() => import('./pages/Error404'), { fallback: <div>Loading...</div> });
+const Loading = loadable(() => import('./shared/Loading'), { fallback: <div>Loading...</div> });
+const Navbar = loadable(() => import('./shared/header/Navbar'), { fallback: <div>Loading...</div> });
+const About = loadable(() => import('./pages/About'), { fallback: <div>Loading...</div> });
+const Services = loadable(() => import('./pages/Services'), { fallback: <div>Loading...</div> });
+const Project = loadable(() => import('./pages/Project'), { fallback: <div>Loading...</div> });
+const Projects = loadable(() => import('./pages/Projects'), { fallback: <div>Loading...</div> });
+const Contact = loadable(() => import('./pages/Contact'), { fallback: <div>Loading...</div> });
+
+
 
 //Styles
 const footerFixed = cssEmotion`

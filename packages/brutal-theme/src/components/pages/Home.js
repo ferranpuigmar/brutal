@@ -17,9 +17,9 @@ const Home = ( { state, } ) =>
       <section id="strengths">
         { renderModule( 'strenghts_module', post?.acf ) }
       </section>
-      <section id="projects">
+      {/* <section id="projects">
         { renderModule( 'projects_module', post?.acf ) }
-      </section>
+      </section> */}
       { renderModule( 'contact_module', post?.acf ) }
       <section id="services">
         { renderModule( 'services_module', post?.acf ) }

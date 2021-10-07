@@ -3,10 +3,18 @@ import { connect, styled } from 'frontity';
 import Link from "@frontity/components/link";
 import { css, cx, keyframes } from '@emotion/css'
 import { theme_colors, breakpoints } from '../../../assets/styles/variables'
-import ArrowLink from '../ArrowLink';
 import { theme } from '../../../assets/styles/theme';
-import FooterText from '../FooterText';
+// import ArrowLink from '../ArrowLink';
+// import FooterText from '../FooterText';
 
+import loadable from '@loadable/component';
+
+const ArrowLink = loadable(() => import('../ArrowLink'), {
+  fallback: <div>Loading...</div>,
+});
+const FooterText = loadable(() => import('../FooterText'), {
+  fallback: <div>Loading...</div>,
+});
 
 const menuDropDown = keyframes`
   0%  { opacity: 0; }

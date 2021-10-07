@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { connect, styled } from 'frontity';
-import NavMenu from './NavMenu';
 import { keyframes } from '@emotion/react'
 import { breakpoints } from '../../../assets/styles/variables'
 import { theme } from '../../../assets/styles/theme';
+// import NavMenu from './NavMenu';
 
+import loadable from '@loadable/component';
+const NavMenu = loadable(() => import('./NavMenu'), {
+  fallback: <div>Loading...</div>,
+});
 
 const topOpen = keyframes`
   0%      { transform: translateY(0.0rem) rotate(0deg); }
