@@ -3,23 +3,23 @@ const settings = {
   state: {
     frontity: {
       url: "https://www.esmuybrutal.com/",
-      title: "Es Muy Brutal"
-    }
+      title: "Es Muy Brutal",
+    },
   },
   packages: [
     {
-      name: "brutal-theme"
+      name: "brutal-theme",
     },
     {
       name: "@frontity/wp-source",
       state: {
         source: {
-          url: "https://puigmar.me/back",
+          url: "http://back.esmuybrutal.com/",
           postTypes: [
             {
               type: "proyectos",
               endpoint: "proyectos",
-              archive: "/proyectos"
+              archive: "/proyectos",
             },
           ],
           taxonomies: [
@@ -29,15 +29,15 @@ const settings = {
             },
           ],
           homepage: "home",
-        }
-      }
+        },
+      },
     },
     "@frontity/tiny-router",
     "@frontity/html2react",
     "@frontity/head-tags",
     "@aamodtgroup/frontity-contact-form-7",
-    "@frontity/yoast"
-  ]
+    "@frontity/yoast",
+  ],
 };
 
 export default settings;
