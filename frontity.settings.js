@@ -14,7 +14,8 @@ const settings = {
       name: "@frontity/wp-source",
       state: {
         source: {
-          url: "http://back.esmuybrutal.com/",
+          //url: "http://back.esmuybrutal.com/",
+          url: "https://puigmar.me/back/",
           postTypes: [
             {
               type: "proyectos",
