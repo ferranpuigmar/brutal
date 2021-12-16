@@ -45,6 +45,7 @@ const GridImage = ({ item, maxSize = 1600, libraries, state }) => {
     const requestFeaturedMedia = await libraries.source.api.get({
       endpoint: `/wp/v2/media/${mediaId}`,
     });
+
     const image = await requestFeaturedMedia.json();
     state.source.data["attachments"] = {
       ...state.source.data["attachments"],
@@ -57,6 +58,7 @@ const GridImage = ({ item, maxSize = 1600, libraries, state }) => {
     const existAttachments = Object.keys(state.source.data).includes(
       "attachments"
     );
+
     if (!existAttachments) {
       state.source.data["attachments"] = {};
     }
